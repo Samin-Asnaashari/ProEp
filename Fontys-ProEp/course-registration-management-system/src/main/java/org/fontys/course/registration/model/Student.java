@@ -9,7 +9,6 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "Student")
 public class Student extends Person {
 
-    //    @Id
     @Column(nullable = false)
     private Integer StudentNumber;
 
@@ -22,10 +21,6 @@ public class Student extends Person {
 
     @Column
     private Double avgScore;
-
-    //    @JsonManagedReference
-//    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    private List<Registration> registrations;
 
     public Student() {
     }

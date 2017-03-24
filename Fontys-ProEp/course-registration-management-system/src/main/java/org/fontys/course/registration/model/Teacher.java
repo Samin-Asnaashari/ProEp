@@ -1,8 +1,7 @@
 package org.fontys.course.registration.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "Teacher")
@@ -12,5 +11,26 @@ public class Teacher extends Person {
     @Column
     private String link;
 
-//    private List<Course> MyCourse;
+    @ManyToMany
+    @JoinTable(name="course_teacher")
+    private List<Course> myCourses;
+
+    public Teacher() {
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public List<Course> getMyCourse() {
+        return myCourses;
+    }
+
+    public void setMyCourse(List<Course> myCourses) {
+        this.myCourses = myCourses;
+    }
 }

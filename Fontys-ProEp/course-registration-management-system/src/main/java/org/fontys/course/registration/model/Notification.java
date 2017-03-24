@@ -1,7 +1,5 @@
 package org.fontys.course.registration.model;
 
-import org.fontys.course.registration.model.enums.NotificationType;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -18,9 +16,6 @@ public class Notification {
 
     @Column
     private Date date;
-
-    @Column
-    private NotificationType type;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn
@@ -55,14 +50,6 @@ public class Notification {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public NotificationType getType() {
-        return type;
-    }
-
-    public void setType(NotificationType type) {
-        this.type = type;
     }
 
     public Person getSender() {

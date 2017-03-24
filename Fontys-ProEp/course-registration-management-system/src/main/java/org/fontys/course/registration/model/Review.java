@@ -1,5 +1,7 @@
 package org.fontys.course.registration.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,6 +18,16 @@ public class Review {
 
     @Column
     private Date date;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Student student;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Course course;
 
     public Review() {
     }
@@ -42,5 +54,21 @@ public class Review {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

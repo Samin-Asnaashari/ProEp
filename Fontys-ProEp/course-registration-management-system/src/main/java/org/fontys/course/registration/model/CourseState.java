@@ -6,6 +6,7 @@ import org.fontys.course.registration.model.enums.Major;
 
 import javax.persistence.*;
 
+@Entity
 public class CourseState {
 
     @Id
@@ -13,16 +14,15 @@ public class CourseState {
     @Column(nullable = false)
     private Integer id;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private Major major;
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private CourseType courseType;
 
-    //TODO check.
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Course course;
 
     public CourseState() {

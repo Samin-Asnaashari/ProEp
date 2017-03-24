@@ -39,13 +39,17 @@ public class Course {
     @Column
     private Date regEndDate;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    private List<Registration> registrations;
+    @ManyToMany
+    @JoinTable(name="course_teacher")
+    private List<Teacher> teachers;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
-//    private List<CourseState> states;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<CourseState> states;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Review> reviews;
 
     public Course() {
     }
@@ -120,5 +124,29 @@ public class Course {
 
     public void setRegEndDate(Date regEndDate) {
         this.regEndDate = regEndDate;
+    }
+
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+    }
+
+    public List<CourseState> getStates() {
+        return states;
+    }
+
+    public void setStates(List<CourseState> states) {
+        this.states = states;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

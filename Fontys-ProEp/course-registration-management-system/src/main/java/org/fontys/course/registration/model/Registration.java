@@ -1,5 +1,7 @@
 package org.fontys.course.registration.model;
 
+import org.fontys.course.registration.model.enums.RegistrationStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,6 +14,9 @@ public class Registration {
 
     @Column
     private Date date;
+
+    @Column
+    private RegistrationStatus registrationStatus;
 
     public Registration() {
     }
@@ -30,5 +35,13 @@ public class Registration {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public RegistrationStatus getRegistrationStatus() {
+        return registrationStatus;
+    }
+
+    public void setRegistrationStatus(RegistrationStatus registrationStatus) {
+        this.registrationStatus = registrationStatus;
     }
 }
