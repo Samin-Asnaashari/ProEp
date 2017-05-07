@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="appTeacher">
+
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Teacher</title>
+    <link rel="shortcut icon" href="#"/>
+
+    <!-- font -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <!-- dependency styles -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+</head>
+
+<body>
+<!-- views -->
+<!--<div ui-view="navigation"></div>-->
+<div ui-view="content" resize-window></div>
+<!--<div ui-view="footer"></div>-->
+
+<!-- dependencies scripts -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-material/angular-material.min.js"></script>
+<script src="../bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="../bower_components/textAngular/dist/textAngular-rangy.min.js"></script>
+<script src="../bower_components/textAngular/dist/textAngular-sanitize.min.js"></script>
+<script src="../bower_components/textAngular/dist/textAngular.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+<!-- resize -->
+<script src="../services/event/config/module.js"></script>
+<script src="../services/event/event.resize-window.js"></script>
+<script src="../components/resize-window/module.js"></script>
+<script src="../components/resize-window/resize.directive.js"></script>
+
+</body>
+</html>

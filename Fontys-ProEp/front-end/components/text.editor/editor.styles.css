@@ -1,0 +1,27 @@
+.text-editor-wysiwyg .buttons-editor, .text-editor-wysiwyg .text-editor {
+    margin: 13px auto;
+}
+
+.text-editor-wysiwyg .buttons-editor .button-edit {
+    position: absolute;
+    top: 0;
+    left: 13px;
+}
+
+.text-editor-wysiwyg .element:focus {
+    outline: none;
+}
+
+.text-editor-wysiwyg .empty-text-wrapper {
+    border: solid 1px rgb(0, 0, 0);
+}
+
+/* text-angular custom styles */
+
+/* sets the height of the editor depending
+on the text inside of it. */
+.ta-editor.ta-html,
+.ta-scroll-window.form-control,
+.ta-bind {
+    min-height: 100px !important;
+}
