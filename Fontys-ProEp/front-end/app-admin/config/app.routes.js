@@ -7,7 +7,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
         .state('home', {
             url: '/home',
             templateUrl: './components/home/admin/home.admin.html',
-            controller: 'adminCtrl as vmAdmin'
+            controller: 'homeCtrl as vmHome'
             // resolve: {
             //     coursesResolve: function (courseService) {
             //         var courses = [];
