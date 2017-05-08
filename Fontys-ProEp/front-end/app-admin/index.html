@@ -28,10 +28,77 @@
     <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
 
-<!--Navigation-->
+        <!-- Logo -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">GORCA</a>
+        </div>
+
+        <!-- Nagivation items -->
+        <div class="collapse navbar-collapse" id="mainNavBar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a> </li>
+
+                <!-- drop down menu -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Students <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Add</a> </li>
+                        <li><a href="#">Remove</a> </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- right align -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Login</a> </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
 <div ui-view></div>
+
+
 <!--Footer-->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-2">
+                <h6>Copyright &copy; 2017 GORCA</h6>
+            </div>
+            <div class="col-sm-4">
+                <h6>About Us</h6>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            </div>
+            <div class="col-sm-2">
+                <h6>Navigation</h6>
+                <ul class="unstyled">
+                    <li><a href="#">Home</a> </li>
+                    <li><a href="#">Students</a> </li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h6>Actions</h6>
+                <ul class="unstyled">
+                    <li><a href="#">Login</a> </li>
+                </ul>
+            </div>
+            <div class="col-sm-2">
+                <h6>Address</h6>
+                <p>Rachelsmolen 1, 5612 MA Eindhoven</p>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- dependencies scripts -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
