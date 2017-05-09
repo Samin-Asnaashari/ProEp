@@ -8,19 +8,25 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     var self = this;
     var http = 'http://';
     var localhost = "localhost";
-    // var secure = '/secure';
     var baseUrl = http + localhost + ':8090/course';
 
-    self.findOneCourse = function (code) {
+    self.addCourse = function (newCourse) {
+        return $http.post(baseUrl + newCourse);
+    };
+
+    self.getCourse = function (code) {
         return $http.get(baseUrl + '/' + code);
     };
 
-    self.findAllCourses = function () {
+    self.getAllCourses = function () {
         return $http.get(baseUrl);
     };
 
     self.updateCourse = function (course) {
-        return $http.put(baseUrl , course);
+        return $http.put(baseUrl, course);
     };
 
+    self.deleteCourse = function (code) {
+        return $http.delete(baseUrl, '/' + code);
+    };
 });

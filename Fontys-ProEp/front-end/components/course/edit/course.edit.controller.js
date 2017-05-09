@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('appComponent.courseEdit').controller('courseEditCtrl', function () {
+angular.module('appComponent.course').controller('courseEditCtrl', function (courseResolve) {
 
     var vm = this;
-
+    vm.course = courseResolve;
 });

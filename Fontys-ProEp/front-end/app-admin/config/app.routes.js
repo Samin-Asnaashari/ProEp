@@ -7,13 +7,17 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
         .state('home', {
             url: '/home',
             templateUrl: './components/home/admin/home.admin.html',
-            controller: 'homeCtrl as vmHome'
-            // resolve: {
-            //     coursesResolve: function (courseService) {
-            //         var courses = [];
-            //         //TODO Resolve list of courses
-            //     }
-            // }
+            controller: 'homeCtrl as vmHome',
+            resolve: {
+                coursesResolve: function ($state, $stateParams, courseService) {
+                    return courseService.getAllCourses()
+                        .then(function (response) {
+                            return {courses: response.data};
+                        }, function (error) {
+                            // $state.go('Error');
+                        });
+                }
+            }
         })
         .state('courseEdit', {
             url: '/admin/course?code',
@@ -21,7 +25,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             controller: 'courseEditCtrl as vmCourseEdit',
             resolve: {
                 courseResolve: function ($state, $stateParams, courseService) {
-                    return courseService.findOneCourse($stateParams.code)
+                    return courseService.getCourse($stateParams.code)
                         .then(function (response) {
                             return {course: response.data};
                         }, function (error) {
@@ -30,36 +34,21 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                 }
             }
         })
-        .state('courses', {
-            url: '/courses',
-            templateUrl: './components/course/view/course.view.html',
-            controller: 'courseViewCtrl as vmCourseView',
+        .state('students', {
+            url: '/students',
+            templateUrl: './components/student/student.html',
+            controller: 'studentCtrl as vmStudent',
             resolve: {
-                courseResolve: function ($state, $stateParams, courseService) {
-                    return courseService.findAllCourses()
+                studentsResolve: function ($state, $stateParams, personService) {
+                    return personService.GetAllStudents()
                         .then(function (response) {
-                            return {courses: response.data};
+                            return {students: response.data};
                         }, function (error) {
                             $state.go('home');
                         });
                 }
             }
-        })
-        .state('students', {
-             url: '/students',
-             templateUrl: './components/student/student.html',
-             controller: 'studentCtrl as vmStudent',
-             resolve: {
-                 studentsResolve: function ($state, $stateParams, personService) {
-                    return personService.GetAllStudents()
-                        .then(function (response) {
-                            return {student: response.data};
-                    }, function (error) {
-                        $state.go('home');
-                 });
-             }
-             }
-         });
+        });
 });
 
 

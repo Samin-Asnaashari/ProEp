@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('appComponent.student').controller('studentCtrl', $state, function () {
+angular.module('appComponent.student').controller('studentCtrl', function (studentsResolve) {
 
     var vm = this;
-    vm.courses = coursResolve;
+    vm.sudents = studentsResolve;
     vm.RowNumber = function (student) {
         return vm.students.indexOf(student) + 1;
-     };
+    };
 });

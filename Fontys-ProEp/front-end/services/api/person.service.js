@@ -10,24 +10,40 @@ angular.module('appServiceAPI').service('personService', function ($http) {
     var localhost = "localhost";
     var baseUrl = http + localhost + ':8090/';
 
-    //testing purposes
+    self.addPerson = function (newPerson) {
+        return $http.post(baseUrl + newPerson);
+    };
+
+    self.getPerson = function (pcn) {
+        return $http.get(baseUrl + '/' + pcn);
+    };
+
+    self.updatePerson = function (person) {
+        return $http.put(baseUrl, person);
+    };
+
+    self.deletePerson = function (pcn) {
+        return $http.delete(baseUrl, '/' + pcn);
+    };
+
+    //TODO remove testing purposes
     self.GetAllStudents = function () {
         return self.students =
             [
                 {
-                    "StudentNr" : "2658974",
-                    "Name" : "Peter"
+                    "StudentNr": "2658974",
+                    "Name": "Peter"
                 },
 
                 {
-                    "StudentNr" : "7896542",
-                    "Name" : "Jan"
+                    "StudentNr": "7896542",
+                    "Name": "Jan"
                 },
                 {
-                    "StudentNr" : "1234567",
-                    "Name" : "Becky"
+                    "StudentNr": "1234567",
+                    "Name": "Becky"
                 }
             ];
-        //return $http.get(baseUrl + "students");//guessing its students//backend student service needed
+        //return $http.get(baseUrl + "students");
     };
 });

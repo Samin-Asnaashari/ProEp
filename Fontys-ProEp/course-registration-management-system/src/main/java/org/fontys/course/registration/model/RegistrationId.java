@@ -1,7 +1,6 @@
 package org.fontys.course.registration.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.fontys.course.registration.model.enums.RegistrationStatus;
 
 import javax.persistence.*;
 import java.io.Serializable;

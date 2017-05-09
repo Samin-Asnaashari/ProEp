@@ -3,9 +3,10 @@
 /**
  * Sub-component module
  */
-angular.module('appComponent.courseView',
+angular.module('appComponent.course',
     [
         'ngAnimate',
-        'ngMaterial'
+        'ngMaterial',
+        'textAngular'
     ]
 );
