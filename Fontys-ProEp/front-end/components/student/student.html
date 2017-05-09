@@ -3,7 +3,7 @@
         <table>
             <thead>
             <tr>
-                <th colspan="6">Courses</th>
+                <th colspan="6">Allowed students</th>
                 <th colspan="3">
                     <form action="" class="search-form">
                         <div style="margin-bottom: 0px;" class="form-group has-feedback">
@@ -16,7 +16,7 @@
             </tr>
             <tr>
                 <th>#</th>
-                <th colspan="3">Course code</th>
+                <th colspan="3">Student nr</th>
                 <th colspan="2">Name</th>
                 <th colspan="3">
                     <i class="button pull-right glyphicon glyphicon-plus" style="padding-right:10px;"></i>
@@ -24,12 +24,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="course in courses | filter:searchText">
-                <td>{{RowNumber(course)}}</td>
-                <td colspan="3">{{course.courseCode}}</td>
-                <td>{{course.name}}</td>
+            <tr ng-repeat="student in students | filter:searchText">
+                <td>{{RowNumber(student)}}</td>
+                <td colspan="3">{{student.StudentNr}}</td>
+                <td>{{student.Name}}</td>
                 <td colspan="4">
-                    <i class="button glyphicon glyphicon-edit"></i>
                     <i class="button glyphicon glyphicon-trash"></i>
                 </td>
             </tr>

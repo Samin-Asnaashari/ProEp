@@ -29,7 +29,37 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                         });
                 }
             }
-        });
+        })
+        .state('courses', {
+            url: '/courses',
+            templateUrl: './components/course/view/course.view.html',
+            controller: 'courseViewCtrl as vmCourseView',
+            resolve: {
+                courseResolve: function ($state, $stateParams, courseService) {
+                    return courseService.findAllCourses()
+                        .then(function (response) {
+                            return {courses: response.data};
+                        }, function (error) {
+                            $state.go('home');
+                        });
+                }
+            }
+        })
+        .state('students', {
+             url: '/students',
+             templateUrl: './components/student/student.html',
+             controller: 'studentCtrl as vmStudent',
+             resolve: {
+                 studentsResolve: function ($state, $stateParams, personService) {
+                    return personService.GetAllStudents()
+                        .then(function (response) {
+                            return {student: response.data};
+                    }, function (error) {
+                        $state.go('home');
+                 });
+             }
+             }
+         });
 });
 
 
