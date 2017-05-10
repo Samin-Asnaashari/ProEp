@@ -6,10 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course, String> {
-
-    //TODO this is example.
-    //    List<MenuItem> findByMenuItemIsNullAndTrashIsTrue();
-    //TODO please for more Ino check the website: http://docs.spring.io/spring-data/jpa/docs/1.4.1.RELEASE/reference/html/jpa.repositories.html
 }
 
 

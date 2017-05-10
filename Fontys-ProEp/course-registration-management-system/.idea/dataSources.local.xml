@@ -8,7 +8,6 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
       <user-name>postgres</user-name>
-      <introspection-schemas>postgres_ProEp:pg_catalog,postgres,public</introspection-schemas>
     </data-source>
   </component>
 </project>

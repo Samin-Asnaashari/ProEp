@@ -24,35 +24,29 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @RequestMapping("")
-    public List<Course> GetAllCourses(){
-    	return this.courseService.GetAllCourses();
+    //TODO didn't we discuss we not gonna create course?
+    @RequestMapping(method = RequestMethod.POST)
+    public void AddCourse(@RequestBody Course course) {
+        this.courseService.AddCourse(course);
     }
-    
-    @RequestMapping("/{id}")
-    public Course GetCourse(@PathVariable String id) {
-		return this.courseService.GetCourse(id);
-	}
-    
-    @RequestMapping(method=RequestMethod.POST)
-    public void AddCourse(@RequestBody Course course){
-    	this.courseService.AddCourse(course);
+
+    @RequestMapping(value = "/{code}", method = RequestMethod.GET)
+    public Course GetCourse(@PathVariable String code) {
+        return this.courseService.GetCourse(code);
     }
-    
-    @RequestMapping(method=RequestMethod.PUT)
-    public void UpdateCourse(@RequestBody Course course){
-    	this.courseService.UpdateCourse(course);
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Course> GetAllCourses() {
+        return this.courseService.GetAllCourses();
     }
-    
-    @RequestMapping(method=RequestMethod.DELETE, value="/{id}")
-    public void DeleteCourse(@PathVariable String id){
-    	this.courseService.DeleteCourse(id);
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void UpdateCourse(@RequestBody Course course) {
+        this.courseService.UpdateCourse(course);
     }
-    
-    //TODO this is example. rest also have @PathVariable, @PathParam, @ApiPathParam(name = "id") is JsonDoc ,.......
-//    @RequestMapping(value = secure, method = RequestMethod.POST, consumes = "application/json")
-//    @ApiMethod(description = "Creates a new block with the given information.")
-//    public Block createBlock(@RequestBody Block block) throws Exception {
-//        return this.blockService.create(block);
-//    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void DeleteCourse(@PathVariable String id) {
+        this.courseService.DeleteCourse(id);
+    }
 }

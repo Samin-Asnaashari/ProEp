@@ -20,6 +20,9 @@
     <!--component style TODO-->
     <link rel="stylesheet" href="../components/course/course.style.css">
     <link rel="stylesheet" href="../components/home/home.style.css">
+    <link rel="stylesheet" href="../components/student/student.style.css">
+    <link rel="stylesheet" href="../components/course/course.style.css">
+
     <!-- text editor -->
     <link rel="stylesheet" href="../components/text.editor/editor.styles.css">
     <!-- color picker -->
@@ -122,7 +125,8 @@
 <!-- components config -->
 <script src="../components/config/components.module.js"></script>
 <script src="../components/home/admin/module.js"></script>
-<script src="../components/course/edit/module.js"></script>
+<script src="../components/course/module.js"></script>
+<script src="../components/student/module.js"></script>
 <!--service config-->
 <script src="../services/api/config/module.js"></script>
 <script src="../services/event/config/module.js"></script>
@@ -134,6 +138,8 @@
 <!-- application -->
 <script src="../components/home/admin/home.admin.controller.js"></script>
 <script src="../components/course/edit/course.edit.controller.js"></script>
+<script src="../components/student/student.controller.js"></script>
+<script src="../components/course/view/course.view.controller.js"></script>
 
 <!-- dependencies config -->
 <script src="../components/text.editor/editor.controller.js"></script>
@@ -142,7 +148,10 @@
 <!--<script src="../components/style.menu/config/app.angularjs-color-picker.js"></script> TODO-->
 
 <!-- services -->
+<script src="../services/api/course.service.js"></script>
+<script src="../services/api/person.service.js"></script>
 <!-- event services -->
+<script src="../services/event/event.resize-window.js"></script>
 
 <!-- resize -->
 <script src="../services/event/event.resize-window.js"></script>

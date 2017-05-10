@@ -3,7 +3,7 @@
 /**
  * Sub-component module
  */
-angular.module('appComponent.courseEdit',
+angular.module('appComponent.student',
     [
         'ngAnimate',
         'ngMaterial'

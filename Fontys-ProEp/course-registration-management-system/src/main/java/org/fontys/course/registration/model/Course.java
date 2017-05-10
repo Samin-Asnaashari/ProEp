@@ -23,7 +23,6 @@ public class Course {
     @Column
     private Integer EC;
 
-    //TODO check.
     @Column
     private Integer block;
 
@@ -41,7 +40,7 @@ public class Course {
     private Date regEndDate;
 
     @ManyToMany
-    @JoinTable(name="course_teacher")
+    @JoinTable(name = "course_teacher")
     private List<Teacher> teachers;
 
     @JsonManagedReference
