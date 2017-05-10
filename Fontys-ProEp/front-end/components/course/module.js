@@ -7,6 +7,7 @@ angular.module('appComponent.course',
     [
         'ngAnimate',
         'ngMaterial',
-        'textAngular'
+        'textAngular',
+        'ngMessages'
     ]
 );

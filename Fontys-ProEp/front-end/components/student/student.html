@@ -25,9 +25,9 @@
             </thead>
             <tbody>
             <tr ng-repeat="student in students | filter:searchText">
-                <td>{{RowNumber(student)}}</td>
-                <td colspan="3">{{student.StudentNr}}</td>
-                <td>{{student.Name}}</td>
+                <td>{{vmStudent.RowNumber(student)}}</td>
+                <td colspan="3">{{vmStudent.student.StudentNr}}</td>
+                <td>{{vmStudent.student.Name}}</td>
                 <td colspan="4">
                     <i class="button glyphicon glyphicon-trash"></i>
                 </td>

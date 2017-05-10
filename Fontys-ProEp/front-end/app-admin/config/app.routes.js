@@ -20,7 +20,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             }
         })
         .state('courseEdit', {
-            url: '/admin/course?code',
+            url: '/courseEdit?code',
             templateUrl: './components/course/edit/course.edit.html',
             controller: 'courseEditCtrl as vmCourseEdit',
             resolve: {

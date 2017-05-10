@@ -1,8 +1,82 @@
-<div class="container-fluid">
-    <div class="row well header">
+<div class="container">
+    <div class="row header">
         <div class="col-xs-12">
-            <h1 class="text-left text-muted"><strong>{{vmCourseEdit.course.name}} ({{vmCourseEdit.course.code}})</strong></h1>
+            <h1 class="text-left text-muted"><strong>{{vmCourseEdit.course.name}}
+                ({{vmCourseEdit.course.code}})</strong></h1>
         </div>
     </div>
 
+    <div class="row well well-sm" style="border-radius: 0; background-color: transparent">
+        <div class="col-xs-6">
+            <md-input-container>
+                <label>Block</label>
+                <input>
+            </md-input-container>
+        </div>
+        <div class="col-xs-6">
+            <md-input-container>
+                <label>EC</label>
+                <input>
+            </md-input-container>
+        </div>
+        <div class="col-xs-12">
+            <md-input-container>
+                <label>MAX Seat</label>
+                <input>
+            </md-input-container>
+        </div>
+    </div>
+
+    <md-content> <!--layout-padding="" ng-cloak=""-->
+        <div layout-gt-xs="row">
+            <div flex-gt-xs>
+                <h4>Registration Start Date</h4>
+                <md-datepicker ng-model="vmCourseEdit.course.regStartDate" md-placeholder="Enter date"></md-datepicker>
+            </div>
+        </div>
+        <div layout-gt-xs="row">
+            <div flex-gt-xs>
+                <h4>Registration End Date</h4>
+                <md-datepicker ng-model="vmCourseEdit.course.regEndDate" md-placeholder="Enter date"></md-datepicker>
+            </div>
+        </div>
+    </md-content>
+
+
+    <!--<md-card>-->
+        <!--<md-card-title>-->
+            <!--<md-card-title-text>-->
+                <!--<span class="md-headline">Account Preferences</span>-->
+                <!--<span class="md-subhead">Tell us a little about you.</span>-->
+            <!--</md-card-title-text>-->
+        <!--</md-card-title>-->
+
+        <!--<md-card-content>-->
+            <!--<div layout="row">-->
+                <!--<md-input-container>-->
+                    <!--<label>Street Name</label>-->
+                    <!--<input>-->
+                <!--</md-input-container>-->
+
+                <!--<md-input-container>-->
+                    <!--<label>City</label>-->
+                    <!--<input>-->
+                <!--</md-input-container>-->
+
+                <!--<md-input-container>-->
+                    <!--<label>State</label>-->
+                    <!--<md-select ng-model="ctrl.userState">-->
+                        <!--<md-option><em>None</em></md-option>-->
+                        <!--<md-option ng-repeat="state in ctrl.states" ng-value="state.abbrev" ng-disabled="$index === 1">-->
+                            <!--{{state.abbrev}}-->
+                        <!--</md-option>-->
+                    <!--</md-select>-->
+                <!--</md-input-container>-->
+            <!--</div>-->
+        <!--</md-card-content>-->
+    <!--</md-card>-->
+
+
+
+    <!--style color icon Block - max seat Course Type major description list of teacher list of added student/ -->
 </div>

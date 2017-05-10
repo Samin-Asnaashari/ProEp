@@ -1,0 +1,36 @@
+{
+  "name": "angular-colorpicker",
+  "description": "angular-colorpicker",
+  "main": [
+    "dist/js/angular-colorpicker.min.js",
+    "dist/css/angular-colorpicker.min.css"
+  ],
+  "dependencies": {},
+  "authors": [
+    "linjinying"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "colorpicker",
+    "color",
+    "angular"
+  ],
+  "homepage": "https://github.com/linjinying/angular-colorpicker",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "a63963a9e3",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "a63963a9e3122deb21b734e5be4de1a293a4b9f8"
+  },
+  "_source": "https://github.com/linjinying/angular-colorpicker.git",
+  "_target": "*",
+  "_originalSource": "angular-colorpicker"
+}

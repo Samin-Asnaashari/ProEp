@@ -1,21 +1,11 @@
 package org.fontys.course.registration.model;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.fontys.course.registration.model.enums.Permission;
 
 import javax.persistence.*;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "userType")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = Student.class, name = "Student"),
-        @JsonSubTypes.Type(value = Teacher.class, name = "Teacher")
-})
 @Entity
-@DiscriminatorColumn(name = "user_type")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Person {
 
     @Id

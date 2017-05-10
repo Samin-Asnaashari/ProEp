@@ -1,4 +1,4 @@
-<div class="container-fluid"> <!--TODO fix-->
+<div class="container"> <!--TODO fix-->
     <div class="row">
         <table>
             <thead>
@@ -24,10 +24,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="course in courses | filter:searchText">
-                <td>{{RowNumber(course)}}</td>
-                <td colspan="3">{{course.courseCode}}</td>
-                <td>{{course.name}}</td>
+            <tr ng-repeat="course in vmHome.courses | filter:searchText">
+                <td>{{vmHome.RowNumber(course)}}</td>
+                <td colspan="3">{{course.code}}</td>
+                <td> {{course.name}}</td>
                 <td colspan="4">
                     <i class="button glyphicon glyphicon-edit"></i>
                     <i class="button glyphicon glyphicon-trash"></i>

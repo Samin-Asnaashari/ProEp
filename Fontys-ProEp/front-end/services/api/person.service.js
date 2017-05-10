@@ -8,7 +8,7 @@ angular.module('appServiceAPI').service('personService', function ($http) {
     var self = this;
     var http = 'http://';
     var localhost = "localhost";
-    var baseUrl = http + localhost + ':8090/';
+    var baseUrl = http + localhost + ':8090/persons';
 
     self.addPerson = function (newPerson) {
         return $http.post(baseUrl + newPerson);

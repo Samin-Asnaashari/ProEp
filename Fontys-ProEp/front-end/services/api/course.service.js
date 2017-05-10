@@ -8,7 +8,7 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     var self = this;
     var http = 'http://';
     var localhost = "localhost";
-    var baseUrl = http + localhost + ':8090/course';
+    var baseUrl = http + localhost + ':8090/courses';
 
     self.addCourse = function (newCourse) {
         return $http.post(baseUrl + newCourse);

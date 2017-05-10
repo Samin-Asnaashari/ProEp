@@ -1,10 +1,10 @@
 {
   "name": "angular-ui-notification",
-  "version": "0.2.0",
+  "version": "0.3.6",
   "homepage": "https://github.com/alexcrack/angular-ui-notification",
   "repository": {
     "type": "git",
-    "url": "git://github.com/alexcrack/angular-ui-notification"
+    "url": "git://github.com/jermorin/angular-ui-notification"
   },
   "authors": [
     "Alexey Avramchik"
@@ -30,16 +30,20 @@
     "demo",
     "build"
   ],
-  "devDependencies": {
-    "bootstrap": "~3.3.2"
+  "dependencies": {
+    "angular": "^1.5.x"
   },
-  "_release": "0.2.0",
+  "devDependencies": {
+    "bootstrap": "^3.3.x"
+  },
+  "_release": "0.3.6",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.0",
-    "commit": "136aa45597ef079f00fa3148a193a60dfd7802a0"
+    "tag": "v0.3.6",
+    "commit": "674ff6b8f8e1c5faabc6f4ff7d41c1807dba509d"
   },
   "_source": "https://github.com/alexcrack/angular-ui-notification.git",
-  "_target": "^0.2.0",
-  "_originalSource": "angular-ui-notification"
+  "_target": "^0.3.6",
+  "_originalSource": "angular-ui-notification",
+  "_direct": true
 }
