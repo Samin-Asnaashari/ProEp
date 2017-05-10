@@ -24,19 +24,19 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping("")
-    public List<Student> GetAllStudents(){return this.studentService.GetAllStudents();  }
-    
-    @RequestMapping("/{pcn}")
-    public Student GetStudent(@PathVariable Integer pcn) {
-		return this.studentService.GetStudent(pcn);
-	}
-    
     @RequestMapping(method=RequestMethod.POST)
     public void AddStudent(@RequestBody Student student){
-    	this.studentService.AddStudent(student);
+        this.studentService.AddStudent(student);
     }
-    
+
+    @RequestMapping("/{pcn}")
+    public Student GetStudent(@PathVariable Integer pcn) {
+        return this.studentService.GetStudent(pcn);
+    }
+
+    @RequestMapping("")
+    public List<Student> GetAllStudents(){return this.studentService.GetAllStudents();  }
+
     @RequestMapping(method=RequestMethod.PUT)
     public void UpdateStudent(@RequestBody Student student){ this.studentService.UpdateStudent(student);  }
     
