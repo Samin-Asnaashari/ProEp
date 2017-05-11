@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import java.io.Console;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,8 +40,9 @@ public class CourseService {
     public void DeleteCourse(String id) {
     	Course course = this.courseRepository.getOne(id);
     	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-    	Date date = new Date();
-    	//if()
-        this.courseRepository.delete(id);
+    	Date todayDate = new Date();
+    	if(todayDate.after(course.getEndDate()) && todayDate.before(course.getRegStartDate())) {
+    		this.courseRepository.delete(id);
+    	}
     }
 }

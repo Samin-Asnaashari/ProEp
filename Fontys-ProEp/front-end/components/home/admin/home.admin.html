@@ -23,14 +23,14 @@
                 </th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="courseTBody">
             <tr ng-repeat="course in vmHome.courses | filter:searchText">
                 <td>{{vmHome.RowNumber(course)}}</td>
                 <td colspan="3">{{course.code}}</td>
                 <td colspan="4"> {{course.name}}</td>
                 <td colspan="1">
                     <i style="margin-right: 5px" class="button glyphicon glyphicon-edit"></i>
-                    <i class="button glyphicon glyphicon-trash"></i>
+                    <i ng-click="vmHome.DeleteRequest(course.code)" class="button glyphicon glyphicon-trash"></i>
                 </td>
             </tr>
             </tbody>
