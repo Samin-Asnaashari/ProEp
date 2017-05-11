@@ -38,6 +38,9 @@ public class Course {
 
     @Column
     private Date regEndDate;
+    
+    @Column
+    private Date endDate;
 
     @ManyToMany
     @JoinTable(name = "course_teacher")

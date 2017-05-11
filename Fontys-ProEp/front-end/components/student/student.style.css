@@ -9,24 +9,24 @@ body {
     color: #333;
 }
 
-table {
+.courseTable {
     text-align: left;
     line-height: 40px;
     border-collapse: separate;
     border-spacing: 0;
-    border: 2px solid #9400D3;
-    width: 500px;
-    margin: 50px auto;
+    border: 2px solid #563d7c;
     border-radius: .25rem;
     table-layout: fixed;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
-thead tr:first-child {
-    background: #9400D3;
+.courseThead tr:first-child {
+    background: #563d7c;
     color: #fff;
     border: none;
 }
-
+/*563d7c*/
 th:first-child,
 td:first-child {
     padding: 0 15px 0 20px;
@@ -114,7 +114,7 @@ td:last-child {
     height: 34px;
     line-height: 34px;
     text-align: center;
-    color: #9400D3;
+    color: #563d7c;
     left: initial;
     font-size: 14px;
 }

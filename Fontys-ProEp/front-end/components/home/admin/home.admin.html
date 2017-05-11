@@ -1,7 +1,7 @@
-<div class="container"> <!--TODO fix-->
+<div class="container" style="padding-bottom: 20px;">
     <div class="row">
-        <table>
-            <thead>
+        <table class="col-xs-12 courseTable">
+            <thead class="courseThead">
             <tr>
                 <th colspan="6">Courses</th>
                 <th colspan="3">
@@ -17,8 +17,8 @@
             <tr>
                 <th>#</th>
                 <th colspan="3">Course code</th>
-                <th colspan="2">Name</th>
-                <th colspan="3">
+                <th colspan="4">Name</th>
+                <th colspan="1">
                     <i class="button pull-right glyphicon glyphicon-plus" style="padding-right:10px;"></i>
                 </th>
             </tr>
@@ -27,9 +27,9 @@
             <tr ng-repeat="course in vmHome.courses | filter:searchText">
                 <td>{{vmHome.RowNumber(course)}}</td>
                 <td colspan="3">{{course.code}}</td>
-                <td> {{course.name}}</td>
-                <td colspan="4">
-                    <i class="button glyphicon glyphicon-edit"></i>
+                <td colspan="4"> {{course.name}}</td>
+                <td colspan="1">
+                    <i style="margin-right: 5px" class="button glyphicon glyphicon-edit"></i>
                     <i class="button glyphicon glyphicon-trash"></i>
                 </td>
             </tr>

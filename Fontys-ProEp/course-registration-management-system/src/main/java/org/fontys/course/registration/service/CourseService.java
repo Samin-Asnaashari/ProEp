@@ -1,5 +1,8 @@
 package org.fontys.course.registration.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.fontys.course.registration.model.Course;
@@ -34,6 +37,10 @@ public class CourseService {
 
     @Transactional
     public void DeleteCourse(String id) {
+    	Course course = this.courseRepository.getOne(id);
+    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+    	Date date = new Date();
+    	//if()
         this.courseRepository.delete(id);
     }
 }
