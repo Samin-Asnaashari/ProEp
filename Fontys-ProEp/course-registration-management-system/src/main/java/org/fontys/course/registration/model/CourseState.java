@@ -14,10 +14,10 @@ public class CourseState {
     @Column(nullable = false)
     private Integer id;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Major major;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private CourseType courseType;
 
     @JsonBackReference

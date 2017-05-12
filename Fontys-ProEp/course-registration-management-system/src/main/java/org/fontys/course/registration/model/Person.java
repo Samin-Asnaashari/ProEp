@@ -26,7 +26,7 @@ public abstract class Person {
     private String familyName;
 
     //TODO Think about it this doesn't feel right maybe having Admin is better.
-    @Column
+    @Enumerated(EnumType.ORDINAL)
     private Permission permission;
 
     public Person() {

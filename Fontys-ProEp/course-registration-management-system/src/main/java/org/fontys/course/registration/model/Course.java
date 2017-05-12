@@ -38,9 +38,6 @@ public class Course {
 
     @Column
     private Date regEndDate;
-    
-    @Column
-    private Date endDate;
 
     @ManyToMany
     @JoinTable(name = "course_teacher")
@@ -111,14 +108,6 @@ public class Course {
 
     public void setFilledSeat(Integer filledSeat) {
         this.filledSeat = filledSeat;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public Date getRegEndDate() {

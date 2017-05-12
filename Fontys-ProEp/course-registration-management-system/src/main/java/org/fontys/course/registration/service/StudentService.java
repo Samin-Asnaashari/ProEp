@@ -33,5 +33,7 @@ public class StudentService {
 		this.studentRepository.delete(pcn);
 	}
 
-
+	public void GetStudentOfCourse(){
+		
+	}
 }
