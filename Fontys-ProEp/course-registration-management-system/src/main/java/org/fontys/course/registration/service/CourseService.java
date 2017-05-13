@@ -69,8 +69,9 @@ public class CourseService {
     		if(studentsToSendNotifications.size() != 0)
     			return new Message("Warning: There are already " + studentsToSendNotifications.size() 
     			+ " students that applied to this course");
-    		else
+    		else{
     			return new Message("");
+    		}
     	}
     }
     

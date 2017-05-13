@@ -7,15 +7,16 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
     vm.RowNumber = function (course) {
         return vm.courses.indexOf(course) + 1;
     };
-    vm.RequestCourseDeletion = function (courseCode) {
-        courseService.RequestCourseDeletion(courseCode)
+    vm.RequestCourseDeletion = function (course) {
+        courseService.RequestCourseDeletion(course.code)
             .then(function (response) {
                 console.log("success request");
-                /*show confirmation model with possible warning message 'response' if empty then there is no warning to how to admin
+                /*show confirmation modal with possible warning message as 'response.message' if empty then there is no warning for admin
                 if yes is pressed then call deletion function
                 courseService.deleteCourse(courseCode)
                     .then(function (response) {
                         console.log("success deletion");
+                        vm.courses.splice(vm.courses.indexOf(course), 1);
                     }, function (error) {
                         console.log("error deletion");
                     });*/
@@ -25,4 +26,12 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
 
             });
     };
+    /*vm.AddCourse = function (course) {
+        coursesResolve.addCourse(course)
+            .then(function (response) {
+                console.log("success");
+            }, function (error) {
+                console.log("error");
+            });
+    };*/
 });

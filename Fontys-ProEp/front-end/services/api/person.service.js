@@ -8,7 +8,7 @@ angular.module('appServiceAPI').service('personService', function ($http) {
     var self = this;
     var http = 'http://';
     var localhost = "localhost";
-    var baseUrl = http + localhost + ':8090/persons';
+    var baseUrl = http + localhost + ':8090/students';
 
     self.addPerson = function (newPerson) {
         return $http.post(baseUrl + newPerson);
@@ -23,27 +23,11 @@ angular.module('appServiceAPI').service('personService', function ($http) {
     };
 
     self.deletePerson = function (pcn) {
-        return $http.delete(baseUrl, '/' + pcn);
+        return $http.delete(baseUrl + '/' + pcn);
     };
 
     //TODO remove testing purposes
     self.GetAllStudents = function () {
-        return self.students =
-            [
-                {
-                    "StudentNr": "2658974",
-                    "Name": "Peter"
-                },
-
-                {
-                    "StudentNr": "7896542",
-                    "Name": "Jan"
-                },
-                {
-                    "StudentNr": "1234567",
-                    "Name": "Becky"
-                }
-            ];
-        //return $http.get(baseUrl + "students");
+        return $http.get(baseUrl);
     };
 });
