@@ -28,10 +28,12 @@ public class CourseService {
         this.courseRepository.save(course);
     }
 
+    @Transactional
     public Course GetCourse(String id) {
         return this.courseRepository.findOne(id);
     }
 
+    @Transactional
     public List<Course> GetAllCourses() {
         return this.courseRepository.findAll();
     }
@@ -41,6 +43,7 @@ public class CourseService {
         this.courseRepository.save(course);
     }
 
+    @Transactional
     public Message RequestCourseDeletion(String id){
     	Course course = this.courseRepository.getOne(id);
     	Date todayDate = new Date();
@@ -54,18 +57,23 @@ public class CourseService {
     		//send notifications that course has been dropped to all teachers and students
     		//this is also checked and this info is sent to the admin before confirming to delete
     		//so he knows that there are already students that requested registering to this course
+    		
+    		List<Person> personsToSendNotifications = new ArrayList<>();
+    		
     		List<Student> studentsToSendNotifications = this.utilService.GetAllStudentsByCourse
     				(course.getCode());
-    		List<Person> personsToSendNotifications = new ArrayList<>();
+    		
     		for(int i = 0; i < studentsToSendNotifications.size(); i++){
     			personsToSendNotifications.add(studentsToSendNotifications.get(i));
     		}
+    		
     		for(int i = 0; i < course.getTeachers().size(); i++){
     			personsToSendNotifications.add(course.getTeachers().get(i));
     		}
+    		
     		this.utilService.AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(course.getCode(), 
     				personsToSendNotifications);
-    		System.out.println("Size:" + studentsToSendNotifications.size());
+    		
     		if(studentsToSendNotifications.size() != 0)
     			return new Message("Warning: There are already " + studentsToSendNotifications.size() 
     			+ " students that applied to this course");
@@ -79,7 +87,6 @@ public class CourseService {
     public void DeleteCourse(String id) {
     	//Check to see if there is a list with persons to send notifications to before deleting
     	List<Person> persons = this.utilService.getPersonsToSendDeleteCourseNotifications().get(id);
-    	System.out.println("DeleteMethod: " + persons.size());
     	if(persons != null){
     		if(persons.size() != 0){
     			String notificationContent = " is not available anymore in this block, sorry for any inconvenience";

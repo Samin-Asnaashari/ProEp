@@ -16,4 +16,8 @@ public class RegistrationService {
 	public List<Registration> GetAllRegistrations() {
 		return this.registrationRepository.findAll();
 	}
+	
+	public List<Registration> GetAllRegistrationsByCourse(String courseCode){
+		return this.registrationRepository.findRegistrationByCourse(courseCode);
+	}
 }

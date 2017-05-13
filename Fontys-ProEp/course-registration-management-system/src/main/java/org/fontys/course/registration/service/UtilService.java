@@ -48,14 +48,16 @@ public class UtilService {
 	}
 	
 	public List<Student> GetAllStudentsByCourse(String courseCode){
-		List<Registration> registrations = this.registrationService.GetAllRegistrations();
+		List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
 		List<Student> studentsApplied = new ArrayList<>();
 		for(int i = 0; i < registrations.size(); i++){
-			if(registrations.get(i).getId().getCourse().getCode().equals(courseCode)){
 				studentsApplied.add(registrations.get(i).getId().getStudent());
-			}
 		}
 		return studentsApplied;
+	}
+	
+	public List<Registration> GetAllRegistrationsByCourse(String courseCode){
+		return this.registrationService.GetAllRegistrationsByCourse(courseCode);
 	}
 	
 	public void AddNewNotification(Notification notification){
