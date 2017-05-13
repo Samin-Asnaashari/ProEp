@@ -2,6 +2,7 @@ package org.fontys.course.registration.controller;
 
 import java.util.List;
 
+import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
@@ -38,6 +39,11 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.GET)
     public List<Course> GetAllCourses() {
         return this.courseService.GetAllCourses();
+    }
+    
+    @RequestMapping(value = "/requestDeletion/{id}", method = RequestMethod.GET)
+    public Message RequestCourseDeletion(@PathVariable String id) {
+        return this.courseService.RequestCourseDeletion(id);
     }
 
     @RequestMapping(method = RequestMethod.PUT)

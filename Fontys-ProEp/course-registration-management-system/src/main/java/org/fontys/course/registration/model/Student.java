@@ -13,7 +13,7 @@ public class Student extends Person {
     private Integer StudentNumber;
 
     //TODO is it really necessary?
-    @Column
+    @Enumerated(EnumType.ORDINAL)
     private StudentType studentType;
 
     @Column

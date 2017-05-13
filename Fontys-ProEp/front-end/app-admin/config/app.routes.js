@@ -39,8 +39,8 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/student/student.html',
             controller: 'studentCtrl as vmStudent',
             resolve: {
-                studentsResolve: function ($state, $stateParams, personService) {
-                    return personService.GetAllStudents()
+                studentsResolve: function ($state, $stateParams, studentService) {
+                    return studentService.GetStudents()
                         .then(function (response) {
                             return {students: response.data};
                         }, function (error) {

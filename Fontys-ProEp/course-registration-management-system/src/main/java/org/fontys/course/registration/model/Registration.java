@@ -1,6 +1,8 @@
 package org.fontys.course.registration.model;
 
 import org.fontys.course.registration.model.enums.RegistrationStatus;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +17,7 @@ public class Registration {
     @Column
     private Date date;
 
-    @Column
+    @Enumerated(EnumType.ORDINAL)
     private RegistrationStatus registrationStatus;
 
     public Registration() {

@@ -27,6 +27,10 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     };
 
     self.deleteCourse = function (code) {
-        return $http.delete(baseUrl, '/' + code);
+        return $http.delete(baseUrl + "/" + code);
+    };
+
+    self.RequestCourseDeletion = function (code) {
+        return $http.get(baseUrl + "/requestDeletion/" + code);
     };
 });

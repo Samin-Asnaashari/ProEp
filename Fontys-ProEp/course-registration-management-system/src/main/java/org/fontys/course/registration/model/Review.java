@@ -3,6 +3,10 @@ package org.fontys.course.registration.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.Date;
 
 @Entity
@@ -22,6 +26,7 @@ public class Review {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(nullable = false)
+    @OnDelete(action=OnDeleteAction.NO_ACTION)
     private Student student;
 
     @JsonBackReference

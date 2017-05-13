@@ -1,6 +1,10 @@
 package org.fontys.course.registration.model;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.util.Date;
 
 @Entity
@@ -9,7 +13,7 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column
     private String content;
@@ -23,20 +27,29 @@ public class Notification {
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn
+    @OnDelete(action=OnDeleteAction.CASCADE)
     private Person receiver;
 
-    public Notification() {
+    public Notification(String content, Date date, Person sender, Person receiver) {
+		super();
+		this.content = content;
+		this.date = date;
+		this.sender = sender;
+		this.receiver = receiver;
+	}
+
+	public Notification() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Long getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getContent() {
+	public String getContent() {
         return content;
     }
 

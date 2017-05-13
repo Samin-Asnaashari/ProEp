@@ -110,14 +110,6 @@ public class Course {
         this.filledSeat = filledSeat;
     }
 
-    public Date getRegStartDate() {
-        return regStartDate;
-    }
-
-    public void setRegStartDate(Date regStartDate) {
-        this.regStartDate = regStartDate;
-    }
-
     public Date getRegEndDate() {
         return regEndDate;
     }
@@ -126,6 +118,14 @@ public class Course {
         this.regEndDate = regEndDate;
     }
 
+    public Date getRegStartDate() {
+        return regStartDate;
+    }
+
+    public void setRegStartDate(Date regStartDate) {
+        this.regStartDate = regStartDate;
+    }
+    
     public List<Teacher> getTeachers() {
         return teachers;
     }
