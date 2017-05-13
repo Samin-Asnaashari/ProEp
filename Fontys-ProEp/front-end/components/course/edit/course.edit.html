@@ -1,82 +1,135 @@
 <div class="container">
-    <div class="row header">
-        <div class="col-xs-12">
-            <h1 class="text-left text-muted"><strong>{{vmCourseEdit.course.name}}
-                ({{vmCourseEdit.course.code}})</strong></h1>
-        </div>
-    </div>
-
-    <div class="row well well-sm" style="border-radius: 0; background-color: transparent">
-        <div class="col-xs-6">
-            <md-input-container>
-                <label>Block</label>
-                <input>
-            </md-input-container>
-        </div>
-        <div class="col-xs-6">
-            <md-input-container>
-                <label>EC</label>
-                <input>
-            </md-input-container>
-        </div>
-        <div class="col-xs-12">
-            <md-input-container>
-                <label>MAX Seat</label>
-                <input>
-            </md-input-container>
-        </div>
-    </div>
-
-    <md-content> <!--layout-padding="" ng-cloak=""-->
-        <div layout-gt-xs="row">
-            <div flex-gt-xs>
-                <h4>Registration Start Date</h4>
-                <md-datepicker ng-model="vmCourseEdit.course.regStartDate" md-placeholder="Enter date"></md-datepicker>
+    <div class="row header top">
+        <div class="col-xs-12" style="display: inline-block;">
+            <div class="col-xs-3">
+                <h1 class="text-left text-muted"><strong style="text-transform: uppercase;">{{vmCourseEdit.course.name}}
+                </strong>({{vmCourseEdit.course.code}})</h1>
+            </div>
+            <form>
+                <div class="col-xs-5" style="display: inline-flex;">
+                    <div class="col-xs-2">
+                        <label><h3>EC:</h3></label>
+                    </div>
+                    <div class="col-xs-3">
+                        <input class="form-control" type="number" ng-model="vmCourseEdit.course.ec">
+                    </div>
+                </div>
+            </form>
+            <div class="col-xs-4">
+                <button class="btn btn-default btn-lg pull-right" aria-label="save changes"
+                        ng-click="vmCourseEdit.save()">
+                    <span class="glyphicon glyphicon-floppy-disk fa-2x" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
-        <div layout-gt-xs="row">
+    </div>
+
+    <br/>
+
+    <!--<div class="input-group">-->
+    <!--<span class="input-group-addon" id="basic-addon1">@</span>-->
+    <!--<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">-->
+    <!--</div>-->
+
+    <form>
+        <div class="col-xs-12" style="display: inline-block;">
+            <div class="col-xs-1">
+                <label><h4>Block:</h4></label>
+            </div>
+            <div class="col-xs-1">
+                <input class="form-control" type="number" ng-model="vmCourseEdit.course.block">
+            </div>
+        </div>
+        <div class="col-xs-12" style="display: inline-block;">
+            <div class="col-xs-1">
+                <label><h5>MAX Seat:</h5></label>
+            </div>
+            <div class="col-xs-1">
+                <input class="form-control" type="number" ng-model="vmCourseEdit.course.maxSeats">
+            </div>
+            <div class="col-xs-1">
+                <label><h5>Filled Seat: </h5></label>
+            </div>
+            <div class="col-xs-1">
+                <input readonly="readonly" class="form-control" type="number" ng-model="vmCourseEdit.course.filledSeat">
+            </div>
+        </div>
+    </form>
+
+    <md-content class="row well" md-theme="docs-dark">
+        <div class="col-xs-6">
+            <div flex-gt-xs>
+                <h4>Registration Start Date</h4>
+                <md-datepicker ng-model="vmCourseEdit.course.regStartDate"
+                               md-placeholder="Enter date"></md-datepicker>
+            </div>
+        </div>
+        <div class="col-xs-6">
             <div flex-gt-xs>
                 <h4>Registration End Date</h4>
-                <md-datepicker ng-model="vmCourseEdit.course.regEndDate" md-placeholder="Enter date"></md-datepicker>
+                <md-datepicker ng-model="vmCourseEdit.course.regEndDate"
+                               md-placeholder="Enter date"></md-datepicker>
             </div>
         </div>
     </md-content>
 
+    <div class="row well well-sm" style="border-style: none;background-color: transparent;">
+        <div class="col-xs-12">
+            <h3>Description:</h3>
+        </div>
+        <div class="col-xs-6 well" style="border-style: 0px;background-color: transparent">
+            <text-editor element="vmCourseEdit.course.description"></text-editor>
+        </div>
+    </div>
 
-    <!--<md-card>-->
-        <!--<md-card-title>-->
-            <!--<md-card-title-text>-->
-                <!--<span class="md-headline">Account Preferences</span>-->
-                <!--<span class="md-subhead">Tell us a little about you.</span>-->
-            <!--</md-card-title-text>-->
-        <!--</md-card-title>-->
+    <table class="table table-striped" style="border: none;display: block;margin-top: 5px">
+        <thead class="thead-inverse">
+        <tr>
+            <th colspan="18">Course State</th>
+        </tr>
+        <tr>
+            <th colspan="6">
+                <md-select placeholder="Major" ng-model="major" md-on-open="vmCourseEdit.loadMajor()">
+                    <md-option ng-value="major" ng-repeat="major in majors">{{major}}</md-option>
+                </md-select>
+            </th>
+            <th colspan="6">
+                <md-select placeholder="Course Type" ng-model="courseType" md-on-open="vmCourseEdit.loadCourseType()">
+                    <md-option ng-value="courseType" ng-repeat="courseType in courseTypes">{{courseType}}</md-option>
+                </md-select>
+            </th>
+            <th colspan="6">
+                <button class="btn btn-default pull-right" aria-label="add new courseState"
+                        ng-click="vmCourseEdit.addNewStateToCourse()"><span
+                        class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="8">Course Type</th>
+            <th colspan="8">Major</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="state in vmCourseEdit.course.states">
+            <td>{{state.courseType}}</td>
+            <td>{{state.major}}</td>
+        </tr>
+        </tbody>
+    </table>
 
-        <!--<md-card-content>-->
-            <!--<div layout="row">-->
-                <!--<md-input-container>-->
-                    <!--<label>Street Name</label>-->
-                    <!--<input>-->
-                <!--</md-input-container>-->
 
-                <!--<md-input-container>-->
-                    <!--<label>City</label>-->
-                    <!--<input>-->
-                <!--</md-input-container>-->
+    <div class="row">
+        <md-button class="md-raised" aria-label="teachers" ng-click="" style="background-color: grey"><span
+                class="fa fa-users"
+                aria-hidden="true"></span> List
+            of the Teachers
+        </md-button>
+    </div>
 
-                <!--<md-input-container>-->
-                    <!--<label>State</label>-->
-                    <!--<md-select ng-model="ctrl.userState">-->
-                        <!--<md-option><em>None</em></md-option>-->
-                        <!--<md-option ng-repeat="state in ctrl.states" ng-value="state.abbrev" ng-disabled="$index === 1">-->
-                            <!--{{state.abbrev}}-->
-                        <!--</md-option>-->
-                    <!--</md-select>-->
-                <!--</md-input-container>-->
-            <!--</div>-->
-        <!--</md-card-content>-->
-    <!--</md-card>-->
-
-
-
-    <!--style color icon Block - max seat Course Type major description list of teacher list of added student/ -->
+    <div class="row">
+        <md-button class="md-fab pull-right" aria-label="go top" ng-click="vmCourseEdit.goTop()"
+                   style="background-color: #333"><span
+                class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>
+    </div>
 </div>

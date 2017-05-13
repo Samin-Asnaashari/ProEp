@@ -1,4 +1,4 @@
-<div class="container"> <!--TODO fix-->
+<div class="container">
     <div class="row">
         <table>
             <thead>
@@ -29,7 +29,7 @@
                 <td colspan="3">{{course.code}}</td>
                 <td> {{course.name}}</td>
                 <td colspan="4">
-                    <i class="button glyphicon glyphicon-edit"></i>
+                    <i class="button glyphicon glyphicon-edit" ng-click="$state.go('courseEdit', {code: course.code})"></i>
                     <i class="button glyphicon glyphicon-trash"></i>
                 </td>
             </tr>

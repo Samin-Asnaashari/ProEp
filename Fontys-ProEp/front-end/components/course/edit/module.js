@@ -3,11 +3,11 @@
 /**
  * Sub-component module
  */
-angular.module('appComponent.course',
+angular.module('appComponent.courseEdit',
     [
         'ngAnimate',
         'ngMaterial',
-        'textAngular',
+        // 'textAngular',
         'ngMessages'
     ]
 );

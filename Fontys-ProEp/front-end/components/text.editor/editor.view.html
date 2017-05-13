@@ -4,31 +4,25 @@
     <!-- text-angular -->
     <div class="text-editor" ng-if="vmTextEditor.editable">
         <!-- element (Edit) -->
-        <div class="element" text-angular ng-model="vmTextEditor.element.content"></div>
+        <div class="element" text-angular ng-model="vmTextEditor.element"></div>
     </div>
     <!-- buttons -->
     <div class="pull-right buttons-editor">
-        <!--<md-button type="button" md-colors="{background: 'grey-900-0.7'}" class="md-fab md-hue-1 button-admin fade-show"-->
-                   <!--aria-label="Edit"-->
-                   <!--ng-click="vmTextEditor.admin()"-->
-                   <!--ng-if="!vmTextEditor.editable && vmTextEditor.hover"><span-->
-                <!--class="glyphicon glyphicon-pencil"></span>-->
-        <!--</md-button>-->
         <md-button md-colors="{background: 'grey-900-0.5'}" class="md-raised" aria-label="Discard"
-                   ng-click="vmTextEditor.discard()"
+                   ng-click="vmTextEditor.close()"
                    ng-if="vmTextEditor.editable">
-            Discard
+            Close
         </md-button>
-        <md-button md-colors="{background: 'green-900-1'}" class="md-raised md-primary" aria-label="Save"
-                   ng-click="vmTextEditor.save()"
-                   ng-if="vmTextEditor.editable">
-            Save
-        </md-button>
+        <!--<md-button md-colors="{background: 'green-900-1'}" class="md-raised md-primary" aria-label="Save"-->
+                   <!--ng-click="vmTextEditor.save()"-->
+                   <!--ng-if="vmTextEditor.editable">-->
+            <!--Save-->
+        <!--</md-button>-->
     </div>
     <!-- element (View) -->
     <!-- text-bind -->
     <div class="element" ng-if="!vmTextEditor.editable"
-         ng-bind-html="vmTextEditor.element.content"
+         ng-bind-html="vmTextEditor.element"
          ng-click="vmTextEditor.edit()"></div>
 
     <!-- if empty, show message -->

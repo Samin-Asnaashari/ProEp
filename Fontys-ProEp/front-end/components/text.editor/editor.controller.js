@@ -1,43 +1,24 @@
 'use strict';
 
-angular.module('appComponent.textEditor').controller('textEditorCtrl', function ($scope, elementService, Notification) {
+angular.module('appComponent.textEditor').controller('textEditorCtrl', function ($scope, EventCourseEdit) {
 
     var vm = this;
-    vm.placeholder = "Enter text here";
+    vm.placeholder = "NO Description Yet...";
     vm.editable = false;
     vm.hover = false;
 
     vm.element = angular.copy($scope.element);
-    var elementRestore = angular.copy(vm.element);
 
     /* Functions - Methods */
 
     vm.edit = function () {
         vm.editable = true;
-        elementRestore.content = vm.element.content;
     };
 
-    vm.save = function () {
+    vm.close = function () {
         vm.hover = false;
         vm.editable = false;
-
-        // Call API
-        elementService.updateElement(vm.element)
-            .then(function (response) {
-                // Success
-                $scope.element.content = vm.element.content;
-                elementRestore.content = vm.element.content;
-                //Notification.success('Saved');
-            }, function (error) {
-                //Notification.error('Something went wrong!');
-            });
-    };
-
-    vm.discard = function () {
-        vm.hover = false;
-        vm.editable = false;
-        // Restore content
-        vm.element.content = elementRestore.content;
+        EventCourseEdit.notifyOnDescriptionChange(vm.element);
     };
 
     /**
@@ -45,6 +26,6 @@ angular.module('appComponent.textEditor').controller('textEditorCtrl', function 
      * @returns {boolean}
      */
     vm.isNullOrEmptyOrUndefined = function () {
-        return !vm.element.content;
+        return !vm.element;
     };
 });

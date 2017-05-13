@@ -17,14 +17,15 @@
     <link rel="stylesheet" href="../bower_components/angular-material/angular-material.min.css">
     <link rel="stylesheet" href="../bower_components/textAngular/dist/textAngular.css">
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../bower_components/angular-ui-notification/dist/angular-ui-notification.css">
     <!--component style TODO-->
     <link rel="stylesheet" href="../components/course/course.style.css">
     <link rel="stylesheet" href="../components/home/home.style.css">
     <link rel="stylesheet" href="../components/student/student.style.css">
     <link rel="stylesheet" href="../components/course/course.style.css">
-
     <!-- text editor -->
     <link rel="stylesheet" href="../components/text.editor/editor.styles.css">
+
     <!-- general styles -->
     <link rel="stylesheet" href="css/styles.css"/>
 </head>
@@ -120,11 +121,12 @@
 <script src="../bower_components/ng-file-upload/ng-file-upload-all.min.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="../components/text.editor/config/module.js"></script>
+<script src="../bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
 
 <!-- components config -->
 <script src="../components/config/components.module.js"></script>
 <script src="../components/home/admin/module.js"></script>
-<script src="../components/course/module.js"></script>
+<script src="../components/course/edit/module.js"></script>
 <script src="../components/student/module.js"></script>
 <!--service config-->
 <script src="../services/api/config/module.js"></script>
@@ -139,7 +141,7 @@
 <script src="../components/course/edit/course.edit.controller.js"></script>
 <script src="../components/student/student.controller.js"></script>
 
-<!-- dependencies config -->
+<!-- text editor -->
 <script src="../components/text.editor/editor.controller.js"></script>
 <script src="../components/text.editor/editor.directive.js"></script>
 <script src="../components/text.editor/config/app.text-angular.js"></script>
@@ -148,10 +150,10 @@
 <script src="../services/api/course.service.js"></script>
 <script src="../services/api/person.service.js"></script>
 <!-- event services -->
+<script src="../services/event/event.courseEdit.js"></script>
 <script src="../services/event/event.resize-window.js"></script>
 
 <!-- resize -->
-<script src="../services/event/event.resize-window.js"></script>
 <script src="../components/resize-window/module.js"></script>
 <script src="../components/resize-window/resize.directive.js"></script>
 

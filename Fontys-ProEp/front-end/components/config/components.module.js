@@ -4,9 +4,9 @@
 angular.module('appComponent',
     [
         'appComponent.homeAdmin',
-        'appComponent.course',
+        'appComponent.courseEdit',
         'appComponent.student',
-        'appComponent.textEditor',
-        'appComponent.resize'
+        'appComponent.resize',
+        'appComponent.textEditor'
     ]
 );
