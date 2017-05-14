@@ -5,6 +5,8 @@ import javax.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 
 @Entity
@@ -25,9 +27,9 @@ public class Notification {
     @JoinColumn
     private Person sender;
 
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonBackReference
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn
-    @OnDelete(action=OnDeleteAction.CASCADE)
     private Person receiver;
 
     public Notification(String content, Date date, Person sender, Person receiver) {

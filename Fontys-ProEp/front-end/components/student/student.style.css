@@ -38,7 +38,7 @@ td:first-child {
     border-bottom: 1px solid #ddd;
 }
 
-td:last-child {
+.studentTBody td:last-child {
     text-align: right;
     padding-right: 10px;
 }

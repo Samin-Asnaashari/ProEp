@@ -3,6 +3,10 @@ package org.fontys.course.registration.model;
 import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.model.enums.StudentType;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,6 +26,10 @@ public class Student extends Person {
     @Column
     private Double avgScore;
 
+    @JsonManagedReference
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Notification> notifications;
+    
     public Student() {
     }
 
