@@ -1,6 +1,3 @@
-/**
- * Created by Merv on 5/13/2017.
- */
 'use strict';
 
 /**
@@ -21,15 +18,15 @@ angular.module('appServiceAPI').service('studentService', function ($http) {
         return $http.get(baseUrl + '/' + pcn);
     };
 
+    self.getAllStudents = function () {
+        return $http.get(baseUrl);
+    };
+
     self.updateStudent = function (student) {
         return $http.put(baseUrl, student);
     };
 
     self.deleteStudent = function (pcn) {
         return $http.delete(baseUrl + '/' + pcn);
-    };
-
-    self.GetStudents = function () {
-        return $http.get(baseUrl);
     };
 });

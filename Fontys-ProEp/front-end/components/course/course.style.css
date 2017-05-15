@@ -1,0 +1,12 @@
+.courseEdit .removeWellStyle {
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.courseEdit .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    /*background-color: #563d7c;*/
+    /*opacity: 0.7;*/
+    color: #563d7c;
+}

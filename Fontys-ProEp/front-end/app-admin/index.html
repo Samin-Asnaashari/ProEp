@@ -48,22 +48,12 @@
         <!-- Nagivation items -->
         <div class="collapse navbar-collapse" id="mainNavBar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a> </li>
-
-                <!-- drop down menu -->
-                <li class="">
-                    <a href="#" class="" >Students</a>
-                        <!--   <span class="caret"></span></a>
-                       <ul class="dropdown-menu">
-                           <li><a href="#">Add</a> </li>
-                           <li><a href="#">Remove</a> </li>
-                       </ul>*/-->
-                </li>
+                <li class="active"><a href="#!/home">Home<span class="sr-only">(current)</span></a></li>
+                <li><a href="#!/students" class="">Students<span class="sr-only">(current)</span></a></li>
             </ul>
-
             <!-- right align -->
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login</a> </li>
+                <li><a href="#">Login<span class="sr-only">(current)</span></a></li> <!--TODO-->
             </ul>
         </div>
     </div>
@@ -82,21 +72,26 @@
             </div>
             <div class="col-sm-4">
                 <h6>About Us</h6>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book. It has survived not only five centuries, but also the
+                    leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s
+                    with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+                    publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
             <div class="col-sm-2">
                 <h6>Navigation</h6>
                 <ul class="unstyled">
-                    <li><a href="#">Home</a> </li>
-                    <li><a href="#">Students</a> </li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Students</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
                 <h6>Actions</h6>
                 <ul class="unstyled">
-                    <li><a href="#">Login</a> </li>
-                    <li><a href="#">Add a student</a> </li>
-                    <li><a href="#">Add a course</a> </li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Add a student</a></li>
+                    <li><a href="#">Add a course</a></li>
                 </ul>
             </div>
             <div class="col-sm-2">
@@ -113,7 +108,6 @@
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-animate/angular-animate.js"></script>
 <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<!--<script src="../bower_components/angular-material/angular-material.js"></script>-->
 <script src="../bower_components/angular-material/angular-material.min.js"></script>
 <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="../bower_components/angular-aria/angular-aria.min.js"></script>
@@ -151,9 +145,8 @@
 
 <!-- services -->
 <script src="../services/api/course.service.js"></script>
-<script src="../services/api/person.service.js"></script>
 <script src="../services/api/student.service.js"></script>
-
+<script src="../services/api/enums.service.js"></script>
 <!-- event services -->
 <script src="../services/event/event.courseEdit.js"></script>
 <script src="../services/event/event.resize-window.js"></script>

@@ -17,7 +17,7 @@ public class Registration {
     @Column
     private Date date;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private RegistrationStatus registrationStatus;
 
     public Registration() {

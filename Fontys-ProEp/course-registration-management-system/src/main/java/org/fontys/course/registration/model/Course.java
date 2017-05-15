@@ -40,14 +40,16 @@ public class Course {
     private Date regEndDate;
 
     @ManyToMany
-    @JoinTable(name = "course_teacher")
+    @JoinTable(name = "course_teacher",
+            joinColumns = @JoinColumn(name = "course_code", referencedColumnName = "code"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_pcn", referencedColumnName = "pcn"))
     private List<Teacher> teachers;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "course-courseState")
     @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<CourseState> states;
 
-    @JsonManagedReference
+    @JsonManagedReference(value = "course-review")
     @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Review> reviews;
 
@@ -125,7 +127,7 @@ public class Course {
     public void setRegStartDate(Date regStartDate) {
         this.regStartDate = regStartDate;
     }
-    
+
     public List<Teacher> getTeachers() {
         return teachers;
     }

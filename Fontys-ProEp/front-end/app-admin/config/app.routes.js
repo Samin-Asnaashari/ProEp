@@ -40,7 +40,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             controller: 'studentCtrl as vmStudent',
             resolve: {
                 studentsResolve: function ($state, $stateParams, studentService) {
-                    return studentService.GetStudents()
+                    return studentService.getAllStudents()
                         .then(function (response) {
                             return {students: response.data};
                         }, function (error) {

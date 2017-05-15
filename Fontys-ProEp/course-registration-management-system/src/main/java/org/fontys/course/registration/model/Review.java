@@ -26,10 +26,10 @@ public class Review {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(nullable = false)
-    @OnDelete(action=OnDeleteAction.NO_ACTION)
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Student student;
 
-    @JsonBackReference
+    @JsonBackReference(value = "course-review")
     @ManyToOne
     @JoinColumn(nullable = false)
     private Course course;

@@ -7,8 +7,8 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
     vm.RowNumber = function (course) {
         return vm.courses.indexOf(course) + 1;
     };
-    vm.RequestCourseDeletion = function (course) {
-        courseService.RequestCourseDeletion(course.code)
+    vm.requestCourseDeletion = function (course) {
+        courseService.requestCourseDeletion(course.code)
             .then(function (response) {
                 console.log("success request");
                 /*show confirmation modal with possible warning message as 'response.message' if empty then there is no warning for admin

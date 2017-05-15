@@ -14,13 +14,13 @@ public class CourseState {
     @Column(nullable = false)
     private Integer id;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Major major;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private CourseType courseType;
 
-    @JsonBackReference
+    @JsonBackReference(value = "course-courseState")
     @ManyToOne
     @JoinColumn
     private Course course;

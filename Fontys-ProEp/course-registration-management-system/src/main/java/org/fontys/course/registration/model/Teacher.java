@@ -11,8 +11,7 @@ public class Teacher extends Person {
     @Column
     private String link;
 
-    @ManyToMany
-    @JoinTable(name="course_teacher")
+    @ManyToMany(mappedBy = "teachers")
     private List<Course> myCourses;
 
     public Teacher() {

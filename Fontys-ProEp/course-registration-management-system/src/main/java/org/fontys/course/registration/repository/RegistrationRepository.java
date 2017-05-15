@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RegistrationRepository extends JpaRepository<Registration, RegistrationId> {
-	
-	@Query(value = "SELECT * FROM Registration WHERE course_code = ?1", nativeQuery = true)
-	List<Registration> findRegistrationByCourse(String courseCode);
+
+    //TODO be consistent use JPA repository has more priority
+    //Replace your code and Query with : List<Registration> findByCourseCode(String courseCode);
+    @Query(value = "SELECT * FROM Registration WHERE course_code = ?1", nativeQuery = true)
+    List<Registration> findRegistrationByCourse(String courseCode);
 }

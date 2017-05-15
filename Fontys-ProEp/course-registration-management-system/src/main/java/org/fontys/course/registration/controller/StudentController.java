@@ -24,26 +24,30 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping(method=RequestMethod.POST)
-    public void AddStudent(@RequestBody Student student){
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
+    public void AddStudent(@RequestBody Student student) {
         this.studentService.AddStudent(student);
     }
 
-    @RequestMapping("/{pcn}")
-    public Student GetStudent(@PathVariable Integer pcn) {
+    @RequestMapping(value = "/{pcn}", method = RequestMethod.GET)
+    public Student GetStudent(@PathVariable Integer pcn) throws Exception {
         return this.studentService.GetStudent(pcn);
     }
 
-    @RequestMapping("")
-    public List<Student> GetAllStudents(){return this.studentService.GetAllStudents();  }
-
-    @RequestMapping(method=RequestMethod.PUT)
-    public void UpdateStudent(@RequestBody Student student){ this.studentService.UpdateStudent(student);  }
-    
-    @RequestMapping(method=RequestMethod.DELETE, value="/{pcn}")
-    public void DeleteStudent(@PathVariable Integer pcn){
-    	this.studentService.DeleteStudent(pcn);
+    @RequestMapping(method = RequestMethod.GET)
+    public List<Student> GetAllStudents() {
+        return this.studentService.GetAllStudents();
     }
-    
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void UpdateStudent(@RequestBody Student student) {
+        this.studentService.UpdateStudent(student);
+    }
+
+    @RequestMapping(value = "/{pcn}", method = RequestMethod.DELETE)
+    public void DeleteStudent(@PathVariable Integer pcn) {
+        this.studentService.DeleteStudent(pcn);
+    }
+
 
 }

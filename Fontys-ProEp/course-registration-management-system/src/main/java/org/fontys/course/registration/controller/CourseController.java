@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
+import org.fontys.course.registration.model.CourseState;
+import org.fontys.course.registration.repository.CourseStateRepository;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -25,14 +27,13 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    //TODO didn't we discuss we not gonna create course?
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public void AddCourse(@RequestBody Course course) {
         this.courseService.AddCourse(course);
     }
 
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
-    public Course GetCourse(@PathVariable String code) {
+    public Course GetCourse(@PathVariable String code) throws Exception {
         return this.courseService.GetCourse(code);
     }
 
@@ -40,15 +41,25 @@ public class CourseController {
     public List<Course> GetAllCourses() {
         return this.courseService.GetAllCourses();
     }
-    
-    @RequestMapping(value = "/requestDeletion/{id}", method = RequestMethod.GET)
-    public Message RequestCourseDeletion(@PathVariable String id) {
-        return this.courseService.RequestCourseDeletion(id);
-    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateCourse(@RequestBody Course course) {
         this.courseService.UpdateCourse(course);
+    }
+
+    @RequestMapping(value = "/addNewState/course/{code}", method = RequestMethod.POST)
+    public void AddNewCourseStateToCourse(@RequestBody List<CourseState> states, @PathVariable String code) throws Exception {
+        this.courseService.AddNewCourseStateToCourse(states, code);
+    }
+
+    @RequestMapping(value = "/removeState", method = RequestMethod.DELETE)
+    public void RemoveCourseStateFromCourse(@RequestBody List<CourseState> states) throws Exception {
+        this.courseService.RemoveCourseStateFromCourse(states);
+    }
+
+    @RequestMapping(value = "/requestDeletion/{id}", method = RequestMethod.GET)
+    public Message RequestCourseDeletion(@PathVariable String id) {
+        return this.courseService.RequestCourseDeletion(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

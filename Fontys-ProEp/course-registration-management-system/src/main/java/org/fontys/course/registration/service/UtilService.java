@@ -15,56 +15,56 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilService {
 
-	@Autowired
+    @Autowired
     private CourseService courseService;
-	
-	@Autowired
+
+    @Autowired
     private StudentService studentService;
-	
-	@Autowired
+
+    @Autowired
     private TeacherService teacherService;
-	
-	@Autowired
+
+    @Autowired
     private RegistrationService registrationService;
-	
-	@Autowired
-	private NotificationService notificationService;
 
-	private HashMap<String, List<Person>> personsToSendDeleteCourseNotifications;
-	
-	public HashMap<String, List<Person>> getPersonsToSendDeleteCourseNotifications() {
-		return personsToSendDeleteCourseNotifications;
-	}
+    @Autowired
+    private NotificationService notificationService;
 
-	public void setPersonsToSendDeleteCourseNotifications(
-			HashMap<String, List<Person>> personsToSendDeleteCourseNotifications) {
-		this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
-	}
+    private HashMap<String, List<Person>> personsToSendDeleteCourseNotifications;
 
-	public void AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(String courseCode, List<Person> persons){
-		if(this.personsToSendDeleteCourseNotifications == null)
-			this.personsToSendDeleteCourseNotifications = new HashMap<>();
-		this.personsToSendDeleteCourseNotifications.put(courseCode, persons);
-	}
-	
-	public List<Student> GetAllStudentsByCourse(String courseCode){
-		List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
-		List<Student> studentsApplied = new ArrayList<>();
-		for(int i = 0; i < registrations.size(); i++){
-				studentsApplied.add(registrations.get(i).getId().getStudent());
-		}
-		return studentsApplied;
-	}
-	
-	public List<Registration> GetAllRegistrationsByCourse(String courseCode){
-		return this.registrationService.GetAllRegistrationsByCourse(courseCode);
-	}
-	
-	public void AddNewNotification(Notification notification){
-		this.notificationService.AddNotification(notification);
-	}
-	
-	public void AddNewNotifications(List<Notification> notifications){
-		this.notificationService.AddNotifications(notifications);
-	}
+    public void AddNewNotification(Notification notification) {
+        this.notificationService.AddNotification(notification);
+    }
+
+    public void AddNewNotifications(List<Notification> notifications) {
+        this.notificationService.AddNotifications(notifications);
+    }
+
+    public void AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(String courseCode, List<Person> persons) {
+        if (this.personsToSendDeleteCourseNotifications == null)
+            this.personsToSendDeleteCourseNotifications = new HashMap<>();
+        this.personsToSendDeleteCourseNotifications.put(courseCode, persons);
+    }
+
+    public HashMap<String, List<Person>> GetPersonsToSendDeleteCourseNotifications() {
+        return personsToSendDeleteCourseNotifications;
+    }
+
+    public List<Student> GetAllStudentsByCourse(String courseCode) {
+        List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
+        List<Student> studentsApplied = new ArrayList<>();
+        for (int i = 0; i < registrations.size(); i++) {
+            studentsApplied.add(registrations.get(i).getId().getStudent());
+        }
+        return studentsApplied;
+    }
+
+    public List<Registration> GetAllRegistrationsByCourse(String courseCode) {
+        return this.registrationService.GetAllRegistrationsByCourse(courseCode);
+    }
+
+    public void SetPersonsToSendDeleteCourseNotifications(
+            HashMap<String, List<Person>> personsToSendDeleteCourseNotifications) {
+        this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
+    }
 }
