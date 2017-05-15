@@ -32,7 +32,7 @@ public class CourseService {
     public Course GetCourse(String code) throws Exception {
         Course course = this.courseRepository.findOne(code);
         if (course == null) {
-            throw new Exception("Course with code=" + code + " does not exist.");
+            throw new Exception("Course with code = " + code + " does not exist.");
         } else {
             return course;
         }
@@ -61,9 +61,9 @@ public class CourseService {
         for (CourseState stateToDelete : courseStates) {
             CourseState state = this.courseStateRepository.findOne(stateToDelete.getId());
             if (state == null) {
-                throw new Exception("State with is=" + state.getId() + " does not exist.");
+                throw new Exception("State with id = " + stateToDelete.getId() + " does not exist.");
             } else {
-                this.courseStateRepository.delete(state.getId());
+                this.courseStateRepository.delete(stateToDelete.getId());
             }
         }
     }

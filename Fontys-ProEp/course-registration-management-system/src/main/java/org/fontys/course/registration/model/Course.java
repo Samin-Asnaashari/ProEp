@@ -1,6 +1,7 @@
 package org.fontys.course.registration.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
@@ -29,14 +30,15 @@ public class Course {
     @Column
     private Integer maxSeats;
 
-    //TODO check.
     @Column
     private Integer filledSeat;
 
     @Column
+    @DateTimeFormat(pattern = "MMMM dd, yyyy HH:MM a")
     private Date regStartDate;
 
     @Column
+    @DateTimeFormat(pattern = "MMMM dd, yyyy HH:MM a")
     private Date regEndDate;
 
     @ManyToMany

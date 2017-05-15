@@ -3,7 +3,7 @@
   "description": "",
   "main": "",
   "authors": [
-    "Spicy Kangaroos"
+    "ProEp"
   ],
   "license": "ISC",
   "homepage": "",
@@ -24,7 +24,6 @@
     "font-awesome": "^4.7.0",
     "angular-material": "^1.1.4",
     "angular-xeditable": "^0.7.1",
-    "angular-color-picker": "^1.0.10",
     "ng-file-upload": "^12.2.13",
     "textAngular": "^1.5.16",
     "tinycolor": "^1.4.1",
@@ -33,13 +32,13 @@
     "angular-bootstrap": "^2.5.0",
     "angular-messages": "^1.6.4",
     "angular-aria": "^1.6.4",
-    "angular-colorpicker": "*"
+    "angular-moment-picker": "moment-picker#^0.10.0"
   },
   "resolutions": {
-    "angular": "^1.6.4",
-    "angular-color-picker": "^2.7.1",
+    "angular": ">=1.4.0",
     "angular-ui-notification": "^0.3.6",
     "angular-ui-router": "^1.0.3",
-    "angular-xeditable": "^0.7.1"
+    "angular-xeditable": "^0.7.1",
+    "angular-material": "^1.1.4"
   }
 }

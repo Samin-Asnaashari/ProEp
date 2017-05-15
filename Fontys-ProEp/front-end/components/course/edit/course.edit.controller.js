@@ -15,7 +15,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     vm.removedcourseStates = [];
 
     vm.teachers = [];
-
+    
     EventCourseEdit.subscribeOnDescriptionChange($scope, function (event, data) {
         vm.course.description = data.description;
     });
@@ -46,10 +46,18 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
      * Adding new combination of courseType + Major as state to course (in frontEnd)
      */
     vm.addNewState = function () {
-        //TODO don't add state that already exist
-        vm.courseStates.push(vm.courseState);
-        vm.addedcourseStates.push(vm.courseState);
-        vm.courseState = {};
+        var add = true;
+        angular.forEach(vm.courseStates, function (s) {
+            if (s.major === vm.courseState.major) {
+                add = false;
+                //TODO break;
+            }
+        });
+        if(add == true){
+            vm.courseStates.push(vm.courseState);
+            vm.addedcourseStates.push(vm.courseState);
+            vm.courseState = {};
+        }//TODO else show error you cant add two different state for a major
     };
 
     /**

@@ -31,7 +31,7 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     };
 
     self.removeCourseStateFromCourse = function (states) {
-        return $http.delete(baseUrl + '/removeState', states);
+        return $http.put(baseUrl + '/removeState', states);
     };
 
     self.deleteCourse = function (code) {

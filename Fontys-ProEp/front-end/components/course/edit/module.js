@@ -7,6 +7,7 @@ angular.module('appComponent.courseEdit',
     [
         'ngAnimate',
         'ngMaterial',
-        'ngMessages'
+        'ngMessages',
+        'moment-picker'
     ]
 );

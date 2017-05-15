@@ -5,7 +5,6 @@ import java.util.List;
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.CourseState;
-import org.fontys.course.registration.repository.CourseStateRepository;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -52,7 +51,7 @@ public class CourseController {
         this.courseService.AddNewCourseStateToCourse(states, code);
     }
 
-    @RequestMapping(value = "/removeState", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/removeState", method = RequestMethod.PUT)
     public void RemoveCourseStateFromCourse(@RequestBody List<CourseState> states) throws Exception {
         this.courseService.RemoveCourseStateFromCourse(states);
     }
