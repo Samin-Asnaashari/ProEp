@@ -1,0 +1,3 @@
+INSERT INTO public.course (code, ec, block, description, filled_seat, max_seats, name, reg_end_date, reg_start_date) VALUES ('IPV', 3, 7, 'Not Added yet', 3, 26, 'Image Processing', null, null);
+INSERT INTO public.course (code, ec, block, description, filled_seat, max_seats, name, reg_end_date, reg_start_date) VALUES ('ES1', 3, 7, null, 6, 17, 'Embedded System', null, null);
+INSERT INTO public.course (code, ec, block, description, filled_seat, max_seats, name, reg_end_date, reg_start_date) VALUES ('ProEp', 7, 7, 'Last Project of your Last Semester as ICT Student', 32, 30, 'Project', null, null);

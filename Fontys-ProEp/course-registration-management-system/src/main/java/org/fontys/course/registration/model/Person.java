@@ -1,7 +1,5 @@
 package org.fontys.course.registration.model;
 
-import org.fontys.course.registration.model.enums.Permission;
-
 import javax.persistence.*;
 
 @Entity
@@ -20,14 +18,10 @@ public abstract class Person {
     private String email;
 
     @Column
-    private String name;
+    private String firstName;
 
     @Column
-    private String familyName;
-
-    //TODO Think about it this doesn't feel right maybe having Admin is better.
-    @Enumerated(EnumType.STRING)
-    private Permission permission;
+    private String lastName; /*middleName?*/
 
     public Person() {
     }
@@ -56,27 +50,19 @@ public abstract class Person {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getFamilyName() {
-        return familyName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public Permission getPermission() {
-        return permission;
-    }
-
-    public void setPermission(Permission permission) {
-        this.permission = permission;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

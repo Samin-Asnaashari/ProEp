@@ -7,6 +7,7 @@ angular.module('appComponent',
         'appComponent.courseEdit',
         'appComponent.student',
         'appComponent.resize',
-        'appComponent.textEditor'
+        'appComponent.textEditor',
+        'appComponent.list'
     ]
 );

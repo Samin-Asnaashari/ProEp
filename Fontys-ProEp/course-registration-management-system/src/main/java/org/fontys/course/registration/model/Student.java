@@ -14,13 +14,14 @@ import javax.persistence.*;
 public class Student extends Person {
 
     @Column(nullable = false)
-    private Integer StudentNumber;
+    private Integer studentNumber;
 
     //TODO is it really necessary?
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Major major;
 
     @Column
@@ -34,11 +35,11 @@ public class Student extends Person {
     }
 
     public Integer getStudentNumber() {
-        return StudentNumber;
+        return studentNumber;
     }
 
     public void setStudentNumber(Integer studentNumber) {
-        StudentNumber = studentNumber;
+        this.studentNumber = studentNumber;
     }
 
     public StudentType getStudentType() {
@@ -63,5 +64,13 @@ public class Student extends Person {
 
     public void setAvgScore(Double avgScore) {
         this.avgScore = avgScore;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }

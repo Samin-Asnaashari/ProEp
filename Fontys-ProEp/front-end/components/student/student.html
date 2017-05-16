@@ -27,7 +27,7 @@
             <tr ng-repeat="student in vmStudent.students | filter:searchText">
                 <td>{{vmStudent.RowNumber(student)}}</td>
                 <td colspan="3">{{student.studentNumber}}</td>
-                <td colspan="4"> {{student.name}}</td>
+                <td colspan="4"> {{student.firstName}}</td>
                 <td colspan="1">
                     <i data-toggle="tooltip" title="Delete" ng-click="vmStudent.DeleteStudent(student)" class="button glyphicon glyphicon-trash"></i>
                 </td>
@@ -35,6 +35,14 @@
             </tbody>
         </table>
     </div>
+
+    <br/><br/> <!--TODO remove-->
+    <div class="row">
+        <div class="col-xs-12">
+            <custom-list list="vmStudent.students"></custom-list>
+        </div>
+    </div>
+
 </div>
 <script>
     $(document).ready(function(){

@@ -15,7 +15,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     vm.removedcourseStates = [];
 
     vm.teachers = [];
-    
+
     EventCourseEdit.subscribeOnDescriptionChange($scope, function (event, data) {
         vm.course.description = data.description;
     });
@@ -57,7 +57,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             vm.courseStates.push(vm.courseState);
             vm.addedcourseStates.push(vm.courseState);
             vm.courseState = {};
-        }//TODO else show error you cant add two different state for a major
+        }//TODO else show error you can't add two different state for one major
     };
 
     /**

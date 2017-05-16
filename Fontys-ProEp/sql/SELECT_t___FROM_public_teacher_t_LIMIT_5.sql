@@ -1,0 +1,3 @@
+INSERT INTO public.teacher (pcn, email, first_name, last_name, password, link, permission) VALUES (38293, 'admin@fontys.nl', 'Admin', 'Admin', '13138138', null, 'ADMIN');
+INSERT INTO public.teacher (pcn, email, first_name, last_name, password, link, permission) VALUES (26646, 't.example@fontys.nl', 'Bert', 'Gestle', '12383', null, 'NORMALUSER');
+INSERT INTO public.teacher (pcn, email, first_name, last_name, password, link, permission) VALUES (37283, 'lol@fontys.nl', 'Marrielle', 'Vrolijk', '12373', null, 'NORMALUSER');

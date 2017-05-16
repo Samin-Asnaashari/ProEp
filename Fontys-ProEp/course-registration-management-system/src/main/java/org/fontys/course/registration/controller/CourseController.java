@@ -41,6 +41,11 @@ public class CourseController {
         return this.courseService.GetAllCourses();
     }
 
+    @RequestMapping(value = "/fontysCourses", method = RequestMethod.GET)
+    public List<Course> GetListOfCourses() {
+        return this.courseService.GetAllCourses(); //TODO
+    }
+
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateCourse(@RequestBody Course course) {
         this.courseService.UpdateCourse(course);
