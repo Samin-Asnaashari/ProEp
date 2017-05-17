@@ -22,6 +22,10 @@ angular.module('appServiceAPI').service('studentService', function ($http) {
         return $http.get(baseUrl);
     };
 
+    self.getAllFontysStudents = function () {
+        return $http.get(baseUrl + '/fontysStudents');
+    };
+
     self.updateStudent = function (student) {
         return $http.put(baseUrl, student);
     };

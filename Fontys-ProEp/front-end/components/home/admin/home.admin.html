@@ -21,7 +21,7 @@
                 <th colspan="4">Name</th>
                 <th colspan="1">
                     <i title="Add" class="button pull-right glyphicon glyphicon-plus"
-                       style="padding-right:10px;" data-toggle="modal" data-target="#addStudentModal"></i>
+                       style="padding-right:10px;" data-toggle="tooltip"></i>
                 </th>
             </tr>
             </thead>
@@ -40,49 +40,6 @@
             </tr>
             </tbody>
         </table>
-        <!-- Modal -->
-        <div class="modal fade" id="addStudentModal" tabindex="-1" role="dialog" aria-labelledby="Add Student">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Create A Student</h4>
-                    </div>
-                    <form action="/students" method="post" class="form-horizontal">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="inputPcn" class="col-sm-4 control-label">PCN</label>
-                                <div class="col-sm-8">
-                                    <input type="number" class="form-control" id="inputPcn" name="pcn" placeholder="PCN">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputFirstName" class="col-sm-4 control-label">First Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputFirstName"  name="first_name" placeholder="First Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputLastName" class="col-sm-4 control-label">Last Name</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="inputLastName" name="last_name" placeholder="Last Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-4 control-label">Email</label>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Add Student</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
