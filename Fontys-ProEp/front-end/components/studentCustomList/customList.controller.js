@@ -4,7 +4,7 @@ angular.module('appComponent.list').controller('customListCtrl', function ($scop
 
     var vm = this;
     vm.showFilter = false;
-    vm.action = 1; //0 determines removing 1 determines adding
+    // vm.action = 1; //0 determines removing 1 determines adding
 
     vm.selected = [];
 
