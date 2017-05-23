@@ -77,6 +77,10 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     };
 
     vm.save = function () {
+        var tempStartMoment = moment(vm.course.regStartDate, "LL LT");
+        vm.course.regStartDate = tempStartMoment.toISOString();
+        var tempEndMoment = moment(vm.course.regEndDate, "LL LT");
+        vm.course.regEndDate = tempEndMoment.toISOString();
         return courseService.updateCourse(vm.course)
             .then(function (response) {
                 vm.saveNewCourseStates();
