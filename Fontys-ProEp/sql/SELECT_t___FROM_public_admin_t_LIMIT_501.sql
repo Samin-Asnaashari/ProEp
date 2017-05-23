@@ -1,0 +1,1 @@
+INSERT INTO public.admin (pcn, email, first_name, last_name, password) VALUES (37777, 'Admin@fontys.nl', 'Admin', 'Admin', 'Admin');
