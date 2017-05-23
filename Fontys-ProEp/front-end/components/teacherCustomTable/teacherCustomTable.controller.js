@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl', function ($scope) {
+angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl', function ($scope, EventTeacher) {
 
     var vm = this;
     vm.showFilter = false;
@@ -8,6 +8,14 @@ angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl',
 
     vm.ShowOrHideFilter = function () {
         vm.showFilter = !vm.showFilter;
+    };
+
+    vm.addTeacher = function (teacher) {
+        EventTeacher.notifyOnAddATeacherToCourse(teacher);
+    };
+
+    vm.addTeachers = function (teachers) {
+        EventTeacher.notifyOnAddTeachersToCourse(teachers);
     };
 
     vm.toggle = function (item) {

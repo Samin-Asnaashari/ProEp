@@ -2,7 +2,8 @@
 
 angular.module('appComponent.courseEdit').controller('courseEditCtrl', function ($stateParams, $state, $scope,
                                                                                  courseResolve, courseService, EventCourseEdit,
-                                                                                 $location, $anchorScroll, enumsService, teacherService, $mdDialog) {
+                                                                                 $location, $anchorScroll, enumsService,
+                                                                                 teacherService, $mdDialog, EventTeacher) {
 
     var vm = this;
     vm.course = courseResolve.course;
@@ -139,6 +140,14 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     vm.removeTeacherFromCourse = function () {
 
     };
+
+    EventTeacher.subscribeOnAddATeacherToCourse($scope, function (event, data) {
+        vm.course.teachers.push(data.teacher);
+    });
+
+    EventTeacher.subscribeOnAddTeachersToCourse($scope, function (event, data) {
+        vm.course.teachers.push(data.teachers);
+    });
 })
     .config(function ($mdThemingProvider) {
 
