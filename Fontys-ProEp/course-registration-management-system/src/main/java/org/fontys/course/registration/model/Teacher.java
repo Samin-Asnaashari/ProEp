@@ -10,7 +10,7 @@ public class Teacher extends Person {
     @Column
     private String link;
 
-    @ManyToMany(mappedBy = "teachers")
+    @ManyToMany
     private List<Course> myCourses;
 
     public Teacher() {
@@ -21,27 +21,19 @@ public class Teacher extends Person {
         this.link = link;
     }
 
-    public String getLink() {
-        return link;
-    }
+	public String getLink() {
+		return link;
+	}
 
-    public void setLink(String link) {
-        this.link = link;
-    }
+	public void setLink(String link) {
+		this.link = link;
+	}
 
-    public List<Course> getMyCourse() {
-        return myCourses;
-    }
+	public List<Course> getMyCourses() {
+		return myCourses;
+	}
 
-    public void setMyCourse(List<Course> myCourses) {
-        this.myCourses = myCourses;
-    }
-
-    public List<Course> getMyCourses() {
-        return myCourses;
-    }
-
-    public void setMyCourses(List<Course> myCourses) {
-        this.myCourses = myCourses;
-    }
+	public void setMyCourses(List<Course> myCourses) {
+		this.myCourses = myCourses;
+	}
 }
