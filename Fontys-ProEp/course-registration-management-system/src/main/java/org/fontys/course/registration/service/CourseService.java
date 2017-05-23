@@ -142,4 +142,11 @@ public class CourseService {
         }
         this.courseRepository.delete(id);
     }
+    
+    @Transactional
+    public void DeleteTeacherFromCourse(Integer pcn, String courseCode) throws Exception {
+    	Teacher teacher = this.utilService.GetTeacher(pcn);
+    	Course course = this.courseRepository.findOne(courseCode);
+    	course.getTeachers().remove(teacher);
+    }
 }

@@ -78,4 +78,9 @@ public class CourseController {
     public void DeleteCourse(@PathVariable String id) {
         this.courseService.DeleteCourse(id);
     }
+    
+    @RequestMapping(value = "/{pcn}/{courseCode}", method = RequestMethod.DELETE)
+    public void DeleteTeacherFromCourse(@PathVariable Integer pcn, @PathVariable String courseCode) throws Exception {
+        this.courseService.DeleteTeacherFromCourse(pcn, courseCode);
+    }
 }

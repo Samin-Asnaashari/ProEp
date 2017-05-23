@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Teacher;
 import org.fontys.course.registration.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,9 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepository;
+    
+    @Autowired
+    private UtilService utilService;
 
     @Transactional
     public void AddTeacher(Teacher teacher) {
