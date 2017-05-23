@@ -71,99 +71,99 @@ public class Course {
         this.regEndDate = regEndDate;
     }
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
-    public void setCode(String code) {
-        this.code = code;
-    }
+	public void setCode(String code) {
+		this.code = code;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Integer getEC() {
-        return EC;
-    }
+	public Integer getEC() {
+		return EC;
+	}
 
-    public void setEC(Integer EC) {
-        this.EC = EC;
-    }
+	public void setEC(Integer eC) {
+		EC = eC;
+	}
 
-    public Integer getBlock() {
-        return block;
-    }
+	public Integer getBlock() {
+		return block;
+	}
 
-    public void setBlock(Integer block) {
-        this.block = block;
-    }
+	public void setBlock(Integer block) {
+		this.block = block;
+	}
 
-    public Integer getMaxSeats() {
-        return maxSeats;
-    }
+	public Integer getMaxSeats() {
+		return maxSeats;
+	}
 
-    public void setMaxSeats(Integer maxSeats) {
-        this.maxSeats = maxSeats;
-    }
+	public void setMaxSeats(Integer maxSeats) {
+		this.maxSeats = maxSeats;
+	}
 
-    public Integer getFilledSeat() {
-        return filledSeat;
-    }
+	public Integer getFilledSeat() {
+		return filledSeat;
+	}
 
-    public void setFilledSeat(Integer filledSeat) {
-        this.filledSeat = filledSeat;
-    }
+	public void setFilledSeat(Integer filledSeat) {
+		this.filledSeat = filledSeat;
+	}
 
-    public Date getRegEndDate() {
-        return regEndDate;
-    }
+	public Date getRegStartDate() {
+		return regStartDate;
+	}
 
-    public void setRegEndDate(Date regEndDate) {
-        this.regEndDate = regEndDate;
-    }
+	public void setRegStartDate(Date regStartDate) {
+		this.regStartDate = regStartDate;
+	}
 
-    public Date getRegStartDate() {
-        return regStartDate;
-    }
+	public Date getRegEndDate() {
+		return regEndDate;
+	}
 
-    public void setRegStartDate(Date regStartDate) {
-        this.regStartDate = regStartDate;
-    }
+	public void setRegEndDate(Date regEndDate) {
+		this.regEndDate = regEndDate;
+	}
 
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
+	public List<Teacher> getTeachers() {
+		return teachers;
+	}
 
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
 
-    public List<CourseState> getStates() {
-        return states;
-    }
+	public List<CourseState> getStates() {
+		return states;
+	}
 
-    public void setStates(List<CourseState> states) {
-        this.states = states;
-    }
+	public void setStates(List<CourseState> states) {
+		this.states = states;
+	}
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
+	public List<Review> getReviews() {
+		return reviews;
+	}
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
+	}
 }

@@ -73,14 +73,14 @@ public class CourseService {
     public Message RequestCourseDeletion(String id) {
         Course course = this.courseRepository.getOne(id);
         Date todayDate = new Date();
+        String defaultMsg = "Are you sure you want do delete course: " + course.getCode() + "?";
         //if today date's is after the course registration end date and it is before the registration starts
         // then delete is possible without sending notifications
         Date regEndDate = course.getRegEndDate();
         Date regStartDate = course.getRegStartDate();
         if(regEndDate != null || regStartDate != null) {
             if (todayDate.after(regEndDate) && todayDate.before(regStartDate)) {
-                this.courseRepository.delete(course.getCode());
-                return new Message("");
+                return new Message(defaultMsg);
             } else {
                 //send notifications that course has been dropped to all teachers and students
                 //this is also checked and this info is sent to the admin before confirming to delete
@@ -104,16 +104,14 @@ public class CourseService {
 
                 if (studentsToSendNotifications.size() != 0)
                     return new Message("Warning: There are already " + studentsToSendNotifications.size()
-                            + " students that applied to this course");
+                            + " students that applied to this course. " + defaultMsg);
                 else {
-                    this.courseRepository.delete(course.getCode());
-                    return new Message("");
+                    return new Message(defaultMsg);
                 }
             }
         }
         else {
-            this.courseRepository.delete(course.getCode());
-            return new Message("");
+            return new Message(defaultMsg);
         }
     }
 

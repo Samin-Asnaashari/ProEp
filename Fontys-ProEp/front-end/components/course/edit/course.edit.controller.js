@@ -133,8 +133,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             ,
             controllerAs: 'vmFontysTeachersDialog'
 
-        })
-        ;
+        });
     };
 
     vm.removeTeacherFromCourse = function () {
