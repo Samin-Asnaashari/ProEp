@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorValue(value = "Student")
 public class Student extends Person {
 
     @Column(nullable = false)

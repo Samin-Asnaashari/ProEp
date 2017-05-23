@@ -1,7 +1,6 @@
 package org.fontys.course.registration.controller;
 
 import org.fontys.course.registration.model.Teacher;
-import org.fontys.course.registration.model.enums.Permission;
 import org.fontys.course.registration.service.TeacherService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -42,11 +41,12 @@ public class TeacherController {
     @RequestMapping(value = "/fontysTeachers", method = RequestMethod.GET)
     public List<Teacher> GetAllFontysStudents() {
         List<Teacher> teachers = new ArrayList<>();
-        teachers.add(new Teacher(83458, "Admin", "admin@fontys.nl", "Admin", "Admin", "", Permission.ADMIN));
-        teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "Bert", "Gestle", "", Permission.NORMALUSER));
-        teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", "", Permission.NORMALUSER));
-        teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", "", Permission.NORMALUSER));
-        teachers.add(new Teacher(80903, "pass", "awesome@fontys.nl", "Anna", "bel", "", Permission.NORMALUSER));
+        teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
+        teachers.add(new Teacher(37283, "12373", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
+        teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "George", "bla", ""));
+        teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", ""));
+        teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", ""));
+        teachers.add(new Teacher(80903, "pass", "awesome@fontys.nl", "Anna", "bel", ""));
         return teachers;
     }
 
