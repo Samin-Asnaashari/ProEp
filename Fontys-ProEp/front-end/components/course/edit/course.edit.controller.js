@@ -4,7 +4,6 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                                                                                  courseResolve, courseService, EventCourseEdit,
                                                                                  $location, $anchorScroll, enumsService,
                                                                                  teacherService, $mdDialog, EventTeacher) {
-
     var vm = this;
     vm.course = courseResolve.course;
     vm.majors = [];
@@ -12,11 +11,12 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
 
     vm.courseState = {};
     vm.courseStates = vm.course.states;
-
     vm.addedcourseStates = [];
     vm.removedcourseStates = [];
 
-    vm.teachers = [];
+    vm.teachers = vm.course.teachers;
+    vm.addedTeacheres = [];
+    vm.removedTeachers = [];
 
     EventCourseEdit.subscribeOnDescriptionChange($scope, function (event, data) {
         vm.course.description = data.description;
@@ -85,6 +85,8 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             .then(function (response) {
                 vm.saveNewCourseStates();
                 vm.removeStatesFromCourse();
+                vm.submitDeletedTeachersFromCourse();
+                vm.submitAddedTeacherToCourse();
                 $state.go('home');
             }, function (error) {
             });
@@ -141,20 +143,66 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
         });
     };
 
-    vm.removeTeacherFromCourse = function () {
-
+    vm.removeTeacherFromCourse = function (teacher) { /*TODO check passing teacher or pcn*/
+        var index = vm.teachers.indexOf(teacher);
+        vm.teachers.splice(index, 1);
+        var findIndex = vm.addedTeacheres.indexOf(teacher);
+        if (findIndex != -1) {
+            vm.addedTeacheres.splice(findIndex, 1);
+        } else {
+            vm.removedTeachers.push(teacher);
+        }
     };
 
     EventTeacher.subscribeOnAddATeacherToCourse($scope, function (event, data) {
-        vm.course.teachers.push(data.teacher);
+        var add = true;
+        angular.forEach(vm.teachers, function (t1) {
+            if (data.teacher.pcn == t1.pcn) {
+                add = false;
+            }
+        });
+        if (add == true) {
+            vm.addedTeacheres.push(data.teacher);
+        }
+        /*TODO else show that teacher already exist*/
     });
 
     EventTeacher.subscribeOnAddTeachersToCourse($scope, function (event, data) {
-        vm.course.teachers.push(data.teachers);
+        angular.forEach(data.teachers, function (t1) {
+            var add = true;
+            angular.forEach(vm.teachers, function (t2) {
+                if (t1.pcn == t2.pcn) {
+                    add = false;
+                }
+            });
+            if (add == true) {
+                vm.addedTeacheres.push(t1);
+            }
+            /*TODO else show that teacher already exist*/
+        });
     });
+
+    vm.submitAddedTeacherToCourse = function () {
+        if (vm.addedTeacheres.length != 0) {
+            return courseService.AddTeachersToCourse(vm.addedTeacheres, vm.course.code)
+                .then(function (response) {
+                    vm.addedTeacheres = [];
+                }, function (error) {
+                });
+        }
+    };
+
+    vm.submitDeletedTeachersFromCourse = function () {
+        if (vm.removedTeachers.length != 0) {
+            return courseService.DeleteTeachersFromCourse(vm.removedTeachers, vm.course.code)
+                .then(function (response) {
+                    vm.removedTeachers = [];
+                }, function (error) {
+                });
+        }
+    };
 })
     .config(function ($mdThemingProvider) {
-
         // Configure a dark theme with primary foreground yellow
         $mdThemingProvider.theme('docs-dark', 'default')
             .primaryPalette('purple')

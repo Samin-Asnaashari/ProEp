@@ -79,19 +79,14 @@ public class CourseController {
     public void DeleteCourse(@PathVariable String id) {
         this.courseService.DeleteCourse(id);
     }
-    
-    @RequestMapping(value = "/{pcn}/{courseCode}", method = RequestMethod.DELETE)
-    public void DeleteTeacherFromCourse(@PathVariable Integer pcn, @PathVariable String courseCode) throws Exception {
-        this.courseService.DeleteTeacherFromCourse(pcn, courseCode);
-    }
-    
-    @RequestMapping(value = "/addTeacher/{courseCode}", method = RequestMethod.POST)
-    public void AddTeacherToCourse(@RequestBody Teacher teacher, @PathVariable String courseCode) throws Exception {
-        this.courseService.AddTeacherToCourse(teacher, courseCode);
-    }
-    
-    @RequestMapping(value = "/addTeachers/{courseCode}", method = RequestMethod.POST)
-    public void AddTeacherToCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
+
+    @RequestMapping(value = "/addTeachersTo/{courseCode}", method = RequestMethod.POST)
+    public void AddTeachersToCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
         this.courseService.AddTeachersToCourse(teachers, courseCode);
+    }
+
+    @RequestMapping(value = "/removeTeachersFrom/{courseCode}", method = RequestMethod.PUT) /*TODO All DELETE*/
+    public void DeleteTeachersFromCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
+        this.courseService.DeleteTeacherFromCourse(teachers, courseCode);
     }
 }

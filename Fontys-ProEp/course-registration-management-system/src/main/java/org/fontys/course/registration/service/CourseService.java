@@ -78,7 +78,7 @@ public class CourseService {
         // then delete is possible without sending notifications
         Date regEndDate = course.getRegEndDate();
         Date regStartDate = course.getRegStartDate();
-        if(regEndDate != null || regStartDate != null) {
+        if (regEndDate != null || regStartDate != null) {
             if (todayDate.after(regEndDate) && todayDate.before(regStartDate)) {
                 return new Message(defaultMsg);
             } else {
@@ -109,8 +109,7 @@ public class CourseService {
                     return new Message(defaultMsg);
                 }
             }
-        }
-        else {
+        } else {
             return new Message(defaultMsg);
         }
     }
@@ -142,25 +141,21 @@ public class CourseService {
         }
         this.courseRepository.delete(id);
     }
-    
+
     @Transactional
-    public void DeleteTeacherFromCourse(Integer pcn, String courseCode) throws Exception {
-    	Teacher teacher = this.utilService.GetTeacher(pcn);
-    	Course course = this.courseRepository.findOne(courseCode);
-    	course.getTeachers().remove(teacher);
+    public void DeleteTeacherFromCourse(List<Teacher> teachers, String courseCode) throws Exception {
+        for (Teacher t : teachers) {
+            Teacher teacher = this.utilService.GetTeacher(t.getPcn());
+            Course course = this.courseRepository.findOne(courseCode);
+            course.getTeachers().remove(teacher);
+        }
     }
-    
+
     @Transactional
-    public void AddTeacherToCourse(Teacher teacher, String courseCode){
-    	Course course = this.courseRepository.findOne(courseCode);
-    	course.getTeachers().add(teacher);
-    }
-    
-    @Transactional
-    public void AddTeachersToCourse(List<Teacher> teachers, String courseCode){
-    	Course course = this.courseRepository.findOne(courseCode);
-    	for (int i = 0; i < teachers.size(); i++) {
-    		course.getTeachers().add(teachers.get(i));
-    	}
+    public void AddTeachersToCourse(List<Teacher> teachers, String courseCode) {
+        Course course = this.courseRepository.findOne(courseCode);
+        for (Teacher teacher : teachers) {
+            course.getTeachers().add(teacher);
+        }
     }
 }

@@ -14,8 +14,8 @@ angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl',
         EventTeacher.notifyOnAddATeacherToCourse(teacher);
     };
 
-    vm.addTeachers = function (teachers) {
-        EventTeacher.notifyOnAddTeachersToCourse(teachers);
+    vm.addTeachers = function () {
+        EventTeacher.notifyOnAddTeachersToCourse(vm.selected);
     };
 
     vm.toggle = function (item) {

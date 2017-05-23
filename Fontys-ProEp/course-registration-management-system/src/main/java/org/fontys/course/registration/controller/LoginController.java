@@ -7,11 +7,6 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-/**
- * Created by Phoenix on 17-May-17.
- */
-
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/login")

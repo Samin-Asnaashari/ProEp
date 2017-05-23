@@ -34,7 +34,8 @@
         <td colspan="5" ts-criteria="lastName">Last Name</td>
         <td colspan="4" ts-criteria="email">Email</td>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li ng-click="" data-toggle="tooltip" title="Add" class="button glyphicon glyphicon-plus-sign"></li>
+            <li ng-click="vmTeacherCustomTable.addTeachers()" data-toggle="tooltip" title="Add"
+                class="button glyphicon glyphicon-plus-sign"></li>
         </th>
     </tr>
     <tr ng-repeat="teacher in teacherList | filter:searchFilter" ts-repeat ts-hide-no-data>
@@ -50,7 +51,8 @@
         <td colspan="4">{{teacher.email}}</td>
         <!--Permission and Link-->
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li ng-click="" data-toggle="tooltip" title="Add" class="button glyphicon glyphicon-plus"></li>
+            <li ng-click="vmTeacherCustomTable.addTeacher(teacher)" data-toggle="tooltip" title="Add"
+                class="button glyphicon glyphicon-plus"></li>
         </th>
     </tr>
     </tbody>
