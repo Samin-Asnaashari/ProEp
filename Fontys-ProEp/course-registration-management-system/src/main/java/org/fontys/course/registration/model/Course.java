@@ -40,6 +40,7 @@ public class Course {
     @Column
     private Date regEndDate;
 
+    @JsonIgnoreProperties("myCourses")
     @ManyToMany
     @JoinTable(name = "course_teacher",
             joinColumns = @JoinColumn(name = "course_code", referencedColumnName = "code"),
