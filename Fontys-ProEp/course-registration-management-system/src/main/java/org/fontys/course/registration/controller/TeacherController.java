@@ -59,6 +59,4 @@ public class TeacherController {
     public void DeleteTeacher(@PathVariable Integer pcn) {
         this.teacherService.DeleteTeacher(pcn);
     }
-
-
 }
