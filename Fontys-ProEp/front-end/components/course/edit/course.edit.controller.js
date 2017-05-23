@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('appComponent.courseEdit').controller('courseEditCtrl', function ($stateParams, $state, $scope,
-                                                                                 courseResolve, courseService, EventCourseEdit, $location, $anchorScroll, enumsService) {
+                                                                                 courseResolve, courseService, EventCourseEdit,
+                                                                                 $location, $anchorScroll, enumsService, teacherService, $mdDialog) {
 
     var vm = this;
     vm.course = courseResolve.course;
@@ -53,7 +54,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 //TODO break;
             }
         });
-        if(add == true){
+        if (add == true) {
             vm.courseStates.push(vm.courseState);
             vm.addedcourseStates.push(vm.courseState);
             vm.courseState = {};
@@ -102,6 +103,42 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 }, function (error) {
                 });
         }
+    };
+
+    vm.goToFontysTeacherDialog = function () {
+        return teacherService.getAllFontysTeachers()
+            .then(function (response) {
+                var allTeachers = [];
+                allTeachers = response.data;
+                vm.showDialog(allTeachers);
+            }, function (error) {
+
+            });
+    };
+
+    vm.showDialog = function (fontysTeacherList) {
+        $mdDialog.show({
+            templateUrl: './components/course/edit/fontysTeachersDialog/fontys.teacher.dialog.html',
+            clickOutsideToClose: true,
+            parent: angular.element(document.body),
+            locals: {fontysTeacherList: fontysTeacherList},
+            controller: function () {
+                var vm = this;
+                vm.allFontysTeachers = fontysTeacherList; //TODO Check
+
+                vm.close = function () {
+                    $mdDialog.cancel();
+                };
+            }
+            ,
+            controllerAs: 'vmFontysTeachersDialog'
+
+        })
+        ;
+    };
+
+    vm.removeTeacherFromCourse = function () {
+
     };
 })
     .config(function ($mdThemingProvider) {

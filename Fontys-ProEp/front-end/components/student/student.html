@@ -1,51 +1,21 @@
 <div class="container" style="padding-bottom: 20px;">
     <div class="row">
-        <table class="col-xs-12 studentTable">
-            <thead class="studentThead">
-            <tr>
-                <th colspan="6">Students</th>
-                <th colspan="3">
-                    <form action="" class="search-form">
-                        <div style="margin-bottom: 0px;" class="form-group has-feedback">
-                            <label for="search" class="sr-only">Search</label>
-                            <input ng-model="searchText" class="form-control" name="search" id="search" placeholder="search" type="text">
-                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        </div>
-                    </form>
-                </th>
-            </tr>
-            <tr>
-                <th>#</th>
-                <th colspan="3">Student nr</th>
-                <th colspan="4">Name</th>
-                <th colspan="1">
-                    <i data-toggle="tooltip" title="Add" class="button pull-right glyphicon glyphicon-plus" style="padding-right:10px;"></i>
-                </th>
-            </tr>
-            </thead>
-            <tbody class="studentTBody">
-            <tr ng-repeat="student in vmStudent.students | filter:searchText">
-                <td>{{vmStudent.RowNumber(student)}}</td>
-                <td colspan="3">{{student.studentNumber}}</td>
-                <td colspan="4"> {{student.firstName}}</td>
-                <td colspan="1">
-                    <i data-toggle="tooltip" title="Delete" ng-click="vmStudent.DeleteStudent(student)" class="button glyphicon glyphicon-trash"></i>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <br/><br/> <!--TODO remove-->
-    <div class="row">
         <div class="col-xs-12">
-            <custom-list list="vmStudent.students"></custom-list>
+            <md-button class="md-fab md-primary pull-right" ng-click="vmStudent.goToFontysStudentDialog()"
+                       data-toggle="tooltip" title="Show Fontys Students" aria-label="fontysStudents">
+                <span class="glyphicon glyphicon-download-alt"></span>
+            </md-button>
+        </div>
+        <br/>
+        <br/>
+        <br/>
+        <div class="col-xs-12 studentTable">
+            <student-custom-table student-list="vmStudent.students" action="0"></student-custom-table>
         </div>
     </div>
-
 </div>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>

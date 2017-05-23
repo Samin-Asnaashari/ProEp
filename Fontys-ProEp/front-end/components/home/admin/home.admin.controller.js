@@ -10,16 +10,20 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
     vm.requestCourseDeletion = function (course) {
         courseService.requestCourseDeletion(course.code)
             .then(function (response) {
-                console.log("success request");
-                /*show confirmation modal with possible warning message as 'response.message' if empty then there is no warning for admin
-                if yes is pressed then call deletion function*/
-                courseService.deleteCourse(course.code)
-                    .then(function (response) {
-                        console.log("success deletion");
-                        vm.courses.splice(vm.courses.indexOf(course), 1);
-                    }, function (error) {
-                        console.log("error deletion");
-                    });
+                //console.log(response.data.message);
+                if (response.data.message != "") {
+                    /*show confirmation modal with possible warning message as 'response.message' if empty then there is no warning for admin
+                     if yes is pressed then call deletion function*/
+                    courseService.deleteCourse(course.code)
+                        .then(function (response) {
+                            console.log("success deletion2s");
+                            vm.courses.splice(vm.courses.indexOf(course), 1);
+                        }, function (error) {
+                            console.log("error deletion");
+                        });
+                }
+                else
+                    vm.courses.splice(vm.courses.indexOf(course), 1);
             }, function (error) {
                 console.log("error request");
                 console.log(error.message);
@@ -27,11 +31,11 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
             });
     };
     /*vm.AddCourse = function (course) {
-        coursesResolve.addCourse(course)
-            .then(function (response) {
-                console.log("success");
-            }, function (error) {
-                console.log("error");
-            });
-    };*/
+     coursesResolve.addCourse(course)
+     .then(function (response) {
+     console.log("success");
+     }, function (error) {
+     console.log("error");
+     });
+     };*/
 });

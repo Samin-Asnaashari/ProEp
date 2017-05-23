@@ -34,6 +34,14 @@ public class Student extends Person {
     public Student() {
     }
 
+    public Student(Integer pcn, String password, String email, String firstName, String lastName, Integer studentNumber, StudentType studentType, Major major, Double avgScore) {
+        super(pcn, password, email, firstName, lastName);
+        this.studentNumber = studentNumber;
+        this.studentType = studentType;
+        this.major = major;
+        this.avgScore = avgScore;
+    }
+
     public Integer getStudentNumber() {
         return studentNumber;
     }

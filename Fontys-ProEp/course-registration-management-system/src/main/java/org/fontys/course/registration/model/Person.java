@@ -26,6 +26,14 @@ public abstract class Person {
     public Person() {
     }
 
+    public Person(Integer pcn, String password, String email, String firstName, String lastName) {
+        this.pcn = pcn;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Integer getPcn() {
         return pcn;
     }

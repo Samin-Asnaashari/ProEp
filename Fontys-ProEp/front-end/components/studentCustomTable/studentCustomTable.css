@@ -1,0 +1,8 @@
+.studentCustomTable {
+    border: 2px solid #563d7c;
+}
+
+.studentCustomTable .tableHeader {
+    background-color: #563d7c;
+    color: #ffffff;
+}

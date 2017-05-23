@@ -1,0 +1,63 @@
+<table class="table table-sm table-hover table-striped teacherCustomTable" ts-wrapper>
+    <thead>
+    <tr class="tableHeader">
+        <th colspan="1"></th>
+        <th colspan="16" class="md-title" style="vertical-align: middle;">Teachers</th>
+        <th colspan="2" style="vertical-align: middle;text-align: center;">
+            <md-button class="pull-right" aria-label="Filter"
+                       ng-click="vmTeacherCustomTable.ShowOrHideFilter()">
+                <span class="glyphicon glyphicon-filter" aria-hidden="true">Filter</span>
+            </md-button>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-show="vmTeacherCustomTable.showFilter">
+        <th colspan="1"></th>
+        <th colspan="2"><input type="text" ng-model="searchFilter.pcn" class="form-control" placeholder="PCN"></th>
+        <th colspan="5"><input type="text" ng-model="searchFilter.firstName" class="form-control"
+                               placeholder="First Name"></th>
+        <th colspan="5"><input type="text" ng-model="searchFilter.lastName" class="form-control"
+                               placeholder="Last Name"></th>
+        <th colspan="4"><input type="text" ng-model="searchFilter.email" class="form-control" placeholder="Email"></th>
+        <th colspan="2"></th>
+    </tr>
+    <tr class="md-body-2">
+        <th colspan="1" style="vertical-align: middle;text-align: center;">
+            <md-checkbox style="margin-bottom: 0;" aria-label="Checkbox" ng-checked="vmTeacherCustomTable.isChecked()"
+                         md-indeterminate="vmTeacherCustomTable.isIndeterminate()"
+                         ng-click="vmTeacherCustomTable.toggleAll(teacherList | filter:searchFilter)">
+            </md-checkbox>
+        </th>
+        <td colspan="2" ts-criteria="pcn">PCN</td>
+        <td colspan="5" ts-criteria="firstName" ts-default>First Name</td>
+        <td colspan="5" ts-criteria="lastName">Last Name</td>
+        <td colspan="4" ts-criteria="email">Email</td>
+        <th colspan="2" style="vertical-align: middle;text-align: center;">
+            <li ng-click="" data-toggle="tooltip" title="Add" class="button glyphicon glyphicon-plus-sign"></li>
+        </th>
+    </tr>
+    <tr ng-repeat="teacher in teacherList | filter:searchFilter" ts-repeat ts-hide-no-data>
+        <th colspan="1" style="vertical-align: middle;text-align: center;">
+            <md-checkbox style="margin-bottom: 0;" class="md-primary" aria-label="Checkbox"
+                         ng-checked="vmTeacherCustomTable.exists(teacher)"
+                         ng-click="vmTeacherCustomTable.toggle(teacher)">
+            </md-checkbox>
+        </th>
+        <td colspan="2">{{teacher.pcn}}</td>
+        <td colspan="5">{{teacher.firstName}}</td>
+        <td colspan="5">{{teacher.lastName}}</td>
+        <td colspan="4">{{teacher.email}}</td>
+        <!--Permission and Link-->
+        <th colspan="2" style="vertical-align: middle;text-align: center;">
+            <li ng-click="" data-toggle="tooltip" title="Add" class="button glyphicon glyphicon-plus"></li>
+        </th>
+    </tr>
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+

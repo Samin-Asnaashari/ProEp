@@ -9,6 +9,7 @@ angular.module('appComponent',
         'appComponent.login',
         'appComponent.resize',
         'appComponent.textEditor',
-        'appComponent.list'
+        'appComponent.studentTable',
+        'appComponent.teacherTable'
     ]
 );

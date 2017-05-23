@@ -11,7 +11,11 @@ angular.module('appServiceAPI').service('studentService', function ($http) {
     var baseUrl = http + localhost + ':8090/students';
 
     self.addStudent = function (student) {
-        return $http.post(baseUrl + student);
+        return $http.post(baseUrl, student);
+    };
+
+    self.addStudents = function (students) {
+        return $http.post(baseUrl + '/addToGORCA', students);
     };
 
     self.getStudent = function (pcn) {
@@ -22,11 +26,19 @@ angular.module('appServiceAPI').service('studentService', function ($http) {
         return $http.get(baseUrl);
     };
 
+    self.getAllFontysStudents = function () {
+        return $http.get(baseUrl + '/fontysStudents');
+    };
+
     self.updateStudent = function (student) {
         return $http.put(baseUrl, student);
     };
 
     self.deleteStudent = function (pcn) {
         return $http.delete(baseUrl + '/' + pcn);
+    };
+
+    self.deleteStudents = function (students) {
+        return $http.put(baseUrl + '/deleteStudents', students);
     };
 });

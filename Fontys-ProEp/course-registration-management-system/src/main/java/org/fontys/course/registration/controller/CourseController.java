@@ -1,5 +1,6 @@
 package org.fontys.course.registration.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fontys.course.registration.exception.Message;
@@ -43,7 +44,14 @@ public class CourseController {
 
     @RequestMapping(value = "/fontysCourses", method = RequestMethod.GET)
     public List<Course> GetListOfCourses() {
-        return this.courseService.GetAllCourses(); //TODO
+        List<Course> fontysCourses = new ArrayList<>(); //
+        fontysCourses.add(new Course("ES1", "Embedded System", "description", 3, 7, 17, 6, null, null));
+        fontysCourses.add(new Course("ProEp", "Project", "Last Project of your Last Semester as ICT Student", 7, 7, 30, 32, null, null));
+        fontysCourses.add(new Course("IPV", "Image Processing", "Not Added yet edited...", 3, 7, 26, 3, null, null));
+        fontysCourses.add(new Course("MOB", "Mobile Application", "des", 3, 4, 10, 7, null, null));
+        fontysCourses.add(new Course("T&H", "Trends and Hypes", "blabla", 2, 14, 23, 4, null, null));
+        fontysCourses.add(new Course("MATH", "Mathematic", "Fun", 3, 5, 17, 6, null, null));
+        return fontysCourses;
     }
 
     @RequestMapping(method = RequestMethod.PUT)
