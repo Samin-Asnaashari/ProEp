@@ -26,7 +26,7 @@
             </tr>
             </thead>
             <tbody class="courseTBody">
-            <tr ng-repeat="course in vmHome.courses | filter:searchText">
+                <tr ng-repeat="course in vmHome.courses | filter:searchText">
                 <td>{{vmHome.RowNumber(course)}}</td>
                 <td colspan="3">{{course.code}}</td>
                 <td colspan="4"> {{course.name}}</td>

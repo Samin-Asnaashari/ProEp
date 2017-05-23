@@ -27,6 +27,8 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                 courseResolve: function ($state, $stateParams, courseService) {
                     return courseService.getCourse($stateParams.code)
                         .then(function (response) {
+                            response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
+                            response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
                             return {course: response.data};
                         }, function (error) {
                             $state.go('home');

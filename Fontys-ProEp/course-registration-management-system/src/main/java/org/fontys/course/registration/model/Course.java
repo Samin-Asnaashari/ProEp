@@ -34,11 +34,9 @@ public class Course {
     private Integer filledSeat;
 
     @Column
-    @DateTimeFormat(pattern = "MMMM dd, yyyy HH:MM a")
     private Date regStartDate;
 
     @Column
-    @DateTimeFormat(pattern = "MMMM dd, yyyy HH:MM a")
     private Date regEndDate;
 
     @ManyToMany
