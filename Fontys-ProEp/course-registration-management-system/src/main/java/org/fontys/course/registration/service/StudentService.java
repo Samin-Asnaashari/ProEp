@@ -19,6 +19,13 @@ public class StudentService {
         this.studentRepository.save(student);
     }
 
+    @Transactional
+    public void AddStudents(List<Student> students) {
+        for (Student student : students) {
+            this.studentRepository.save(student);
+        }
+    }
+
     public Student GetStudent(Integer pcn) throws Exception {
         Student student = this.studentRepository.findOne(pcn);
         if (student == null) {
@@ -40,5 +47,12 @@ public class StudentService {
     @Transactional
     public void DeleteStudent(Integer pcn) {
         this.studentRepository.delete(pcn);
+    }
+
+    @Transactional
+    public void DeleteStudents(List<Student> students) {
+        for (Student student : students) { // TODO double check if student exist
+            this.studentRepository.delete(student);
+        }
     }
 }

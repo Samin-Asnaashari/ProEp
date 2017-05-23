@@ -8,6 +8,7 @@ angular.module('appComponent',
         'appComponent.student',
         'appComponent.resize',
         'appComponent.textEditor',
-        'appComponent.list'
+        'appComponent.studentTable',
+        'appComponent.teacherTable'
     ]
 );

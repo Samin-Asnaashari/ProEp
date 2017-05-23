@@ -23,6 +23,12 @@ public class Teacher extends Person {
     public Teacher() {
     }
 
+    public Teacher(Integer pcn, String password, String email, String firstName, String lastName, String link, Permission permission) {
+        super(pcn, password, email, firstName, lastName);
+        this.link = link;
+        this.permission = permission;
+    }
+
     public String getLink() {
         return link;
     }

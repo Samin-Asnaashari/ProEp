@@ -22,6 +22,10 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
         return $http.get(baseUrl);
     };
 
+    self.getAllFontysCourses = function () {
+        return $http.get(baseUrl + '/fontysCourses');
+    };
+
     self.updateCourse = function (course) {
         return $http.put(baseUrl, course);
     };

@@ -58,6 +58,18 @@ public class Course {
     public Course() {
     }
 
+    public Course(String code, String name, String description, Integer EC, Integer block, Integer maxSeats, Integer filledSeat, Date regStartDate, Date regEndDate) {
+        this.code = code;
+        this.name = name;
+        this.description = description;
+        this.EC = EC;
+        this.block = block;
+        this.maxSeats = maxSeats;
+        this.filledSeat = filledSeat;
+        this.regStartDate = regStartDate;
+        this.regEndDate = regEndDate;
+    }
+
     public String getCode() {
         return code;
     }

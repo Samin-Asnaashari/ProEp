@@ -1,0 +1,9 @@
+.teacherCustomTable {
+    border: 2px solid #563d7c;
+    table-layout: fixed;
+}
+
+.teacherCustomTable .tableHeader {
+    background-color: #563d7c;
+    color: #ffffff;
+}

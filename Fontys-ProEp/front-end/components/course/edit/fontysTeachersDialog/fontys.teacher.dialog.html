@@ -1,0 +1,16 @@
+<md-dialog aria-label="fontys teachers list dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #563d7c;">
+            <h4>List of Fontys Teacher</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vmFontysTeachersDialog.close()">
+                <md-icon class="glyphicon glyphicon-remove" aria-label="Close teacher dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <teacher-custom-table teacher-list="vmFontysTeachersDialog.allFontysTeachers"></teacher-custom-table>
+        </div>
+    </md-dialog-content>
+</md-dialog>

@@ -3,7 +3,7 @@
 /**
  * Sub-component module
  */
-angular.module('appComponent.list',
+angular.module('appComponent.teacherTable',
     [
         'ngAnimate',
         'ngMaterial',

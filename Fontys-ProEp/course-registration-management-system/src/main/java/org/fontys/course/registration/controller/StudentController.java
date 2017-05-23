@@ -32,6 +32,11 @@ public class StudentController {
         this.studentService.AddStudent(student);
     }
 
+    @RequestMapping(value = "/addToGORCA", method = RequestMethod.POST, consumes = "application/json")
+    public void AddStudents(@RequestBody List<Student> students) {
+        this.studentService.AddStudents(students);
+    }
+
     @RequestMapping(value = "/{pcn}", method = RequestMethod.GET)
     public Student GetStudent(@PathVariable Integer pcn) throws Exception {
         return this.studentService.GetStudent(pcn);
@@ -63,6 +68,11 @@ public class StudentController {
     @RequestMapping(value = "/{pcn}", method = RequestMethod.DELETE)
     public void DeleteStudent(@PathVariable Integer pcn) {
         this.studentService.DeleteStudent(pcn);
+    }
+
+    @RequestMapping(value = "/deleteStudents", method = RequestMethod.PUT) //TODO y not DELETE
+    public void DeleteStudents(@RequestBody List<Student> students) {
+        this.studentService.DeleteStudents(students);
     }
 
 
