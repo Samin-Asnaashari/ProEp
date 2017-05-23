@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Registration;
@@ -85,5 +86,13 @@ public class UtilService {
             throw new Exception("PCN doesn't exist");
 
         return person.getPassword().equals(pass);
+    }
+    
+    public Course GetCourse(String courseCode) throws Exception{
+    	return this.courseService.GetCourse(courseCode);
+    }
+    
+    public Teacher GetTeacher(Integer pcn) throws Exception{
+    	return this.teacherService.GetTeacher(pcn);
     }
 }

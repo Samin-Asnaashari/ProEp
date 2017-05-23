@@ -1,5 +1,6 @@
 package org.fontys.course.registration.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,11 +40,11 @@ public class Course {
     @Column
     private Date regEndDate;
 
+    @JsonIgnoreProperties("myCourses")
     @ManyToMany
     @JoinTable(name = "course_teacher",
             joinColumns = @JoinColumn(name = "course_code", referencedColumnName = "code"),
             inverseJoinColumns = @JoinColumn(name = "teacher_pcn", referencedColumnName = "pcn"))
-    //@JsonManagedReference(value = "course-teacher")
     private List<Teacher> teachers;
 
     @JsonManagedReference(value = "course-courseState")

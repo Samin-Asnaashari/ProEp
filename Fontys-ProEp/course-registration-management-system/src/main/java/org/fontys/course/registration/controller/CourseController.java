@@ -6,6 +6,7 @@ import java.util.List;
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.CourseState;
+import org.fontys.course.registration.model.Teacher;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -77,5 +78,20 @@ public class CourseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void DeleteCourse(@PathVariable String id) {
         this.courseService.DeleteCourse(id);
+    }
+    
+    @RequestMapping(value = "/{pcn}/{courseCode}", method = RequestMethod.DELETE)
+    public void DeleteTeacherFromCourse(@PathVariable Integer pcn, @PathVariable String courseCode) throws Exception {
+        this.courseService.DeleteTeacherFromCourse(pcn, courseCode);
+    }
+    
+    @RequestMapping(value = "/addTeacher/{courseCode}", method = RequestMethod.POST)
+    public void AddTeacherToCourse(@RequestBody Teacher teacher, @PathVariable String courseCode) throws Exception {
+        this.courseService.AddTeacherToCourse(teacher, courseCode);
+    }
+    
+    @RequestMapping(value = "/addTeachers/{courseCode}", method = RequestMethod.POST)
+    public void AddTeacherToCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
+        this.courseService.AddTeachersToCourse(teachers, courseCode);
     }
 }

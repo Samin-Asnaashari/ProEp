@@ -142,4 +142,25 @@ public class CourseService {
         }
         this.courseRepository.delete(id);
     }
+    
+    @Transactional
+    public void DeleteTeacherFromCourse(Integer pcn, String courseCode) throws Exception {
+    	Teacher teacher = this.utilService.GetTeacher(pcn);
+    	Course course = this.courseRepository.findOne(courseCode);
+    	course.getTeachers().remove(teacher);
+    }
+    
+    @Transactional
+    public void AddTeacherToCourse(Teacher teacher, String courseCode){
+    	Course course = this.courseRepository.findOne(courseCode);
+    	course.getTeachers().add(teacher);
+    }
+    
+    @Transactional
+    public void AddTeachersToCourse(List<Teacher> teachers, String courseCode){
+    	Course course = this.courseRepository.findOne(courseCode);
+    	for (int i = 0; i < teachers.size(); i++) {
+    		course.getTeachers().add(teachers.get(i));
+    	}
+    }
 }
