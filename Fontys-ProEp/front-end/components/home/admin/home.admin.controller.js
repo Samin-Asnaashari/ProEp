@@ -56,4 +56,36 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($state
      console.log("error");
      });
      };*/
+
+    vm.goToFontysCourseDialog = function () {
+        return courseService.getAllFontysCourses()
+            .then(function (response) {
+                var allCourses = [];
+                allCourses = response.data;
+                vm.showDialog(allCourses);
+            }, function (error) {
+
+            });
+    };
+
+    vm.showDialog = function (fontysCoursesList) {
+        $mdDialog.show({
+            templateUrl: './components/home/admin/fontysCourseDialog/fontys.course.dialog.html',
+            clickOutsideToClose: true,
+            parent: angular.element(document.body),
+            locals: {fontysCoursesList: fontysCoursesList},
+            controller: function () {
+                var vm = this;
+                vm.allFontysCourses = fontysCoursesList; //TODO Check
+
+                vm.close = function () {
+                    $mdDialog.cancel();
+                };
+            }
+            ,
+            controllerAs: 'vmFontysCourseDialog'
+
+        })
+        ;
+    };
 });
