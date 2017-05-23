@@ -67,4 +67,23 @@ public class UtilService {
             HashMap<String, List<Person>> personsToSendDeleteCourseNotifications) {
         this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
     }
+
+    private Person GetPersonById(Integer pcn){
+        Person person = this.teacherService.GetTeacherUnsafe(pcn);
+
+        if(person == null)
+            person = this.studentService.GetStudentUnsafe(pcn);
+
+        return person;
+    }
+
+    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception
+    {
+        Person person = GetPersonById(pcn);
+
+        if(person == null)
+            throw new Exception("PCN doesn't exist");
+
+        return person.getPassword().equals(pass);
+    }
 }

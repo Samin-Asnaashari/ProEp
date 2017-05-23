@@ -28,6 +28,10 @@ public class TeacherService {
         }
     }
 
+    public Teacher GetTeacherUnsafe(Integer pcn) {
+        return this.teacherRepository.findOne(pcn);
+    }
+
     public List<Teacher> GetAllTeachers() {
         return this.teacherRepository.findAll();
     }

@@ -28,6 +28,10 @@ public class StudentService {
         }
     }
 
+    public Student GetStudentUnsafe(Integer pcn) {
+        return this.studentRepository.findOne(pcn);
+    }
+
     public List<Student> GetAllStudents() {
         return this.studentRepository.findAll();
     }

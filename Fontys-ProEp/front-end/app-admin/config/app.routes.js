@@ -34,6 +34,11 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                 }
             }
         })
+        state('login', {
+            url: '/login',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+        })
         .state('students', {
             url: '/students',
             templateUrl: './components/student/student.html',
