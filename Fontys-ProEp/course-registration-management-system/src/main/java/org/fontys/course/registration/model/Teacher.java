@@ -1,6 +1,7 @@
 package org.fontys.course.registration.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,8 +13,9 @@ public class Teacher extends Person {
     @Column
     private String link;
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "teachers")
-    @JsonBackReference(value = "course-teacher")
+    //@JsonBackReference(value = "course-teacher")
     private List<Course> myCourses;
 
     public Teacher() {
