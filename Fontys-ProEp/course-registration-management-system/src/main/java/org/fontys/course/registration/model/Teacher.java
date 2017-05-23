@@ -1,5 +1,7 @@
 package org.fontys.course.registration.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class Teacher extends Person {
     private String link;
 
     @ManyToMany(mappedBy = "teachers")
+    @JsonBackReference(value = "course-teacher")
     private List<Course> myCourses;
 
     public Teacher() {
@@ -27,14 +30,6 @@ public class Teacher extends Person {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public List<Course> getMyCourse() {
-        return myCourses;
-    }
-
-    public void setMyCourse(List<Course> myCourses) {
-        this.myCourses = myCourses;
     }
 
     public List<Course> getMyCourses() {
