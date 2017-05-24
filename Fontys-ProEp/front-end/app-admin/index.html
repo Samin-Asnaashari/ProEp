@@ -37,6 +37,7 @@
 <body>
 
 <!--Navigation-->
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
 
@@ -52,13 +53,13 @@
 
         <!-- Nagivation items -->
         <div class="collapse navbar-collapse" id="mainNavBar">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#!/home">Home<span class="sr-only">(current)</span></a></li>
-                <li><a href="#!/students" class="">Students<span class="sr-only">(current)</span></a></li>
+            <ul ng-controller="navCtrl" class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
+                <li ng-class="{ active: isActive('/students')}"><a ng-href="#!/students">Students</a></li>
             </ul>
             <!-- right align -->
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Login<span class="sr-only">(current)</span></a></li> <!--TODO-->
+            <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
+                <li ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
             </ul>
         </div>
     </div>
@@ -87,19 +88,12 @@
             <div class="col-sm-2">
                 <h6>Navigation</h6>
                 <ul class="unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Students</a></li>
+                    <li><a href="#!/home">Home</a></li>
+                    <li><a href="#!/students">Students</a></li>
+                    <li><a href="#!/login">Login</a></li>
                 </ul>
             </div>
-            <div class="col-sm-2">
-                <h6>Actions</h6>
-                <ul class="unstyled">
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Add a student</a></li>
-                    <li><a href="#">Add a course</a></li>
-                </ul>
-            </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 pull-right">
                 <h6>Address</h6>
                 <p>Rachelsmolen 1, 5612 MA Eindhoven</p>
             </div>
@@ -108,6 +102,7 @@
 </footer>
 
 <!-- dependencies scripts -->
+
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -152,6 +147,7 @@
 
 <!-- application -->
 <script src="../components/home/admin/home.admin.controller.js"></script>
+<script src="adminNav.controller.js"></script>
 <script src="../components/course/edit/course.edit.controller.js"></script>
 <script src="../components/student/student.controller.js"></script>
 <script src="../components/login/login.controller.js"></script>
@@ -178,4 +174,5 @@
 <script src="../components/resize-window/resize.directive.js"></script>
 
 </body>
+
 </html>
