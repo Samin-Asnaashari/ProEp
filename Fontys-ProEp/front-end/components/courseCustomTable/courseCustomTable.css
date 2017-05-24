@@ -1,0 +1,9 @@
+.courseCustomTable {
+    border: 2px solid #563d7c;
+    table-layout: fixed;
+}
+
+.courseCustomTable .tableHeader {
+    background-color: #563d7c;
+    color: #ffffff;
+}

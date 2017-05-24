@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO decide what API documentation we want to use beside JAVADoc for documenting our codes.
-
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/students")

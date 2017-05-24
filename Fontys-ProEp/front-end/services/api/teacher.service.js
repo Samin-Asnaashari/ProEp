@@ -22,10 +22,6 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
         return $http.get(baseUrl);
     };
 
-    self.getAllFontysTeachers = function () {
-        return $http.get(baseUrl + '/fontysTeachers');
-    };
-
     self.updateTeacher = function (teacher) {
         return $http.put(baseUrl, teacher);
     };

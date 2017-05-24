@@ -45,4 +45,12 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     self.requestCourseDeletion = function (code) {
         return $http.get(baseUrl + "/requestDeletion/" + code);
     };
+
+    self.AddTeachersToCourse = function (teachers, courseCode) {
+        return $http.post(baseUrl + "/addTeachersTo" + "/" + courseCode, teachers);
+    };
+
+    self.DeleteTeachersFromCourse = function (teachers, courseCode) {
+        return $http.put(baseUrl + "/removeTeachersFrom" + "/" + courseCode, teachers);
+    };
 });

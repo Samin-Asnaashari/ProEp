@@ -1,0 +1,16 @@
+<md-dialog aria-label="fontys courses list dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools" style="background-color: #563d7c;">
+            <h4>List of Fontys Courses</h4>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vmFontysCourseDialog.close()">
+                <md-icon class="glyphicon glyphicon-remove" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <course-custom-table student-list="vmFontysCourseDialog.allFontysCourses" action="1"></course-custom-table>
+        </div>
+    </md-dialog-content>
+</md-dialog>

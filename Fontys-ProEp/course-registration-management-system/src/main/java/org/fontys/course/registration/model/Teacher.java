@@ -1,6 +1,6 @@
 package org.fontys.course.registration.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,9 +11,9 @@ public class Teacher extends Person {
     //TODO is it really needed as field (link to portal).
     @Column
     private String link;
-
+    
+    @JsonIgnoreProperties("teachers")
     @ManyToMany(mappedBy = "teachers")
-    @JsonBackReference(value = "course-teacher")
     private List<Course> myCourses;
 
     public Teacher() {

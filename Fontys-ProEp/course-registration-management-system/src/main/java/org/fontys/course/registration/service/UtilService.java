@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Registration;
@@ -68,22 +69,29 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
     }
 
-    private Person GetPersonById(Integer pcn){
+    private Person GetPersonById(Integer pcn) {
         Person person = this.teacherService.GetTeacherUnsafe(pcn);
 
-        if(person == null)
+        if (person == null)
             person = this.studentService.GetStudentUnsafe(pcn);
 
         return person;
     }
 
-    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception
-    {
+    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception {
         Person person = GetPersonById(pcn);
 
-        if(person == null)
+        if (person == null)
             throw new Exception("PCN doesn't exist");
 
         return person.getPassword().equals(pass);
+    }
+
+    public Course GetCourse(String courseCode) throws Exception {
+        return this.courseService.GetCourse(courseCode);
+    }
+
+    public Teacher GetTeacher(Integer pcn) throws Exception {
+        return this.teacherService.GetTeacher(pcn);
     }
 }

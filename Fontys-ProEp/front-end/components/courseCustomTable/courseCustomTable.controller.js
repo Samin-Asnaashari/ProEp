@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl', function ($scope, EventTeacher) {
+angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', function ($scope, EventCourse) {
 
     var vm = this;
     vm.showFilter = false;
@@ -10,12 +10,12 @@ angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl',
         vm.showFilter = !vm.showFilter;
     };
 
-    vm.addTeacher = function (teacher) {
-        EventTeacher.notifyOnAddATeacherToCourse(teacher);
+    vm.addCourse = function (course) {
+        EventCourse.notifyOnACourseAdded(course);
     };
 
-    vm.addTeachers = function () {
-        EventTeacher.notifyOnAddTeachersToCourse(vm.selected);
+    vm.addCourses = function (courses) {
+        EventCourse.notifyOnCoursesAdded(courses)
     };
 
     vm.toggle = function (item) {
@@ -34,11 +34,11 @@ angular.module('appComponent.teacherTable').controller('teacherCustomTableCtrl',
 
     vm.isIndeterminate = function () {
         return (vm.selected.length !== 0 &&
-        vm.selected.length !== $scope.teacherList.length); //TODO check if list is ok to be $scope
+        vm.selected.length !== $scope.courseList.length); //TODO check if list is ok to be $scope
     };
 
     vm.isChecked = function () {
-        return vm.selected.length === $scope.teacherList.length; //TODO check if list is ok to be $scope
+        return vm.selected.length === $scope.courseList.length; //TODO check if list is ok to be $scope
     };
 
     vm.toggleAll = function (list) {

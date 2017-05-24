@@ -1,5 +1,9 @@
 <div class="container" style="padding-bottom: 20px;">
     <div class="row">
+        <!--<md-button class="md-fab md-primary pull-right" ng-click="vmHome.goToFontysCourseDialog()"-->
+                   <!--data-toggle="tooltip" title="Show Fontys Courses" aria-label="fontysCourses">-->
+            <!--<span class="glyphicon glyphicon-download-alt"></span>-->
+        <!--</md-button>-->
         <table class="col-xs-12 courseTable">
             <thead class="courseThead">
             <tr>
@@ -20,13 +24,13 @@
                 <th colspan="3">Course code</th>
                 <th colspan="4">Name</th>
                 <th colspan="1">
-                    <i title="Add" class="button pull-right glyphicon glyphicon-plus"
+                    <i ng-click="vmHome.goToFontysCourseDialog()" title="Add" class="button pull-right glyphicon glyphicon-plus"
                        style="padding-right:10px;" data-toggle="tooltip"></i>
                 </th>
             </tr>
             </thead>
             <tbody class="courseTBody">
-                <tr ng-repeat="course in vmHome.courses | filter:searchText">
+            <tr ng-repeat="course in vmHome.courses | filter:searchText">
                 <td>{{vmHome.RowNumber(course)}}</td>
                 <td colspan="3">{{course.code}}</td>
                 <td colspan="4"> {{course.name}}</td>
