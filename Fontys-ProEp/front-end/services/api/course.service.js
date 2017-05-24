@@ -15,7 +15,7 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     };
 
     self.getCourse = function (code) {
-        return $http.get(baseUrl + code);
+        return $http.get(baseUrl + '/' + code);
     };
 
     self.getAllCourses = function () {
