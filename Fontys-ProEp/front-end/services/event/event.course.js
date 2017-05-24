@@ -15,9 +15,18 @@ angular.module('appServiceEvent').factory('EventCourse', function ($rootScope) {
             var handler = $rootScope.$on('EventCourse::onDelete', callback);
             scope.$on('$destroy', handler);
         },
-
         notifyOnCourseDeleted: function (course) {
             $rootScope.$emit('EventCourse::onDelete', {
+                course: course
+            });
+        },
+
+        subscribeOnCourseAdded: function (scope, callback) {
+            var handler = $rootScope.$on('EventCourse::onAdd', callback);
+            scope.$on('$destroy', handler);
+        },
+        notifyOnCourseAdded: function (course) {
+            $rootScope.$emit('EventCourse::onAdd', {
                 course: course
             });
         }

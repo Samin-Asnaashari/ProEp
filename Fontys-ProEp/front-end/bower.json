@@ -32,7 +32,8 @@
     "angular-bootstrap": "^2.5.0",
     "angular-messages": "^1.6.4",
     "angular-aria": "^1.6.4",
-    "angular-moment-picker": "moment-picker#^0.10.0"
+    "angular-moment-picker": "moment-picker#^0.10.0",
+    "angular-cookies": "^1.6.4"
   },
   "resolutions": {
     "angular": ">=1.4.0",

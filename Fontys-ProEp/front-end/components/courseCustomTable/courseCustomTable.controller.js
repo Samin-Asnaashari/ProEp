@@ -1,51 +1,55 @@
 'use strict';
 
-angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', function ($scope, EventCourse) {
+angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', function ($state, $scope, courseService, $mdDialog, EventCourse) {
 
     var vm = this;
-    vm.showFilter = false;
-    vm.selected = [];
 
-    vm.ShowOrHideFilter = function () {
-        vm.showFilter = !vm.showFilter;
+    vm.RowNumber = function (course) {
+        return $scope.courseList.indexOf(course) + 1;
+    };
+
+    vm.goToCourseEdit = function (courseCode) {
+        $state.go('courseEdit', {code: courseCode})
     };
 
     vm.addCourse = function (course) {
-        EventCourse.notifyOnACourseAdded(course);
+        EventCourse.notifyOnCourseAdded(course);
     };
 
-    vm.addCourses = function (courses) {
-        EventCourse.notifyOnCoursesAdded(courses)
+    vm.requestCourseDeletion = function (course) {
+        courseService.requestCourseDeletion(course.code)
+            .then(function (response) {
+                vm.showDialog(response.data.message, course);
+            }, function (error) {
+                console.log("error request");
+                console.log(error.data.message);
+            });
     };
 
-    vm.toggle = function (item) {
-        var idx = vm.selected.indexOf(item);
-        if (idx > -1) {
-            vm.selected.splice(idx, 1);
-        }
-        else {
-            vm.selected.push(item);
-        }
-    };
-
-    vm.exists = function (item) {
-        return vm.selected.indexOf(item) > -1;
-    };
-
-    vm.isIndeterminate = function () {
-        return (vm.selected.length !== 0 &&
-        vm.selected.length !== $scope.courseList.length); //TODO check if list is ok to be $scope
-    };
-
-    vm.isChecked = function () {
-        return vm.selected.length === $scope.courseList.length; //TODO check if list is ok to be $scope
-    };
-
-    vm.toggleAll = function (list) {
-        if (vm.selected.length === list.length) {
-            vm.selected = [];
-        } else if (vm.selected.length === 0 || vm.selected.length > 0) {
-            vm.selected = list.slice(0);
-        }
+    vm.showDialog = function (serverMessage, course) {
+        $mdDialog.show({
+            templateUrl: './components/ConfirmationDialog/delete.confirmation.template.html',
+            clickOutsideToClose: true,
+            parent: angular.element(document.body),
+            locals: {serverResponse: serverMessage},
+            controller: function (courseService, EventCourse) {
+                var vm = this;
+                vm.serverResponse = serverMessage;
+                vm.cancel = function () {
+                    $mdDialog.cancel();
+                };
+                vm.ok = function () {
+                    courseService.deleteCourse(course.code)
+                        .then(function (response) {
+                            console.log("success deletion2s");
+                            EventCourse.notifyOnCourseDeleted(course);
+                        }, function (error) {
+                            console.log("error deletion");
+                        });
+                    $mdDialog.cancel();
+                };
+            },
+            controllerAs: 'vmDeleteCourseConfirmationDialog'
+        });
     };
 });

@@ -5,7 +5,9 @@ angular.module('appComponent.courseTable').directive('courseCustomTable', functi
             restrict: "E",
             scope: {
                 courseList: '=',
-                action: '='  //0 determines removing 1 determines adding
+                editAction: '=', /*0 mean is not supports this action, 1 mean is supports this action*/
+                deleteAction: '=',
+                addAction: '='
             },
             templateUrl: "./components/courseCustomTable/courseCustomTable.html",
             controller: 'courseCustomTableCtrl',

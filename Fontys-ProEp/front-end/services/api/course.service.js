@@ -11,11 +11,11 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     var baseUrl = http + localhost + ':8090/courses';
 
     self.addCourse = function (newCourse) {
-        return $http.post(baseUrl + newCourse);
+        return $http.post(baseUrl, newCourse);
     };
 
     self.getCourse = function (code) {
-        return $http.get(baseUrl + '/' + code);
+        return $http.get(baseUrl + code);
     };
 
     self.getAllCourses = function () {
