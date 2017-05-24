@@ -87,6 +87,6 @@ public class CourseController {
 
     @RequestMapping(value = "/removeTeachersFrom/{courseCode}", method = RequestMethod.PUT) /*TODO All DELETE*/
     public void DeleteTeachersFromCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
-        this.courseService.DeleteTeacherFromCourse(teachers, courseCode);
+        this.courseService.DeleteTeachersFromCourse(teachers, courseCode);
     }
 }

@@ -143,7 +143,7 @@ public class CourseService {
     }
 
     @Transactional
-    public void DeleteTeacherFromCourse(List<Teacher> teachers, String courseCode) throws Exception {
+    public void DeleteTeachersFromCourse(List<Teacher> teachers, String courseCode) throws Exception {
         for (Teacher t : teachers) {
             Teacher teacher = this.utilService.GetTeacher(t.getPcn());
             Course course = this.courseRepository.findOne(courseCode);

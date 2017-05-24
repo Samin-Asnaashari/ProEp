@@ -69,30 +69,29 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
     }
 
-    private Person GetPersonById(Integer pcn){
+    private Person GetPersonById(Integer pcn) {
         Person person = this.teacherService.GetTeacherUnsafe(pcn);
 
-        if(person == null)
+        if (person == null)
             person = this.studentService.GetStudentUnsafe(pcn);
 
         return person;
     }
 
-    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception
-    {
+    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception {
         Person person = GetPersonById(pcn);
 
-        if(person == null)
+        if (person == null)
             throw new Exception("PCN doesn't exist");
 
         return person.getPassword().equals(pass);
     }
-    
-    public Course GetCourse(String courseCode) throws Exception{
-    	return this.courseService.GetCourse(courseCode);
+
+    public Course GetCourse(String courseCode) throws Exception {
+        return this.courseService.GetCourse(courseCode);
     }
-    
-    public Teacher GetTeacher(Integer pcn) throws Exception{
-    	return this.teacherService.GetTeacher(pcn);
+
+    public Teacher GetTeacher(Integer pcn) throws Exception {
+        return this.teacherService.GetTeacher(pcn);
     }
 }

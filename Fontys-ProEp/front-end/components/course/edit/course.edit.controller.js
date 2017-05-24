@@ -113,7 +113,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     };
 
     vm.goToFontysTeacherDialog = function () {
-        return teacherService.getAllFontysTeachers()
+        return teacherService.getAllTeachers()
             .then(function (response) {
                 var allTeachers = [];
                 allTeachers = response.data;
@@ -162,6 +162,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             }
         });
         if (add == true) {
+            vm.teachers.push(data.teacher);
             vm.addedTeacheres.push(data.teacher);
         }
         /*TODO else show that teacher already exist*/
@@ -176,6 +177,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 }
             });
             if (add == true) {
+                vm.teachers.push(t1);
                 vm.addedTeacheres.push(t1);
             }
             /*TODO else show that teacher already exist*/

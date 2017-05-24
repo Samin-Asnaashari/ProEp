@@ -14,16 +14,8 @@ angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', f
         EventCourse.notifyOnACourseAdded(course);
     };
 
-    vm.removeCourse = function (id) {
-        EventCourse.notifyOnACourseRemoved(id);
-    };
-
     vm.addCourses = function (courses) {
         EventCourse.notifyOnCoursesAdded(courses)
-    };
-
-    vm.removeCourses = function (courses) {
-        EventCourse.notifyOnCoursesRemoved(courses);
     };
 
     vm.toggle = function (item) {

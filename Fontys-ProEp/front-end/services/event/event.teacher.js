@@ -29,7 +29,7 @@ angular.module('appServiceEvent').factory('EventTeacher', function ($rootScope) 
 
         notifyOnAddTeachersToCourse: function (teachers) {
             $rootScope.$emit('EventTeacher::onAddMany', {
-                students: teachers
+                teachers: teachers
             });
         }
     };
