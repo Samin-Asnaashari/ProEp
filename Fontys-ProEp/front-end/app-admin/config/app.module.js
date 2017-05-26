@@ -6,6 +6,8 @@ angular.module('appAdmin',
         'ui.router',
         'appServiceAPI',
         'appServiceEvent',
-        'appComponent'
+        'appComponent',
+        'ngCookies',
+        'base64'
     ]
 );

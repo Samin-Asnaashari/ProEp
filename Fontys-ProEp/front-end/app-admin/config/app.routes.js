@@ -9,13 +9,18 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/home/admin/home.admin.html',
             controller: 'homeCtrl as vmHome',
             resolve: {
-                coursesResolve: function ($state, $stateParams, courseService) {
-                    return courseService.getAllCourses()
-                        .then(function (response) {
-                            return {courses: response.data};
-                        }, function (error) {
-                            // $state.go('Error');
-                        });
+                coursesResolve: function ($state, $stateParams, courseService, loginService) {
+                    if(loginService.SetHeaderAuthentication()){
+                        return courseService.getAllCourses()
+                            .then(function (response) {
+                                return {courses: response.data};
+                            }, function (error) {
+                                // $state.go('Error');
+                            });
+                    }
+                    else {
+                        return $state.go('login');
+                    }
                 }
             }
         })
@@ -24,35 +29,70 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/course/edit/course.edit.html',
             controller: 'courseEditCtrl as vmCourseEdit',
             resolve: {
-                courseResolve: function ($state, $stateParams, courseService) {
-                    return courseService.getCourse($stateParams.code)
-                        .then(function (response) {
-                            response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
-                            response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
-                            return {course: response.data};
-                        }, function (error) {
-                            $state.go('home');
-                        });
+                courseResolve: function ($state, $stateParams, courseService, loginService) {
+                    if(loginService.SetHeaderAuthentication()) {
+                        return courseService.getCourse($stateParams.code)
+                            .then(function (response) {
+                                response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
+                                response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
+                                return {course: response.data};
+                            }, function (error) {
+                                $state.go('home');
+                            });
+                    }
+                    else {
+                        return $state.go('login');
+                    }
                 }
             }
         })
         .state('login', {
             url: '/login',
             templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin'
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                logInResolve: function ($state, $stateParams, loginService) {
+                    if (loginService.SetHeaderAuthentication()) {
+                        console.log("sdd");
+                        return $state.go('home');
+                    }
+                }
+            }
+        })
+        .state('logout', {
+            url: '/logout',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                logOutResolve: function ($state, $stateParams, loginService) {
+                    return loginService.logout()
+                        .then(function (response) {
+                            loginService.DeleteAuthenticationCookie();
+                        }, function (error) {
+                            console.log("Error");
+                            console.log(error);
+                        });
+                }
+            }
         })
         .state('students', {
             url: '/students',
             templateUrl: './components/student/student.html',
             controller: 'studentCtrl as vmStudent',
             resolve: {
-                studentsResolve: function ($state, $stateParams, studentService) {
-                    return studentService.getAllStudents()
-                        .then(function (response) {
-                            return {students: response.data};
-                        }, function (error) {
-                            $state.go('home');
-                        });
+                studentsResolve: function ($state, $stateParams, studentService, loginService) {
+                    if(loginService.SetHeaderAuthentication()) {
+                        return studentService.getAllStudents()
+                            .then(function (response) {
+                                return {students: response.data};
+                            }, function (error) {
+                                console.log(error);
+                                //$state.go('home');
+                            });
+                    }
+                    else {
+                        return $state.go('login');
+                    }
                 }
             }
         });

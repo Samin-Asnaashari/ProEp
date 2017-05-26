@@ -22,7 +22,7 @@ public abstract class Person {
 
     @Column
     private String lastName; /*middleName?*/
-
+    
     public Person() {
     }
 

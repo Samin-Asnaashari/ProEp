@@ -59,7 +59,8 @@
             </ul>
             <!-- right align -->
             <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
-                <li ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
+                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
+                <li ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
             </ul>
         </div>
     </div>
@@ -123,6 +124,7 @@
 <script src="../bower_components/angular-moment-picker/dist/angular-moment-picker.min.js"></script>
 <script src="../bower_components/angular-tablesort/js/angular-tablesort.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="../bower_components/angular-base64/angular-base64.js"></script>
 <!-- text editor -->
 <script src="../components/text.editor/editor.controller.js"></script>
 <script src="../components/text.editor/editor.directive.js"></script>
@@ -162,6 +164,7 @@
 <script src="../services/api/student.service.js"></script>
 <script src="../services/api/teacher.service.js"></script>
 <script src="../services/api/enums.service.js"></script>
+<script src="../services/api/login.service.js"></script>
 <!-- event services -->
 <script src="../services/event/event.courseEdit.js"></script>
 <script src="../services/event/event.resize-window.js"></script>

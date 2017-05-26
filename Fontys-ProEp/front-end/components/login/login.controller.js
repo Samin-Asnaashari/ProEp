@@ -5,24 +5,34 @@
 angular.module('appComponent.login').controller('loginCtrl', function ($state, $scope, loginService) {
 
     var vm = this;
+    vm.errorMsg = "";
 
-    vm.login = function (pcn, pass) {
-        loginService.login(pcn, pass)
-            .then(function (response) {
-                console.log("success request");
-                /*show confirmation modal with possible warning message as 'response.message' if empty then there is no warning for admin
-                 if yes is pressed then call deletion function*/
-                courseService.deleteCourse(course.code)
-                    .then(function (response) {
-                        console.log("success deletion");
-                        vm.courses.splice(vm.courses.indexOf(course), 1);
-                    }, function (error) {
-                        console.log("error deletion");
-                    });
-            }, function (error) {
-                console.log("error request");
-                console.log(error.message);
-
-            });
+    vm.SetErrorEmpty = function () {
+        vm.errorMsg = "";
     }
+
+    vm.GetError = function () {
+        if (vm.errorMsg === "") {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    vm.login = function () {
+        loginService.login(vm.newLogin)
+            .then(function (response) {
+                loginService.setAuthentication(response.data.message);
+                $state.go('home');
+            }, function (error) {
+                console.log(error);
+                if(error.status === 401){
+                    vm.errorMsg = "Bad credentials";
+                }
+                else if(error.status === 403){
+                    vm.errorMsg = error.data.message;
+                }
+            });
+    };
 });

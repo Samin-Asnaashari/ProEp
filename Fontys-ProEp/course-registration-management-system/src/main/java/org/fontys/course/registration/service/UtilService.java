@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.fontys.course.registration.model.Admin;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Person;
@@ -16,6 +17,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UtilService {
 
+	public final String teacher = "TEACHER";
+	public final String student = "STUDENT";
+	public final String admin = "ADMIN";
+	
     @Autowired
     private CourseService courseService;
 
@@ -30,6 +35,9 @@ public class UtilService {
 
     @Autowired
     private NotificationService notificationService;
+    
+    @Autowired
+    private AdminService adminService;
 
     private HashMap<String, List<Person>> personsToSendDeleteCourseNotifications;
 
@@ -69,12 +77,13 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
     }
 
-    private Person GetPersonById(Integer pcn) {
+    public Person GetPersonById(Integer pcn) {
         Person person = this.teacherService.GetTeacherUnsafe(pcn);
 
         if (person == null)
             person = this.studentService.GetStudentUnsafe(pcn);
-
+        if(person == null)
+        	person = this.adminService.GetAdmin(pcn);
         return person;
     }
 
@@ -82,7 +91,7 @@ public class UtilService {
         Person person = GetPersonById(pcn);
 
         if (person == null)
-            throw new Exception("PCN doesn't exist");
+            throw new Exception("User doesn't exist");
 
         return person.getPassword().equals(pass);
     }
@@ -93,5 +102,35 @@ public class UtilService {
 
     public Teacher GetTeacher(Integer pcn) throws Exception {
         return this.teacherService.GetTeacher(pcn);
+    }
+
+    public Student GetStudentById(String pcn){
+    	try {
+			return this.studentService.GetStudentUnsafe(Integer.valueOf(pcn));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    public Admin GetAdminById(String pcn){
+    	try {
+			return this.adminService.GetAdmin(Integer.valueOf(pcn));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+    }
+    
+    public Teacher GetTeacherById(String pcn){
+    	try {
+			return this.teacherService.GetTeacherUnsafe(Integer.valueOf(pcn));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
     }
 }
