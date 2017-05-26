@@ -144,15 +144,16 @@ public class CourseService {
 
     @Transactional
     public void DeleteTeachersFromCourse(List<Teacher> teachers, String courseCode) throws Exception {
+    	Course course = this.courseRepository.findOne(courseCode);
+    	Teacher teacher = null;
         for (Teacher t : teachers) {
-            Teacher teacher = this.utilService.GetTeacher(t.getPcn());
-            Course course = this.courseRepository.findOne(courseCode);
+            teacher = this.utilService.GetTeacher(t.getPcn());
             course.getTeachers().remove(teacher);
         }
     }
 
     @Transactional
-    public void AddTeachersToCourse(List<Teacher> teachers, String courseCode) {
+	public void AddTeachersToCourse(List<Teacher> teachers, String courseCode) {
         Course course = this.courseRepository.findOne(courseCode);
         for (Teacher teacher : teachers) {
             course.getTeachers().add(teacher);

@@ -82,11 +82,11 @@ public class CourseController {
 
     @RequestMapping(value = "/addTeachersTo/{courseCode}", method = RequestMethod.POST)
     public void AddTeachersToCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
-        this.courseService.AddTeachersToCourse(teachers, courseCode);
+        //this.courseService.AddTeachersToCourse(teachers, courseCode);
     }
 
     @RequestMapping(value = "/removeTeachersFrom/{courseCode}", method = RequestMethod.PUT) /*TODO All DELETE*/
     public void DeleteTeachersFromCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
-        this.courseService.DeleteTeachersFromCourse(teachers, courseCode);
+        //this.courseService.DeleteTeachersFromCourse(teachers, courseCode);
     }
 }
