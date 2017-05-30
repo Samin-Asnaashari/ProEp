@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="container" style="padding-bottom: 20px;">
+    <div class="row">
+        <br/>
+        <br/>
+        <br/>
+        <div class="col-xs-12">
+            <course-custom-table course-list="vmTeacherHome.courses" edit-action="1" delete-action="1" add-action="0"></course-custom-table>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
