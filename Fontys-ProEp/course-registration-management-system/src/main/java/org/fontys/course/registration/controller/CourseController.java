@@ -60,6 +60,11 @@ public class CourseController {
         this.courseService.UpdateCourse(course);
     }
 
+    @RequestMapping(value = "/token/{token}", method = RequestMethod.GET)
+    public void AddNewCourseStateToCourse(@PathVariable String token) throws Exception {
+        System.out.println(token);
+    }
+    
     @RequestMapping(value = "/addNewState/course/{code}", method = RequestMethod.POST)
     public void AddNewCourseStateToCourse(@RequestBody List<CourseState> states, @PathVariable String code) throws Exception {
         this.courseService.AddNewCourseStateToCourse(states, code);

@@ -25,6 +25,9 @@ public class Student extends Person {
 
     @Column
     private Double avgScore;
+    
+    @Column
+    private String pushNotificationToken;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -41,7 +44,15 @@ public class Student extends Person {
         this.avgScore = avgScore;
     }
 
-    public Integer getStudentNumber() {
+    public String getPushNotificationToken() {
+		return pushNotificationToken;
+	}
+
+	public void setPushNotificationToken(String pushNotificationToken) {
+		this.pushNotificationToken = pushNotificationToken;
+	}
+
+	public Integer getStudentNumber() {
         return studentNumber;
     }
 

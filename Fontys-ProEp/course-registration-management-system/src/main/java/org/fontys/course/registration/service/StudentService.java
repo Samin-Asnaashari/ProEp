@@ -59,4 +59,9 @@ public class StudentService {
             this.studentRepository.delete(student);
         }
     }
+
+    @Transactional
+	public void AddPushNotificationToken(Integer pcn, String pushNotificationToken) {
+		this.studentRepository.findOne(pcn).setPushNotificationToken(pushNotificationToken);
+	}
 }

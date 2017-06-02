@@ -2,6 +2,8 @@ package org.fontys.course.registration.model;
 
 import javax.persistence.*;
 
+import org.fontys.course.registration.model.enums.Major;
+import org.fontys.course.registration.model.enums.NotificationStatus;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,6 +24,9 @@ public class Notification {
 
     @Column
     private Date date;
+    
+    @Enumerated(EnumType.STRING)
+    private NotificationStatus status;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn
@@ -43,7 +48,15 @@ public class Notification {
 	public Notification() {
     }
 
-    public Long getId() {
+    public NotificationStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(NotificationStatus status) {
+		this.status = status;
+	}
+
+	public Long getId() {
 		return id;
 	}
 

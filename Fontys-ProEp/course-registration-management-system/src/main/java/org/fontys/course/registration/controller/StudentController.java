@@ -9,6 +9,7 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,5 +74,8 @@ public class StudentController {
         this.studentService.DeleteStudents(students);
     }
 
-
+    @RequestMapping(value = "/AddPushNotificationToken/{pushNotificationToken}", method = RequestMethod.PUT)
+    public void AddPushNotificationToken(@PathVariable("pushNotificationToken") String pushNotificationToken, Principal principal) {
+        this.studentService.AddPushNotificationToken(Integer.valueOf(principal.getName()), pushNotificationToken);
+    }
 }
