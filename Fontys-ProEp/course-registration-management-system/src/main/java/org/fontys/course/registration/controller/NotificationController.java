@@ -46,10 +46,10 @@ public class NotificationController {
         return null;
     }
 	
-	@RequestMapping(value = "/after/{pcn}/{notificationID}", method = RequestMethod.GET)
-    public List<Notification> GetNotificationsAfter(@PathVariable("pcn") Integer pcn, 
-    		@PathVariable("notificationID") Integer notificationID) throws Exception {
-        return this.notificationService.GetNotifications(pcn);
+	@RequestMapping(value = "/after/{notificationID}", method = RequestMethod.GET)
+    public List<Notification> GetNotificationsAfter(Principal principal,
+    		@PathVariable("notificationID") Long notificationID) throws Exception {
+        return this.notificationService.GetNotificationsAfter(Integer.valueOf(principal.getName()), notificationID);
     }
 	
 	@RequestMapping(value = "/changeStatus", method = RequestMethod.PUT)

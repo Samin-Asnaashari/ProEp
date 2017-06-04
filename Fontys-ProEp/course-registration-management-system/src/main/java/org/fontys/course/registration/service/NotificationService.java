@@ -6,7 +6,6 @@ import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.enums.NotificationStatus;
 import org.fontys.course.registration.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,9 +28,11 @@ public class NotificationService {
 		this.notificationRepository.save(notifications);
 	}
 	
+	
+	
 	@Transactional
 	public List<Notification> GetNotifications(Integer pcn){
-		return this.notificationRepository.findTop10ByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
+		return this.notificationRepository.findTop5ByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
 	}
 
 	@Transactional
@@ -45,7 +46,13 @@ public class NotificationService {
 		}
 	}
 
+	@Transactional
 	public List<Notification> GetNotificationsBefore(Integer pcn, Long notificationID) {
 		return this.notificationRepository.findByIdGreaterThanAndReceiverOrderByDateDesc(notificationID, this.utilService.GetPersonById(pcn));
+	}
+	
+	@Transactional
+	public List<Notification> GetNotificationsAfter(Integer pcn, Long notificationID){
+		return this.notificationRepository.findTop1ByIdLessThanAndReceiverOrderByDateDesc(notificationID, this.utilService.GetPersonById(pcn));
 	}
 }

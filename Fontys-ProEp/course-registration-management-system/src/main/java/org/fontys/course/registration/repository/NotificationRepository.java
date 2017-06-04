@@ -11,7 +11,9 @@ import org.springframework.stereotype.Repository;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 	List<Notification> findByReceiver(Person person);
 	
-	List<Notification> findTop10ByReceiverOrderByDateDesc(Person person);
+	List<Notification> findTop5ByReceiverOrderByDateDesc(Person person);
 
 	List<Notification> findByIdGreaterThanAndReceiverOrderByDateDesc(Long id, Person person);
+	
+	List<Notification> findTop1ByIdLessThanAndReceiverOrderByDateDesc(Long id, Person person);
 }
