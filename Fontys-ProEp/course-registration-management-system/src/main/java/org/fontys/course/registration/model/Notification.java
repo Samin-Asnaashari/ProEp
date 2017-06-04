@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.model.enums.NotificationStatus;
+import org.fontys.course.registration.model.enums.SendStatus;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -27,6 +28,9 @@ public class Notification {
     
     @Enumerated(EnumType.STRING)
     private NotificationStatus status;
+    
+    @Enumerated(EnumType.STRING)
+    private SendStatus sendStatus;
 
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn
@@ -48,7 +52,15 @@ public class Notification {
 	public Notification() {
     }
 
-    public NotificationStatus getStatus() {
+    public SendStatus getSendStatus() {
+		return sendStatus;
+	}
+
+	public void setSendStatus(SendStatus sendStatus) {
+		this.sendStatus = sendStatus;
+	}
+
+	public NotificationStatus getStatus() {
 		return status;
 	}
 

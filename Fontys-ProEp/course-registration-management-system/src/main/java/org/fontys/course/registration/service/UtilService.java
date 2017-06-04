@@ -40,7 +40,17 @@ public class UtilService {
     private AdminService adminService;
 
     private HashMap<String, List<Person>> personsToSendDeleteCourseNotifications;
+    
+    public HashMap<String, List<Person>> GetPersonsToSendDeleteCourseNotifications() {
+        return personsToSendDeleteCourseNotifications;
+    }
+    
+    public void SetPersonsToSendDeleteCourseNotifications(
+            HashMap<String, List<Person>> personsToSendDeleteCourseNotifications) {
+        this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
+    }
 
+    //UTIL METHODS
     public void AddNewNotification(Notification notification) {
         this.notificationService.AddNotification(notification);
     }
@@ -55,10 +65,7 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications.put(courseCode, persons);
     }
 
-    public HashMap<String, List<Person>> GetPersonsToSendDeleteCourseNotifications() {
-        return personsToSendDeleteCourseNotifications;
-    }
-
+    
     public List<Student> GetAllStudentsByCourse(String courseCode) {
         List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
         List<Student> studentsApplied = new ArrayList<>();
@@ -72,11 +79,6 @@ public class UtilService {
         return this.registrationService.GetAllRegistrationsByCourse(courseCode);
     }
 
-    public void SetPersonsToSendDeleteCourseNotifications(
-            HashMap<String, List<Person>> personsToSendDeleteCourseNotifications) {
-        this.personsToSendDeleteCourseNotifications = personsToSendDeleteCourseNotifications;
-    }
-
     public Person GetPersonById(Integer pcn) {
         Person person = this.teacherService.GetTeacherUnsafe(pcn);
 
@@ -87,6 +89,7 @@ public class UtilService {
         return person;
     }
 
+    //not needed anymore
     public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception {
         Person person = GetPersonById(pcn);
 
@@ -132,5 +135,17 @@ public class UtilService {
 			e.printStackTrace();
 		}
 		return null;
+    }
+    
+    public List<Notification> GetUnSendNotifications(Person person){
+    	return this.notificationService.GetUnSendNotifications(person);
+    }
+    
+    public List<Student> GetAllStudents(){
+    	return this.studentService.GetAllStudents();
+    }
+    
+    public void SetNotificationsSenderStatus(Student student) {
+    	this.notificationService.SetNotificationsSenderStatus(student);
     }
 }

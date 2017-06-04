@@ -1,11 +1,17 @@
 package org.fontys.course.registration.model;
 
-public class Pojo {
+public class PushNotificationPostParams {
 	private String tokens;
 	private String profile;
 	private PushNotification notification;
 	
-	public Pojo() {
+	public PushNotificationPostParams(String tokens, PushNotification notification) {
+		super();
+		this.tokens = tokens;
+		this.profile = "pushnotifications";
+		this.notification = notification;
+	}
+	public PushNotificationPostParams() {
 		super();
 	}
 	public String getTokens() {

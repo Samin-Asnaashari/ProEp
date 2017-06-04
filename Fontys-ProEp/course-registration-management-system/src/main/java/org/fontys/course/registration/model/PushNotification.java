@@ -14,6 +14,12 @@ public class PushNotification {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	public PushNotification(String message) {
+		super();
+		this.title = "New notifications";
+		this.message = message;
+	}
+
 	public String getTitle() {
 		return title;
 	}

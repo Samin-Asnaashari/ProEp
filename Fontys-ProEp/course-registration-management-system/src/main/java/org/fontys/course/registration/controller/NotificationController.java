@@ -29,14 +29,12 @@ public class NotificationController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
     public List<Notification> GetNotifications(Principal principal) throws Exception {
-		System.out.println("GetNotifications Acessed");
-        return this.notificationService.GetNotifications(Integer.valueOf(principal.getName()));
+        return this.notificationService.GetNotificationsForMobileView(Integer.valueOf(principal.getName()));
     }
 	
 	@RequestMapping(value = "/before/{notificationID}", method = RequestMethod.GET)
     public List<Notification> GetNotificationsBefore(Principal principal,
     		@PathVariable("notificationID") Long notificationID) throws Exception {
-		//Thread.sleep(4000);
         return this.notificationService.GetNotificationsBefore(Integer.valueOf(principal.getName()), notificationID);
     }
 	
