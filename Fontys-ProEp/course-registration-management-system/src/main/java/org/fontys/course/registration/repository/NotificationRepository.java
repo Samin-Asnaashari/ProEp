@@ -12,6 +12,8 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 	List<Notification> findByReceiver(Person person);
 	
 	List<Notification> findTop5ByReceiverOrderByDateDesc(Person person);
+	
+	List<Notification> findByReceiverOrderByDateDesc(Person person);
 
 	List<Notification> findByIdGreaterThanAndReceiverOrderByDateDesc(Long id, Person person);
 	

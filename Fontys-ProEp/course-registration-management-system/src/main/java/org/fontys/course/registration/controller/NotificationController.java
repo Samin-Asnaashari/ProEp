@@ -40,12 +40,6 @@ public class NotificationController {
         return this.notificationService.GetNotificationsBefore(Integer.valueOf(principal.getName()), notificationID);
     }
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-    public List<Notification> GetNotificationstest(Principal principal) throws Exception {
-		System.out.println("TEST accessed");
-        return null;
-    }
-	
 	@RequestMapping(value = "/after/{notificationID}", method = RequestMethod.GET)
     public List<Notification> GetNotificationsAfter(Principal principal,
     		@PathVariable("notificationID") Long notificationID) throws Exception {
@@ -55,5 +49,21 @@ public class NotificationController {
 	@RequestMapping(value = "/changeStatus", method = RequestMethod.PUT)
     public void SetNotificationsStatus(Principal principal) throws Exception {
         this.notificationService.SetNotificationsStatus(Integer.valueOf(principal.getName()));
+    }
+	
+	@RequestMapping(value = "/changeStatus/{notificationID}", method = RequestMethod.PUT)
+    public void SetNotificationsStatus(@PathVariable("notificationID") Long notificationID) throws Exception {
+        this.notificationService.SetNotificationStatus(notificationID);
+    }
+	
+	@RequestMapping(value = "/amountOfBadges", method = RequestMethod.GET)
+    public Long GetAmountOfBadges(Principal principal) throws Exception {
+        return this.notificationService.getAmountOfBadges(Integer.valueOf(principal.getName()));
+    }
+	
+	@RequestMapping(value = "/test", method = RequestMethod.GET)
+    public List<Notification> GetNotificationstest(Principal principal) throws Exception {
+		System.out.println("TEST accessed");
+        return null;
     }
 }

@@ -32,7 +32,20 @@ public class NotificationService {
 	
 	@Transactional
 	public List<Notification> GetNotifications(Integer pcn){
-		return this.notificationRepository.findTop5ByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
+		List<Notification> notifications = this.notificationRepository.findByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
+		Integer lastUNREADIndex = 0;
+		for (int i = 0; i < notifications.size(); i++) {
+			if(notifications.get(i).getStatus().equals(NotificationStatus.UNREAD)){
+				lastUNREADIndex = i;
+			}
+		}
+		
+		if(notifications.size() < 5){
+			return notifications;
+		}
+		else
+			return notifications.subList(0, lastUNREADIndex + 1);
+		
 	}
 
 	@Transactional
@@ -54,5 +67,22 @@ public class NotificationService {
 	@Transactional
 	public List<Notification> GetNotificationsAfter(Integer pcn, Long notificationID){
 		return this.notificationRepository.findTop1ByIdLessThanAndReceiverOrderByDateDesc(notificationID, this.utilService.GetPersonById(pcn));
+	}
+
+	@Transactional
+	public Long getAmountOfBadges(Integer pcn) {
+		List<Notification> notifications = this.notificationRepository.findByReceiver(this.utilService.GetPersonById(pcn));
+		Long amountOfBadges = (long) 0;
+		for (int i = 0; i < notifications.size(); i++) {
+			if(notifications.get(i).getStatus().equals(NotificationStatus.UNREAD)){
+				amountOfBadges++;
+			}
+		}
+		return amountOfBadges;
+	}
+
+	@Transactional
+	public void SetNotificationStatus(Long notificationID) {
+		this.notificationRepository.findOne(notificationID).setStatus(NotificationStatus.READ);
 	}
 }
