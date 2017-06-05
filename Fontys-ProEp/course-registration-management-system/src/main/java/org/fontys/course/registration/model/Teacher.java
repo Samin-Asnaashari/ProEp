@@ -12,6 +12,9 @@ public class Teacher extends Person {
     @Column
     private String link;
     
+    @Column
+    private Integer notificationBadgeCount;
+    
     @JsonIgnoreProperties("teachers")
     @ManyToMany(mappedBy = "teachers")
     private List<Course> myCourses;
@@ -24,7 +27,15 @@ public class Teacher extends Person {
         this.link = link;
     }
 
-    public String getLink() {
+    public Integer getNotificationBadgeCount() {
+		return notificationBadgeCount;
+	}
+
+	public void setNotificationBadgeCount(Integer notificationBadgeCount) {
+		this.notificationBadgeCount = notificationBadgeCount;
+	}
+
+	public String getLink() {
         return link;
     }
 

@@ -89,16 +89,6 @@ public class UtilService {
         return person;
     }
 
-    //not needed anymore
-    public boolean CheckUsernameAndPassword(Integer pcn, String pass) throws Exception {
-        Person person = GetPersonById(pcn);
-
-        if (person == null)
-            throw new Exception("User doesn't exist");
-
-        return person.getPassword().equals(pass);
-    }
-
     public Course GetCourse(String courseCode) throws Exception {
         return this.courseService.GetCourse(courseCode);
     }
@@ -145,7 +135,12 @@ public class UtilService {
     	return this.studentService.GetAllStudents();
     }
     
-    public void SetNotificationsSenderStatus(Student student) {
-    	this.notificationService.SetNotificationsSenderStatus(student);
+    public void IncreaseNotificationBadgeCount(Person person) {
+    	if(person instanceof Student)
+    		this.studentService.IncreaseNotificationBadgeCount(person);
+    	else
+    		this.teacherService.IncreaseNotificationBadgeCount(person);
     }
+    
+    
 }

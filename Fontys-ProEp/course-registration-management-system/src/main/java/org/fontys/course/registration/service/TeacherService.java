@@ -1,6 +1,8 @@
 package org.fontys.course.registration.service;
 
 import org.fontys.course.registration.model.Course;
+import org.fontys.course.registration.model.Person;
+import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.Teacher;
 import org.fontys.course.registration.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +51,10 @@ public class TeacherService {
     public void DeleteTeacher(Integer pcn) {
         this.teacherRepository.delete(pcn);
     }
+
+    @Transactional
+	public void IncreaseNotificationBadgeCount(Person person) {
+		Teacher teacher = this.teacherRepository.findOne(person.getPcn());
+		teacher.setNotificationBadgeCount(teacher.getNotificationBadgeCount() + 1);
+	}
 }

@@ -78,4 +78,14 @@ public class StudentController {
     public void AddPushNotificationToken(@PathVariable("pushNotificationToken") String pushNotificationToken, Principal principal) {
         this.studentService.AddPushNotificationToken(Integer.valueOf(principal.getName()), pushNotificationToken);
     }
+    
+    @RequestMapping(value = "/clearBadgeCount", method = RequestMethod.PUT)
+    public void ClearAmounOfBadges(Principal principal) throws Exception {
+        this.studentService.ClearAmountOfBadges(Integer.valueOf(principal.getName()));
+    }
+    
+    @RequestMapping(value = "/getBadgeCount", method = RequestMethod.GET)
+    public Integer GetAmounOfBadges(Principal principal) throws Exception {
+        return this.studentService.GetAmountOfBadges(Integer.valueOf(principal.getName()));
+    }
 }

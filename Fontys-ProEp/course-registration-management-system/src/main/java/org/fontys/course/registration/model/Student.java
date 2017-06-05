@@ -15,7 +15,6 @@ public class Student extends Person {
     @Column(nullable = false)
     private Integer studentNumber;
 
-    //TODO is it really necessary?
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
 
@@ -28,8 +27,12 @@ public class Student extends Person {
     
     @Column
     private String pushNotificationToken;
+    
+    @Column
+    @org.hibernate.annotations.ColumnDefault("0")
+    private Integer notificationBadgeCount;
 
-    @JsonManagedReference
+	@JsonManagedReference
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Notification> notifications;
     
@@ -44,6 +47,14 @@ public class Student extends Person {
         this.avgScore = avgScore;
     }
 
+    public Integer getNotificationBadgeCount() {
+		return notificationBadgeCount;
+	}
+
+	public void setNotificationBadgeCount(Integer notificationBadgeCount) {
+		this.notificationBadgeCount = notificationBadgeCount;
+	}
+    
     public String getPushNotificationToken() {
 		return pushNotificationToken;
 	}
@@ -84,11 +95,11 @@ public class Student extends Person {
         this.avgScore = avgScore;
     }
 
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
+	public List<Notification> getNotifications() {
+		return notifications;
+	}
 
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
+	public void setNotifications(List<Notification> notifications) {
+		this.notifications = notifications;
+	}
 }

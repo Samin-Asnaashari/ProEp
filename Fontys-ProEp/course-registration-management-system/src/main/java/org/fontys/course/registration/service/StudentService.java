@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +22,7 @@ public class StudentService {
 
     @Transactional
     public void AddStudents(List<Student> students) {
-        for (Student student : students) {
-            this.studentRepository.save(student);
-        }
+        this.studentRepository.save(students);
     }
 
     public Student GetStudent(Integer pcn) throws Exception {
@@ -35,10 +34,12 @@ public class StudentService {
         }
     }
 
+    @Transactional
     public Student GetStudentUnsafe(Integer pcn) {
         return this.studentRepository.findOne(pcn);
     }
 
+    @Transactional
     public List<Student> GetAllStudents() {
         return this.studentRepository.findAll();
     }
@@ -63,5 +64,21 @@ public class StudentService {
     @Transactional
 	public void AddPushNotificationToken(Integer pcn, String pushNotificationToken) {
 		this.studentRepository.findOne(pcn).setPushNotificationToken(pushNotificationToken);
+	}
+
+    @Transactional
+	public void IncreaseNotificationBadgeCount(Person person) {
+    	Student student = this.studentRepository.findOne(person.getPcn());
+    	student.setNotificationBadgeCount(student.getNotificationBadgeCount() + 1);
+	}
+
+    @Transactional
+	public void ClearAmountOfBadges(Integer pcn) {
+		this.studentRepository.findOne(pcn).setNotificationBadgeCount(0);
+	}
+
+    @Transactional
+	public Integer GetAmountOfBadges(Integer pcn) {
+		return this.studentRepository.findOne(pcn).getNotificationBadgeCount();
 	}
 }

@@ -1,6 +1,5 @@
 package org.fontys.course.registration.model;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.fontys.course.registration.service.UtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 import com.google.gson.Gson;
 
 @Component
@@ -47,7 +45,6 @@ public class PushNotificationSender {
 			
 			HttpResponse response = httpClient.execute(post);
 			StatusLine s = response.getStatusLine();
-			System.out.println(s.getStatusCode());
 			if (s.getStatusCode() != 201)
 				return false;
 		} catch (Exception e) {
@@ -97,26 +94,30 @@ public class PushNotificationSender {
 	}
 
 	@Scheduled(initialDelay = 0, fixedDelay = 300000)
-	private void SendPushNotifications() throws InterruptedException {
-		List<Student> students = this.utilService.GetAllStudents();
-		for (int i = 0; i < students.size(); i++) {
-			Student student = students.get(i);
-			List<Notification> unSendNotifications = PushNotificationSender.this.utilService
-					.GetUnSendNotifications(student);
+	private void SendPushNotifications() {
+		try {
+			List<Student> students = this.utilService.GetAllStudents();
+			for (int i = 0; i < students.size(); i++) {
+				Student student = students.get(i);
+				List<Notification> unSendNotifications = PushNotificationSender.this.utilService
+						.GetUnSendNotifications(student);
 
-			if(unSendNotifications.size() != 0) {
-				String senders = this.GetPushNotificationMessageSenders(this.GetDistinctSendersPcns(unSendNotifications));
-				
-				PushNotificationPostParams pushNotificationPostParams = new PushNotificationPostParams(
-						student.getPushNotificationToken(),
-						new PushNotification("You have new notifications from: " + senders));
-				
-				if (!this.SendPushNotification(pushNotificationPostParams)) {
-					this.pushNotificationPostRequestsNotSent.add(pushNotificationPostParams);
+				if (unSendNotifications.size() != 0) {
+					String senders = this
+							.GetPushNotificationMessageSenders(this.GetDistinctSendersPcns(unSendNotifications));
+
+					PushNotificationPostParams pushNotificationPostParams = new PushNotificationPostParams(
+							student.getPushNotificationToken(),
+							new PushNotification("You have new notifications from: " + senders));
+
+					if (!this.SendPushNotification(pushNotificationPostParams)) {
+						this.pushNotificationPostRequestsNotSent.add(pushNotificationPostParams);
+					}
 				}
-				this.utilService.SetNotificationsSenderStatus(student);
+				Thread.sleep(1000);
 			}
-			Thread.sleep(1000);
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
 		}
 	}
 }

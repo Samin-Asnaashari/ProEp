@@ -2,11 +2,8 @@ package org.fontys.course.registration.model;
 
 import javax.persistence.*;
 
-import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.model.enums.NotificationStatus;
 import org.fontys.course.registration.model.enums.SendStatus;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -24,9 +21,11 @@ public class Notification {
     private String content;
 
     @Column
+//    @JsonFormat
+//    (shape = JsonFormat.Shape.STRING, pattern = "yyyy-mm-dd hh:mm:ss")
     private Date date;
     
-    @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
     private NotificationStatus status;
     
     @Enumerated(EnumType.STRING)
@@ -41,14 +40,14 @@ public class Notification {
     @JoinColumn
     private Person receiver;
 
-    public Notification(String content, Date date, Person sender, Person receiver) {
+	public Notification(String content, Date date, Person sender, Person receiver) {
 		super();
 		this.content = content;
 		this.date = date;
 		this.sender = sender;
 		this.receiver = receiver;
 	}
-
+	
 	public Notification() {
     }
 

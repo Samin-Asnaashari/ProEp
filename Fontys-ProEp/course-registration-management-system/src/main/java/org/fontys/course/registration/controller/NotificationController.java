@@ -10,6 +10,7 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,24 +45,19 @@ public class NotificationController {
         return this.notificationService.GetNotificationsAfter(Integer.valueOf(principal.getName()), notificationID);
     }
 	
-	@RequestMapping(value = "/changeStatus", method = RequestMethod.PUT)
-    public void SetNotificationsStatus(Principal principal) throws Exception {
-        this.notificationService.SetNotificationsStatus(Integer.valueOf(principal.getName()));
-    }
-	
 	@RequestMapping(value = "/changeStatus/{notificationID}", method = RequestMethod.PUT)
     public void SetNotificationsStatus(@PathVariable("notificationID") Long notificationID) throws Exception {
         this.notificationService.SetNotificationStatus(notificationID);
     }
-	
-	@RequestMapping(value = "/amountOfBadges", method = RequestMethod.GET)
-    public Long GetAmountOfBadges(Principal principal) throws Exception {
-        return this.notificationService.getAmountOfBadges(Integer.valueOf(principal.getName()));
+
+	//TEST METHODS
+	@RequestMapping(value = "/test", method = RequestMethod.POST, consumes = "application/json")
+    public void GetNotificationstest(@RequestBody Notification notification) throws Exception {
+		this.notificationService.AddNotification(notification);
     }
 	
-	@RequestMapping(value = "/test", method = RequestMethod.GET)
-    public List<Notification> GetNotificationstest(Principal principal) throws Exception {
-		System.out.println("TEST accessed");
-        return null;
+	@RequestMapping(value = "/tests", method = RequestMethod.POST, consumes = "application/json")
+    public void GetNotificationstest(@RequestBody List<Notification> notifications) throws Exception {
+		this.notificationService.AddNotifications(notifications);
     }
 }

@@ -1,8 +1,6 @@
 package org.fontys.course.registration.model;
 
-/**
- * Created by Phoenix on 17-May-17.
- */
+
 public class Credentials {
     private String password;
     private Integer pcn;

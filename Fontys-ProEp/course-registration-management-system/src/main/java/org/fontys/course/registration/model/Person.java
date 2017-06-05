@@ -2,14 +2,25 @@ package org.fontys.course.registration.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@JsonTypeInfo(  
+	    use = JsonTypeInfo.Id.NAME,  
+	    include = JsonTypeInfo.As.PROPERTY,  
+	    property = "class")  
+	@JsonSubTypes({  
+	    @Type(value = Student.class, name = "com.example.Student"),  
+	    @Type(value = Teacher.class, name = "com.example.Teacher") })  
 public abstract class Person {
 
     @Id
     @Column(nullable = false)
     private Integer pcn;
-    //TODO private Long pcn / private string ipcn
+    //TODO private Long pcn / private string pcn
 
     @Column(nullable = false)
     private String password;
@@ -21,7 +32,7 @@ public abstract class Person {
     private String firstName;
 
     @Column
-    private String lastName; /*middleName?*/
+    private String lastName;
     
     public Person() {
     }
