@@ -38,6 +38,23 @@ public class CourseController {
         return this.courseService.GetCourse(code);
     }
 
+    @RequestMapping(value = "/{pcn}/courses",method = RequestMethod.GET)
+    public List<Course>GetAllCoursesPerTeacher(@PathVariable Integer pcn)
+    {
+        List<Course>temp = new ArrayList<>();
+        List<Course> courses =  GetAllCourses();
+        for (int c=0;c<courses.size();c++)
+        {
+            for (Teacher t: courses.get(c).getTeachers()) {
+                if (t.getPcn()==pcn)//teacher has this course
+                {
+                    temp.add( courses.get(c));
+                }
+            }
+        }
+        return temp;
+
+    }
     @RequestMapping(method = RequestMethod.GET)
     public List<Course> GetAllCourses() {
         return this.courseService.GetAllCourses();
