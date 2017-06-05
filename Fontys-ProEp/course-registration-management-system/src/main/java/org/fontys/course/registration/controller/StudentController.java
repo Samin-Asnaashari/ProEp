@@ -74,7 +74,7 @@ public class StudentController {
         this.studentService.DeleteStudents(students);
     }
 
-    @RequestMapping(value = "/AddPushNotificationToken/{pushNotificationToken}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/addPushNotificationToken/{pushNotificationToken}", method = RequestMethod.PUT)
     public void AddPushNotificationToken(@PathVariable("pushNotificationToken") String pushNotificationToken, Principal principal) {
         this.studentService.AddPushNotificationToken(Integer.valueOf(principal.getName()), pushNotificationToken);
     }
