@@ -1,5 +1,6 @@
 package org.fontys.course.registration.controller;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Teacher;
 import org.fontys.course.registration.service.TeacherService;
 import org.jsondoc.core.annotation.Api;
@@ -59,4 +60,15 @@ public class TeacherController {
     public void DeleteTeacher(@PathVariable Integer pcn) {
         this.teacherService.DeleteTeacher(pcn);
     }
+
+    @RequestMapping(value = "/{pcn}/courses", method = RequestMethod.GET)
+    public List<Course> GetAllCoursesPerTeacher(@PathVariable Integer pcn)
+    {
+        try {
+            return this.teacherService.GetTeacher(pcn).getMyCourses();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

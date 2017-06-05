@@ -38,7 +38,7 @@ public class CourseController {
         return this.courseService.GetCourse(code);
     }
 
-    @RequestMapping(value = "/{pcn}/courses",method = RequestMethod.GET)
+   /* @RequestMapping(value = "/{pcn}/courses",method = RequestMethod.GET)
     public List<Course>GetAllCoursesPerTeacher(@PathVariable Integer pcn)
     {
         List<Course>temp = new ArrayList<>();
@@ -54,7 +54,8 @@ public class CourseController {
         }
         return temp;
 
-    }
+    }*/
+
     @RequestMapping(method = RequestMethod.GET)
     public List<Course> GetAllCourses() {
         return this.courseService.GetAllCourses();

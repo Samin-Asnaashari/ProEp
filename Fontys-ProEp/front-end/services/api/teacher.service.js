@@ -29,4 +29,9 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
     self.deleteTeacher = function (pcn) {
         return $http.delete(baseUrl + '/' + pcn);
     };
+
+    self.getMyCourses=function(pcn)
+    {
+        return $http.get(baseUrl+'/'+pcn+'/courses')
+    }
 });
