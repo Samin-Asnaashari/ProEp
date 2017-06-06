@@ -1,0 +1,30 @@
+<ion-view view-title="Home">
+  <ion-content>
+    <div class="list card">
+
+      <div class="item item-avatar">
+        <img ng-src="http://www.pantherarmstraining.com/register.jpg">
+        <h2 style="font-weight: bold">What is it all about?</h2>
+        <span>{{homeCtrl.currentDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY'}}</span>
+      </div>
+
+      <div class="item item-body">
+        <img class="full-image"
+             ng-src="https://www.nirma.org/wp-content/uploads/2015/04/Register-Button.jpg">
+
+        <p>This is an online course registration app.</p>
+        <p>You can view details about your courses here, all elective, mandatory and registered ones.</p>
+        <p>Registration is only possible for the elective courses.</p>
+        <p>User reviews about courses is available and courses can also be reviewed.</p>
+        <p>Notifications about your courses registration are also available (if any.)</p>
+        <br>
+        <p>
+          <a href="#" class="subdued">
+            <h3>Click here to start</h3>
+          </a>
+        </p>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-view>

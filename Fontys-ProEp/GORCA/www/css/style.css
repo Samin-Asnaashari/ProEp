@@ -1,0 +1,15 @@
+/* Empty. Add your own CSS if you like */
+h2.notification-title {
+  white-space: normal;
+  height: 4.8em;
+}
+
+#menu-notifications ion-item .item-content{
+  background-color: transparent !important;
+}
+
+/*.scroll-refresher .ionic-refresher-content {*/
+  /*width: 50%;*/
+  /*right: 0;*/
+  /*text-align: right;*/
+/*}*/
