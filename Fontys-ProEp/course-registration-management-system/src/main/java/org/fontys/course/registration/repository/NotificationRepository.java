@@ -12,13 +12,13 @@ import org.springframework.stereotype.Repository;
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
 	List<Notification> findByReceiver(Person person);
 	
-	List<Notification> findTop5ByReceiverOrderByDateDesc(Person person);
+	List<Notification> findTop5ByReceiverOrderByIdDesc(Person person);
 	
 	List<Notification> findByReceiverOrderByDateDesc(Person person);
 
-	List<Notification> findByIdGreaterThanAndReceiverOrderByDateDesc(Long id, Person person);
+	List<Notification> findByIdGreaterThanAndReceiverOrderByIdDesc(Long id, Person person);
 	
-	List<Notification> findTop5ByIdLessThanAndReceiverOrderByDateDesc(Long id, Person person);
+	List<Notification> findTop5ByIdLessThanAndReceiverOrderByIdDesc(Long id, Person person);
 	
-	List<Notification> findByReceiverAndSendStatusOrderByDateDesc(Person person, SendStatus status);
+	List<Notification> findByReceiverAndSendStatusOrderByIdDesc(Person person, SendStatus status);
 }

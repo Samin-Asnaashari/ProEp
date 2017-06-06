@@ -36,12 +36,18 @@ public class NotificationService {
 	
 	@Transactional
 	public List<Notification> GetNotificationsForMobileView(Integer pcn){
-		return this.notificationRepository.findTop5ByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
+		List<Notification> notifications = this.notificationRepository.findTop5ByReceiverOrderByIdDesc(this.utilService.GetPersonById(pcn));
+		for (int i = 0; i < notifications.size(); i++) {
+			if(notifications.get(i).getSendStatus().equals(SendStatus.UNSEND)) {
+				notifications.get(i).setSendStatus(SendStatus.SEND);
+			}
+		}
+		return notifications;
 	}
 
 	@Transactional
 	public List<Notification> GetNotificationsBefore(Integer pcn, Long notificationID) {
-		List<Notification> notifications = this.notificationRepository.findByIdGreaterThanAndReceiverOrderByDateDesc
+		List<Notification> notifications = this.notificationRepository.findByIdGreaterThanAndReceiverOrderByIdDesc
 				(notificationID, this.utilService.GetPersonById(pcn));
 		for (int i = 0; i < notifications.size(); i++) {
 			if(notifications.get(i).getSendStatus().equals(SendStatus.UNSEND)) {
@@ -53,7 +59,7 @@ public class NotificationService {
 	
 	@Transactional
 	public List<Notification> GetNotificationsAfter(Integer pcn, Long notificationID){
-		List<Notification> notifications = this.notificationRepository.findTop5ByIdLessThanAndReceiverOrderByDateDesc
+		List<Notification> notifications = this.notificationRepository.findTop5ByIdLessThanAndReceiverOrderByIdDesc
 				(notificationID, this.utilService.GetPersonById(pcn));
 		for (int i = 0; i < notifications.size(); i++) {
 			if(notifications.get(i).getSendStatus().equals(SendStatus.UNSEND)) {
@@ -70,7 +76,7 @@ public class NotificationService {
 	
 	@Transactional
 	public List<Notification> GetUnSendNotifications(Person person) {
-		List<Notification> notifications = this.notificationRepository.findByReceiverAndSendStatusOrderByDateDesc(person, SendStatus.UNSEND);
+		List<Notification> notifications = this.notificationRepository.findByReceiverAndSendStatusOrderByIdDesc(person, SendStatus.UNSEND);
 		for (int i = 0; i < notifications.size(); i++) {
 			notifications.get(i).setSendStatus(SendStatus.SEND);
 		}
