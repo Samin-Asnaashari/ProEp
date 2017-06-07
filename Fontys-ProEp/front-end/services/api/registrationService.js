@@ -3,7 +3,7 @@
 /**
  * this service provides all the http requests to back-end related to Registration
  */
-angular.module('appRegistrationAPI').service('registrationService', function ($http) {
+angular.module('appServiceAPI').service('registrationService', function ($http) {
 
     var self = this;
     var http = 'http://';

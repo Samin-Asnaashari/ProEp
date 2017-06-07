@@ -6,6 +6,7 @@ angular.module('appTeacher',
         'ui.router',
         'appServiceAPI',
         'appServiceEvent',
-        'appComponent'
+        'appComponent.homeTeacher',
+        'appComponent.courseView'
     ]
 );
