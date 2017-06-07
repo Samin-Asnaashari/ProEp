@@ -57,6 +57,8 @@
 <!-- application -->
 <script src="../components/home/teacher/home.teacher.controller.js"></script>
 <script src="../components/course/view/course.view.controller.js"></script>
+<script src="teacherNav.controller.js"></script>
+
 
 <!-- services -->
 <script src="../services/api/teacher.service.js"></script>
@@ -69,6 +71,46 @@
 <!-- resize -->
 <script src="../components/resize-window/module.js"></script>
 <script src="../components/resize-window/resize.directive.js"></script>
+
+
+<!--Navigation-->
+
+<nav class="navbar teacherNav">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">GORCA</a>
+        </div>
+
+        <!-- Nagivation items -->
+        <div class="collapse navbar-collapse" id="mainNavBar">
+            <ul ng-controller="navCtrl" class="nav navbar-nav">
+                <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
+                <li ng-class="{ active: isActive('/courses')}"><a ng-href="#!/courses">Courses</a></li>
+            </ul>
+            <ul ng-controller="navCtrl" class="nav navbar-right">
+                <li class="dropdown pull-right dropdown-notifications">
+                    <a href="#notifications-panel" class="dropdown-toggle">
+                        <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+                    </a>
+                </li>
+            </ul>
+            <!-- right align
+            <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
+                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
+                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
+                <li ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
+            </ul>
+            -->
+        </div>
+    </div>
+</nav>
 
 </body>
 </html>
