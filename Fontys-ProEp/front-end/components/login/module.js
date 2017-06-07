@@ -1,5 +1,7 @@
+'use strict';
+
 /**
- * Created by Phoenix on 17-May-17.
+ * Sub-component module
  */
 angular.module('appComponent.login',
     [

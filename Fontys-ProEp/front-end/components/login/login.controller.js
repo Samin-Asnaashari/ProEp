@@ -9,7 +9,7 @@ angular.module('appComponent.login').controller('loginCtrl', function ($state, $
 
     vm.SetErrorEmpty = function () {
         vm.errorMsg = "";
-    }
+    };
 
     vm.GetError = function () {
         if (vm.errorMsg === "") {
@@ -18,7 +18,7 @@ angular.module('appComponent.login').controller('loginCtrl', function ($state, $
         else {
             return true;
         }
-    }
+    };
 
     vm.login = function () {
         loginService.login(vm.newLogin)
