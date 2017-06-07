@@ -30,8 +30,8 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
         return $http.delete(baseUrl + '/' + pcn);
     };
 
-    self.getMyCourses=function(pcn)
+    self.getMyCourses=function()
     {
-        return $http.get(baseUrl+'/'+pcn+'/courses')
+        return $http.get(baseUrl+'/courses')
     }
 });

@@ -1,6 +1,3 @@
-/**
- * Created by Phoenix on 17-May-17.
- */
 angular.module('appServiceAPI').service('loginService', function ($http, $cookies, $base64) {
 
     var self = this;
@@ -10,7 +7,7 @@ angular.module('appServiceAPI').service('loginService', function ($http, $cookie
 
     self.logout = function () {
         return $http.post(http + localhost + ":8090/logout");
-    }
+    };
     
     self.login = function (newLogin) {
         return $http({
@@ -31,7 +28,7 @@ angular.module('appServiceAPI').service('loginService', function ($http, $cookie
         else {
             return false;
         }
-    }
+    };
 
     self.setAuthentication = function (token) {
         $http.defaults.headers.common.Authorization = token;

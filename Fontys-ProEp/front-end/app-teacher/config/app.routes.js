@@ -9,8 +9,8 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             templateUrl: './components/home/teacher/home.teacher.html',
             controller: 'teacherHomeCtrl as vmTeacherHome',
             resolve: {
-                coursesResolve: function ($state, $stateParams, courseService) {
-                    return courseService.getAllCourses()
+                coursesResolve: function (courseService) {
+                    return teacherService.getMyCourses()
                         .then(function (response) {
                             return {courses: response.data};
                         }, function (error) {
@@ -33,27 +33,41 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         }, function (error) {
                             $state.go('home');
                         });
-                }
-            }
-        })
-        .state('login', {
-            url: '/login',
-            templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin'
-        })
-        .state('students', {
-            url: '/students',
-            templateUrl: './components/student/student.html',
-            controller: 'studentCtrl as vmStudent',
-            resolve: {
-                studentsResolve: function ($state, $stateParams, studentService) {
-                    return studentService.getAllStudents()
+                },
+                acceptedRegistrationsResolve: function ($state, registrationService) {
+                    return registrationService.getAllAcceptedRegistrations(status)
                         .then(function (response) {
-                            return {students: response.data};
+                            return {acceptedRegistrations: response.data};
+                        }, function (error) {
+                            $state.go('home');
+                        });
+                },
+                PendingRegistrationsResolve: function ($state, registrationService) {
+                    return registrationService.getAllPendingRegistrations(status)
+                        .then(function (response) {
+                            return {pendingRegistrations: response.data};
+                        }, function (error) {
+                            $state.go('home');
+                        });
+                },
+                declineRegistrationsResolve: function ($state, registrationService) {
+                    return registrationService.getAllDeclineRegistrations(status)
+                        .then(function (response) {
+                            return {declinedRegistrations: response.data};
                         }, function (error) {
                             $state.go('home');
                         });
                 }
+            }
+        })
+        .state('login', {
+            url: '/login'
+        })
+        .state('notifications', {
+            url: '',
+            templateUrl: '',
+            controller: '',
+            resolve: {
             }
         });
 });

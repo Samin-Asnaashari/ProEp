@@ -8,7 +8,7 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -29,7 +29,7 @@ public class TeacherController {
         this.teacherService.AddTeacher(teacher);
     }
 
-    @RequestMapping(value = "/{pcn}")
+    @RequestMapping(value = "/{pcn}", method = RequestMethod.GET)
     public Teacher GetTeacher(@PathVariable Integer pcn) throws Exception {
         return this.teacherService.GetTeacher(pcn);
     }
@@ -61,15 +61,10 @@ public class TeacherController {
         this.teacherService.DeleteTeacher(pcn);
     }
 
-    @RequestMapping(value = "/{pcn}/courses", method = RequestMethod.GET)
-    public List<Course> GetAllCoursesPerTeacher(@PathVariable Integer pcn)
+    @RequestMapping(value = "courses", method = RequestMethod.GET)
+    public List<Course> GetAllCoursesPerTeacher(Principal principal) throws Exception
     {
-        try {
-            return this.teacherService.GetTeacher(pcn).getMyCourses();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		return null;
+        return this.teacherService.GetTeacher(Integer.valueOf(principal.getName())).getMyCourses();
     }
 
 }

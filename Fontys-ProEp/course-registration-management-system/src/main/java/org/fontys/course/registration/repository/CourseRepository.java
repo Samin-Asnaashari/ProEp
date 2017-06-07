@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CourseRepository extends JpaRepository<Course, String> {
 
@@ -12,6 +14,8 @@ public interface CourseRepository extends JpaRepository<Course, String> {
     //Replace your code and Query with :  Course findByCode(String courseCode);
     @Query(value = "SELECT * FROM Course WHERE code = ?1", nativeQuery = true)
     Course findCourse(String courseCode);
+
+    List<Course> findByTeachersPcn(Integer pcn);
 }
 
 

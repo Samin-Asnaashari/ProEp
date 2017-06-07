@@ -82,7 +82,7 @@ gulp.task('copy-services-teacher', function () {
 gulp.task('connect-teacher', function () {
     connect.server({
         root: 'app-teacher/',
-        port: 8881,
+        port: 8882,
         middleware: function(connect) {
             return [
                 connect().use('/bower_components', connect.static('bower_components')),

@@ -28,7 +28,7 @@ angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', f
 
     vm.showDialog = function (serverMessage, course) {
         $mdDialog.show({
-            templateUrl: './components/ConfirmationDialog/delete.confirmation.template.html',
+            templateUrl: './components/confirmationDialog/delete.confirmation.template.html',
             clickOutsideToClose: true,
             parent: angular.element(document.body),
             locals: {serverResponse: serverMessage},
