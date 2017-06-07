@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module('GORCA.serviceAPIS', []).service('notificationService', function ($http) {
+angular.module('GORCA.serviceAPIS').service('notificationService', function ($http) {
 
   var self = this;
   var http = 'http://';
@@ -12,6 +12,7 @@ angular.module('GORCA.serviceAPIS', []).service('notificationService', function 
   var baseUrl = http + ipAddress + ':8090/notifications';
 
   self.getAllNotifications = function () {
+    $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
     return $http.get(baseUrl + "/");
   };
 

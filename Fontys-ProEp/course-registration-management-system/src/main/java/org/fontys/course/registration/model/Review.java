@@ -15,14 +15,23 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column
-    private String content;
+    private String description;
+    
+    @Column
+    private String negativePoints;
+    
+    @Column
+    private String positivePoints;
 
     @Column
     private Date date;
 
+    @Column
+    private Integer score;
+    
     @JsonBackReference
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -37,43 +46,67 @@ public class Review {
     public Review() {
     }
 
-    public Integer getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public Date getDate() {
-        return date;
-    }
+	public String getNegativePoints() {
+		return negativePoints;
+	}
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+	public void setNegativePoints(String negativePoints) {
+		this.negativePoints = negativePoints;
+	}
 
-    public Student getStudent() {
-        return student;
-    }
+	public String getPositivePoints() {
+		return positivePoints;
+	}
 
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+	public void setPositivePoints(String positivePoints) {
+		this.positivePoints = positivePoints;
+	}
 
-    public Course getCourse() {
-        return course;
-    }
+	public Date getDate() {
+		return date;
+	}
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 }

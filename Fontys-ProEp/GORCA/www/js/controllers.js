@@ -96,7 +96,6 @@ angular.module('GORCA.controllers', [])
           if (response.data != "") {
             vm.notifications = vm.notifications.concat(response.data);
             $scope.$broadcast('scroll.infiniteScrollComplete');
-            return;
           }
           else {
             vm.moreDataCanBeLoaded = false;
