@@ -6,16 +6,20 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: './components/home/teacher/home.teacher.html',
-            controller: 'teacherHomeCtrl as vmTeacherHome',
-            resolve: {
-                coursesResolve: function (courseService) {
-                    return teacherService.getMyCourses()
-                        .then(function (response) {
-                            return {courses: response.data};
-                        }, function (error) {
-                            // $state.go('Error');
-                        });
+            views: {
+                'content': {
+                    templateUrl: './components/home/teacher/home.teacher.html',
+                    controller: 'teacherHomeCtrl as vmTeacherHome',
+                    resolve: {
+                        coursesResolve: function (teacherService) {
+                            return teacherService.getMyCourses()
+                                .then(function (response) {
+                                    return {courses: response.data};
+                                }, function (error) {
+                                    // $state.go('Error');
+                                });
+                        }
+                    }
                 }
             }
         })
@@ -24,16 +28,6 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             templateUrl: './components/course/view/course.view.html',
             controller: 'courseViewCtrl as vmCourseView',
             resolve: {
-                courseResolve: function ($state, $stateParams, courseService) {
-                    return courseService.getCourse($stateParams.code)
-                        .then(function (response) {
-                            response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
-                            response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
-                            return {course: response.data};
-                        }, function (error) {
-                            $state.go('home');
-                        });
-                },
                 acceptedRegistrationsResolve: function ($state, registrationService) {
                     return registrationService.getAllAcceptedRegistrations(status)
                         .then(function (response) {
@@ -42,7 +36,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             $state.go('home');
                         });
                 },
-                PendingRegistrationsResolve: function ($state, registrationService) {
+                pendingRegistrationsResolve: function ($state, registrationService) {
                     return registrationService.getAllPendingRegistrations(status)
                         .then(function (response) {
                             return {pendingRegistrations: response.data};

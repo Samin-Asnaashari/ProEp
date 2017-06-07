@@ -1,10 +1,9 @@
 
 'use strict';
 
-angular.module('appComponent.homeTeacher').controller('teacherHomeCtrl', function ($scope, teachersResolve, teacherService) {
+angular.module('appComponent.homeTeacher').controller('teacherHomeCtrl', function ($scope) {
 
     var vm = this;
-    vm.teacher = teachersResolve.teacher;
-    vm.courses = vm.teacher.courses;
+    // vm.courses = coursesResolve.courses;
 
 });
