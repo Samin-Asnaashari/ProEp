@@ -11,7 +11,6 @@ angular.module('GORCA.controllers', [])
     //   alert("MenuController entered");
     // });
 
-    var jnjnjnj = "jjjjjj";
     var vm = this;
 
     vm.notifications = notificationsResolve.notifications;
