@@ -6,7 +6,7 @@
 footer {
     display: table-row;
     height: 1px;
-    background: #333;
+    background: #573d7e;
     color: #eee;
     font-size: 11px;
     padding: 20px;
@@ -63,4 +63,12 @@ body {
 }
 .teacherNav .navbar-right > li > a:hover, .teacherNav .navbar-right > li > a:focus{
     background-color: transparent !important;
+}
+.glyphiconRight{
+    color: #573d7e;
+    font-size: x-large;
+}
+
+.rightIcon >a .glyphiconRight:hover, .rightIcon >a .glyphiconRight:focus{
+    color: #DCDCDC;
 }

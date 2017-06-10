@@ -61,7 +61,7 @@ public class TeacherController {
         this.teacherService.DeleteTeacher(pcn);
     }
 
-    @RequestMapping(value = "courses", method = RequestMethod.GET)
+    @RequestMapping(value = "/courses", method = RequestMethod.GET)
     public List<Course> GetAllCoursesPerTeacher(Principal principal) throws Exception
     {
         return this.teacherService.GetTeacher(Integer.valueOf(principal.getName())).getMyCourses();

@@ -46,12 +46,11 @@
         <div class="collapse navbar-collapse" id="mainNavBar">
             <ul ng-controller="navCtrl" class="nav navbar-nav">
                 <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
-                <li ng-class="{ active: isActive('/courses')}"><a ng-href="#!/courses">Courses</a></li>
             </ul>
             <ul ng-controller="navCtrl" class="nav navbar-right">
-                <li class="dropdown pull-right dropdown-notifications">
-                    <a href="#notifications-panel" class="dropdown-toggle">
-                        <i data-count="2" class="glyphicon glyphicon-bell notification-icon"></i>
+                <li class="dropdown pull-right dropdown-notifications" >
+                    <a href="#" class="dropdown-toggle">
+                        <i data-count="2" class="glyphicon glyphicon-bell notification-icon" style="vertical-align: middle;"></i>
                     </a>
                 </li>
             </ul>
@@ -66,8 +65,28 @@
     </div>
 </nav>
 
-<div ui-view="content"></div>
+<div ui-view></div>
 
+<!--Footer-->
+<footer class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h6>Copyright &copy; 2017 GORCA Teachers</h6>
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-2">
+
+            </div>
+            <div class="col-sm-2 pull-right">
+                <h6>Address</h6>
+                <p>Rachelsmolen 1, 5612 MA Eindhoven</p>
+            </div>
+        </div>
+    </div>
+</footer>
 <!-- dependencies scripts -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
 <script src="../bower_components/angular/angular.js"></script>
