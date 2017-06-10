@@ -13,7 +13,7 @@ angular.module('GORCA.serviceAPIS').service('notificationService', function ($ht
 
   self.getAllNotifications = function () {
     $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
-    return $http.get(baseUrl + "/");
+    return $http.get(baseUrl);
   };
 
   self.getAllNotificationsBefore = function (lastNotificationID) {

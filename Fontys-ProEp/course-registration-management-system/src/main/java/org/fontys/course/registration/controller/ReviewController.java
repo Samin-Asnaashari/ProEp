@@ -1,7 +1,9 @@
 package org.fontys.course.registration.controller;
 
+import java.security.Principal;
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Review;
 import org.fontys.course.registration.service.ReviewService;
 import org.jsondoc.core.annotation.Api;
@@ -9,6 +11,7 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,5 +32,10 @@ public class ReviewController {
 	@RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
     public List<Review> GetAllReviews(@PathVariable("courseCode") String courseCode) {
         return this.reviewService.GetAllReviews(courseCode);
+    }
+	
+	@RequestMapping(value = "/{courseCode}", method = RequestMethod.POST, consumes = "application/json")
+    public void AddReview(@PathVariable("courseCode") String courseCode, Principal principal, @RequestBody Review review) {
+        this.reviewService.AddReview(Integer.valueOf(principal.getName()), review, courseCode);
     }
 }

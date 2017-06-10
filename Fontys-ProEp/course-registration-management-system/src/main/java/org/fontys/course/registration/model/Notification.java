@@ -6,6 +6,7 @@ import org.fontys.course.registration.model.enums.NotificationStatus;
 import org.fontys.course.registration.model.enums.SendStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 
@@ -31,6 +32,7 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     private SendStatus sendStatus;
 
+    @JsonIgnoreProperties("myCourses")
     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn
     private Person sender;

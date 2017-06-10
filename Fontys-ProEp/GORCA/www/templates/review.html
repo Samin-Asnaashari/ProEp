@@ -1,0 +1,53 @@
+<ion-view view-title="Reviews">
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-back-button>{{ reviewCtrl.courseCode }}</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content id="reviews">
+    <div id="reviewsHeader" class="card ">
+      <div class="item">
+        <div class="reviewsScore">{{ reviewCtrl.overallScore | number:1 }}</div>
+        <div>
+          <h2>{{ reviewCtrl.scoreDefinition }}</h2>
+          <p>Based on {{ reviewCtrl.reviews.length }} reviews</p>
+        </div>
+      </div>
+    </div>
+    <ion-list id="reviewsList">
+      <div ng-repeat="review in reviewCtrl.reviews track by review.id" class="list card review">
+
+        <div class="item item-borderless reviewHead">
+          <h2>{{ review.student.firstName }} - {{ review.student.studentType }}</h2>
+          <div style="overflow: hidden;">
+            <ionic-ratings style="float:left;" ratingsobj='review.ratingObject' index='$index'></ionic-ratings>
+            <div class="ratingDateSeparator"> - </div>
+            <span style="overflow: hidden;">{{review.date | amUtc | amLocal | amDateFormat:'dddd MMMM DD, YYYY'}}</span>
+          </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="item item-borderless item-body reviewBody">
+
+          <p class="description">"{{ review.description }}"</p>
+
+          <p>
+            <a style="color: #666;" class="icon-left">
+              <i style="color: mediumvioletred;margin-right: 10px;" class="icon ion-minus-circled"></i>
+              {{ review.negativePoints }}
+            </a>
+          </p>
+
+          <p>
+            <a style="color: #666;" class="icon-left">
+              <i style="color: forestgreen;margin-right: 10px;" class="icon ion-plus-circled"></i>
+              {{ review.positivePoints}}
+            </a>
+          </p>
+
+        </div>
+
+      </div>
+    </ion-list>
+
+  </ion-content>
+</ion-view>

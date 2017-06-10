@@ -28,7 +28,7 @@ public class NotificationController {
 	@Autowired
     private NotificationService notificationService;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
     public List<Notification> GetNotifications(Principal principal) throws Exception {
         return this.notificationService.GetNotificationsForMobileView(Integer.valueOf(principal.getName()));
     }
