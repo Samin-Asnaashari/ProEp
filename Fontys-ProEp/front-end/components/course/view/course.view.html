@@ -10,27 +10,15 @@
 
     <br/>
 
-    <div>
-        <div class="row"> <!--style="display: inline-flex;"-->
-            <div class="col-xs-2 well well-sm removeWellStyle">
-                <div  class="col-xs-2" style="padding-left: 0">
-                    <span class="text-left"><strong> EC </strong> {{vmCourseView.course.ec}}</span>
-                </div>
-            </div>
-            <div class="col-xs-2 well well-sm removeWellStyle">
-                <div  class="col-xs-2" style="padding-left: 0">
-                    <span class="text-left"><strong> Block </strong>{{vmCourseView.course.block}}</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
     <div class="row">
 
 
         <div class="col-xs-12" style="padding-left: 0;">
-            <h3><strong>Description</strong></h3>
+            <h3><strong>Students</strong></h3>
         </div>
+    </div>
+    <div class="col-xs-12">
+        <student-custom-table student-list="vmCourseView.acceptedStudents()"  delete-action="0" add-action="1"></student-custom-table>
     </div>
 
 
