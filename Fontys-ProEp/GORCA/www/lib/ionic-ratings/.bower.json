@@ -1,0 +1,41 @@
+{
+  "name": "ionic-ratings",
+  "version": "0.3.0",
+  "authors": [
+    "rajeshwarpatlolla <rajeshwar.patlolla@gmail.com>"
+  ],
+  "description": "A ratings plugin for IONIC framework",
+  "main": [
+    "./dist/ionic-ratings.min.js"
+  ],
+  "keywords": [
+    "ionic-ratings",
+    "ionic",
+    "rating",
+    "ratings",
+    "ratings for ionic"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rajeshwarpatlolla/ionic-ratings",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ionic": ">=0.9.27"
+  },
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "3473a64cb284134f62fdc09ca4dbf5c6662903f2"
+  },
+  "_source": "https://github.com/rajeshwarpatlolla/ionic-ratings.git",
+  "_target": "^0.3.0",
+  "_originalSource": "ionic-ratings",
+  "_direct": true
+}

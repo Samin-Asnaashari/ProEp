@@ -32,10 +32,8 @@ public class Review {
     @Column
     private Integer score;
     
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @OneToOne
+    @JoinColumn(referencedColumnName="pcn")
     private Student student;
 
     @JsonBackReference(value = "course-review")

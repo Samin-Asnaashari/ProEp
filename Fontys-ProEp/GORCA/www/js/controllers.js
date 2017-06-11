@@ -140,6 +140,105 @@ angular.module('GORCA.controllers', [])
     $ionicLoading.hide();
   })
 
+  .controller('ReviewController', function (reviewsResolve, $ionicLoading, $stateParams) {
+    var vm = this;
+
+    vm.courseCode = $stateParams.courseCode;
+
+    vm.reviews = reviewsResolve.reviews;
+
+    vm.overallScore = null;
+
+    vm.scoreDefinition = null;
+
+    vm.processVariables = function () {
+      var totalScore = 0;
+      angular.forEach(vm.reviews, function(obj) {
+
+        //overallscore calculation
+        totalScore = totalScore + obj.score;
+
+        //injecting rating object into review object
+        obj.ratingObject = {
+          iconOn: 'ion-ios-star',
+          iconOff: 'ion-ios-star-outline',
+          iconOnColor: 'rgb(107, 70, 229)',
+          iconOffColor:  'rgb(107, 70, 229)',
+          rating:  obj.score,
+          minRating: 1,
+          readOnly: true
+        };
+      });
+
+      //overallscore calculation
+      vm.overallScore = (totalScore / vm.reviews.length);
+    };
+
+    vm.processVariables();
+
+    vm.getScoreDefinition = function () {
+      if(vm.overallScore < 2) {
+        vm.scoreDefinition = "Poor";
+      }
+      else if(vm.overallScore < 3) {
+        vm.scoreDefinition = "Bad";
+      }
+      else if(vm.overallScore < 4) {
+        vm.scoreDefinition = "Good";
+      }
+      else if (vm.overallScore >= 4 && vm.overallScore <= 4.5) {
+        vm.scoreDefinition = "Very good";
+      }
+      else
+        vm.scoreDefinition = "Excellent";
+    };
+
+    vm.getScoreDefinition();
+    //disable loading icon
+    $ionicLoading.hide();
+  })
+
+  .controller('addReviewController', function($stateParams, reviewService, $state, $ionicHistory,$ionicPopup) {
+    var vm = this;
+
+    vm.courseCode = $stateParams.courseCode;
+
+    vm.newReview = {};
+
+    vm.newReview.score = 3;
+
+    vm.ratingObject = {
+      iconOn: 'ion-ios-star',    //Optional
+      iconOff: 'ion-ios-star-outline',   //Optional
+      iconOnColor: 'rgb(107, 70, 229)',  //Optional
+      iconOffColor:  'rgb(107, 70, 229)',    //Optional
+      rating:  3, //Optional
+      minRating: 1,    //Optional
+      readOnly: false, //Optional
+      callback: function(rating, index) {    //Mandatory
+        vm.ratingsCallback(rating, index);
+      }
+    };
+
+    vm.ratingsCallback = function(rating, index) {
+      vm.newReview.score = rating;
+    };
+
+    vm.save = function () {
+      reviewService.addReview(vm.courseCode, vm.newReview)
+        .then(function (response) {
+          $ionicHistory.currentView($ionicHistory.backView());
+          vm.newReview = {};
+          $state.go('reviews', {courseCode: 'SAI'});
+        }, function (error) {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Saving new review failed'
+          })
+        });
+    };
+  })
+
   .controller('HomeController', function () {
     var vm = this;
     vm.currentDate = new Date();
@@ -157,4 +256,5 @@ angular.module('GORCA.controllers', [])
   })
 
   .controller('PlaylistCtrl', function($scope, $stateParams) {
+    console.log("playlistID:: " + $stateParams.playlistId);
   });
