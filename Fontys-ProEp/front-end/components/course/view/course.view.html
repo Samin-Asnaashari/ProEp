@@ -10,32 +10,28 @@
 
     <br/>
 
-    <div>
-        <div class="row"> <!--style="display: inline-flex;"-->
-            <div class="col-xs-2 well well-sm removeWellStyle">
-                <div  class="col-xs-2" style="padding-left: 0">
-                    <span class="text-left"><strong> EC </strong> {{vmCourseView.course.ec}}</span>
-                </div>
-            </div>
-            <div class="col-xs-2 well well-sm removeWellStyle">
-                <div  class="col-xs-2" style="padding-left: 0">
-                    <span class="text-left"><strong> Block </strong>{{vmCourseView.course.block}}</span>
-                </div>
-            </div>
-            <div class="col-xs-2 well well-sm removeWellStyle">
-                <div  class="col-xs-2" style="padding-left: 0">
-                    <span class="text-left"><strong> Max Seat </strong>{{vmCourseView.course.maxSeats}}</span>
-                    <span class="text-left"><strong> Filled Seat </strong>{{vmCourseView.course.filledSeat}}</span>
-                </div>
-            </div>
+    <div class="row">
+        <div class="col-xs-12" style="padding-left: 0;">
+            <h3><strong>Accepted Students</strong></h3>
+        </div>
+        <div class="col-xs-12">
+            <student-custom-table student-list="vmCourseView.acceptedRegistrations"  delete-action="0" add-action="1"></student-custom-table>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12" style="padding-left: 0;">
-            <h3><strong>Description</strong></h3>
+            <h3><strong>Pending Students</strong></h3>
         </div>
-        <div class="col-xs-7 well" style="background-color: transparent">
-            <p> {{vmCourseView.course.description}}</p>
+        <div class="col-xs-12">
+            <student-custom-table student-list="vmCourseView.pendingRegistrations"  delete-action="0" add-action="1"></student-custom-table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12" style="padding-left: 0;">
+            <h3><strong>Declined Students</strong></h3>
+        </div>
+        <div class="col-xs-12">
+            <student-custom-table student-list="vmCourseView.declineRegistrations"  delete-action="0" add-action="1"></student-custom-table>
         </div>
     </div>
 

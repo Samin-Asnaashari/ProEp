@@ -6,7 +6,7 @@
 footer {
     display: table-row;
     height: 1px;
-    background: #333;
+    background: #573d7e;
     color: #eee;
     font-size: 11px;
     padding: 20px;
@@ -36,4 +36,39 @@ body {
 .md-button {
     margin: 0;
     text-transform: none;
+}
+
+.teacherNav{
+    background-color: #573d7e;
+    border: none;
+    color: #fff
+}
+.teacherNav .navbar-nav > li > a {
+    color: #e7e7e7
+}
+.teacherNav .navbar-nav > li > a:hover {
+    color: #5e5e5e;
+}
+.teacherNav .navbar-right > li > a {
+    color: #e7e7e7
+}
+.teacherNav .navbar-right > li > a:hover {
+    color: #5e5e5e;
+}
+.teacherNav .navbar-brand {
+    color: #fff
+}
+.teacherNav .navbar-brand:hover, .teacherNav .navbar-brand:focus {
+    color: #ccc
+}
+.teacherNav .navbar-right > li > a:hover, .teacherNav .navbar-right > li > a:focus{
+    background-color: transparent !important;
+}
+.glyphiconRight{
+    color: #573d7e;
+    font-size: x-large;
+}
+
+.rightIcon >a .glyphiconRight:hover, .rightIcon >a .glyphiconRight:focus{
+    color: #DCDCDC;
 }

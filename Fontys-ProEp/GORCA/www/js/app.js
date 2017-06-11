@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
+angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
   'angularMoment', 'GORCA.events'])
 
   .run(function ($ionicPlatform, $ionicPush, studentService, notificationDataService, notificationService, EventNotification) {
@@ -150,6 +150,47 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
         views: {
           'menuContent': {
             templateUrl: 'templates/browse.html'
+          }
+        }
+      })
+
+      .state('addReview', {
+        url: '/courseDetails/newReview/:courseCode',
+        views: {
+          'mainMenu': {
+            templateUrl: 'templates/addReview.html',
+            controller: 'addReviewController',
+            controllerAs: 'addReviewCtrl'
+          }
+        }
+      })
+
+      .state('reviews', {
+        url: '/courseDetails/reviews/:courseCode',
+        views: {
+          'mainMenu': {
+            templateUrl: 'templates/review.html',
+            controller: 'ReviewController',
+            controllerAs: 'reviewCtrl'
+          }
+        },
+        resolve: {
+          reviewsResolve: function (reviewService, $ionicLoading, $stateParams) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
+
+            return reviewService.getAllReviews($stateParams.courseCode)
+              .then(function (response) {
+                return {reviews: response.data};
+              }, function (error) {
+                console.log('error');
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           }
         }
       })

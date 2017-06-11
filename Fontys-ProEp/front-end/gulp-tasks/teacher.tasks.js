@@ -97,7 +97,7 @@ gulp.task('connect-teacher', function () {
 gulp.task('connect-public-teacher', function () {
     connect.server({
         root: 'public/app-teacher/',
-        port: 9991,
+        port: 9992,
         middleware: function(connect) {
             return [
                 connect().use('/bower_components', connect.static('bower_components')),
@@ -113,9 +113,9 @@ gulp.task('connect-public-teacher', function () {
  * Run sequence tasks
  */
 
-gulp.task('build-admin', function () {
+gulp.task('build-teacher', function () {
     runSequence(
-        ['clean-admin', 'lint-admin', 'minify-css-admin', 'minify-js-admin', 'copy-html-files-admin',
-            'copy-bower-components-admin', 'copy-components-admin', 'copy-services-admin', 'connect-public-admin']
+        ['clean-teacher', 'lint-teacher', 'minify-css-teacher', 'minify-js-teacher', 'copy-html-files-teacher',
+            'copy-bower-components-teacher', 'copy-components-teacher', 'copy-services-teacher', 'connect-public-teacher']
     );
 });

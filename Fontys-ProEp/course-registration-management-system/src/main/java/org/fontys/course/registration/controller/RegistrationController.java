@@ -32,8 +32,8 @@ public class RegistrationController {
         return this.registrationService.GetAllRegistrationsByCourse(courseCode);
     }
 
-    @RequestMapping(value = "/{registrationStatus}", method = RequestMethod.GET)
-    public List<Registration> GetAllRegistrationsByStatus(@PathVariable RegistrationStatus registrationStatus) {
+    @RequestMapping(value = "/status/{registrationStatus}", method = RequestMethod.GET)
+    public List<Registration> GetAllRegistrationsByStatus(@PathVariable RegistrationStatus registrationStatus){
         return this.registrationService.GetAllRegistrationByStatus(registrationStatus);
     }
 }

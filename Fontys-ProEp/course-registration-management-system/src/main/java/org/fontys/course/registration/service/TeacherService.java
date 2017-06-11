@@ -1,8 +1,6 @@
 package org.fontys.course.registration.service;
 
-import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Person;
-import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.Teacher;
 import org.fontys.course.registration.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;

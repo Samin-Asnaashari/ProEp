@@ -140,6 +140,4 @@ public class UtilService {
     	else
     		this.teacherService.IncreaseNotificationBadgeCount(person);
     }
-    
-    
 }

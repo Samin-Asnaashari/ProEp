@@ -15,19 +15,20 @@ angular.module('appServiceAPI').service('registrationService', function ($http) 
     };
 
     self.getAllRegistrationsByStatus = function (status) {
-        return $http.get(baseUrl + '/' + status);
+        return $http.get(baseUrl + '/status/' + status);
     };
 
     self.getAllAcceptedRegistrations = function () {
-        return $http.get(baseUrl + '/ACCEPTED');
+        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
+        return $http.get(baseUrl + '/status/ACCEPTED');
     };
 
     self.getAllPendingRegistrations = function () {
-        return $http.get(baseUrl + '/PENDING');
+        return $http.get(baseUrl + '/status/PENDING');
     };
 
     self.getAllDeclineRegistrations = function () {
-        return $http.get(baseUrl + '/DECLINE');
+        return $http.get(baseUrl + '/status/DECLINE');
     };
 
 });

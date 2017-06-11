@@ -1,0 +1,22 @@
+<ion-view view-title="New review">
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-back-button>{{ addReviewCtrl.courseCode }}</ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content id="newReview">
+    <ionic-ratings ratingsobj='addReviewCtrl.ratingObject' index='0'></ionic-ratings>
+    <div class="list card">
+      <div class="item item-input">
+        <input type="text" ng-model="addReviewCtrl.newReview.description" placeholder="Description">
+      </div>
+      <div class="item item-input">
+        <textarea rows="3" ng-model="addReviewCtrl.newReview.negativePoints" placeholder="Negative points"></textarea>
+      </div>
+      <div class="item item-input">
+        <textarea rows="3" ng-model="addReviewCtrl.newReview.positivePoints" placeholder="Positive points"></textarea>
+      </div>
+    </div>
+    <div class="padding">
+      <button ng-click="addReviewCtrl.save()" class="button button-block button-royal">Save</button>
+    </div>
+  </ion-content>
+</ion-view>

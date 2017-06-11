@@ -28,6 +28,7 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
 
     self.getMyCourses=function()
     {
+        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
         return $http.get(baseUrl+'/courses')
     };
 

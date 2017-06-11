@@ -6,8 +6,6 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
     $stateProvider
         .state('home', {
             url: '/home',
-            views: {
-                'content': {
                     templateUrl: './components/home/teacher/home.teacher.html',
                     controller: 'teacherHomeCtrl as vmTeacherHome',
                     resolve: {
@@ -16,18 +14,32 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                                 .then(function (response) {
                                     return {courses: response.data};
                                 }, function (error) {
+                                    console.log(error.data);
                                     // $state.go('Error');
                                 });
                         }
                     }
-                }
-            }
         })
         .state('courseView', {
             url: '/courseView?code',
             templateUrl: './components/course/view/course.view.html',
             controller: 'courseViewCtrl as vmCourseView',
             resolve: {
+                courseResolve: function ($state, $stateParams, courseService /*, loginService*/) {
+                    //if(loginService.SetHeaderAuthentication()) {
+                        return courseService.getCourse($stateParams.code)
+                            .then(function (response) {
+                               // response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
+                               // response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
+                                return {course: response.data};
+                            }, function (error) {
+                                $state.go('home');
+                            });
+                  //  }
+                   // else {
+                   //     return $state.go('login');
+                   // }
+                },
                 acceptedRegistrationsResolve: function ($state, registrationService) {
                     return registrationService.getAllAcceptedRegistrations(status)
                         .then(function (response) {

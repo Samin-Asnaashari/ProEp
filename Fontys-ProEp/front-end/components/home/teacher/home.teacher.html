@@ -1,7 +1,20 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-                check
+            <h2>My Courses</h2>
+            <md-card  class="md-subhead col-xs-12 courseCard" ng-repeat="course in vmTeacherHome.courses">
+                <md-card-content>
+                    <div class="col-xs-10">
+                    <span class="md-headline">{{course.name}}</span>
+                    {{course.code}}
+                    </div>
+                    <div class="col-xs-2 col-centered rightIcon"  style="vertical-align: middle;" >
+                        <a ng-click="vmTeacherHome.goToCourseView(course.code)">
+                        <div class="glyphicon glyphicon-menu-right pull-right glyphiconRight"></div>
+                    </a>
+                    </div>
+                </md-card-content>
+            </md-card>
         </div>
     </div>
 </div>
