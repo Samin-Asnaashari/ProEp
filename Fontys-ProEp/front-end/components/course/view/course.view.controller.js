@@ -3,36 +3,19 @@
 angular.module('appComponent.courseView').controller('courseViewCtrl', function ($stateParams, acceptedRegistrationsResolve,
                                                                                  pendingRegistrationsResolve, declinedRegistrationsResolve) {
     var vm = this;
-    vm.course = $stateParams.course;
-    vm.acceptedRegistrations = acceptedRegistrationsResolve.acceptedRegistrations;
-    vm.pendingRegistrations = pendingRegistrationsResolve.pendingRegistrations;
-    vm.declinedRegistrations = declinedRegistrationsResolve.declinedRegistrations;
 
-    vm.acceptedStudents = acceptedRegistrationsResolve.acceptedRegistrations;
-    vm.pendingStudents = [];
-    vm.declinedStudents = [];
+    //storing data for when browser refreshes
+    if(angular.fromJson(sessionStorage.course) === null || ($stateParams.course !== null &&
+        $stateParams.course.code !== angular.fromJson(sessionStorage.course))) {
+        sessionStorage.course = angular.toJson($stateParams.course);
+    }
 
-    //vm.acceptedStudents = [{"class":"com.example.Student","pcn":310323,"password":"123","email":"example@student.fontys.nl","firstName":"Samin","lastName":"Asnaashari","studentNumber":271372,"studentType":"REGULARSEMESTER","major":"SOFTWARE","avgScore":8.0,"pushNotificationToken":null,"notificationBadgeCount":0,"notifications":[]},{"class":"com.example.Student","pcn":236478,"password":"789","email":"blabla@student.fontys.nl","firstName":"Beer","lastName":"LaLa","studentNumber":278383,"studentType":"SECONDSEMESTER","major":"TECHNOLOGY","avgScore":6.0,"pushNotificationToken":null,"notificationBadgeCount":0,"notifications":[]},{"class":"com.example.Student","pcn":37272,"password":"738","email":"agnes@student.fontys.nl","firstName":"Agnes","lastName":"Wasee","studentNumber":637367,"studentType":"REGULARSEMESTER","major":"SOFTWARE","avgScore":8.0,"pushNotificationToken":null,"notificationBadgeCount":0,"notifications":[]},{"class":"com.example.Student","pcn":18583,"password":"74839","email":"tech@student.fontys.nl","firstName":"Dex","lastName":"Heijden","studentNumber":382938,"studentType":"SECONDSEMESTER","major":"BUSINESS","avgScore":7.0,"pushNotificationToken":null,"notificationBadgeCount":0,"notifications":[]}];
+    //getting stored data for when browser refreshes
+    vm.course = angular.fromJson(sessionStorage.course);
 
-    vm.getAcceptedStudents = function () {
-        for (var i=0; i<vm.acceptedRegistrations.length; i++) {
-            vm.acceptedStudents.push(vm.acceptedRegistrations[i].student);
-        }
-        return vm.acceptedStudents;
-    };
-
-    vm.getPendingStudents = function () {
-        angular.forEach(vm.pendingRegistrations, function (r) {
-            vm.pendingStudents.push(r.student);
-        });
-        return vm.pendingStudents;
-    };
-
-    vm.getDeclinedStudents = function () {
-        angular.forEach(vm.declinedRegistrations, function (r) {
-            vm.declinedStudents.push(r.student);
-        });
-        return vm.declinedStudents;
-    };
-
+    //Coming from route resolve only all accepted, pending and declined students
+    //If you need information from the registration objects then see route acceptedRegistrationsResolve for example
+    vm.acceptedStudents = acceptedRegistrationsResolve.acceptedStudents;
+    vm.pendingStudents = pendingRegistrationsResolve.pendingStudents;
+    vm.declinedStudents = declinedRegistrationsResolve.declinedStudents;
 });

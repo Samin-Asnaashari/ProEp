@@ -8,6 +8,7 @@ angular.module('appTeacher',
         'appServiceEvent',
         'appComponent.homeTeacher',
         'appComponent.courseView',
-        'appComponent.studentTable'
+        'appComponent.studentTable',
+        'ngCookies'
     ]
 );

@@ -6,7 +6,7 @@ angular.module('appComponent.homeTeacher').controller('teacherHomeCtrl', functio
     vm.courses = coursesResolve.courses;
 
     vm.goToCourseView = function (course) {
-        $state.go('courseView', {course: course})
+        $state.go('courseView', {course: course, code: course.code});
     };
 
 

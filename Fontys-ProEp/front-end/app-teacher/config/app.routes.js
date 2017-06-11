@@ -21,7 +21,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             }
         })
         .state('courseView', {
-            url: '/courseView',
+            url: '/courseView?code',
             templateUrl: './components/course/view/course.view.html',
             controller: 'courseViewCtrl as vmCourseView',
             params: {
@@ -43,30 +43,39 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             //        //     return $state.go('login');
             //        // }
             //     },
-                acceptedRegistrationsResolve: function ($state, registrationService) {
-                    return registrationService.getAllAcceptedRegistrations()
+                acceptedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                    return registrationService.getAllAcceptedRegistrations($stateParams.code)
+                        .then(function (response) {
+                            var acceptedStudents = [];
+                            angular.forEach(response.data, function (r) {
+                                acceptedStudents.push(r.student);
+                            });
+                            //If other info is needed other than student from registration object you can pass it here as commented example below
+                            return {acceptedStudents:  acceptedStudents/*, otherinfo: "whatever"*/};
+                        }, function (error) {
+                            $state.go('home');
+                        });
+                },
+                pendingRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                    return registrationService.getAllPendingRegistrations($stateParams.code)
                         .then(function (response) {
                             var pendingStudents = [];
                             angular.forEach(response.data, function (r) {
                                 pendingStudents.push(r.student);
                             });
-                            return {acceptedRegistrations:  pendingStudents};
+                            return {pendingStudents: pendingStudents};
                         }, function (error) {
                             $state.go('home');
                         });
                 },
-                pendingRegistrationsResolve: function ($state, registrationService) {
-                    return registrationService.getAllPendingRegistrations()
+                declinedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                    return registrationService.getAllDeclinedRegistrations($stateParams.code)
                         .then(function (response) {
-                            return {pendingRegistrations: response.data};
-                        }, function (error) {
-                            $state.go('home');
-                        });
-                },
-                declinedRegistrationsResolve: function ($state, registrationService) {
-                    return registrationService.getAllDeclinedRegistrations()
-                        .then(function (response) {
-                            return {declinedRegistrations: response.data};
+                            var declinedStudents = [];
+                            angular.forEach(response.data, function (r) {
+                                declinedStudents.push(r.student);
+                            });
+                            return {declinedStudents: declinedStudents};
                         }, function (error) {
                             $state.go('home');
                         });
