@@ -22,19 +22,21 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       }
 
       $ionicPlatform.on("resume", function (event) {
-        var lastID = notificationDataService.lastNotificationID;
-        if (lastID == -1) {
-          lastID = 0;
+        if(loginService.getAuthentication()) {
+          var lastID = notificationDataService.lastNotificationID;
+          if (lastID == -1) {
+            lastID = 0;
+          }
+          notificationService.getAllNotificationsBefore(lastID)
+            .then(function (response) {
+              if (response.data != "") {
+                notificationDataService.lastNotificationID = response.data[0].id;
+                EventNotification.notifyOnNewNotifications(response.data);
+              }
+            }, function (error) {
+              alert(angular.toJson(error));
+            });
         }
-        notificationService.getAllNotificationsBefore(lastID)
-          .then(function (response) {
-            if (response.data != "") {
-              notificationDataService.lastNotificationID = response.data[0].id;
-              EventNotification.notifyOnNewNotifications(response.data);
-            }
-          }, function (error) {
-            alert(angular.toJson(error));
-          });
       });
       $rootScope.$on('$stateChangeStart', function(event, toState){
         if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
