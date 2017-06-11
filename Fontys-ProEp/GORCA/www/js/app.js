@@ -7,8 +7,8 @@
 angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
   'angularMoment', 'GORCA.events'])
 
-  .run(function($ionicPlatform, $ionicPush, studentService, notificationDataService, notificationService, EventNotification) {
-    $ionicPlatform.ready(function() {
+  .run(function ($ionicPlatform, $ionicPush, studentService, notificationDataService, notificationService, EventNotification) {
+    $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,7 +21,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
         StatusBar.styleDefault();
       }
 
-      $ionicPlatform.on("resume", function(event) {
+      $ionicPlatform.on("resume", function (event) {
         var lastID = notificationDataService.lastNotificationID;
         if (lastID == -1) {
           lastID = 0;
@@ -40,10 +40,10 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
       //registering for push notifications
       //for now here, must be after user logs in
       $ionicPush.register()
-        .then(function(t) {
+        .then(function (t) {
           return $ionicPush.saveToken(t);
-        }).then(function(t) {
-          studentService.addPushNotificationToken(t.token);
+        }).then(function (t) {
+        studentService.addPushNotificationToken(t.token);
       });
     });
   })
@@ -72,7 +72,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
     $ionicConfigProvider.navBar.alignTitle('center');
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('app', {
@@ -94,27 +94,27 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
             });
 
             return notificationService.getAllNotifications()
-                    .then(function (response) {
-                      return {notifications: response.data};
-                    }, function (error) {
-                      console.log('error');
-                      //disable loading icon
-                      $ionicLoading.hide();
-                      alert(angular.toJson(error));
-                    })
+              .then(function (response) {
+                return {notifications: response.data};
+              }, function (error) {
+                console.log('error');
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           },
           notificationsBadgeCountResolve: function (studentService) {
             return studentService.getBadgeCount()
-                    .then(function (response) {
-                      return {badgeCount: response.data};
-                    }, function (error) {
-                      //disable loading icon
-                      $ionicLoading.hide();
-                      alert(angular.toJson(error));
-                    })
+              .then(function (response) {
+                return {badgeCount: response.data};
+              }, function (error) {
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           }
         }
-    })
+      })
 
       .state('login', {
         url: '/login',
@@ -136,16 +136,16 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
         }
       })
 
-    .state('app.search', {
-      url: '/search',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/search.html'
+      .state('app.search', {
+        url: '/search',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/search.html'
+          }
         }
-      }
-    })
+      })
 
-    .state('app.browse', {
+      .state('app.browse', {
         url: '/browse',
         views: {
           'menuContent': {
@@ -153,6 +153,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
           }
         }
       })
+
       .state('app.playlists', {
         url: '/playlists',
         views: {
@@ -163,15 +164,25 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'GORCA.controllers', 'GORCA.ser
         }
       })
 
-    .state('app.single', {
-      url: '/playlists/:playlistId',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
+      .state('app.single', {
+        url: '/playlists/:playlistId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/playlist.html',
+            controller: 'PlaylistCtrl'
+          }
         }
-      }
-    });
+      })
+
+      .state('courseDetailView', {
+        url: '/courseDetailView',
+        views: {
+          'mainMenu': {
+            templateUrl: 'templates/courseDetailView.html'
+          }
+        }
+      });
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
-});
+  });

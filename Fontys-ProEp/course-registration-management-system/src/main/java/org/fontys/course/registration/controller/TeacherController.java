@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin
@@ -39,17 +40,17 @@ public class TeacherController {
         return this.teacherService.GetAllTeachers();
     }
 
-//    @RequestMapping(value = "/fontysTeachers", method = RequestMethod.GET)
-//    public List<Teacher> GetAllFontysStudents() {
-//        List<Teacher> teachers = new ArrayList<>();
-//        teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
-//        teachers.add(new Teacher(37283, "12373", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
-//        teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "George", "bla", ""));
-//        teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", ""));
-//        teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", ""));
-//        teachers.add(new Teacher(80903, "pass", "awesome@fontys.nl", "Anna", "bel", ""));
-//        return teachers;
-//    }
+    @RequestMapping(value = "/fontysTeachers", method = RequestMethod.GET)
+    public List<Teacher> GetAllFontysStudents() {
+        List<Teacher> teachers = new ArrayList<>();
+        teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
+        teachers.add(new Teacher(37283, "12373", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
+        teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "George", "bla", ""));
+        teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", ""));
+        teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", ""));
+        teachers.add(new Teacher(80903, "pass", "awesome@fontys.nl", "Anna", "bel", ""));
+        return teachers;
+    }
 
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateTeacher(@RequestBody Teacher teacher) {

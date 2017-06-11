@@ -11,18 +11,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistrationService {
 
-	@Autowired
+    @Autowired
     private RegistrationRepository registrationRepository;
-	
-	public List<Registration> GetAllRegistrations() {
-		return this.registrationRepository.findAll();
-	}
-	
-	public List<Registration> GetAllRegistrationsByCourse(String courseCode){
-		return this.registrationRepository.findRegistrationByCourse(courseCode);
-	}
 
-	public List<Registration> GetAllRegistrationByStatus(RegistrationStatus registrationStatus){
-		return this.registrationRepository.findByRegistrationStatus(registrationStatus);
-	}
+    public void createRegistration(Registration registration) {
+        this.registrationRepository.save(registration);
+    }
+
+    public List<Registration> GetAllRegistrations() {
+        return this.registrationRepository.findAll();
+    }
+
+    public List<Registration> GetAllRegistrationsByCourse(String courseCode) {
+        return this.registrationRepository.findRegistrationByCourse(courseCode);
+    }
+
+    public List<Registration> GetAllRegistrationByStatus(RegistrationStatus registrationStatus) {
+        return this.registrationRepository.findByRegistrationStatus(registrationStatus);
+    }
 }

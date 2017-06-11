@@ -8,11 +8,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-//@IdClass(RegistrationId.class)
+@IdClass(RegistrationId.class)
 public class Registration {
 
-    @EmbeddedId
-    private RegistrationId id;
+//    @EmbeddedId
+//    private RegistrationId id;
+
+    @Id
+    private Student student;
+    @Id
+    private Course course;
 
     @Column
     private Date date;
@@ -23,13 +28,13 @@ public class Registration {
     public Registration() {
     }
 
-    public RegistrationId getId() {
-        return id;
-    }
+//    public RegistrationId getId() {
+//        return id;
+//    }
 
-    public void setId(RegistrationId id) {
-        this.id = id;
-    }
+//    public void setId(RegistrationId id) {
+//        this.id = id;
+//    }
 
     public Date getDate() {
         return date;
@@ -45,5 +50,21 @@ public class Registration {
 
     public void setRegistrationStatus(RegistrationStatus registrationStatus) {
         this.registrationStatus = registrationStatus;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }

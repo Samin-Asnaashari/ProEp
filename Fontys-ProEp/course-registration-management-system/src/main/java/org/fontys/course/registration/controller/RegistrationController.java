@@ -22,13 +22,18 @@ public class RegistrationController {
     @Autowired
     private RegistrationService registrationService;
 
+    @RequestMapping(method = RequestMethod.POST)
+    public void createRegistration(@PathVariable Registration registration) {
+        this.registrationService.createRegistration(registration);
+    }
+
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
-    public List<Registration> GetAllRegistrationsByCourse(@PathVariable String courseCode){
+    public List<Registration> GetAllRegistrationsByCourse(@PathVariable String courseCode) {
         return this.registrationService.GetAllRegistrationsByCourse(courseCode);
     }
 
     @RequestMapping(value = "/{registrationStatus}", method = RequestMethod.GET)
-    public List<Registration> GetAllRegistrationsByStatus(@PathVariable RegistrationStatus registrationStatus){
+    public List<Registration> GetAllRegistrationsByStatus(@PathVariable RegistrationStatus registrationStatus) {
         return this.registrationService.GetAllRegistrationByStatus(registrationStatus);
     }
 }
