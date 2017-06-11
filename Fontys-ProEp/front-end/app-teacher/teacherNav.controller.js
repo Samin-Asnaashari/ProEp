@@ -1,8 +1,11 @@
 /**
  * Created by Phoenix on 24-May-17.
  */
-angular.module("appTeacher").controller("navCtrl", function ($scope, $rootScope, $location /**, loginService**/) {
-    $scope.isActive = function (viewLocation) {
+angular.module("appTeacher").controller("navCtrl", function ($location /**, loginService**/) {
+
+    var vm = this;
+
+    vm.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
 

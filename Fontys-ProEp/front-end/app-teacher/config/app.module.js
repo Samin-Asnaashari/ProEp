@@ -7,6 +7,7 @@ angular.module('appTeacher',
         'appServiceAPI',
         'appServiceEvent',
         'appComponent.homeTeacher',
-        'appComponent.courseView'
+        'appComponent.courseView',
+        'appComponent.studentTable'
     ]
 );

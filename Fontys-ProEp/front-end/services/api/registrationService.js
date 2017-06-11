@@ -24,10 +24,12 @@ angular.module('appServiceAPI').service('registrationService', function ($http) 
     };
 
     self.getAllPendingRegistrations = function () {
+        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
         return $http.get(baseUrl + '/status/PENDING');
     };
 
-    self.getAllDeclineRegistrations = function () {
+    self.getAllDeclinedRegistrations = function () {
+        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
         return $http.get(baseUrl + '/status/DECLINE');
     };
 

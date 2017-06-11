@@ -15,7 +15,7 @@
             <h3><strong>Accepted Students</strong></h3>
         </div>
         <div class="col-xs-12">
-            <student-custom-table student-list="vmCourseView.acceptedRegistrations"  delete-action="0" add-action="1"></student-custom-table>
+            <student-custom-table student-list="vmCourseView.vm.acceptedStudents"  action="0"></student-custom-table>
         </div>
     </div>
     <div class="row">
@@ -23,7 +23,7 @@
             <h3><strong>Pending Students</strong></h3>
         </div>
         <div class="col-xs-12">
-            <student-custom-table student-list="vmCourseView.pendingRegistrations"  delete-action="0" add-action="1"></student-custom-table>
+            <student-custom-table student-list="vmCourseView.getPendingStudents()"  action="1"></student-custom-table>
         </div>
     </div>
     <div class="row">
@@ -31,7 +31,7 @@
             <h3><strong>Declined Students</strong></h3>
         </div>
         <div class="col-xs-12">
-            <student-custom-table student-list="vmCourseView.declineRegistrations"  delete-action="0" add-action="1"></student-custom-table>
+            <student-custom-table student-list="vmCourseView.getDeclinedStudents()"  action="1"></student-custom-table>
         </div>
     </div>
 
@@ -39,7 +39,8 @@
     <div class="row">
         <md-button class="md-fab pull-right" aria-label="go top" ng-click="vmCourseView.goTop()" data-toggle="tooltip"
                    title="GoTop"
-                   style="background-color: #333; margin-bottom: 20px"><span
-                class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>
+                   style="background-color: #333; margin-bottom: 20px">
+            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+        </md-button>
     </div>
 </div>

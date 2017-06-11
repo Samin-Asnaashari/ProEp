@@ -26,10 +26,10 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
         return $http.get(baseUrl + '/fontysTeachers');
     };
 
-    self.getMyCourses=function()
+    self.getMyCourses = function()
     {
-        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
-        return $http.get(baseUrl+'/courses')
+        $http.defaults.headers.common.Authorization = "Basic " + btoa('37283:12373');
+        return $http.get(baseUrl + '/courses');
     };
 
     self.updateTeacher = function (teacher) {
