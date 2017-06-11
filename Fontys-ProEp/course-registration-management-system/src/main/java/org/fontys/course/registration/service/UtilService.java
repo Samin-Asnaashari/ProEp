@@ -65,12 +65,11 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications.put(courseCode, persons);
     }
 
-    
     public List<Student> GetAllStudentsByCourse(String courseCode) {
         List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
         List<Student> studentsApplied = new ArrayList<>();
         for (int i = 0; i < registrations.size(); i++) {
-            studentsApplied.add(registrations.get(i).getId().getStudent());
+            studentsApplied.add(registrations.get(i).getStudent());
         }
         return studentsApplied;
     }

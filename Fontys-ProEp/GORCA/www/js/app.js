@@ -21,7 +21,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         StatusBar.styleDefault();
       }
 
-      $ionicPlatform.on("resume", function(event) {
+      $ionicPlatform.on("resume", function (event) {
         var lastID = notificationDataService.lastNotificationID;
         if (lastID == -1) {
           lastID = 0;
@@ -72,7 +72,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
     $ionicConfigProvider.navBar.alignTitle('center');
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
 
       .state('app', {
@@ -94,27 +94,27 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             });
 
             return notificationService.getAllNotifications()
-                    .then(function (response) {
-                      return {notifications: response.data};
-                    }, function (error) {
-                      console.log('error');
-                      //disable loading icon
-                      $ionicLoading.hide();
-                      alert(angular.toJson(error));
-                    })
+              .then(function (response) {
+                return {notifications: response.data};
+              }, function (error) {
+                console.log('error');
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           },
           notificationsBadgeCountResolve: function (studentService, $ionicLoading) {
             return studentService.getBadgeCount()
-                    .then(function (response) {
-                      return {badgeCount: response.data};
-                    }, function (error) {
-                      //disable loading icon
-                      $ionicLoading.hide();
-                      alert(angular.toJson(error));
-                    })
+              .then(function (response) {
+                return {badgeCount: response.data};
+              }, function (error) {
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           }
         }
-    })
+      })
 
       .state('login', {
         url: '/login',
@@ -138,16 +138,16 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-    .state('app.search', {
-      url: '/search',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/search.html'
+      .state('app.search', {
+        url: '/search',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/search.html'
+          }
         }
-      }
-    })
+      })
 
-    .state('app.browse', {
+      .state('app.browse', {
         url: '/browse',
         views: {
           'menuContent': {
@@ -207,15 +207,25 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-    .state('app.single', {
-      url: '/playlists/:playlistId',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlist.html',
-          controller: 'PlaylistCtrl'
+      .state('app.single', {
+        url: '/playlists/:playlistId',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/playlist.html',
+            controller: 'PlaylistCtrl'
+          }
         }
-      }
-    });
+      })
+
+      .state('courseDetailView', {
+        url: '/courseDetailView',
+        views: {
+          'mainMenu': {
+            templateUrl: 'templates/courseDetailView.html'
+          }
+        }
+      });
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
-});
+  });

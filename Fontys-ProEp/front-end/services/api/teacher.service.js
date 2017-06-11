@@ -22,6 +22,16 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
         return $http.get(baseUrl);
     };
 
+    self.getAllFontysCourses = function () {
+        return $http.get(baseUrl + '/fontysTeachers');
+    };
+
+    self.getMyCourses=function()
+    {
+        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
+        return $http.get(baseUrl+'/courses')
+    };
+
     self.updateTeacher = function (teacher) {
         return $http.put(baseUrl, teacher);
     };
@@ -29,10 +39,4 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
     self.deleteTeacher = function (pcn) {
         return $http.delete(baseUrl + '/' + pcn);
     };
-
-    self.getMyCourses = function()
-    {
-        $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
-        return $http.get(baseUrl+'/courses')
-    }
 });

@@ -58,6 +58,7 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.PUT)
     public void UpdateCourse(@RequestBody Course course) {
         this.courseService.UpdateCourse(course);
+
     }
 
     @RequestMapping(value = "/token/{token}", method = RequestMethod.GET)
@@ -65,11 +66,6 @@ public class CourseController {
         System.out.println(token);
     }
     
-    @RequestMapping(value = "/addNewState/course/{code}", method = RequestMethod.POST)
-    public void AddNewCourseStateToCourse(@RequestBody List<CourseState> states, @PathVariable String code) throws Exception {
-        this.courseService.AddNewCourseStateToCourse(states, code);
-    }
-
     @RequestMapping(value = "/removeState", method = RequestMethod.PUT)
     public void RemoveCourseStateFromCourse(@RequestBody List<CourseState> states) throws Exception {
         this.courseService.RemoveCourseStateFromCourse(states);
@@ -83,15 +79,5 @@ public class CourseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void DeleteCourse(@PathVariable String id) {
         this.courseService.DeleteCourse(id);
-    }
-
-    @RequestMapping(value = "/addTeachersTo/{courseCode}", method = RequestMethod.POST)
-    public void AddTeachersToCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
-        //this.courseService.AddTeachersToCourse(teachers, courseCode);
-    }
-
-    @RequestMapping(value = "/removeTeachersFrom/{courseCode}", method = RequestMethod.PUT) /*TODO All DELETE*/
-    public void DeleteTeachersFromCourse(@RequestBody List<Teacher> teachers, @PathVariable String courseCode) throws Exception {
-        //this.courseService.DeleteTeachersFromCourse(teachers, courseCode);
     }
 }

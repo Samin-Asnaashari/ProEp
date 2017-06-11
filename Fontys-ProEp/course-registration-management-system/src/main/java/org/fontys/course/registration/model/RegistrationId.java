@@ -9,19 +9,23 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.io.Serializable;
 
-@Embeddable
-public class RegistrationId  implements Serializable {
+//@Embeddable
+public class RegistrationId implements Serializable {
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    //    @JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn
     private Student student;
 
-    @JsonBackReference
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    //    @JsonBackReference
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    @OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn
     private Course course;
 
     public RegistrationId() {

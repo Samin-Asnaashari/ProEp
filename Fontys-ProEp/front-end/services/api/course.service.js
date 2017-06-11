@@ -30,10 +30,6 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
         return $http.put(baseUrl, course);
     };
 
-    self.addNewCourseStateToCourse = function (courseCode, states) {
-        return $http.post(baseUrl + '/addNewState/course/' + courseCode, states);
-    };
-
     self.removeCourseStateFromCourse = function (states) {
         return $http.put(baseUrl + '/removeState', states);
     };
@@ -44,13 +40,5 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
 
     self.requestCourseDeletion = function (code) {
         return $http.get(baseUrl + "/requestDeletion/" + code);
-    };
-
-    self.AddTeachersToCourse = function (teachers, courseCode) {
-        return $http.post(baseUrl + "/addTeachersTo" + "/" + courseCode, teachers);
-    };
-
-    self.DeleteTeachersFromCourse = function (teachers, courseCode) {
-        return $http.put(baseUrl + "/removeTeachersFrom" + "/" + courseCode, teachers);
     };
 });

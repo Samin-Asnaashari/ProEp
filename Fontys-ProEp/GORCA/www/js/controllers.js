@@ -3,6 +3,7 @@ angular.module('GORCA.controllers', [])
   .controller('MenuController', function(notificationsResolve, notificationsBadgeCountResolve, notificationService,
                                          $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
 
+
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -12,6 +13,10 @@ angular.module('GORCA.controllers', [])
     // });
 
     var vm = this;
+
+    vm.doLogin = function () {
+      $state.go('/home');
+    };
 
     vm.notifications = notificationsResolve.notifications;
 
@@ -42,26 +47,26 @@ angular.module('GORCA.controllers', [])
 
     vm.amountOfBadges = notificationsBadgeCountResolve.badgeCount;
 
-    if(vm.amountOfBadges > 0) {
+    if (vm.amountOfBadges > 0) {
       vm.badgeAvailable = true;
     }
 
     vm.removeBadge = function () {
-      if(vm.badgeAvailable){
+      if (vm.badgeAvailable) {
         vm.badgeAvailable = false;
         studentService.clearBadgeCount();
       }
     };
 
     vm.typeOfNotificationClass = function () {
-      if(vm.badgeAvailable)
+      if (vm.badgeAvailable)
         return "ion-android-notifications";
       else
         return "ion-android-notifications-none";
     };
 
     vm.setNotificationStatus = function (notification) {
-      if(notification.status === "UNREAD"){
+      if (notification.status === "UNREAD") {
         notification.status = "READ";
         notificationService.setNotificationStatus(notification.id);
         vm.removeBadge();
@@ -69,8 +74,8 @@ angular.module('GORCA.controllers', [])
     };
 
     //event for receiving push notifications
-    $scope.$on('cloud:push:notification', function(event, data) {
-      if(data.message.raw.additionalData.foreground) {
+    $scope.$on('cloud:push:notification', function (event, data) {
+      if (data.message.raw.additionalData.foreground) {
         notificationService.getAllNotificationsBefore(notificationDataService.lastNotificationID)
           .then(function (response) {
             if (response.data != "") {
@@ -87,8 +92,8 @@ angular.module('GORCA.controllers', [])
     vm.updateNotificationGui = function () {
       studentService.getBadgeCount()
         .then(function (response) {
-          if(response.data != ""){
-            if(response.data != 0){
+          if (response.data != "") {
+            if (response.data != 0) {
               vm.amountOfBadges = response.data;
               vm.badgeAvailable = true;
             }
@@ -123,7 +128,7 @@ angular.module('GORCA.controllers', [])
     //NOT WORKING CORRECTLY PHYSICAL DEVICE CHECK IF YOU CAN FIX IT
     // vm.loadNewerNotifications = function () {
     //   // $timeout(function () {
-    //   //   console.log("ffff");
+    //   //   console.log("test");
     //   //   $scope.$broadcast('scroll.refreshComplete');
     //   // }, 5000);
     //   var notificationID = -1;
@@ -292,17 +297,18 @@ angular.module('GORCA.controllers', [])
     vm.currentDate = new Date();
   })
 
-  .controller('PlaylistsCtrl', function($scope) {
+  .controller('PlaylistsCtrl', function ($scope) {
     $scope.playlists = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 },
-      { title: 'Cowbell', id: 6 }
+      {title: 'Reggae', id: 1},
+      {title: 'Chill', id: 2},
+      {title: 'Dubstep', id: 3},
+      {title: 'Indie', id: 4},
+      {title: 'Rap', id: 5},
+      {title: 'Cowbell', id: 6}
     ];
   })
 
   .controller('PlaylistCtrl', function($scope, $stateParams) {
     console.log("playlistID:: " + $stateParams.playlistId);
-  });
+  })
+;

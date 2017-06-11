@@ -1,6 +1,3 @@
-/**
- * Created by Merv on 6/2/2017.
- */
 'use strict';
 
 angular.module('GORCA.serviceAPIS').service('notificationService', function ($http) {

@@ -130,7 +130,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="state in vmCourseEdit.courseStates">
+            <tr ng-repeat="state in vmCourseEdit.course.states">
                 <th colspan="8">
                     <i ng-click="vmCourseEdit.removeState(state)" data-toggle="tooltip" title="delete"
                        class="button glyphicon glyphicon-remove"></i>
@@ -164,7 +164,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="teacher in vmCourseEdit.teachers">
+            <tr ng-repeat="teacher in vmCourseEdit.course.teachers">
                 <th colspan="1">
                     <i ng-click="vmCourseEdit.removeTeacherFromCourse(teacher)" data-toggle="tooltip" title="delete"
                        class="button glyphicon glyphicon-remove"></i>

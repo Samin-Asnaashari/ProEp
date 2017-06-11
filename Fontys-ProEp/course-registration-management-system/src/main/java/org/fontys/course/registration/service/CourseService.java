@@ -45,16 +45,13 @@ public class CourseService {
 
     @Transactional
     public void UpdateCourse(Course course) {
-        this.courseRepository.save(course);
-    }
-
-    @Transactional
-    public void AddNewCourseStateToCourse(List<CourseState> courseStates, String courseCode) throws Exception {
-        Course course = this.GetCourse(courseCode);
-        for (CourseState state : courseStates) {
-            state.setCourse(course);
-            this.courseStateRepository.save(state);
+        for (CourseState state : course.getStates()) {
+            if(state.getId() == null){
+                state.setCourse(course);
+                this.courseStateRepository.save(state);
+            }
         }
+        this.courseRepository.save(course);
     }
 
     @Transactional
@@ -140,23 +137,5 @@ public class CourseService {
             }
         }
         this.courseRepository.delete(id);
-    }
-
-    @Transactional
-    public void DeleteTeachersFromCourse(List<Teacher> teachers, String courseCode) throws Exception {
-    	Course course = this.courseRepository.findOne(courseCode);
-    	Teacher teacher = null;
-        for (Teacher t : teachers) {
-            teacher = this.utilService.GetTeacher(t.getPcn());
-            course.getTeachers().remove(teacher);
-        }
-    }
-
-    @Transactional
-	public void AddTeachersToCourse(List<Teacher> teachers, String courseCode) {
-        Course course = this.courseRepository.findOne(courseCode);
-        for (Teacher teacher : teachers) {
-            course.getTeachers().add(teacher);
-        }
     }
 }
