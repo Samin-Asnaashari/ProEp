@@ -14,10 +14,6 @@ angular.module('GORCA.controllers', [])
 
     var vm = this;
 
-    vm.doLogin = function () {
-      $state.go('/home');
-    };
-
     vm.notifications = notificationsResolve.notifications;
 
     vm.moreDataCanBeLoaded = true;
@@ -216,7 +212,7 @@ angular.module('GORCA.controllers', [])
     $ionicLoading.hide();
   })
 
-  .controller('addReviewController', function($stateParams, reviewService, $state, $ionicHistory,$ionicPopup) {
+  .controller('AddReviewController', function($stateParams, reviewService, $state, $ionicHistory,$ionicPopup) {
     var vm = this;
 
     vm.courseCode = $stateParams.courseCode;
@@ -282,14 +278,14 @@ angular.module('GORCA.controllers', [])
           $ionicHistory.clearCache()
             .then(function(){
               $state.go('app.home');
-            })
+            });
         }, function (error) {
           $ionicPopup.alert({
             title: 'Error',
             template: error.data.error
-          })
-        })
-    }
+          });
+        });
+    };
   })
 
   .controller('HomeController', function () {
