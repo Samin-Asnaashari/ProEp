@@ -1,7 +1,8 @@
 angular.module('GORCA.controllers', [])
 
-  .controller('MenuController', function (notificationsResolve, notificationsBadgeCountResolve, notificationService,
-                                          $ionicLoading, $scope, EventNotification, notificationDataService, studentService, $state) {
+  .controller('MenuController', function(notificationsResolve, notificationsBadgeCountResolve, notificationService,
+                                         $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
+
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -21,7 +22,20 @@ angular.module('GORCA.controllers', [])
 
     vm.moreDataCanBeLoaded = true;
 
-    if (vm.notifications.length > 0) {
+    vm.logout = function () {
+      loginService.logout()
+        .then(function (response) {
+          loginService.DeleteAuthenticationCookie();
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $state.go('login');
+        }, function (error) {
+          alert(angular.toJson(error));
+        })
+    };
+
+    if(vm.notifications.length > 0) {
       notificationDataService.lastNotificationID = vm.notifications[0].id;
     }
     else {
@@ -241,6 +255,41 @@ angular.module('GORCA.controllers', [])
           })
         });
     };
+  })
+
+  .controller('LoginController', function(loginService, $ionicHistory, $state, $ionicPush, studentService, $ionicPopup) {
+    var vm = this;
+
+    vm.loginData = {
+      pcn: "310323",
+      password: "123"
+    }
+
+    vm.trylogin = function () {
+      loginService.login(vm.loginData)
+        .then(function (response) {
+          loginService.setAuthentication(response.data.message);
+          //registering for push notifications
+          $ionicPush.register()
+            .then(function(t) {
+              return $ionicPush.saveToken(t);
+            }).then(function(t) {
+            studentService.addPushNotificationToken(t.token);
+          });
+          $ionicHistory.nextViewOptions({
+            historyRoot: true
+          });
+          $ionicHistory.clearCache()
+            .then(function(){
+              $state.go('app.home');
+            })
+        }, function (error) {
+          $ionicPopup.alert({
+            title: 'Error',
+            template: error.data.error
+          })
+        })
+    }
   })
 
   .controller('HomeController', function () {

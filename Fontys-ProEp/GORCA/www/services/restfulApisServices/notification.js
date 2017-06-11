@@ -5,11 +5,10 @@ angular.module('GORCA.serviceAPIS').service('notificationService', function ($ht
   var self = this;
   var http = 'http://';
   //192.168.178.24 (your own ip) for testing on emulator or android device
-  var ipAddress = "145.116.43.195"; /*145.93.136.163*/
+  var ipAddress = "145.116.40.28";
   var baseUrl = http + ipAddress + ':8090/notifications';
 
   self.getAllNotifications = function () {
-    $http.defaults.headers.common.Authorization = "Basic MzEwMzIzOjEyMw==";
     return $http.get(baseUrl);
   };
 
