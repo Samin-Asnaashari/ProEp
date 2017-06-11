@@ -5,9 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
-  'angularMoment', 'GORCA.events'])
+  'angularMoment', 'GORCA.events', 'ngCookies'])
 
-  .run(function($ionicPlatform, $ionicPush, studentService, notificationDataService, notificationService, EventNotification) {
+  .run(function($ionicPlatform, notificationDataService, notificationService, EventNotification, $rootScope, loginService, $state) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -36,16 +36,16 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             alert(angular.toJson(error));
           });
       });
-
-      //registering for push notifications
-      //for now here, must be after user logs in
-      $ionicPush.register()
-        .then(function(t) {
-          return $ionicPush.saveToken(t);
-        }).then(function(t) {
-          studentService.addPushNotificationToken(t.token);
-      });
     });
+    $rootScope.$on('$stateChangeStart', function(event, toState, fromState){
+      if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+        event.preventDefault();
+        $state.go('login');
+      }
+      else if(loginService.getAuthentication() && toState.name === 'login') {
+        event.preventDefault();
+      }
+    })
   })
 
   .config(function ($ionicCloudProvider) {
@@ -103,7 +103,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                       alert(angular.toJson(error));
                     })
           },
-          notificationsBadgeCountResolve: function (studentService) {
+          notificationsBadgeCountResolve: function (studentService, $ionicLoading) {
             return studentService.getBadgeCount()
                     .then(function (response) {
                       return {badgeCount: response.data};
@@ -120,7 +120,9 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         url: '/login',
         views: {
           'mainMenu': {
-            templateUrl: 'templates/login.html'
+            templateUrl: 'templates/login.html',
+            controller: 'LoginController',
+            controllerAs: 'loginCtrl'
           }
         }
       })

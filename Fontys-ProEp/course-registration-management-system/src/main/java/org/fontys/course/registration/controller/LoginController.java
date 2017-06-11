@@ -23,7 +23,12 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping(value = "/doAdminLogin", method = RequestMethod.POST)
-    public Message Login(HttpServletRequest request) {
+    public Message AdminLogin(HttpServletRequest request) {
+    	return new Message(request.getHeader("Authorization"));
+    }
+    
+    @RequestMapping(value = "/doStudentLogin", method = RequestMethod.GET)
+    public Message StudentLogin(HttpServletRequest request) {
     	return new Message(request.getHeader("Authorization"));
     }
 }
