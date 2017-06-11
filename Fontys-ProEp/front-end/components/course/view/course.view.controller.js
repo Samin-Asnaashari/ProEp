@@ -11,12 +11,12 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
     vm.declineRegistrations = declineRegistrationsResolve.declineRegistrations;
     vm.acceptedRegistrationStudents = [];
 
-    vm.acceptedStudents = function () {
-        angular.forEach(vm.acceptedRegistrations, function (s) {
-            var temp;
-            temp = studentService.getStudent(s.studentPcn);
-            vm.acceptedRegistrationStudents.push(temp);
-        });
-        return vm.acceptedRegistrationStudents;
-        };
+   // vm.acceptedStudents = function () {
+     //   angular.forEach(vm.acceptedRegistrations, function (s) {
+       //     var temp;
+         //   temp = studentService.getStudent(s.studentPcn);
+           // vm.acceptedRegistrationStudents.push(temp);
+        //});
+        //return vm.acceptedRegistrationStudents;
+        //};
 });
