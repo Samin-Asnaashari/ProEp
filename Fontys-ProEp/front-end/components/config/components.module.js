@@ -10,6 +10,7 @@ angular.module('appComponent',
         'appComponent.resize',
         'appComponent.textEditor',
         'appComponent.teacherTable',
-        'appComponent.courseTable'
+        'appComponent.courseTable',
+        'appComponent.studentTable'
     ]
 );
