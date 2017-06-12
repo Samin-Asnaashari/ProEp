@@ -138,20 +138,22 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.search', {
-        url: '/search',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/search.html'
-          }
-        }
-      })
+      // .state('app.myCourses', {
+      //   url: '/myCourses',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: ''
+      //     }
+      //   }
+      // })
 
-      .state('app.browse', {
-        url: '/browse',
+      .state('app.registration', {
+        url: '/registration',
         views: {
           'menuContent': {
-            templateUrl: 'templates/browse.html'
+            templateUrl: 'templates/courseDetailsView.html',
+            controller: 'RegistrationController',
+            controllerAs: 'registrationCtrl'
           }
         }
       })
@@ -197,34 +199,15 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.playlists', {
-        url: '/playlists',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
-          }
-        }
-      })
-
-      .state('app.single', {
-        url: '/playlists/:playlistId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlist.html',
-            controller: 'PlaylistCtrl'
-          }
-        }
-      })
-
-      .state('courseDetailView', {
-        url: '/courseDetailView',
-        views: {
-          'mainMenu': {
-            templateUrl: 'templates/courseDetailView.html'
-          }
-        }
-      });
+      // .state('courseDetailView', {
+      //   url: '/courseDetailView?code',
+      //   views: {
+      //     'mainMenu': {
+      //       templateUrl: 'templates/courseDetailView.html'
+      //     }
+      //   }
+      // })
+      ;
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');

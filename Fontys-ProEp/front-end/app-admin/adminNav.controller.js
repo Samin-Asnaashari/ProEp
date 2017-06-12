@@ -6,6 +6,8 @@ angular.module("appAdmin").controller("navCtrl", function ($scope, $rootScope, $
         return viewLocation === $location.path();
     };
 
+    console.log("blabla");
+
     $scope.isLoggedIn = function () {
         if(loginService.getAuthentication()){
             return true;
