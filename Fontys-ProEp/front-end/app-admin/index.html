@@ -59,7 +59,6 @@
             <!-- right align -->
             <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
                 <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
-                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
                 <li ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
             </ul>
         </div>

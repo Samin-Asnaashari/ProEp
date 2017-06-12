@@ -11,6 +11,7 @@ import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.Teacher;
+import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,12 +66,21 @@ public class UtilService {
         this.personsToSendDeleteCourseNotifications.put(courseCode, persons);
     }
 
-    public List<Student> GetAllStudentsByCourse(String courseCode) {
-        List<Registration> registrations = this.registrationService.GetAllRegistrationsByCourse(courseCode);
+    public List<Student> GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus status, String courseCode) {
+    	
+        List<Registration> registrations = null;
+        
+		try {
+			registrations = this.registrationService.GetAllRegistrationByStatusAndCourse(status, courseCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
         List<Student> studentsApplied = new ArrayList<>();
         for (int i = 0; i < registrations.size(); i++) {
             studentsApplied.add(registrations.get(i).getStudent());
         }
+        
         return studentsApplied;
     }
 
@@ -139,5 +149,9 @@ public class UtilService {
     		this.studentService.IncreaseNotificationBadgeCount(person);
     	else
     		this.teacherService.IncreaseNotificationBadgeCount(person);
+    }
+    
+    public void AddNewTeacher(Teacher teacher) {
+    	this.teacherService.AddTeacher(teacher);
     }
 }

@@ -5,11 +5,6 @@
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <title>GORCA</title>
 
-  <!--CSS-->
-  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link href="css/reviews.css" rel="stylesheet">
-  <link href="css/newReview.css" rel="stylesheet">
   <link rel="manifest" href="manifest.json">
 
   <!-- un-comment this code to enable service worker
@@ -21,6 +16,12 @@
     }
   </script>-->
 
+  <!--CSS-->
+  <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/reviews.css" rel="stylesheet">
+  <link href="css/newReview.css" rel="stylesheet">
+
   <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
   <link href="css/ionic.app.css" rel="stylesheet">
   -->
@@ -31,27 +32,33 @@
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
 
-  <!--dependencies-->
+  <!-- your app's js -->
+  <script src="js/app.js"></script>
+  <script src="js/controllers.js"></script>
+
+  <!--Component module-->
+  <script src="services/restfulApisServices/module.js"></script>
+
+  <!--Services js-->
+  <script src="services/restfulApisServices/notification.js"></script>
+  <script src="services/restfulApisServices/student.js"></script>
+  <script src="services/restfulApisServices/review.js"></script>
+  <script src="services/restfulApisServices/login.js"></script>
+  <script src="services/restfulApisServices/course.js"></script>
+  <script src="services/restfulApisServices/registration.js"></script>
+
+  <!--Service-->
+  <script src="services/dataServices/notificationData.js"></script>
+
+  <!--Dependencies-->
   <script src="lib/moment/moment.js"></script>
   <script src="lib/angular-moment/angular-moment.js"></script>
   <script src="lib/ionic-ratings/src/ionic-ratings.js"></script>
   <script src="lib/angular-cookies/angular-cookies.js"></script>
 
-  <!-- your app's js -->
-  <script src="js/app.js"></script>
-  <script src="js/controllers.js"></script>
-
-  <!--component module-->
-  <script src="services/restfulApisServices/module.js"></script>
-
-  <!--Component's js-->
-  <script src="services/restfulApisServices/login.js"></script>
-  <script src="services/restfulApisServices/notification.js"></script>
-  <script src="services/restfulApisServices/student.js"></script>
-  <script src="services/restfulApisServices/review.js"></script>
-
-  <!--Services-->
+  <!--Service-->
   <script src="services/dataServices/notificationData.js"></script>
+
   <!--Events-->
   <script src="events/config/module.js"></script>
   <script src="events/EventNotification.js"></script>
@@ -61,5 +68,4 @@
 <body ng-app="GORCA">
 <ion-nav-view name="mainMenu"></ion-nav-view>
 </body>
-
 </html>

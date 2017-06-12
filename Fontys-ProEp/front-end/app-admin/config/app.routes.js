@@ -9,18 +9,13 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/home/admin/home.admin.html',
             controller: 'homeCtrl as vmHome',
             resolve: {
-                coursesResolve: function ($state, $stateParams, courseService, loginService) {
-                    if(loginService.SetHeaderAuthentication()){
-                        return courseService.getAllCourses()
-                            .then(function (response) {
-                                return {courses: response.data};
-                            }, function (error) {
-                                // $state.go('Error');
-                            });
-                    }
-                    else {
-                        return $state.go('login');
-                    }
+                coursesResolve: function ($state, courseService) {
+                    return courseService.getAllCourses()
+                        .then(function (response) {
+                            return {courses: response.data};
+                        }, function (error) {
+                            // $state.go('Error');
+                        });
                 }
             }
         })
@@ -29,35 +24,22 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/course/edit/course.edit.html',
             controller: 'courseEditCtrl as vmCourseEdit',
             resolve: {
-                courseResolve: function ($state, $stateParams, courseService, loginService) {
-                    if(loginService.SetHeaderAuthentication()) {
-                        return courseService.getCourse($stateParams.code)
-                            .then(function (response) {
-                                response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
-                                response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
-                                return {course: response.data};
-                            }, function (error) {
-                                $state.go('home');
-                            });
-                    }
-                    else {
-                        return $state.go('login');
-                    }
+                courseResolve: function ($state, $stateParams, courseService) {
+                    return courseService.getCourse($stateParams.code)
+                        .then(function (response) {
+                            response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
+                            response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
+                            return {course: response.data};
+                        }, function (error) {
+                            $state.go('home');
+                        });
                 }
             }
         })
         .state('login', {
             url: '/login',
             templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin',
-            resolve: {
-                logInResolve: function ($state, $stateParams, loginService) {
-                    if (loginService.SetHeaderAuthentication()) {
-                        console.log("sdd");
-                        return $state.go('home');
-                    }
-                }
-            }
+            controller: 'loginCtrl as vmLogin'
         })
         .state('logout', {
             url: '/logout',
@@ -80,8 +62,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/student/student.html',
             controller: 'studentCtrl as vmStudent',
             resolve: {
-                studentsResolve: function ($state, $stateParams, studentService, loginService) {
-                    if(loginService.SetHeaderAuthentication()) {
+                studentsResolve: function (studentService) {
                         return studentService.getAllStudents()
                             .then(function (response) {
                                 return {students: response.data};
@@ -89,10 +70,6 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                                 console.log(error);
                                 //$state.go('home');
                             });
-                    }
-                    else {
-                        return $state.go('login');
-                    }
                 }
             }
         });

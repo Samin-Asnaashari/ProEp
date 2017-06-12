@@ -2,6 +2,7 @@ package org.fontys.course.registration.service;
 
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.RegistrationRepository;
@@ -13,6 +14,9 @@ public class RegistrationService {
 
     @Autowired
     private RegistrationRepository registrationRepository;
+    
+    @Autowired
+    private UtilService utilService;
 
     public void createRegistration(Registration registration) {
         this.registrationRepository.save(registration);
@@ -26,7 +30,7 @@ public class RegistrationService {
         return this.registrationRepository.findRegistrationByCourse(courseCode);
     }
 
-    public List<Registration> GetAllRegistrationByStatus(RegistrationStatus registrationStatus) {
-        return this.registrationRepository.findByRegistrationStatus(registrationStatus);
+    public List<Registration> GetAllRegistrationByStatusAndCourse(RegistrationStatus registrationStatus, String courseCode) throws Exception {
+        return this.registrationRepository.findByRegistrationStatusAndCourse(registrationStatus, utilService.GetCourse(courseCode));
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.*;
+import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.CourseRepository;
 import org.fontys.course.registration.repository.CourseStateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,14 @@ public class CourseService {
                 this.courseStateRepository.save(state);
             }
         }
+        
+        List<Teacher> teachers = course.getTeachers();
+        for (int i = 0; i < teachers.size(); i++) {
+        	Teacher teacher = teachers.get(i);
+        	teacher.setNotificationBadgeCount(0);
+			this.utilService.AddNewTeacher(teacher);
+		}
+        
         this.courseRepository.save(course);
     }
 
@@ -66,76 +75,65 @@ public class CourseService {
         }
     }
 
-    @Transactional
-    public Message RequestCourseDeletion(String id) {
-        Course course = this.courseRepository.getOne(id);
-        Date todayDate = new Date();
-        String defaultMsg = "Are you sure you want do delete course: " + course.getCode() + "?";
-        //if today date's is after the course registration end date and it is before the registration starts
-        // then delete is possible without sending notifications
-        Date regEndDate = course.getRegEndDate();
-        Date regStartDate = course.getRegStartDate();
-        if (regEndDate != null || regStartDate != null) {
-            if (todayDate.after(regEndDate) && todayDate.before(regStartDate)) {
-                return new Message(defaultMsg);
-            } else {
-                //send notifications that course has been dropped to all teachers and students
-                //this is also checked and this info is sent to the admin before confirming to delete
-                //so he knows that there are already students that requested registering to this course
+	@Transactional
+	public Message RequestCourseDeletion(String id) {
+		Course course = this.courseRepository.getOne(id);
+		String defaultMsg = "Are you sure you want do delete course: " + course.getCode() + "?";
 
-                List<Person> personsToSendNotifications = new ArrayList<>();
+		List<Person> personsToSendNotifications = new ArrayList<>();
 
-                List<Student> studentsToSendNotifications = this.utilService.GetAllStudentsByCourse
-                        (course.getCode());
+		List<Student> acceptedStudents = this.utilService
+				.GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.ACCEPTED, course.getCode());
+		
+		List<Student> pendingStudents = this.utilService
+				.GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.PENDING, course.getCode());
 
-                for (int i = 0; i < studentsToSendNotifications.size(); i++) {
-                    personsToSendNotifications.add(studentsToSendNotifications.get(i));
-                }
+		for (int i = 0; i < acceptedStudents.size(); i++) {
+			personsToSendNotifications.add(acceptedStudents.get(i));
+		}
 
-                for (int i = 0; i < course.getTeachers().size(); i++) {
-                    personsToSendNotifications.add(course.getTeachers().get(i));
-                }
+		for (int i = 0; i < pendingStudents.size(); i++) {
+			personsToSendNotifications.add(pendingStudents.get(i));
+		}
 
-                this.utilService.AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(course.getCode(),
-                        personsToSendNotifications);
+		for (int i = 0; i < course.getTeachers().size(); i++) {
+			personsToSendNotifications.add(course.getTeachers().get(i));
+		}
 
-                if (studentsToSendNotifications.size() != 0)
-                    return new Message("Warning: There are already " + studentsToSendNotifications.size()
-                            + " students that applied to this course. " + defaultMsg);
-                else {
-                    return new Message(defaultMsg);
-                }
-            }
-        } else {
-            return new Message(defaultMsg);
-        }
-    }
+		this.utilService.AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(course.getCode(),
+				personsToSendNotifications);
+
+		if (acceptedStudents.size() != 0)
+			return new Message("Warning: There are already " + acceptedStudents.size()
+					+ " students that applied to this course. " + defaultMsg);
+		else {
+			return new Message(defaultMsg);
+		}
+	}
 
     @Transactional
-    public void DeleteCourse(String id) {
+    public void DeleteCourse(String courseCode, Integer sender) {
         //Check to see if there is a list with persons to send notifications to before deleting
         HashMap<String, List<Person>> personsToSendDeleteCourseNotifications = this.utilService.GetPersonsToSendDeleteCourseNotifications();
         if (personsToSendDeleteCourseNotifications != null) {
-            List<Person> persons = personsToSendDeleteCourseNotifications.get(id);
+            List<Person> persons = personsToSendDeleteCourseNotifications.get(courseCode);
             if (persons != null) {
                 if (persons.size() != 0) {
-                    String notificationContent = " is not available anymore in this block, sorry for any inconvenience";
+                    String notificationContent = " is not available anymore in this block, sorry for any inconveniences.";
                     if (persons.size() == 1) {
                         Notification notification = new Notification
-                                (id + notificationContent, new Date(), null
-                                     /*need to find a way to get the admin user logged in*/, persons.get(0));
+                                (courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(0));
                         this.utilService.AddNewNotification(notification);
                     } else {
                         List<Notification> notifications = new ArrayList<>();
                         for (int i = 0; i < persons.size(); i++) {
-                            notifications.add(new Notification(id + notificationContent, new Date(), null
-                                     /*need to find a way to get the admin user logged in*/, persons.get(i)));
+                            notifications.add(new Notification(courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(i)));
                         }
                         this.utilService.AddNewNotifications(notifications);
                     }
                 }
             }
         }
-        this.courseRepository.delete(id);
+        this.courseRepository.delete(courseCode);
     }
 }

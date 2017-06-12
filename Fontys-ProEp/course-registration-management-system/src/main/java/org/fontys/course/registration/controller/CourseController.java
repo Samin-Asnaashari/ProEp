@@ -1,5 +1,6 @@
 package org.fontys.course.registration.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void DeleteCourse(@PathVariable String id) {
-        this.courseService.DeleteCourse(id);
+    public void DeleteCourse(@PathVariable String id, Principal principal) {
+        this.courseService.DeleteCourse(id, Integer.valueOf(principal.getName()));
     }
 }

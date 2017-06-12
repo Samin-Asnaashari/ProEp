@@ -32,8 +32,15 @@ public class RegistrationController {
         return this.registrationService.GetAllRegistrationsByCourse(courseCode);
     }
 
-    @RequestMapping(value = "/status/{registrationStatus}", method = RequestMethod.GET)
-    public List<Registration> GetAllRegistrationsByStatus(@PathVariable RegistrationStatus registrationStatus){
-        return this.registrationService.GetAllRegistrationByStatus(registrationStatus);
+    @RequestMapping(value = "/status/{registrationStatus}/{courseCode}", method = RequestMethod.GET)
+    public List<Registration> GetAllRegistrationsByStatus(@PathVariable("registrationStatus") RegistrationStatus registrationStatus,
+    		@PathVariable("courseCode") String courseCode){
+        try {
+			return this.registrationService.GetAllRegistrationByStatusAndCourse(registrationStatus, courseCode);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return null;
     }
 }

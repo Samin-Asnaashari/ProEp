@@ -2,6 +2,7 @@ package org.fontys.course.registration.repository;
 
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.RegistrationId;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
@@ -17,5 +18,5 @@ public interface RegistrationRepository extends JpaRepository<Registration, Regi
     @Query(value = "SELECT * FROM Registration WHERE course_code = ?1", nativeQuery = true)
     List<Registration> findRegistrationByCourse(String courseCode);
 
-    List<Registration> findByRegistrationStatus(RegistrationStatus status);
+    List<Registration> findByRegistrationStatusAndCourse(RegistrationStatus status, Course course);
 }
