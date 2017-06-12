@@ -49,13 +49,13 @@ public class StudentController {
     @RequestMapping(value = "/fontysStudents", method = RequestMethod.GET)
     public List<Student> GetAllFontysStudents() {
         List<Student> students = new ArrayList<>();
-        students.add(new Student(310323, "234", "example@student.fontys.nl", "Samin", "Asnaashari", 271372, StudentType.REGULARSEMESTER, Major.SOFTWARE, 8.0));
-        students.add(new Student(236478, "789", "blabla@student.fontys.nl", "Beer", "LaLa", 278383, StudentType.SECONDSEMESTER, Major.TECHNOLOGY, 6.0));
-        students.add(new Student(37272, "738", "agnes@student.fontys.nl", "Agnes", "Wasee", 637367, StudentType.REGULARSEMESTER, Major.SOFTWARE, 8.0));
-        students.add(new Student(18583, "74839", "tech@student.fontys.nl", "Dex", "Heijden", 382938, StudentType.SECONDSEMESTER, Major.BUSINESS, 7.0));
+        students.add(new Student(310323, "234", "example@student.fontys.nl", "Samin", "Asnaashari", 271372, StudentType.REGULAR, Major.SOFTWARE, 8.0));
+        students.add(new Student(236478, "789", "blabla@student.fontys.nl", "Beer", "LaLa", 278383, StudentType.JELLYPICKING, Major.TECHNOLOGY, 6.0));
+        students.add(new Student(37272, "738", "agnes@student.fontys.nl", "Agnes", "Wasee", 637367, StudentType.REGULAR, Major.SOFTWARE, 8.0));
+        students.add(new Student(18583, "74839", "tech@student.fontys.nl", "Dex", "Heijden", 382938, StudentType.JELLYPICKING, Major.BUSINESS, 7.0));
         students.add(new Student(244234, "random", "joe@student.fontys.nl", "Joe", "Smith", 212142, StudentType.RETAKE, Major.SOFTWARE, 6.0));
-        students.add(new Student(921234, "test", "ben@student.fontys.nl", "Ben", "Doe", 122345, StudentType.REGULARSEMESTER, Major.BUSINESS, 3.0));
-        students.add(new Student(343421, "password", "Ann@student.fontys.nl", "Ann", "Williams", 545672, StudentType.REGULARSEMESTER, Major.TECHNOLOGY, 5.0));
+        students.add(new Student(921234, "test", "ben@student.fontys.nl", "Ben", "Doe", 122345, StudentType.REGULAR, Major.BUSINESS, 3.0));
+        students.add(new Student(343421, "password", "Ann@student.fontys.nl", "Ann", "Williams", 545672, StudentType.REGULAR, Major.TECHNOLOGY, 5.0));
         return students;
     }
 

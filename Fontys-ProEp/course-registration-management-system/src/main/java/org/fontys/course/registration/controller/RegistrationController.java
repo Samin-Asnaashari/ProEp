@@ -36,7 +36,7 @@ public class RegistrationController {
     public List<Registration> GetAllRegistrationsByStatus(@PathVariable("registrationStatus") RegistrationStatus registrationStatus,
     		@PathVariable("courseCode") String courseCode){
         try {
-			return this.registrationService.GetAllRegistrationByStatus(registrationStatus, courseCode);
+			return this.registrationService.GetAllRegistrationByStatusAndCourse(registrationStatus, courseCode);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

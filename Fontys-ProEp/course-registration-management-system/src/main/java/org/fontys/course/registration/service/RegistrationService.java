@@ -30,7 +30,7 @@ public class RegistrationService {
         return this.registrationRepository.findRegistrationByCourse(courseCode);
     }
 
-    public List<Registration> GetAllRegistrationByStatus(RegistrationStatus registrationStatus, String courseCode) throws Exception {
+    public List<Registration> GetAllRegistrationByStatusAndCourse(RegistrationStatus registrationStatus, String courseCode) throws Exception {
         return this.registrationRepository.findByRegistrationStatusAndCourse(registrationStatus, utilService.GetCourse(courseCode));
     }
 }

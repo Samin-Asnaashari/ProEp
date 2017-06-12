@@ -100,7 +100,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     };
 
     vm.goToFontysTeacherDialog = function () {
-        return teacherService.getAllTeachers()
+        return teacherService.getAllFontysCourses()
             .then(function (response) {
                 var allTeachers = [];
                 allTeachers = response.data;

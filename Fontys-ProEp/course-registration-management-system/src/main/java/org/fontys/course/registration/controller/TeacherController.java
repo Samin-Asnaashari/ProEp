@@ -41,7 +41,7 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/fontysTeachers", method = RequestMethod.GET)
-    public List<Teacher> GetAllFontysStudents() {
+    public List<Teacher> GetAllFontysTeachers() {
         List<Teacher> teachers = new ArrayList<>();
         teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
         teachers.add(new Teacher(37283, "12373", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));

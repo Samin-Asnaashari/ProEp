@@ -48,6 +48,8 @@ public class Notification {
 		this.date = date;
 		this.sender = sender;
 		this.receiver = receiver;
+		this.sendStatus = SendStatus.UNSEND;
+		this.status = NotificationStatus.UNREAD;
 	}
 	
 	public Notification() {
