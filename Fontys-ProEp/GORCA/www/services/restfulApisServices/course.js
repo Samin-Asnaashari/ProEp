@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('GORCA.serviceAPIS', []).service('courseService', function ($http) {
+angular.module('GORCA.serviceAPIS').service('courseService', function ($http) {
 
   var self = this;
   var http = 'http://';
