@@ -2,9 +2,12 @@
  * Created by Phoenix on 17-May-17.
  */
 
-angular.module('appComponent.login').controller('loginCtrl', function ($state, $scope, loginService) {
+angular.module('appComponent.login').controller('loginCtrl', function ($state, $scope, loginService, loginResolve) {
 
     var vm = this;
+
+    sessionStorage.loginApp = angular.toJson(loginResolve.loginApp);
+
     vm.errorMsg = "";
 
     vm.SetErrorEmpty = function () {

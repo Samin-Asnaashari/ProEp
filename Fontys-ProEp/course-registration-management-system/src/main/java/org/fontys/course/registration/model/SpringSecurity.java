@@ -33,6 +33,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 		.antMatchers("/courses").access("hasRole('ROLE_" + utilservice.admin + "')")
 		.antMatchers("/login/doAdminLogin").access("hasRole('ROLE_" + utilservice.admin + "')")
 		.antMatchers("/login/doStudentLogin").access("hasRole('ROLE_" + utilservice.student + "')")
+		.antMatchers("/login/doTeacherLogin").access("hasRole('ROLE_" + utilservice.teacher + "')")
 		.anyRequest()
 		.fullyAuthenticated()
 		.and()

@@ -7,8 +7,7 @@ angular.module('appAdmin',
         'appServiceAPI',
         'appServiceEvent',
         'appComponent',
-        'ngCookies',
-        'base64'
+        'ngCookies'
     ]
 )
 

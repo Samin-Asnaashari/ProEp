@@ -61,7 +61,7 @@ body {
 .teacherNav .navbar-brand:hover, .teacherNav .navbar-brand:focus {
     color: #ccc
 }
-.teacherNav .navbar-right > li > a:hover, .teacherNav .navbar-right > li > a:focus{
+.teacherNav .navbar-right .removeHighlight > a:hover, .teacherNav .navbar-right .removeHighlight > a:focus{
     background-color: transparent !important;
 }
 .glyphiconRight{

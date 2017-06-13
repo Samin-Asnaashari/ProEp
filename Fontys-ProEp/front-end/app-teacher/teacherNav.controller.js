@@ -1,20 +1,20 @@
 /**
  * Created by Phoenix on 24-May-17.
  */
-angular.module("appTeacher").controller("navCtrl", function ($location /**, loginService**/) {
+angular.module("appTeacher").controller("navCtrl", function ($location, loginService, $scope) {
 
-    var vm = this;
+    //var vm = this;
 
-    vm.isActive = function (viewLocation) {
+    $scope.isActive = function (viewLocation) {
         return viewLocation === $location.path();
     };
 
-    /**$scope.isLoggedIn = function () {
+    $scope.isLoggedIn = function () {
         if(loginService.getAuthentication()){
             return true;
         }
         else{
             return false;
         }
-    };**/
+    };
 });
