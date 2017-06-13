@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.*;
+import org.fontys.course.registration.model.enums.CourseType;
+import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.CourseRepository;
 import org.fontys.course.registration.repository.CourseStateRepository;
@@ -29,6 +31,22 @@ public class CourseService {
     @Transactional
     public void AddCourse(Course course) {
         this.courseRepository.save(course);
+    }
+
+    public List<Course> GetMandatoryCourses(Integer pcn) {
+        Student student = utilService.GetStudentById(pcn);
+        List<Course> result = new ArrayList<>();
+        List<CourseState> courseStates =
+                this.courseStateRepository.findByMajorAndCourseType(student.getMajor(), CourseType.MANDATORY);
+
+        for(CourseState cs : courseStates)
+            result.add(cs.getCourse());
+
+        return result;
+    }
+
+    public List<Course> GetAcceptedElectiveCourses(Integer pcn) {
+        return this.utilService.GetAllAcceptedElectiveCoursesByPcn(pcn);
     }
 
     public Course GetCourse(String code) throws Exception {

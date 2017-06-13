@@ -115,6 +115,16 @@ public class UtilService {
 		}
 		return null;
     }
+
+    public Student GetStudentById(Integer pcn){
+        try {
+            return this.studentService.GetStudentUnsafe(pcn);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
     
     public Admin GetAdminById(String pcn){
     	try {
@@ -153,5 +163,17 @@ public class UtilService {
     
     public void AddNewTeacher(Teacher teacher) {
     	this.teacherService.AddTeacher(teacher);
+    }
+
+    public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
+    {
+        List<Registration> registrations =
+                this.registrationService.GetAllAcceptedRegistrationsByPcn(pcn);
+        List<Course> courses = new ArrayList<>();
+
+        for(Registration reg: registrations)
+            courses.add(reg.getCourse());
+
+        return courses;
     }
 }

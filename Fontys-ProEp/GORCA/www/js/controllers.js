@@ -296,7 +296,11 @@ angular.module('GORCA.controllers', [])
     ;
   })
 
-  // .controller('PlaylistCtrl', function($scope, $stateParams) {
-  //   console.log("playlistID:: " + $stateParams.playlistId);
-  // })
-;
+  .controller('MyCoursesController', function(myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
+    var vm = this;
+    vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
+    vm.mandatoryCourses = myMandatoryCoursesResolve.mandatoryCourses;
+
+    vm.mandatoryEC = myMandatoryCoursesResolve.mandatoryEC;
+    vm.acceptedEC = myAcceptedCoursesResolve.acceptedEC;
+  });
