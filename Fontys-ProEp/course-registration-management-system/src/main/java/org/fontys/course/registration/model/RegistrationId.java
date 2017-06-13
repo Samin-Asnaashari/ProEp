@@ -16,7 +16,7 @@ public class RegistrationId implements Serializable {
 //    @ManyToOne
 //    @JoinColumn(nullable = false)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne
     @JoinColumn
     private Student student;
 
@@ -24,7 +24,7 @@ public class RegistrationId implements Serializable {
 //    @ManyToOne
 //    @JoinColumn(nullable = false)
 //    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne
     @JoinColumn
     private Course course;
 
