@@ -33,7 +33,7 @@ public class Student extends Person {
     private Integer notificationBadgeCount;
 
 	@JsonManagedReference
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.REMOVE)
     private List<Notification> notifications;
     
     public Student() {

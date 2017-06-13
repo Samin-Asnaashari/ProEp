@@ -88,8 +88,7 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
                 vm.close = function () {
                     $mdDialog.cancel();
                 };
-            }
-            ,
+            },
             controllerAs: 'vmFontysStudentsDialog'
 
         })
