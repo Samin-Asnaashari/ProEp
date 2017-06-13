@@ -49,6 +49,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             var acceptedStudents = [];
                             angular.forEach(response.data, function (r) {
                                 acceptedStudents.push(r.student);
+                                //acceptedStudents.push(r);
                             });
                             //If other info is needed other than student from registration object you can pass it here as commented example below
                             return {acceptedStudents:  acceptedStudents/*, otherinfo: "whatever"*/};
