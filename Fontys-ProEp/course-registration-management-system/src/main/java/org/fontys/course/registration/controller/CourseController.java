@@ -8,6 +8,7 @@ import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.CourseState;
 import org.fontys.course.registration.model.Teacher;
+import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -32,6 +33,11 @@ public class CourseController {
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     public void AddCourse(@RequestBody Course course) {
         this.courseService.AddCourse(course);
+    }
+
+    @RequestMapping(value = "/mandatory", method = RequestMethod.GET)
+    public List<Course> GetMandatoryCourses(Principal principal) throws Exception {
+        return this.courseService.GetMandatoryCourses(Integer.valueOf(principal.getName()));
     }
 
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
@@ -80,5 +86,10 @@ public class CourseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void DeleteCourse(@PathVariable String id, Principal principal) {
         this.courseService.DeleteCourse(id, Integer.valueOf(principal.getName()));
+    }
+
+    @RequestMapping(value = "/accepted", method = RequestMethod.GET)
+    public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal){
+        return this.courseService.GetAcceptedElectiveCourses(Integer.valueOf(principal.getName()));
     }
 }

@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fontys.course.registration.model.Course;
@@ -36,9 +37,42 @@ public class RegistrationService {
         return this.registrationRepository.findByRegistrationStatusAndCourse(registrationStatus, utilService.GetCourse(courseCode));
     }
 
+<<<<<<< HEAD
     @Transactional
     public void UpdateRegistration(String courseCode, String studentPcn, String status) throws Exception {
         Registration registration=this.registrationRepository.findByCourseAndStudent(utilService.GetCourse(courseCode),utilService.GetStudentById(studentPcn));
         registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
     }
+=======
+    public List<Registration> GetAllRegistrationsByPcn(Integer pcn) {
+        return this.registrationRepository.findByStudent_Pcn(pcn);
+    }
+
+    public List<Course> GetAllAppliedElectiveCoursesByPcn(Integer pcn)
+    {
+        List<Registration> registrations = this.registrationRepository.findByStudent_Pcn(pcn);
+        List<Course> courses = new ArrayList<>();
+
+        for(Registration reg: registrations)
+            courses.add(reg.getCourse());
+
+        return courses;
+    }
+
+    public List<Registration> GetAllAcceptedRegistrationsByPcn(Integer pcn) {
+        return this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+    }
+
+//    public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
+//    {
+//        List<Registration> registrations =
+//                this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+//        List<Course> courses = new ArrayList<>();
+//
+//        for(Registration reg: registrations)
+//            courses.add(reg.getCourse());
+//
+//        return courses;
+//    }
+>>>>>>> fe8562d2a68f7b9ebf3ad9bfd56a88bdc46e76ec
 }

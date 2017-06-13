@@ -5,10 +5,20 @@ angular.module('GORCA.serviceAPIS').service('registrationService', function ($ht
   var self = this;
   var http = 'http://';
   //192.168.178.24 (your own ip) for testing on emulator or android device
-  var ipAddress = "145.116.43.195"; /*145.93.136.163*/
+  var ipAddress = "145.93.43.252"; /*145.93.136.163*/
   var baseUrl = http + ipAddress + ':8090/registrations';
+  var accepted = '/accepted/pcn/' ;
+  var acceptedAsCourses = '/ascourses' + accepted;
 
   self.createRegistration = function (registration) {
     return $http.post(baseUrl, registration);
   };
+
+  self.getAcceptedRegistrations = function (pcn) {
+    return $http.post(baseUrl + accepted + pcn);
+  }
+
+  self.getAcceptedRegistrationsAsCourses = function (pcn) {
+    return $http.post(baseUrl + acceptedAsCourses + pcn);
+  }
 });

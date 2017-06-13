@@ -38,15 +38,15 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             });
         }
       });
-      $rootScope.$on('$stateChangeStart', function(event, toState){
-        if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
-          event.preventDefault();
-          $state.go('login');
-        }
-        else if(loginService.getAuthentication() && toState.name === 'login') {
-          event.preventDefault();
-        }
-      });
+    });
+    $rootScope.$on('$stateChangeStart', function(event, toState){
+      if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+        event.preventDefault();
+        $state.go('login');
+      }
+      else if(loginService.getAuthentication() && toState.name === 'login') {
+        event.preventDefault();
+      }
     });
   })
 
@@ -140,20 +140,22 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.search', {
-        url: '/search',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/search.html'
-          }
-        }
-      })
+      // .state('app.myCourses', {
+      //   url: '/myCourses',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: ''
+      //     }
+      //   }
+      // })
 
-      .state('app.browse', {
-        url: '/browse',
+      .state('app.registration', {
+        url: '/registration',
         views: {
           'menuContent': {
-            templateUrl: 'templates/browse.html'
+            templateUrl: 'templates/courseDetailsView.html',
+            controller: 'RegistrationController',
+            controllerAs: 'registrationCtrl'
           }
         }
       })
@@ -199,34 +201,60 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.playlists', {
-        url: '/playlists',
+      .state('app.mycourses', {
+        url: '/mycourses',
         views: {
           'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
+            templateUrl: 'templates/myCourses.html',
+            controller: 'MyCoursesController',
+            controllerAs: 'MyCoursesCtrl'
           }
-        }
-      })
+        },
+        resolve: {
+          myAcceptedCoursesResolve: function (courseService, $ionicPopup) {
 
-      .state('app.single', {
-        url: '/playlists/:playlistId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlist.html',
-            controller: 'PlaylistCtrl'
-          }
-        }
-      })
+            return courseService.getAllAcceptedElectiveCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function(course){
+                  totalEC = totalEC + course.ec;
+                });
 
-      .state('courseDetailView', {
-        url: '/courseDetailView',
-        views: {
-          'mainMenu': {
-            templateUrl: 'templates/courseDetailView.html'
+                return {acceptedCourses : response.data, acceptedEC : totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving accepted courses'
+                })
+              });
+          },
+          myMandatoryCoursesResolve: function (courseService, $ionicPopup) {
+
+            return courseService.getAllMandatoryCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function(course){
+                  totalEC = totalEC + course.ec;
+                });
+
+                return {mandatoryCourses : response.data, mandatoryEC : totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving mandatory courses'
+                })
+              });
           }
         }
       });
+      // .state('courseDetailView', {
+      //   url: '/courseDetailView',
+      //   views: {
+      //     'mainMenu': {
+      //       templateUrl: 'templates/courseDetailView.html'
+      //     }
+      //   }
+      // });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');

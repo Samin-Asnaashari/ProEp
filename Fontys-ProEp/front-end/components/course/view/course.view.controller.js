@@ -42,7 +42,7 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
         console.log(data.pcn, "data");
         registrationService.updateRegistration(vm.course.code,data.pcn,"DECLINE")
             .then(function () {
-                vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(data), 1);
+                vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(data), 1)
                 vm.declinedStudents.push(data);
             }, function (error) {
 

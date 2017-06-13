@@ -1,51 +1,86 @@
-<ion-view view-title="Home">
+<ion-view view-title="Course Details">
   <ion-content>
-    <div class="header top">
-      <div class="" style="display: inline-block; padding-left: 0">
-        <div class="" style="padding-left: 0">
-          <h1 class="text-left text-muted"><strong style="text-transform: uppercase;">{{vmCourseView.course.name}}
-          </strong>({{vmCourseView.course.code}})</h1>
-        </div>
-      </div>
+
+    <div class="bar bar-header" style="text-transform: uppercase;">
+      <h1 class="title"><strong>{{course.name}} </strong><span class="badge badge-royal">{{course.code}}</span></h1>
     </div>
 
-    <br/> <!--Registration end and start-->
+    <div class="list">
+      <a class="item item-icon-left" href="#">
+      </a>
+      regStartDate regEndDate
+      <!--<a class="item item-icon-left" href="#">-->
+      <!--<i class="icon ion-email"></i>-->
+      <!--Check mail-->
+      <!--<i class="icon ion-email"></i>-->
+      <!--Check mail-->
+      <!--</a>-->
 
-    <div>
-      <div class="row"> <!--style="display: inline-flex;"-->
-        <div class="col-xs-2 well well-sm removeWellStyle">
-          <div class="col-xs-2" style="padding-left: 0">
-            <span class="text-left"><strong> EC </strong> {{vmCourseView.course.ec}}</span>
-          </div>
-        </div>
-        <div class="col-xs-2 well well-sm removeWellStyle">
-          <div class="col-xs-2" style="padding-left: 0">
-            <span class="text-left"><strong> Block </strong>{{vmCourseView.course.block}}</span>
-          </div>
-        </div>
-        <div class="col-xs-2 well well-sm removeWellStyle">
-          <div class="col-xs-2" style="padding-left: 0">
-            <span class="text-left"><strong> Max Seat </strong>{{vmCourseView.course.maxSeats}}</span>
-            <span class="text-left"><strong> Filled Seat </strong>{{vmCourseView.course.filledSeat}}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12" style="padding-left: 0;">
-        <h3><strong>Description</strong></h3>
-      </div>
-      <div class="col-xs-7 well" style="background-color: transparent">
-        <p> {{vmCourseView.course.description}}</p>
-      </div>
+      <!--<a class="item item-icon-left item-icon-right" href="#">-->
+      <!--<i class="icon ion-chatbubble-working"></i>-->
+      <!--Call Ma-->
+      <!--<i class="icon ion-ios-telephone-outline"></i>-->
+      <!--</a>-->
+
+      <!--<a class="item item-icon-left" href="#">-->
+      <!--<i class="icon ion-mic-a"></i>-->
+      <!--Record album-->
+      <!--<span class="item-note">-->
+      <!--Grammy-->
+      <!--</span>-->
+      <!--</a>-->
     </div>
 
 
-    <div class="row">
-      <md-button class="md-fab pull-right" aria-label="go top" ng-click="vmCourseView.goTop()" data-toggle="tooltip"
-                 title="GoTop"
-                 style="background-color: #333; margin-bottom: 20px"><span
-        class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>
-    </div>
+    <!--<ion-row>-->
+    <!--<ion-col>-->
+    <!--Code-->
+    <!--<ion-badge color="secondary">{{course.code}}</ion-badge>-->
+    <!--<ion-item>-->
+    <!--<ion-icon name="logo-twitter" item-start></ion-icon>-->
+    <!--Followers-->
+    <!--<ion-badge color="light">260k</ion-badge>-->
+    <!--</ion-item>-->
+    <!--</ion-col>-->
+    <!--</ion-row>-->
+
+
+    <!--<div>-->
+    <!--<div class="row"> &lt;!&ndash;style="display: inline-flex;"&ndash;&gt;-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> EC </strong> {{course.ec}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> Block </strong>{{course.block}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> Max Seat </strong>{{course.maxSeats}}</span>-->
+    <!--<span class="text-left"><strong> Filled Seat </strong>{{course.filledSeat}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-xs-12" style="padding-left: 0;">-->
+    <!--<h3><strong>Description</strong></h3>-->
+    <!--</div>-->
+    <!--<div class="col-xs-7 well" style="background-color: transparent">-->
+    <!--<p> {{vmCourseView.course.description}}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="row">-->
+    <!--<md-button class="md-fab pull-right" aria-label="go top" ng-click="goTop()" data-toggle="tooltip"-->
+    <!--title="GoTop"-->
+    <!--style="background-color: #333; margin-bottom: 20px"><span-->
+    <!--class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>-->
+    <!--</div>-->
   </ion-content>
 </ion-view>
+
+
