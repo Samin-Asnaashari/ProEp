@@ -1,13 +1,15 @@
 <ion-view view-title="GORCA login">
   <ion-nav-bar class="bar-royal"></ion-nav-bar>
   <ion-content id="login">
-    <div class="list card">
-      <div class="item item-input">
-        <input type="text" placeholder="Pcn" ng-model="loginCtrl.loginData.pcn">
-      </div>
-      <div class="item item-input">
+    <div class="list">
+      <label class="item item-input item-floating-label">
+        <span class="input-label">PCN</span>
+        <input type="text" placeholder="PCN" ng-model="loginCtrl.loginData.pcn">
+      </label>
+      <label class="item item-input item-floating-label">
+        <span class="input-label">Password</span>
         <input type="password" placeholder="Password" ng-model="loginCtrl.loginData.password">
-      </div>
+      </label>
     </div>
     <div class="padding">
       <button class="button button-block button-royal" ng-click="loginCtrl.trylogin()">Login</button>

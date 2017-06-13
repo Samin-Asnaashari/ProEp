@@ -256,8 +256,6 @@ angular.module('GORCA.controllers', [])
     var vm = this;
 
     vm.loginData = {
-      pcn: "310323",
-      password: "123"
     };
 
     vm.trylogin = function () {

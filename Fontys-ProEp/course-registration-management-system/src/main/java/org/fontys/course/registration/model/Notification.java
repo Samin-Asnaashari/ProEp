@@ -33,12 +33,12 @@ public class Notification {
     private SendStatus sendStatus;
 
     @JsonIgnoreProperties("myCourses")
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne
     @JoinColumn
     private Person sender;
 
     @JsonBackReference
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn
     private Person receiver;
 

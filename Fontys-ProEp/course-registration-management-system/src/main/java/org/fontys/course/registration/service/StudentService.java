@@ -17,11 +17,15 @@ public class StudentService {
 
     @Transactional
     public void AddStudent(Student student) {
+    	student.setNotificationBadgeCount(0);
         this.studentRepository.save(student);
     }
 
     @Transactional
     public void AddStudents(List<Student> students) {
+    	for(int i = 0; i < students.size(); i++) {
+    		students.get(i).setNotificationBadgeCount(0);
+    	}
         this.studentRepository.save(students);
     }
 
