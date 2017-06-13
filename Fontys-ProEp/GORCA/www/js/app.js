@@ -38,15 +38,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             });
         }
       });
-      $rootScope.$on('$stateChangeStart', function(event, toState){
-        if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
-          event.preventDefault();
-          $state.go('login');
-        }
-        else if(loginService.getAuthentication() && toState.name === 'login') {
-          event.preventDefault();
-        }
-      });
     });
   })
 

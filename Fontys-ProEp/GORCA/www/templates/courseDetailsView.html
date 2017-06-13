@@ -1,97 +1,86 @@
-<!--<ion-view view-title="Course Details">-->
-  <!--<ion-content>-->
-    <!--<div class="header top">-->
-      <!--<ion-row>-->
-        <!--<ion-col coll-12 style="padding-left: 0; text-transform: uppercase;">-->
-          <!--<h1 calss=".md-headline"><strong>{{course.name}}</strong></h1>-->
-        <!--</ion-col>-->
-      <!--</ion-row>-->
-    <!--</div>-->
+<ion-view view-title="Course Details">
+  <ion-content>
 
-    <!--<br/> &lt;!&ndash;Registration end and start&ndash;&gt;-->
+    <div class="bar bar-header" style="text-transform: uppercase;">
+      <h1 class="title"><strong>{{course.name}} </strong><span class="badge badge-royal">{{course.code}}</span></h1>
+    </div>
+
+    <div class="list">
+      <a class="item item-icon-left" href="#">
+      </a>
+      regStartDate regEndDate
+      <!--<a class="item item-icon-left" href="#">-->
+      <!--<i class="icon ion-email"></i>-->
+      <!--Check mail-->
+      <!--<i class="icon ion-email"></i>-->
+      <!--Check mail-->
+      <!--</a>-->
+
+      <!--<a class="item item-icon-left item-icon-right" href="#">-->
+      <!--<i class="icon ion-chatbubble-working"></i>-->
+      <!--Call Ma-->
+      <!--<i class="icon ion-ios-telephone-outline"></i>-->
+      <!--</a>-->
+
+      <!--<a class="item item-icon-left" href="#">-->
+      <!--<i class="icon ion-mic-a"></i>-->
+      <!--Record album-->
+      <!--<span class="item-note">-->
+      <!--Grammy-->
+      <!--</span>-->
+      <!--</a>-->
+    </div>
+
 
     <!--<ion-row>-->
-      <!--<ion-col>-->
-        <!--Code <ion-badge color="secondary">{{course.code}}</ion-badge>-->
-        <!--<ion-item>-->
-          <!--<ion-icon name="logo-twitter" item-start></ion-icon>-->
-          <!--Followers-->
-          <!--<ion-badge item-end>260k</ion-badge>-->
-        <!--</ion-item>-->
-      <!--</ion-col>-->
+    <!--<ion-col>-->
+    <!--Code-->
+    <!--<ion-badge color="secondary">{{course.code}}</ion-badge>-->
+    <!--<ion-item>-->
+    <!--<ion-icon name="logo-twitter" item-start></ion-icon>-->
+    <!--Followers-->
+    <!--<ion-badge color="light">260k</ion-badge>-->
+    <!--</ion-item>-->
+    <!--</ion-col>-->
     <!--</ion-row>-->
 
 
     <!--<div>-->
-      <!--<div class="row"> &lt;!&ndash;style="display: inline-flex;"&ndash;&gt;-->
-        <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
-          <!--<div class="col-xs-2" style="padding-left: 0">-->
-            <!--<span class="text-left"><strong> EC </strong> {{course.ec}}</span>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
-          <!--<div class="col-xs-2" style="padding-left: 0">-->
-            <!--<span class="text-left"><strong> Block </strong>{{course.block}}</span>-->
-          <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
-          <!--<div class="col-xs-2" style="padding-left: 0">-->
-            <!--<span class="text-left"><strong> Max Seat </strong>{{course.maxSeats}}</span>-->
-            <!--<span class="text-left"><strong> Filled Seat </strong>{{course.filledSeat}}</span>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
+    <!--<div class="row"> &lt;!&ndash;style="display: inline-flex;"&ndash;&gt;-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> EC </strong> {{course.ec}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> Block </strong>{{course.block}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-xs-2 well well-sm removeWellStyle">-->
+    <!--<div class="col-xs-2" style="padding-left: 0">-->
+    <!--<span class="text-left"><strong> Max Seat </strong>{{course.maxSeats}}</span>-->
+    <!--<span class="text-left"><strong> Filled Seat </strong>{{course.filledSeat}}</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
     <!--<div class="row">-->
-      <!--<div class="col-xs-12" style="padding-left: 0;">-->
-        <!--<h3><strong>Description</strong></h3>-->
-      <!--</div>-->
-      <!--<div class="col-xs-7 well" style="background-color: transparent">-->
-        <!--<p> {{vmCourseView.course.description}}</p>-->
-      <!--</div>-->
+    <!--<div class="col-xs-12" style="padding-left: 0;">-->
+    <!--<h3><strong>Description</strong></h3>-->
+    <!--</div>-->
+    <!--<div class="col-xs-7 well" style="background-color: transparent">-->
+    <!--<p> {{vmCourseView.course.description}}</p>-->
+    <!--</div>-->
     <!--</div>-->
 
-    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-    <!--&lt;!&ndash;<md-button class="md-fab pull-right" aria-label="go top" ng-click="goTop()" data-toggle="tooltip"&ndash;&gt;-->
-    <!--&lt;!&ndash;title="GoTop"&ndash;&gt;-->
-    <!--&lt;!&ndash;style="background-color: #333; margin-bottom: 20px"><span&ndash;&gt;-->
-    <!--&lt;!&ndash;class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>&ndash;&gt;-->
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-  <!--</ion-content>-->
-<!--</ion-view>-->
-<ion-header>
-  <ion-navbar>
-    <ion-title>Badges</ion-title>
-  </ion-navbar>
-</ion-header>
+    <!--<div class="row">-->
+    <!--<md-button class="md-fab pull-right" aria-label="go top" ng-click="goTop()" data-toggle="tooltip"-->
+    <!--title="GoTop"-->
+    <!--style="background-color: #333; margin-bottom: 20px"><span-->
+    <!--class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></md-button>-->
+    <!--</div>-->
+  </ion-content>
+</ion-view>
 
-<ion-content>
 
-  <ion-card>
-
-    <!--<img src="assets/img/bjork-live.jpg"/>-->
-
-    <ion-card-content>
-      <ion-card-title>
-        Björk
-      </ion-card-title>
-      <p>
-        Björk first came to prominence as one of the lead vocalists of the avant pop Icelandic sextet the Sugarcubes, but when...
-      </p>
-    </ion-card-content>
-
-    <ion-item>
-      <ion-icon name='musical-notes' item-start style="color: #d03e84"></ion-icon>
-      Albums
-      <ion-badge item-end>9</ion-badge>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name='logo-twitter' item-start style="color: #55acee"></ion-icon>
-      Followers
-      <ion-badge item-end>260k</ion-badge>
-    </ion-item>
-
-  </ion-card>
-
-</ion-content>

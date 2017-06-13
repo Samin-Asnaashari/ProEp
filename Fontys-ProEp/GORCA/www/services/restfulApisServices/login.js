@@ -7,7 +7,7 @@ angular.module('GORCA.serviceAPIS').service('loginService', function ($http, $co
 
   var self = this;
   var http = 'http://';
-  var localhost = "192.168.0.115";
+  var localhost = "145.93.44.129";
   var baseUrl = http + localhost + ':8090/login';
 
   self.logout = function () {
