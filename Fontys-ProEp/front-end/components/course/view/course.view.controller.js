@@ -40,12 +40,50 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
 
     EventStudent.subscribeOnAStudentRemoved($scope, function (event, data) {
         console.log(data.pcn, "data");
-        registrationService.updateRegistration(vm.course.code,data.pcn,"DECLINE")
+        for(var i =0;i<vm.acceptedStudents.length;i++)
+        {
+            if(vm.acceptedStudents[i].pcn==data.pcn)
+            {
+                var s;
+                s =vm.acceptedStudents[i];
+                registrationService.updateRegistration(vm.course.code,data.pcn,"DECLINE")
+                    .then(function () {
+                        vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(s), 1);
+                        vm.declinedStudents.push(s);
+                    }, function (error) {
+
+                    });
+            }
+        }
+
+    });
+
+    EventStudent.subscribeOnStudentsAdded($scope, function (event, data) {
+        angular.forEach(data.students, function (s) {
+        return registrationService.updateRegistration(vm.course.code,s.pcn,"ACCEPTED")
             .then(function () {
-                vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(data), 1)
-                vm.declinedStudents.push(data);
+                    if(vm.pendingStudents.indexOf(s) !== -1) {
+                        vm.pendingStudents.splice(vm.pendingStudents.indexOf(s), 1);
+                    }
+                    if(vm.declinedStudents.indexOf(s) !== -1) {
+                        vm.declinedStudents.splice(vm.declinedStudents.indexOf(s), 1);
+                    }
+                    vm.acceptedStudents.push(s);
             }, function (error) {
 
             });
+        })
+    });
+
+    EventStudent.subscribeOnStudentsRemoved($scope, function (event, data){
+        angular.forEach(data.students, function (s) {
+            return registrationService.updateRegistration(vm.course.code,s.pcn,"DECLINE")
+                .then(function () {
+                    vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(s), 1);
+                    vm.declinedStudents.push(s);
+                }, function (error) {
+
+                });
+        })
     });
 });
