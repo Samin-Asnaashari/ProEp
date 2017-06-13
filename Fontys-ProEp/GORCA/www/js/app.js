@@ -46,6 +46,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       }
       else if(loginService.getAuthentication() && toState.name === 'login') {
         event.preventDefault();
+        $state.go('app.home');
       }
     });
   })
@@ -256,6 +257,8 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       //   }
       // });
 
-    // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise(function($injector) {
+      var $state = $injector.get('$state');
+      return $state.go('login');
+    });
   });

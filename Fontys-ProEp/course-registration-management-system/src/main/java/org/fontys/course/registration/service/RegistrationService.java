@@ -37,13 +37,12 @@ public class RegistrationService {
         return this.registrationRepository.findByRegistrationStatusAndCourse(registrationStatus, utilService.GetCourse(courseCode));
     }
 
-<<<<<<< HEAD
     @Transactional
     public void UpdateRegistration(String courseCode, String studentPcn, String status) throws Exception {
         Registration registration=this.registrationRepository.findByCourseAndStudent(utilService.GetCourse(courseCode),utilService.GetStudentById(studentPcn));
         registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
     }
-=======
+
     public List<Registration> GetAllRegistrationsByPcn(Integer pcn) {
         return this.registrationRepository.findByStudent_Pcn(pcn);
     }
@@ -74,5 +73,4 @@ public class RegistrationService {
 //
 //        return courses;
 //    }
->>>>>>> fe8562d2a68f7b9ebf3ad9bfd56a88bdc46e76ec
 }
