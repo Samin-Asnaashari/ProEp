@@ -38,6 +38,24 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             });
         }
       });
+      // $rootScope.$on('$stateChangeStart', function(event, toState){
+      //   if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+      //     event.preventDefault();
+      //     $state.go('login');
+      //   }
+      //   else if(loginService.getAuthentication() && toState.name === 'login') {
+      //     event.preventDefault();
+      //   }
+      // });
+    });
+    $rootScope.$on('$stateChangeStart', function(event, toState){
+      if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+        event.preventDefault();
+        $state.go('login');
+      }
+      else if(loginService.getAuthentication() && toState.name === 'login') {
+        event.preventDefault();
+      }
     });
   })
 
@@ -131,22 +149,32 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      // .state('app.myCourses', {
-      //   url: '/myCourses',
-      //   views: {
-      //     'menuContent': {
-      //       templateUrl: ''
-      //     }
-      //   }
-      // })
-
       .state('app.registration', {
         url: '/registration',
         views: {
           'menuContent': {
-            templateUrl: 'templates/courseDetailsView.html',
+            templateUrl: 'templates/registration.html',
             controller: 'RegistrationController',
             controllerAs: 'registrationCtrl'
+          }
+        },
+        resolve: {
+          electiveCoursesResolve: function (reviewService, $ionicLoading, $stateParams) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
+
+            return reviewService.getAllReviews($stateParams.courseCode)
+              .then(function (response) {
+                return {reviews: response.data};
+              }, function (error) {
+                console.log('error');
+                //disable loading icon
+                $ionicLoading.hide();
+                alert(angular.toJson(error));
+              })
           }
         }
       })
@@ -192,14 +220,14 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      // .state('courseDetailView', {
-      //   url: '/courseDetailView?code',
-      //   views: {
-      //     'mainMenu': {
-      //       templateUrl: 'templates/courseDetailView.html'
-      //     }
-      //   }
-      // })
+      .state('courseDetailView', {
+        url: '/courseDetailView?code',
+        views: {
+          'mainMenu': {
+            templateUrl: 'templates/courseDetailsView.html'
+          }
+        }
+      })
       ;
 
     // if none of the above states are matched, use this as the fallback
