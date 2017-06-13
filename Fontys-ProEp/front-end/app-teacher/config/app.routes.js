@@ -81,10 +81,36 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         });
                 }
             }
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                loginResolve: function () {
+                    return {loginApp: "Teacher"};
+                }
+            }
+        })
+        .state('logout', {
+            url: '/logout',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                logOutResolve: function ($state, $stateParams, loginService) {
+                    return loginService.logout()
+                        .then(function (response) {
+                            loginService.DeleteAuthenticationCookie();
+                        }, function (error) {
+                            console.log("Error");
+                            console.log(error);
+                        });
+                },
+                loginResolve: function () {
+                    return {loginApp: "Admin"};
+                }
+            }
         });
-        // .state('login', {
-        //     url: '/login'
-        // })
         // .state('notifications', {
         //     url: '',
         //     templateUrl: '',

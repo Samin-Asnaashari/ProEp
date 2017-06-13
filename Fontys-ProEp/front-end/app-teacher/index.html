@@ -25,6 +25,8 @@
 
     <!-- general styles -->
     <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="../components/login/login.css"/>
+
 </head>
 
 <body>
@@ -44,12 +46,15 @@
         </div>
 
         <!-- Nagivation items -->
-        <div ng-controller="navCtrl as vmNav" class="collapse navbar-collapse" id="mainNavBar">
+        <div ng-controller="navCtrl" class="collapse navbar-collapse" id="mainNavBar">
             <ul class="nav navbar-nav">
-                <li ng-class="{ active: vmNav.isActive('/home')}"><a ng-href="#!/home">Home</a></li>
+                <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
             </ul>
-            <ul class="nav navbar-right">
-                <li class="dropdown pull-right dropdown-notifications" >
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="pull-right" ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
+                <li class="pull-right" ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
+                <li class="removeHighlight dropdown pull-right dropdown-notifications" >
                     <a href="#" class="dropdown-toggle">
                         <i data-count="2" class="glyphicon glyphicon-bell notification-icon" style="vertical-align: middle;"></i>
                     </a>
@@ -113,6 +118,7 @@
 <script src="../components/home/teacher/module.js"></script>
 <script src="../components/course/view/module.js"></script>
 <script src="../components/studentCustomTable/module.js"></script>
+<script src="../components/login/module.js"></script>
 
 <!--service config-->
 <script src="../services/api/config/module.js"></script>
@@ -121,6 +127,7 @@
 <!-- application -->
 <script src="../components/home/teacher/home.teacher.controller.js"></script>
 <script src="../components/course/view/course.view.controller.js"></script>
+<script src="../components/login/login.controller.js"></script>
 <script src="teacherNav.controller.js"></script>
 <script src="../components/studentCustomTable/studentCustomTable.controller.js"></script>
 <script src="../components/studentCustomTable/studentCustomTable.directive.js"></script>
@@ -129,6 +136,7 @@
 <script src="../services/api/teacher.service.js"></script>
 <script src="../services/api/registrationService.js"></script>
 <script src="../services/api/course.service.js"></script>
+<script src="../services/api/login.service.js"></script>
 
 <!--event-->
 <script src="../services/event/event.student.js"></script>

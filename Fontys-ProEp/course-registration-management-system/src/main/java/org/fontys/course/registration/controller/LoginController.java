@@ -22,13 +22,18 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping(value = "/doAdminLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/doAdminLogin", method = RequestMethod.GET)
     public Message AdminLogin(HttpServletRequest request) {
     	return new Message(request.getHeader("Authorization"));
     }
     
     @RequestMapping(value = "/doStudentLogin", method = RequestMethod.GET)
     public Message StudentLogin(HttpServletRequest request) {
+    	return new Message(request.getHeader("Authorization"));
+    }
+    
+    @RequestMapping(value = "/doTeacherLogin", method = RequestMethod.GET)
+    public Message TeacherLogin(HttpServletRequest request) {
     	return new Message(request.getHeader("Authorization"));
     }
 }

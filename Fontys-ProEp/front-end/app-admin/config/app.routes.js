@@ -39,7 +39,12 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
         .state('login', {
             url: '/login',
             templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin'
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                loginResolve: function () {
+                    return {loginApp: "Admin"};
+                }
+            }
         })
         .state('logout', {
             url: '/logout',
@@ -54,6 +59,9 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                             console.log("Error");
                             console.log(error);
                         });
+                },
+                loginResolve: function () {
+                    return {loginApp: "Admin"};
                 }
             }
         })
