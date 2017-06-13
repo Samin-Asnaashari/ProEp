@@ -38,15 +38,15 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             });
         }
       });
-      $rootScope.$on('$stateChangeStart', function(event, toState){
-        if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
-          event.preventDefault();
-          $state.go('login');
-        }
-        else if(loginService.getAuthentication() && toState.name === 'login') {
-          event.preventDefault();
-        }
-      });
+    });
+    $rootScope.$on('$stateChangeStart', function(event, toState){
+      if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+        event.preventDefault();
+        $state.go('login');
+      }
+      else if(loginService.getAuthentication() && toState.name === 'login') {
+        event.preventDefault();
+      }
     });
   })
 
@@ -219,14 +219,62 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('courseDetailView', {
-        url: '/courseDetailView',
+      .state('app.mycourses', {
+        url: '/mycourses',
         views: {
-          'mainMenu': {
-            templateUrl: 'templates/courseDetailView.html'
+          'menuContent': {
+            templateUrl: 'templates/myCourses.html',
+            controller: 'MyCoursesController',
+            controllerAs: 'MyCoursesCtrl'
+          }
+        },
+        resolve: {
+          myAcceptedCoursesResolve: function (courseService, $ionicPopup) {
+
+            return courseService.getAllAcceptedElectiveCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function(course){
+                  totalEC = totalEC + course.ec;
+                });
+
+                console.log(totalEC);
+                return {acceptedCourses : response.data, acceptedEC : totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving accepted courses'
+                })
+              });
+          },
+          myMandatoryCoursesResolve: function (courseService, $ionicPopup) {
+
+            return courseService.getAllMandatoryCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function(course){
+                  totalEC = totalEC + course.ec;
+                });
+
+                return {mandatoryCourses : response.data, mandatoryEC : totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving mandatory courses'
+                })
+              });
           }
         }
       });
+
+      // .state('courseDetailView', {
+      //   url: '/courseDetailView',
+      //   views: {
+      //     'mainMenu': {
+      //       templateUrl: 'templates/courseDetailView.html'
+      //     }
+      //   }
+      // });
 
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');

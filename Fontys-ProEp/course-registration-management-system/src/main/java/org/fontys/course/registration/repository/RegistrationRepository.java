@@ -19,4 +19,6 @@ public interface RegistrationRepository extends JpaRepository<Registration, Regi
     List<Registration> findRegistrationByCourse(String courseCode);
 
     List<Registration> findByRegistrationStatusAndCourse(RegistrationStatus status, Course course);
+    List<Registration> findByStudent_Pcn(Integer pcn);
+    List<Registration> findByStudent_PcnAndRegistrationStatus(Integer pcn, RegistrationStatus status);
 }

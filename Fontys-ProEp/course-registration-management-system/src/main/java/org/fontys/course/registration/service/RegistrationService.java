@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fontys.course.registration.model.Course;
@@ -33,4 +34,35 @@ public class RegistrationService {
     public List<Registration> GetAllRegistrationByStatusAndCourse(RegistrationStatus registrationStatus, String courseCode) throws Exception {
         return this.registrationRepository.findByRegistrationStatusAndCourse(registrationStatus, utilService.GetCourse(courseCode));
     }
+
+    public List<Registration> GetAllRegistrationsByPcn(Integer pcn) {
+        return this.registrationRepository.findByStudent_Pcn(pcn);
+    }
+
+    public List<Course> GetAllAppliedElectiveCoursesByPcn(Integer pcn)
+    {
+        List<Registration> registrations = this.registrationRepository.findByStudent_Pcn(pcn);
+        List<Course> courses = new ArrayList<>();
+
+        for(Registration reg: registrations)
+            courses.add(reg.getCourse());
+
+        return courses;
+    }
+
+    public List<Registration> GetAllAcceptedRegistrationsByPcn(Integer pcn) {
+        return this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+    }
+
+//    public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
+//    {
+//        List<Registration> registrations =
+//                this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+//        List<Course> courses = new ArrayList<>();
+//
+//        for(Registration reg: registrations)
+//            courses.add(reg.getCourse());
+//
+//        return courses;
+//    }
 }

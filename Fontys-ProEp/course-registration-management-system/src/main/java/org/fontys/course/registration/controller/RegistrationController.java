@@ -1,5 +1,6 @@
 package org.fontys.course.registration.controller;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.service.RegistrationService;
@@ -8,6 +9,7 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
@@ -43,4 +45,25 @@ public class RegistrationController {
 		}
         return null;
     }
+
+    @RequestMapping(value = "/pcn/{pcn}", method = RequestMethod.GET)
+    public List<Registration> GetAllRegistrationsByStudent(@PathVariable Integer pcn){
+        return this.registrationService.GetAllRegistrationsByPcn(pcn);
+    }
+
+    @RequestMapping(value = "/ascourses/pcn/{pcn}", method = RequestMethod.GET)
+    public List<Course> GetAllRegistrationsByStudentAsCourses(@PathVariable Integer pcn){
+        return this.registrationService.GetAllAppliedElectiveCoursesByPcn(pcn);
+    }
+
+    @RequestMapping(value = "/accepted/pcn/{pcn}", method = RequestMethod.GET)
+    public List<Registration> GetAllAcceptedRegistrationsByStudent(@PathVariable Integer pcn){
+        return this.registrationService.GetAllAcceptedRegistrationsByPcn(pcn);
+    }
+
+    //@RequestMapping(value = "/accepted/ascourses/pcn/{pcn}", method = RequestMethod.GET)
+//    @RequestMapping(value = "/accepted/ascourses/pcn/", method = RequestMethod.GET)
+//    public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal){
+//        return this.registrationService.GetAllAcceptedElectiveCoursesByPcn(Integer.valueOf(principal.getName()));
+//    }
 }
