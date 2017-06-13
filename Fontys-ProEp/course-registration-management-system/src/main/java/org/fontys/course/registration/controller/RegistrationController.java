@@ -43,4 +43,16 @@ public class RegistrationController {
 		}
         return null;
     }
+
+    @RequestMapping(value = "/updateRegistrationStatus/{courseCode}/{studentPcn}/{registrationStatus}",
+            method = RequestMethod.PUT)
+    public void UpdateRegistration(@PathVariable("courseCode") String courseCode,@PathVariable("studentPcn") String studentPcn,
+                                   @PathVariable("registrationStatus") String registrationStatus ) {
+        try {
+            this.registrationService.UpdateRegistration(courseCode,studentPcn,registrationStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

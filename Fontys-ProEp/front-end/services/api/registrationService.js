@@ -33,4 +33,8 @@ angular.module('appServiceAPI').service('registrationService', function ($http) 
         return $http.get(baseUrl + '/status/DECLINE/' + courseCode);
     };
 
+    self.updateRegistration = function (courseCode, studentPcn, status) {
+        return $http.put(baseUrl+ '/updateRegistrationStatus/'+ courseCode+ '/' + studentPcn+'/'+status);
+    };
+
 });
