@@ -3,7 +3,6 @@ angular.module('GORCA.controllers', [])
   .controller('MenuController', function(notificationsResolve, notificationsBadgeCountResolve, notificationService,
                                          $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
 
-
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
     // To listen for when this page is active (for example, to refresh data),
@@ -257,9 +256,7 @@ angular.module('GORCA.controllers', [])
     var vm = this;
 
     vm.loginData = {
-      pcn: "310323",
-      password: "123"
-    }
+    };
 
     vm.trylogin = function () {
       loginService.login(vm.loginData)
@@ -293,19 +290,10 @@ angular.module('GORCA.controllers', [])
     vm.currentDate = new Date();
   })
 
-  .controller('PlaylistsCtrl', function ($scope) {
-    $scope.playlists = [
-      {title: 'Reggae', id: 1},
-      {title: 'Chill', id: 2},
-      {title: 'Dubstep', id: 3},
-      {title: 'Indie', id: 4},
-      {title: 'Rap', id: 5},
-      {title: 'Cowbell', id: 6}
-    ];
-  })
-
-  .controller('PlaylistCtrl', function($scope, $stateParams) {
-    console.log("playlistID:: " + $stateParams.playlistId);
+  .controller('RegistrationController', function ($scope) {
+    $scope.course =
+      {"code":"IPV","name":"Image Processing","description":"Not Added yet...","block":7,"maxSeats":26,"filledSeat":3,"regStartDate":null,"regEndDate":null,"teachers":[],"states":[{"id":7,"major":"SOFTWARE","courseType":"ELECTIVE"},{"id":8,"major":"BUSINESS","courseType":"ELECTIVE"}],"reviews":[],"ec":3}
+    ;
   })
 
   .controller('MyCoursesController', function(myMandatoryCoursesResolve, myAcceptedCoursesResolve) {

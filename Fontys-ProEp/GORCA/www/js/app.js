@@ -140,20 +140,22 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.search', {
-        url: '/search',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/search.html'
-          }
-        }
-      })
+      // .state('app.myCourses', {
+      //   url: '/myCourses',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: ''
+      //     }
+      //   }
+      // })
 
-      .state('app.browse', {
-        url: '/browse',
+      .state('app.registration', {
+        url: '/registration',
         views: {
           'menuContent': {
-            templateUrl: 'templates/browse.html'
+            templateUrl: 'templates/courseDetailsView.html',
+            controller: 'RegistrationController',
+            controllerAs: 'registrationCtrl'
           }
         }
       })
@@ -199,26 +201,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.playlists', {
-        url: '/playlists',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlists.html',
-            controller: 'PlaylistsCtrl'
-          }
-        }
-      })
-
-      .state('app.single', {
-        url: '/playlists/:playlistId',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/playlist.html',
-            controller: 'PlaylistCtrl'
-          }
-        }
-      })
-
       .state('app.mycourses', {
         url: '/mycourses',
         views: {
@@ -238,7 +220,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                   totalEC = totalEC + course.ec;
                 });
 
-                console.log(totalEC);
                 return {acceptedCourses : response.data, acceptedEC : totalEC};
               }, function (error) {
                 $ionicPopup.alert({
@@ -266,7 +247,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         }
       });
-
       // .state('courseDetailView', {
       //   url: '/courseDetailView',
       //   views: {

@@ -61,22 +61,12 @@ gulp.task('minify-js-teacher', function () {
 
 gulp.task('copy-bower-components-teacher', function () {
     gulp.src('./bower_components/**')
-        .pipe(gulp.dest('public/bower_components/'));
+        .pipe(gulp.dest('public/bower_components'));
 });
 
 gulp.task('copy-html-files-teacher', function () {
     gulp.src('./app-teacher/**/*.html')
         .pipe(gulp.dest('./public/app-teacher/'));
-});
-
-gulp.task('copy-components-teacher', function () {
-    gulp.src('./components/**')
-        .pipe(gulp.dest('public/components/'));
-});
-
-gulp.task('copy-services-teacher', function () {
-    gulp.src('./services/**')
-        .pipe(gulp.dest('public/services/'));
 });
 
 gulp.task('connect-teacher', function () {
@@ -116,6 +106,6 @@ gulp.task('connect-public-teacher', function () {
 gulp.task('build-teacher', function () {
     runSequence(
         ['clean-teacher', 'lint-teacher', 'minify-css-teacher', 'minify-js-teacher', 'copy-html-files-teacher',
-            'copy-bower-components-teacher', 'copy-components-teacher', 'copy-services-teacher', 'connect-public-teacher']
+            'copy-bower-components-teacher', 'connect-public-teacher']
     );
 });
