@@ -1,10 +1,12 @@
 package org.fontys.course.registration.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Registration;
+import org.fontys.course.registration.model.RegistrationId;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.RegistrationRepository;
@@ -21,8 +23,13 @@ public class RegistrationService {
     @Autowired
     private UtilService utilService;
 
-    public void createRegistration(Registration registration) {
-        this.registrationRepository.save(registration);
+    @Transactional
+    public void createRegistration(String courseCode, int pcn) throws Exception {
+        Student s = utilService.GetStudentById(pcn);
+        Course c = utilService.GetCourse(courseCode);
+        RegistrationId id = new RegistrationId();
+        Registration newRegistration = new Registration(s.getPcn(),c.getCode(),new Date(),RegistrationStatus.PENDING);
+        this.registrationRepository.save(newRegistration);
     }
 
     public List<Registration> GetAllRegistrations() {

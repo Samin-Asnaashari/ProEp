@@ -8,15 +8,11 @@ angular.module('GORCA.serviceAPIS').service('registrationService', function ($ht
   var ipAddress = "localhost"; /*145.93.136.163*/
   var baseUrl = http + ipAddress + ':8090/registrations';
 
-  self.createRegistration = function (registration) {
-    return $http.post(baseUrl, registration);
+  self.createRegistration = function (courseCode) {
+    return $http.post(baseUrl + "/" +courseCode);
   };
 
   self.GetAllRegistrationsExceptAcceptedOnes = function () {
     return $http.get(baseUrl + "/exceptAcceptedOnes");
-  };
-
-  self.GetAllRegistrationsByStudent = function () {
-    return $http.get(baseUrl + "/forStudent/{pcn}");
   };
 });

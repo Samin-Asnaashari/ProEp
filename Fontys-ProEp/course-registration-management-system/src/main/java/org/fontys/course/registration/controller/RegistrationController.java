@@ -21,12 +21,13 @@ import java.util.List;
         stage = ApiStage.RC
 )
 public class RegistrationController {
+
     @Autowired
     private RegistrationService registrationService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void createRegistration(@PathVariable Registration registration) {
-        this.registrationService.createRegistration(registration);
+    @RequestMapping(value = "/{courseCode}", method = RequestMethod.POST)
+    public void createRegistration(@PathVariable String courseCode, Principal principal) throws Exception {
+        this.registrationService.createRegistration(courseCode, Integer.valueOf(principal.getName()));
     }
 
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
