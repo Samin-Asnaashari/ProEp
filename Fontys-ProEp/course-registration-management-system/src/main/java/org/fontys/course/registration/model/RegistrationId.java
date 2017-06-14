@@ -1,54 +1,53 @@
 package org.fontys.course.registration.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-//@Embeddable
+@Embeddable
 public class RegistrationId implements Serializable {
 
-    //    @JsonBackReference
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToOne
-    @JoinColumn
+	@JsonIgnoreProperties("notifications")
+	@OneToOne
+    @JoinColumn(name = "student_pcn", referencedColumnName="pcn")
     private Student student;
 
-    //    @JsonBackReference
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    @OnDelete(action = OnDeleteAction.CASCADE)
+	@JsonIgnoreProperties({"teachers", "states", "reviews"})
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "course_code", referencedColumnName="code")
     private Course course;
 
     public RegistrationId() {
     }
 
-    public RegistrationId(Student student, Course course) {
-        this.student = student;
-        this.course = course;
-    }
+	public RegistrationId(Student student, Course course) {
+		super();
+		this.student = student;
+		this.course = course;
+	}
+    
+	public Student getStudent() {
+		return student;
+	}
 
-    public Student getStudent() {
-        return student;
-    }
+	public Course getCourse() {
+		return course;
+	}
 
-    public void setStudent(Student student) {
-        this.student = student;
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RegistrationId)) return false;
+        RegistrationId that = (RegistrationId) o;
+        return Objects.equals(getStudent(), that.getStudent()) &&
+                Objects.equals(getCourse(), that.getCourse());
     }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
+ 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStudent(), getCourse());
     }
 }

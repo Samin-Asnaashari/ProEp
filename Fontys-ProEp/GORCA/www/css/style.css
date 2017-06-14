@@ -7,3 +7,27 @@ h2.notification-title {
 #menu-notifications ion-item .item-content{
   background-color: transparent !important;
 }
+
+.popup-body {
+  text-align: center;
+}
+
+.popup-buttons .button-positive{
+  background-color: #886AEA;
+}
+
+.popup-buttons .button-positive.activated {
+  background-color: #886AEA;
+}
+
+.popup-buttons .button-default{
+  border: 1px solid #222222;
+  background-color: #ffffff;
+}
+
+.vertical-align-content > *
+{
+  display: flex!important;
+  align-content: center!important;
+  align-items: center!important;
+}

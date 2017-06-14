@@ -44,6 +44,14 @@ public class Review {
     public Review() {
     }
 
+    public Review(String description,String negativePoints,String positivePoints, Integer score )
+	{
+		this.description=description;
+		this.negativePoints=negativePoints;
+		this.positivePoints=positivePoints;
+		this.score=score;
+	}
+
 	public Long getId() {
 		return id;
 	}

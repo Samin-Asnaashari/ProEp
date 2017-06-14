@@ -35,7 +35,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 		.antMatchers("/login/doStudentLogin").access("hasRole('ROLE_" + utilservice.student + "')")
 		.antMatchers("/login/doTeacherLogin").access("hasRole('ROLE_" + utilservice.teacher + "')")
 		.anyRequest()
-		.fullyAuthenticated()
+		.permitAll()
 		.and()
 		.logout()
 		.logoutSuccessHandler((new HttpStatusReturningLogoutSuccessHandler(HttpStatus.OK)))

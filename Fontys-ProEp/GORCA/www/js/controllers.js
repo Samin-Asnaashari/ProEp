@@ -306,11 +306,35 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.reviews = reviewsResolve.reviews;
   })
 
-  .controller('MyCoursesController', function ($state, myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
+  .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService) {
     var vm = this;
     vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
     vm.mandatoryCourses = myMandatoryCoursesResolve.mandatoryCourses;
 
     vm.mandatoryEC = myMandatoryCoursesResolve.mandatoryEC;
     vm.acceptedEC = myAcceptedCoursesResolve.acceptedEC;
+
+    vm.dropRegistration = function(course) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Drop course ' + course.code,
+        template: 'Are you sure you want to drop this course?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          registrationService.dropRegistration(course.code).then(function (response) {
+            var index = vm.acceptedCourses.indexOf(course);
+            vm.acceptedEC = vm.acceptedEC - course.ec;
+            vm.acceptedCourses.splice(index, 1);
+          }, function (error) {
+
+          });
+        }
+      });
+    };
+
+    vm.reloadElective = function () {
+      vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
+      vm.acceptedEC = myAcceptedCoursesResolve.acceptedEC;
+    };
   });

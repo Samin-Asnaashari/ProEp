@@ -276,6 +276,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
       .state('app.courseDetailsView', {
         url: '/myCourses/courseDetailsView',
+        cache: false,
         params: {
           courseView: null
         },
