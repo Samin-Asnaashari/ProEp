@@ -90,6 +90,9 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('app', {
         url: '/app',
         abstract: true,
+        params: {
+          courseToView: null
+        },
         views: {
           'mainMenu': {
             templateUrl: 'templates/menu.html',
@@ -272,14 +275,14 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
       .state('courseDetailView', {
         url: '/courseDetailView',
+        params: {
+          courseview: null
+        },
         views: {
           'mainMenu': {
             templateUrl: 'templates/courseDetailsView.html',
             controller: 'CourseDetailsController',
-            controllerAs: 'CourseDetailsCtrl',
-            params: {
-              course: null
-            }
+            controllerAs: 'CourseDetailsCtrl'
           }
         }
       })
