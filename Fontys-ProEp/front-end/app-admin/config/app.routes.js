@@ -42,6 +42,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             controller: 'loginCtrl as vmLogin',
             resolve: {
                 loginResolve: function () {
+                    console.log("KEKEKEKEKE");
                     return {loginApp: "Admin"};
                 }
             }

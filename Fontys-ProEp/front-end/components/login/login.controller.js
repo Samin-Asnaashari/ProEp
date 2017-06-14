@@ -6,8 +6,9 @@ angular.module('appComponent.login').controller('loginCtrl', function ($state, $
 
     var vm = this;
 
+    console.log("WAWAWAWAWA");
     sessionStorage.loginApp = angular.toJson(loginResolve.loginApp);
-
+    console.log("qqqqqqqqqqqq: " + angular.fromJson(sessionStorage.loginApp));
     vm.errorMsg = "";
 
     vm.SetErrorEmpty = function () {
