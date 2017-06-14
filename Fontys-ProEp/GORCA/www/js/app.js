@@ -197,56 +197,37 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      // .state('app.registration', {
-      //   url: '/registration',
-      //   views: {
-      //     'menuContent': {
-      //       templateUrl: 'templates/registration.html',
-      //       controller: 'RegistrationController',
-      //       controllerAs: 'registrationCtrl'
-      //     }
-      //   },
-      //   resolve: {
-      //     electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
-      //       //show loading icon
-      //       // $ionicLoading.show({
-      //       //   template: 'Loading...'
-      //       // });
-      //
-      //       var courses = [];
-      //
-      //       return courseService.getAllElectiveCourses()
-      //         .then(function (response) {
-      //           courses = response.data;
-      //         }, function (error) {
-      //           console.log('error');
-      //           //disable loading icon
-      //           // $ionicLoading.hide();
-      //           alert(angular.toJson(error))
-      //         });
-      //
-      //       // return registrationService.GetAllRegistrationsExceptAcceptedOnes()
-      //       //   .then(function (response) {
-      //       //     var courses = [];
-      //       //     angular.forEach(response.data, function (c) {
-      //       //       angular.forEach(response.data, function (r) {
-      //       //         if(c == r.course){
-      //       //           r.course.status = r.registrationStatus;
-      //       //           courses.push(r.course)
-      //       //         }
-      //       //       });
-      //       //     });
-      //       //     return {electiveCourses: courses};
-      //       //     /*+ elective ones*/
-      //       //   }, function (error) {
-      //       //     console.log('error');
-      //       //     //disable loading icon
-      //       //     // $ionicLoading.hide();
-      //       //     alert(angular.toJson(error));
-      //       //   })
-      //     }
-      //   }
-      // })
+      .state('app.registration', {
+        url: '/registration',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/registration.html',
+            controller: 'RegistrationController',
+            controllerAs: 'registrationCtrl'
+          }
+        },
+        resolve: {
+          electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
+            var courses = [];
+            return courseService.getAllElectiveCourses()
+              .then(function (courseResponse) {
+                courses = courseResponse.data;
+                registrationService.GetAllOfMyRegistrationsExceptAcceptedOnes()
+                  .then(function (registrationResponse) {
+                    angular.forEach(registrationResponse, function (r) {
+                      var duplicatedCIndex = courses.indexOf(r.course);
+                      if (duplicatedCIndex != undefined) {
+                        courses.splice(duplicatedCIndex, 1);
+                        r.course.status = r.registrationStatus;
+                        courses.push(r.course);
+                      }
+                    });
+                    return {courses: courses};
+                  })
+              })
+          }
+        }
+      })
 
       .state('addReview', {
         url: '/courseDetails/newReview/:courseCode',
@@ -304,7 +285,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       })
     ;
 
-    $urlRouterProvider.otherwise(function($injector) {
+    $urlRouterProvider.otherwise(function ($injector) {
       var $state = $injector.get('$state');
       return $state.go('login');
     });
