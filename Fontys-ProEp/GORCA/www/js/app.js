@@ -7,8 +7,8 @@
 angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
   'angularMoment', 'GORCA.events', 'ngCookies'])
 
-  .run(function($ionicPlatform, notificationDataService, notificationService, EventNotification, $rootScope, loginService, $state) {
-    $ionicPlatform.ready(function() {
+  .run(function ($ionicPlatform, notificationDataService, notificationService, EventNotification, $rootScope, loginService, $state) {
+    $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
       if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -22,7 +22,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       }
 
       $ionicPlatform.on("resume", function (event) {
-        if(loginService.getAuthentication()) {
+        if (loginService.getAuthentication()) {
           var lastID = notificationDataService.lastNotificationID;
           if (lastID == -1) {
             lastID = 0;
@@ -48,12 +48,12 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       //   }
       // });
     });
-    $rootScope.$on('$stateChangeStart', function(event, toState){
-      if(!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
+    $rootScope.$on('$stateChangeStart', function (event, toState) {
+      if (!loginService.SetHeaderAuthentication() && toState.name !== 'login') {
         event.preventDefault();
         $state.go('login');
       }
-      else if(loginService.getAuthentication() && toState.name === 'login') {
+      else if (loginService.getAuthentication() && toState.name === 'login') {
         event.preventDefault();
       }
     });
@@ -149,6 +149,53 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
+      .state('app.myCourses', {
+        url: '/mycourses',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/myCourses.html',
+            controller: 'MyCoursesController',
+            controllerAs: 'MyCoursesCtrl'
+          }
+        },
+        resolve: {
+          myAcceptedCoursesResolve: function (courseService, $ionicPopup) {
+
+            return courseService.getAllAcceptedElectiveCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function (course) {
+                  totalEC = totalEC + course.ec;
+                });
+
+                return {acceptedCourses: response.data, acceptedEC: totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving accepted courses'
+                })
+              });
+          },
+          myMandatoryCoursesResolve: function (courseService, $ionicPopup) {
+
+            return courseService.getAllMandatoryCourses()
+              .then(function (response) {
+                var totalEC = 0;
+                angular.forEach(response.data, function (course) {
+                  totalEC = totalEC + course.ec;
+                });
+
+                return {mandatoryCourses: response.data, mandatoryEC: totalEC};
+              }, function (error) {
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error retreiving mandatory courses'
+                })
+              });
+          }
+        }
+      })
+
       .state('app.registration', {
         url: '/registration',
         views: {
@@ -159,20 +206,41 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          electiveCoursesResolve: function (reviewService, $ionicLoading, $stateParams) {
-
+          electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
             //show loading icon
-            $ionicLoading.show({
-              template: 'Loading...'
-            });
+            // $ionicLoading.show({
+            //   template: 'Loading...'
+            // });
 
-            return reviewService.getAllReviews($stateParams.courseCode)
+            var courses = [];
+
+            return courseService.getAllElectiveCourses()
               .then(function (response) {
-                return {reviews: response.data};
+                courses = response.data;
               }, function (error) {
                 console.log('error');
                 //disable loading icon
-                $ionicLoading.hide();
+                // $ionicLoading.hide();
+                alert(angular.toJson(error))
+              });
+
+            return registrationService.GetAllRegistrationsExceptAcceptedOnes()
+              .then(function (response) {
+                var courses = [];
+                angular.forEach(response.data, function (c) {
+                  angular.forEach(response.data, function (r) {
+                    if(c == r.course){
+                      r.course.status = r.registrationStatus;
+                      courses.push(r.course)
+                    }
+                  });
+                });
+                return {electiveCourses: courses};
+                /*+ elective ones*/
+              }, function (error) {
+                console.log('error');
+                //disable loading icon
+                // $ionicLoading.hide();
                 alert(angular.toJson(error));
               })
           }
@@ -220,58 +288,16 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('app.mycourses', {
-        url: '/mycourses',
-        views: {
-          'menuContent': {
-            templateUrl: 'templates/myCourses.html',
-            controller: 'MyCoursesController',
-            controllerAs: 'MyCoursesCtrl'
-          }
-        },
-        resolve: {
-          myAcceptedCoursesResolve: function (courseService, $ionicPopup) {
-
-            return courseService.getAllAcceptedElectiveCourses()
-              .then(function (response) {
-                var totalEC = 0;
-                angular.forEach(response.data, function(course){
-                  totalEC = totalEC + course.ec;
-                });
-
-                return {acceptedCourses : response.data, acceptedEC : totalEC};
-              }, function (error) {
-                $ionicPopup.alert({
-                  title: 'Error',
-                  template: 'Error retreiving accepted courses'
-                })
-              });
-          },
-          myMandatoryCoursesResolve: function (courseService, $ionicPopup) {
-
-            return courseService.getAllMandatoryCourses()
-              .then(function (response) {
-                var totalEC = 0;
-                angular.forEach(response.data, function(course){
-                  totalEC = totalEC + course.ec;
-                });
-
-                return {mandatoryCourses : response.data, mandatoryEC : totalEC};
-              }, function (error) {
-                $ionicPopup.alert({
-                  title: 'Error',
-                  template: 'Error retreiving mandatory courses'
-                })
-              });
-          }
-        }
-      })
-
       .state('courseDetailView', {
         url: '/courseDetailView',
         views: {
           'mainMenu': {
-            templateUrl: 'templates/courseDetailView.html'
+            templateUrl: 'templates/courseDetailsView.html',
+            controller: 'CourseDetailsController',
+            controllerAs: 'CourseDetailsCtrl',
+            params: {
+              course: null
+            }
           }
         }
       })

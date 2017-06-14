@@ -1,5 +1,6 @@
 package org.fontys.course.registration.repository;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.CourseState;
 import org.fontys.course.registration.model.enums.CourseType;
 import org.fontys.course.registration.model.enums.Major;
@@ -10,5 +11,8 @@ import java.util.List;
 
 @Repository
 public interface CourseStateRepository extends JpaRepository<CourseState, Integer> {
+
     List<CourseState> findByMajorAndCourseType(Major major, CourseType courseType);
+
+//    List<CourseState> findByMajorAndCourseTypeElectiveAndCourseNotIn(Major major, List<Course> courses);
 }

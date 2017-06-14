@@ -1,7 +1,7 @@
 angular.module('GORCA.controllers', [])
 
-  .controller('MenuController', function(notificationsResolve, notificationsBadgeCountResolve, notificationService,
-                                         $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
+  .controller('MenuController', function (notificationsResolve, notificationsBadgeCountResolve, notificationService,
+                                          $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -30,7 +30,7 @@ angular.module('GORCA.controllers', [])
         })
     };
 
-    if(vm.notifications.length > 0) {
+    if (vm.notifications.length > 0) {
       notificationDataService.lastNotificationID = vm.notifications[0].id;
     }
     else {
@@ -166,7 +166,7 @@ angular.module('GORCA.controllers', [])
 
     vm.processVariables = function () {
       var totalScore = 0;
-      angular.forEach(vm.reviews, function(obj) {
+      angular.forEach(vm.reviews, function (obj) {
 
         //overallscore calculation
         totalScore = totalScore + obj.score;
@@ -176,8 +176,8 @@ angular.module('GORCA.controllers', [])
           iconOn: 'ion-ios-star',
           iconOff: 'ion-ios-star-outline',
           iconOnColor: 'rgb(107, 70, 229)',
-          iconOffColor:  'rgb(107, 70, 229)',
-          rating:  obj.score,
+          iconOffColor: 'rgb(107, 70, 229)',
+          rating: obj.score,
           minRating: 1,
           readOnly: true
         };
@@ -190,13 +190,13 @@ angular.module('GORCA.controllers', [])
     vm.processVariables();
 
     vm.getScoreDefinition = function () {
-      if(vm.overallScore < 2) {
+      if (vm.overallScore < 2) {
         vm.scoreDefinition = "Poor";
       }
-      else if(vm.overallScore < 3) {
+      else if (vm.overallScore < 3) {
         vm.scoreDefinition = "Bad";
       }
-      else if(vm.overallScore < 4) {
+      else if (vm.overallScore < 4) {
         vm.scoreDefinition = "Good";
       }
       else if (vm.overallScore >= 4 && vm.overallScore <= 4.5) {
@@ -211,7 +211,7 @@ angular.module('GORCA.controllers', [])
     $ionicLoading.hide();
   })
 
-  .controller('AddReviewController', function($stateParams, reviewService, $state, $ionicHistory,$ionicPopup) {
+  .controller('AddReviewController', function ($stateParams, reviewService, $state, $ionicHistory, $ionicPopup) {
     var vm = this;
 
     vm.courseCode = $stateParams.courseCode;
@@ -224,16 +224,16 @@ angular.module('GORCA.controllers', [])
       iconOn: 'ion-ios-star',    //Optional
       iconOff: 'ion-ios-star-outline',   //Optional
       iconOnColor: 'rgb(107, 70, 229)',  //Optional
-      iconOffColor:  'rgb(107, 70, 229)',    //Optional
-      rating:  3, //Optional
+      iconOffColor: 'rgb(107, 70, 229)',    //Optional
+      rating: 3, //Optional
       minRating: 1,    //Optional
       readOnly: false, //Optional
-      callback: function(rating, index) {    //Mandatory
+      callback: function (rating, index) {    //Mandatory
         vm.ratingsCallback(rating, index);
       }
     };
 
-    vm.ratingsCallback = function(rating, index) {
+    vm.ratingsCallback = function (rating, index) {
       vm.newReview.score = rating;
     };
 
@@ -252,11 +252,10 @@ angular.module('GORCA.controllers', [])
     };
   })
 
-  .controller('LoginController', function(loginService, $ionicHistory, $state, $ionicPush, studentService, $ionicPopup) {
+  .controller('LoginController', function (loginService, $ionicHistory, $state, $ionicPush, studentService, $ionicPopup) {
     var vm = this;
 
-    vm.loginData = {
-    };
+    vm.loginData = {};
 
     vm.trylogin = function () {
       loginService.login(vm.loginData)
@@ -264,16 +263,16 @@ angular.module('GORCA.controllers', [])
           loginService.setAuthentication(response.data.message);
           //registering for push notifications
           $ionicPush.register()
-            .then(function(t) {
+            .then(function (t) {
               return $ionicPush.saveToken(t);
-            }).then(function(t) {
+            }).then(function (t) {
             studentService.addPushNotificationToken(t.token);
           });
           $ionicHistory.nextViewOptions({
             historyRoot: true
           });
           $ionicHistory.clearCache()
-            .then(function(){
+            .then(function () {
               $state.go('app.home');
             });
         }, function (error) {
@@ -290,13 +289,54 @@ angular.module('GORCA.controllers', [])
     vm.currentDate = new Date();
   })
 
-  .controller('RegistrationController', function ($scope) {
-    $scope.course =
-      {"code":"IPV","name":"Image Processing","description":"Not Added yet...","block":7,"maxSeats":26,"filledSeat":3,"regStartDate":null,"regEndDate":null,"teachers":[],"states":[{"id":7,"major":"SOFTWARE","courseType":"ELECTIVE"},{"id":8,"major":"BUSINESS","courseType":"ELECTIVE"}],"reviews":[],"ec":3}
-    ;
+  .controller('RegistrationController', function (electiveCoursesResolve) {
+    var vm = this;
+    vm.electiveCourses = electiveCoursesResolve.electiveCourses;
   })
 
-  .controller('MyCoursesController', function(myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
+  .controller('CourseDetailsController', function ($stateParams) {
+    var vm = this;
+    // vm.course =$stateParams.course;
+    //TODO remove
+    vm.course = {
+      "code": "IPV",
+      "name": "Image Processing",
+      "description": "Not Added yet...",
+      "block": 7,
+      "maxSeats": 26,
+      "filledSeat": 3,
+      "regStartDate": null,
+      "regEndDate": null,
+      "teachers": [{
+        "class": "com.example.Teacher",
+        "pcn": 26646,
+        "password": "12383",
+        "email": "t.example@fontys.nl",
+        "firstName": "Bert",
+        "lastName": "Gestle",
+        "link": "portal/t.example@fontys.nl",
+        "notificationBadgeCount": null
+      }, {
+        "class": "com.example.Teacher",
+        "pcn": 37283,
+        "password": "12373",
+        "email": "lol@fontys.nl",
+        "firstName": "Marrielle",
+        "lastName": "Vrolijk",
+        "link": "portal/lol@fontys.nl",
+        "notificationBadgeCount": null
+      }],
+      "states": [{"id": 7, "major": "SOFTWARE", "courseType": "ELECTIVE"}, {
+        "id": 8,
+        "major": "BUSINESS",
+        "courseType": "ELECTIVE"
+      }],
+      "reviews": [],
+      "ec": 3
+    };
+  })
+
+  .controller('MyCoursesController', function (myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
     var vm = this;
     vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
     vm.mandatoryCourses = myMandatoryCoursesResolve.mandatoryCourses;

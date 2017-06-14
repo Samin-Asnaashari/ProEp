@@ -20,11 +20,20 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
     // };
 
     EventStudent.subscribeOnAStudentAdded($scope, function (event, data) {
-        return studentService.addStudent(data.student)
-            .then(function (response) {
-                vm.students.push(data.student);
-            }, function (error) {
-            });
+        var add = true;
+        angular.forEach(vm.students, function (s) {
+            if (s.pcn == data.student.pcn) {
+                add = false;
+            }
+        });
+        if (add == true) {
+            return studentService.addStudent(data.student)
+                .then(function (response) {
+                    vm.students.push(data.student);
+                }, function (error) {
+                });
+        }
+        /*TODO show student already existed notification*/
     });
 
     EventStudent.subscribeOnAStudentRemoved($scope, function (event, data) {
@@ -42,11 +51,22 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
     });
 
     EventStudent.subscribeOnStudentsAdded($scope, function (event, data) {
-        return studentService.addStudents(data.students)
+        var addedStudents = [];
+        angular.forEach(data.students, function (s1) {
+            var add = true;
+            angular.forEach(vm.students, function (s2) {
+                if (s1.pcn == s2.pcn) {
+                    add = false;
+                }
+            });
+            if (add == true) {
+                vm.students.push(s1);
+                addedStudents.push(s1);
+            }
+            /*TODO else show that student already exist*/
+        });
+        return studentService.addStudents(addedStudents)
             .then(function (response) {
-                angular.forEach(data.students, function (s) {
-                    vm.students.push(s);
-                });
             }, function (error) {
 
             });

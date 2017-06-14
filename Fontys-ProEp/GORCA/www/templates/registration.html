@@ -1,12 +1,14 @@
 <ion-view view-title="Registration">
   <ion-content>
     <div class="list card">
-
-      <a class="item item-icon-left" ng-repeat="">
-        <i class="icon ion-home"></i>
-        Enter home address
-      </a>
-
+      <ion-item class="item-icon-right" ng-repeat="course in registrationCtrl.electiveCourses track by course.code"
+                ng-class="{pending: (course.status=='PENDING')}">
+        <h2>{{ course.code }}
+          <small ng-show=" course.status== 'PENDING'">
+            <sup>PENDING</sup></small>
+        </h2>
+        <i class="icon ion-plus-circled"></i>
+      </ion-item>
     </div>
-</ion-content>
+  </ion-content>
 </ion-view>

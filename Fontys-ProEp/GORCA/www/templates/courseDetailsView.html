@@ -1,7 +1,7 @@
 <ion-view view-title="Course Details">
 
   <div class="bar bar-subheader" style="text-transform: uppercase;">
-    <h1 class="title"><strong> {{course.name}} </strong><span class="badge badge-royal">{{course.code}}</span></h1>
+    <h1 class="title"><strong> {{CourseDetailsCtrl.course.name}} </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.code}}</span></h1>
   </div>
 
   <ion-content>
@@ -11,36 +11,36 @@
     <br/>
 
     <div class="item item-icon-left">
-      <strong> EC: </strong><span class="badge badge-royal">{{course.ec}}</span>
+      <strong> EC: </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.ec}}</span>
     </div>
     <div class="item item-icon-left">
-      <strong> BLOCK: </strong><span class="badge badge-royal">{{course.block}}</span>
+      <strong> BLOCK: </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.block}}</span>
     </div>
 
     <div class="item item-icon-left bar bar-dark">
       <i class="icon icon ion-calendar"></i>
-      {{course.regStartDate}}
+      {{CourseDetailsCtrl.course.regStartDate}}
     </div>
     <div class="item item-icon-left bar bar-dark">
       <i class="icon ion-calendar"></i>
-      {{course.regEndDate}}
+      {{CourseDetailsCtrl.course.regEndDate}}
     </div>
 
     <div class="item item-icon-left">
       <i class="icon ion-ios-people"></i>
-      {{course.maxSeats}}/{{course.filledSeat}}
+      {{CourseDetailsCtrl.course.maxSeats}}/{{course.filledSeat}}
     </div>
 
     <div class="item">
       <h3>Teachers:</h3>
-      <div ng-repeat="teacher in course.teachers track by teacher.pcn">
+      <div ng-repeat="teacher in CourseDetailsCtrl.course.teachers track by teacher.pcn">
         <p>{{teacher.link}}</p>
       </div>
     </div>
 
     <div class="item">
       <h3>Description:</h3>
-      {{course.description}}
+      {{CourseDetailsCtrl.course.description}}
     </div>
 
     <!--Review-->

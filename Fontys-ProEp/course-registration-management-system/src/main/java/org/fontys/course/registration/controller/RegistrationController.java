@@ -46,7 +46,7 @@ public class RegistrationController {
         return null;
     }
 
-    @RequestMapping(value = "/pcn/{pcn}", method = RequestMethod.GET)
+    @RequestMapping(value = "/forStudent/{pcn}", method = RequestMethod.GET)
     public List<Registration> GetAllRegistrationsByStudent(@PathVariable Integer pcn){
         return this.registrationService.GetAllRegistrationsByPcn(pcn);
     }
@@ -59,6 +59,11 @@ public class RegistrationController {
     @RequestMapping(value = "/accepted/pcn/{pcn}", method = RequestMethod.GET)
     public List<Registration> GetAllAcceptedRegistrationsByStudent(@PathVariable Integer pcn){
         return this.registrationService.GetAllAcceptedRegistrationsByPcn(pcn);
+    }
+
+    @RequestMapping(value = "/exceptAcceptedOnes", method = RequestMethod.GET)
+    public List<Registration> GetAllRegistrationsExceptAcceptedOnes(Principal principal){
+        return this.registrationService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()),RegistrationStatus.ACCEPTED);
     }
 
     //@RequestMapping(value = "/accepted/ascourses/pcn/{pcn}", method = RequestMethod.GET)

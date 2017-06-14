@@ -8,7 +8,9 @@ import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.CourseState;
 import org.fontys.course.registration.model.Teacher;
+import org.fontys.course.registration.model.enums.CourseType;
 import org.fontys.course.registration.model.enums.Major;
+import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.service.CourseService;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.pojo.ApiStage;
@@ -37,7 +39,12 @@ public class CourseController {
 
     @RequestMapping(value = "/mandatory", method = RequestMethod.GET)
     public List<Course> GetMandatoryCourses(Principal principal) throws Exception {
-        return this.courseService.GetMandatoryCourses(Integer.valueOf(principal.getName()));
+        return this.courseService.GetCoursesByCourseType(Integer.valueOf(principal.getName()), CourseType.MANDATORY);
+    }
+
+    @RequestMapping(value = "/elective", method = RequestMethod.GET)
+    public List<Course> GetElectiveCourses(Principal principal) throws Exception {
+        return this.courseService.GetCoursesByCourseType(Integer.valueOf(principal.getName()), CourseType.ELECTIVE);
     }
 
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
@@ -72,7 +79,7 @@ public class CourseController {
     public void AddNewCourseStateToCourse(@PathVariable String token) throws Exception {
         System.out.println(token);
     }
-    
+
     @RequestMapping(value = "/removeState", method = RequestMethod.PUT)
     public void RemoveCourseStateFromCourse(@RequestBody List<CourseState> states) throws Exception {
         this.courseService.RemoveCourseStateFromCourse(states);
@@ -89,7 +96,12 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/accepted", method = RequestMethod.GET)
-    public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal){
+    public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal) {
         return this.courseService.GetAcceptedElectiveCourses(Integer.valueOf(principal.getName()));
+    }
+
+    @RequestMapping(value = "/elective/notYetApplied", method = RequestMethod.GET)
+    public List<Course> GetAllElectiveCoursesByPcnWithFilteredStatus(Principal principal) {
+        return this.courseService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()), RegistrationStatus.ACCEPTED);
     }
 }

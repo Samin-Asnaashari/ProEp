@@ -15,7 +15,7 @@ public class RegistrationService {
 
     @Autowired
     private RegistrationRepository registrationRepository;
-    
+
     @Autowired
     private UtilService utilService;
 
@@ -39,12 +39,11 @@ public class RegistrationService {
         return this.registrationRepository.findByStudent_Pcn(pcn);
     }
 
-    public List<Course> GetAllAppliedElectiveCoursesByPcn(Integer pcn)
-    {
+    public List<Course> GetAllAppliedElectiveCoursesByPcn(Integer pcn) {
         List<Registration> registrations = this.registrationRepository.findByStudent_Pcn(pcn);
         List<Course> courses = new ArrayList<>();
 
-        for(Registration reg: registrations)
+        for (Registration reg : registrations)
             courses.add(reg.getCourse());
 
         return courses;
@@ -52,6 +51,10 @@ public class RegistrationService {
 
     public List<Registration> GetAllAcceptedRegistrationsByPcn(Integer pcn) {
         return this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+    }
+
+    public List<Registration> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer pcn, RegistrationStatus registrationStatus) {
+        return this.registrationRepository.findByStudent_PcnAndRegistrationStatusNot(pcn, registrationStatus);
     }
 
 //    public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
@@ -65,4 +68,5 @@ public class RegistrationService {
 //
 //        return courses;
 //    }
+
 }

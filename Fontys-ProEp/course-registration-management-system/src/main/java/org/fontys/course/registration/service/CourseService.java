@@ -8,7 +8,6 @@ import java.util.List;
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.*;
 import org.fontys.course.registration.model.enums.CourseType;
-import org.fontys.course.registration.model.enums.Major;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.CourseRepository;
 import org.fontys.course.registration.repository.CourseStateRepository;
@@ -33,13 +32,13 @@ public class CourseService {
         this.courseRepository.save(course);
     }
 
-    public List<Course> GetMandatoryCourses(Integer pcn) {
+    public List<Course> GetCoursesByCourseType(Integer pcn, CourseType courseType) {
         Student student = utilService.GetStudentById(pcn);
         List<Course> result = new ArrayList<>();
         List<CourseState> courseStates =
-                this.courseStateRepository.findByMajorAndCourseType(student.getMajor(), CourseType.MANDATORY);
+                this.courseStateRepository.findByMajorAndCourseType(student.getMajor(), courseType);
 
-        for(CourseState cs : courseStates)
+        for (CourseState cs : courseStates)
             result.add(cs.getCourse());
 
         return result;
@@ -62,22 +61,33 @@ public class CourseService {
         return this.courseRepository.findAll();
     }
 
+    public List<Course> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer pcn, RegistrationStatus registrationStatus) {
+//        List<Course> coursesExceptRegisteredOnes = utilService.GetAllElectiveCoursesByPcnWithFilteredRegistrationStatus(pcn, registrationStatus);
+//        List<CourseState> electiveCourses = courseStateRepository.findByMajorAndCourseTypeElectiveAndCourseNotIn(this.utilService.GetStudentById(pcn).getMajor(), coursesExceptRegisteredOnes);
+//        List<Course> courses = new ArrayList<>();
+//        for (CourseState c : electiveCourses) {
+//            courses.add(c.getCourse());
+//        }
+//        return courses;
+        return null;
+    }
+
     @Transactional
     public void UpdateCourse(Course course) {
         for (CourseState state : course.getStates()) {
-            if(state.getId() == null){
+            if (state.getId() == null) {
                 state.setCourse(course);
                 this.courseStateRepository.save(state);
             }
         }
-        
+
         List<Teacher> teachers = course.getTeachers();
         for (int i = 0; i < teachers.size(); i++) {
-        	Teacher teacher = teachers.get(i);
-        	teacher.setNotificationBadgeCount(0);
-			this.utilService.AddNewTeacher(teacher);
-		}
-        
+            Teacher teacher = teachers.get(i);
+            teacher.setNotificationBadgeCount(0);
+            this.utilService.AddNewTeacher(teacher);
+        }
+
         this.courseRepository.save(course);
     }
 
@@ -93,41 +103,41 @@ public class CourseService {
         }
     }
 
-	@Transactional
-	public Message RequestCourseDeletion(String id) {
-		Course course = this.courseRepository.getOne(id);
-		String defaultMsg = "Are you sure you want do delete course: " + course.getCode() + "?";
+    @Transactional
+    public Message RequestCourseDeletion(String id) {
+        Course course = this.courseRepository.getOne(id);
+        String defaultMsg = "Are you sure you want do delete course: " + course.getCode() + "?";
 
-		List<Person> personsToSendNotifications = new ArrayList<>();
+        List<Person> personsToSendNotifications = new ArrayList<>();
 
-		List<Student> acceptedStudents = this.utilService
-				.GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.ACCEPTED, course.getCode());
-		
-		List<Student> pendingStudents = this.utilService
-				.GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.PENDING, course.getCode());
+        List<Student> acceptedStudents = this.utilService
+                .GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.ACCEPTED, course.getCode());
 
-		for (int i = 0; i < acceptedStudents.size(); i++) {
-			personsToSendNotifications.add(acceptedStudents.get(i));
-		}
+        List<Student> pendingStudents = this.utilService
+                .GetAllStudentsByRegistrationStatusAndCourse(RegistrationStatus.PENDING, course.getCode());
 
-		for (int i = 0; i < pendingStudents.size(); i++) {
-			personsToSendNotifications.add(pendingStudents.get(i));
-		}
+        for (int i = 0; i < acceptedStudents.size(); i++) {
+            personsToSendNotifications.add(acceptedStudents.get(i));
+        }
 
-		for (int i = 0; i < course.getTeachers().size(); i++) {
-			personsToSendNotifications.add(course.getTeachers().get(i));
-		}
+        for (int i = 0; i < pendingStudents.size(); i++) {
+            personsToSendNotifications.add(pendingStudents.get(i));
+        }
 
-		this.utilService.AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(course.getCode(),
-				personsToSendNotifications);
+        for (int i = 0; i < course.getTeachers().size(); i++) {
+            personsToSendNotifications.add(course.getTeachers().get(i));
+        }
 
-		if (acceptedStudents.size() != 0)
-			return new Message("Warning: There are already " + acceptedStudents.size()
-					+ " students that applied to this course. " + defaultMsg);
-		else {
-			return new Message(defaultMsg);
-		}
-	}
+        this.utilService.AddNewHashMapEntryForPersonsToSendDeleteCourseNotifications(course.getCode(),
+                personsToSendNotifications);
+
+        if (acceptedStudents.size() != 0)
+            return new Message("Warning: There are already " + acceptedStudents.size()
+                    + " students that applied to this course. " + defaultMsg);
+        else {
+            return new Message(defaultMsg);
+        }
+    }
 
     @Transactional
     public void DeleteCourse(String courseCode, Integer sender) {
@@ -154,6 +164,4 @@ public class CourseService {
         }
         this.courseRepository.delete(courseCode);
     }
-
-
 }

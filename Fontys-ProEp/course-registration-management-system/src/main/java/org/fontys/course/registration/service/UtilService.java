@@ -176,4 +176,16 @@ public class UtilService {
 
         return courses;
     }
+
+    public List<Course> GetAllElectiveCoursesByPcnWithFilteredRegistrationStatus(Integer pcn, RegistrationStatus registrationStatus)
+    {
+        List<Registration> registrations =
+                this.registrationService.GetAllElectiveCoursesByPcnWithFilteredStatus(pcn, registrationStatus);
+        List<Course> courses = new ArrayList<>();
+
+        for(Registration reg: registrations)
+            courses.add(reg.getCourse());
+
+        return courses;
+    }
 }
