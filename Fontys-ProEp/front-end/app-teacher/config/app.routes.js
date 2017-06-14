@@ -49,6 +49,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             var acceptedStudents = [];
                             angular.forEach(response.data, function (r) {
                                 acceptedStudents.push(r.student);
+                                //acceptedStudents.push(r);
                             });
                             //If other info is needed other than student from registration object you can pass it here as commented example below
                             return {acceptedStudents:  acceptedStudents/*, otherinfo: "whatever"*/};
@@ -81,10 +82,36 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         });
                 }
             }
+        })
+        .state('login', {
+            url: '/login',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                loginResolve: function () {
+                    return {loginApp: "Teacher"};
+                }
+            }
+        })
+        .state('logout', {
+            url: '/logout',
+            templateUrl: './components/login/login.html',
+            controller: 'loginCtrl as vmLogin',
+            resolve: {
+                logOutResolve: function ($state, $stateParams, loginService) {
+                    return loginService.logout()
+                        .then(function (response) {
+                            loginService.DeleteAuthenticationCookie();
+                        }, function (error) {
+                            console.log("Error");
+                            console.log(error);
+                        });
+                },
+                loginResolve: function () {
+                    return {loginApp: "Admin"};
+                }
+            }
         });
-        // .state('login', {
-        //     url: '/login'
-        // })
         // .state('notifications', {
         //     url: '',
         //     templateUrl: '',

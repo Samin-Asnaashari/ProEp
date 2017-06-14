@@ -3,11 +3,11 @@
  */
 'use strict';
 
-angular.module('GORCA.serviceAPIS').service('loginService', function ($http, $cookies) {
+angular.module('GORCA.serviceAPIS').service('loginService', function ($http, $window) {
 
   var self = this;
   var http = 'http://';
-  var localhost = "192.168.0.115";
+  var localhost = "192.168.178.24";
   var baseUrl = http + localhost + ':8090/login';
 
   self.logout = function () {
@@ -37,15 +37,15 @@ angular.module('GORCA.serviceAPIS').service('loginService', function ($http, $co
 
   self.setAuthentication = function (token) {
     $http.defaults.headers.common.Authorization = token;
-    $cookies.putObject('token', token);
+    $window.localStorage['token'] = token;
   };
 
   self.getAuthentication = function () {
-    return $cookies.getObject('token');
+    return $window.localStorage['token'] || false;
   };
 
   self.DeleteAuthenticationCookie = function () {
     $http.defaults.headers.common.Authorization = "";
-    $cookies.remove('token');
+    $window.localStorage.removeItem('token');
   };
 });

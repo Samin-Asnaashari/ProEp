@@ -46,7 +46,18 @@ public class RegistrationController {
         return null;
     }
 
-    @RequestMapping(value = "/forStudent/{pcn}", method = RequestMethod.GET)
+    @RequestMapping(value = "/updateRegistrationStatus/{courseCode}/{studentPcn}/{registrationStatus}",
+            method = RequestMethod.PUT)
+    public void UpdateRegistration(@PathVariable("courseCode") String courseCode,@PathVariable("studentPcn") String studentPcn,
+                                   @PathVariable("registrationStatus") String registrationStatus ) {
+        try {
+            this.registrationService.UpdateRegistration(courseCode,studentPcn,registrationStatus);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/pcn/{pcn}", method = RequestMethod.GET)
     public List<Registration> GetAllRegistrationsByStudent(@PathVariable Integer pcn){
         return this.registrationService.GetAllRegistrationsByPcn(pcn);
     }

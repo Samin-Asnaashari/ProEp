@@ -51,13 +51,13 @@
         </div>
 
         <!-- Nagivation items -->
-        <div class="collapse navbar-collapse" id="mainNavBar">
-            <ul ng-controller="navCtrl" class="nav navbar-nav">
+        <div ng-controller="navCtrl" class="collapse navbar-collapse" id="mainNavBar">
+            <ul class="nav navbar-nav">
                 <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
                 <li ng-class="{ active: isActive('/students')}"><a ng-href="#!/students">Students</a></li>
             </ul>
             <!-- right align -->
-            <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right">
                 <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
                 <li ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
             </ul>
@@ -122,7 +122,6 @@
 <script src="../bower_components/angular-moment-picker/dist/angular-moment-picker.min.js"></script>
 <script src="../bower_components/angular-tablesort/js/angular-tablesort.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="../bower_components/angular-base64/angular-base64.js"></script>
 <!-- text editor -->
 <script src="../components/text.editor/editor.controller.js"></script>
 <script src="../components/text.editor/editor.directive.js"></script>
