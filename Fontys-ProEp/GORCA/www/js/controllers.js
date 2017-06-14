@@ -296,47 +296,10 @@ angular.module('GORCA.controllers', [])
 
   .controller('CourseDetailsController', function ($stateParams) {
     var vm = this;
-    // vm.course =$stateParams.course;
-    //TODO remove
-    vm.course = {
-      "code": "IPV",
-      "name": "Image Processing",
-      "description": "Not Added yet...",
-      "block": 7,
-      "maxSeats": 26,
-      "filledSeat": 3,
-      "regStartDate": null,
-      "regEndDate": null,
-      "teachers": [{
-        "class": "com.example.Teacher",
-        "pcn": 26646,
-        "password": "12383",
-        "email": "t.example@fontys.nl",
-        "firstName": "Bert",
-        "lastName": "Gestle",
-        "link": "portal/t.example@fontys.nl",
-        "notificationBadgeCount": null
-      }, {
-        "class": "com.example.Teacher",
-        "pcn": 37283,
-        "password": "12373",
-        "email": "lol@fontys.nl",
-        "firstName": "Marrielle",
-        "lastName": "Vrolijk",
-        "link": "portal/lol@fontys.nl",
-        "notificationBadgeCount": null
-      }],
-      "states": [{"id": 7, "major": "SOFTWARE", "courseType": "ELECTIVE"}, {
-        "id": 8,
-        "major": "BUSINESS",
-        "courseType": "ELECTIVE"
-      }],
-      "reviews": [],
-      "ec": 3
-    };
+    vm.course = $stateParams.courseview;
   })
 
-  .controller('MyCoursesController', function (myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
+  .controller('MyCoursesController', function ($state, myMandatoryCoursesResolve, myAcceptedCoursesResolve) {
     var vm = this;
     vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
     vm.mandatoryCourses = myMandatoryCoursesResolve.mandatoryCourses;
