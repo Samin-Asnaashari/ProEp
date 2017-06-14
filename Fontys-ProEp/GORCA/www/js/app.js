@@ -90,6 +90,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('app', {
         url: '/app',
         abstract: true,
+        cache: false,
         params: {
           courseToView: null
         },
@@ -235,7 +236,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('addReview', {
         url: '/courseDetails/newReview/:courseCode',
         views: {
-          'mainMenu': {
+          'menuContent': {
             templateUrl: 'templates/addReview.html',
             controller: 'AddReviewController',
             controllerAs: 'addReviewCtrl'
@@ -243,46 +244,65 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         }
       })
 
-      .state('reviews', {
-        url: '/courseDetails/reviews/:courseCode',
+      // .state('reviews', {
+      //   url: '/courseDetails/reviews/:courseCode',
+      //   views: {
+      //     'menuContent': {
+      //       templateUrl: 'templates/review.html',
+      //       controller: 'ReviewController',
+      //       controllerAs: 'reviewCtrl'
+      //     }
+      //   },
+      //   resolve: {
+      //     reviewsResolve: function (reviewService, $ionicLoading, $stateParams) {
+      //
+      //       //show loading icon
+      //       $ionicLoading.show({
+      //         template: 'Loading...'
+      //       });
+      //
+      //       return reviewService.getAllReviews($stateParams.courseCode)
+      //         .then(function (response) {
+      //           return {reviews: response.data};
+      //         }, function (error) {
+      //           console.log('error');
+      //           //disable loading icon
+      //           $ionicLoading.hide();
+      //           alert(angular.toJson(error));
+      //         })
+      //     }
+      //   }
+      // })
+
+      .state('app.courseDetailsView', {
+        url: '/myCourses/courseDetailsView',
+        params: {
+          courseView: null
+        },
         views: {
-          'mainMenu': {
-            templateUrl: 'templates/review.html',
-            controller: 'ReviewController',
-            controllerAs: 'reviewCtrl'
+          'menuContent': {
+            templateUrl: 'templates/courseDetailsView.html',
+            controller: 'CourseDetailsController',
+            controllerAs: 'CourseDetailsCtrl'
           }
         },
         resolve: {
           reviewsResolve: function (reviewService, $ionicLoading, $stateParams) {
 
-            //show loading icon
-            $ionicLoading.show({
-              template: 'Loading...'
-            });
+            // show loading icon
+            // $ionicLoading.show({
+            //   template: 'Loading...'
+            // });
 
-            return reviewService.getAllReviews($stateParams.courseCode)
+            return reviewService.getAllReviews($stateParams.courseView.code)
               .then(function (response) {
                 return {reviews: response.data};
               }, function (error) {
                 console.log('error');
                 //disable loading icon
-                $ionicLoading.hide();
+                // $ionicLoading.hide();
                 alert(angular.toJson(error));
               })
-          }
-        }
-      })
-
-      .state('courseDetailView', {
-        url: '/courseDetailView',
-        params: {
-          courseview: null
-        },
-        views: {
-          'mainMenu': {
-            templateUrl: 'templates/courseDetailsView.html',
-            controller: 'CourseDetailsController',
-            controllerAs: 'CourseDetailsCtrl'
           }
         }
       })

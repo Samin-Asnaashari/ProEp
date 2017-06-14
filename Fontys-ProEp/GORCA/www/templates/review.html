@@ -1,19 +1,19 @@
-<ion-view view-title="Reviews">
-  <ion-nav-bar class="bar-royal">
-    <ion-nav-back-button>{{ reviewCtrl.courseCode }}</ion-nav-back-button>
-  </ion-nav-bar>
-  <ion-content id="reviews">
+<!--<ion-view view-title="Reviews">-->
+  <!--<ion-nav-bar class="bar-royal">-->
+    <!--<ion-nav-back-button>{{ courseCode }}</ion-nav-back-button>-->
+  <!--</ion-nav-bar>-->
+  <!--<ion-content id="reviews">-->
     <div id="reviewsHeader" class="card ">
       <div class="item">
         <div class="reviewsScore">{{ reviewCtrl.overallScore | number:1 }}</div>
         <div>
           <h2>{{ reviewCtrl.scoreDefinition }}</h2>
-          <p>Based on {{ reviewCtrl.reviews.length }} reviews</p>
+          <p>Based on {{ reviewList.length }} reviews</p>
         </div>
       </div>
     </div>
     <ion-list id="reviewsList">
-      <div ng-repeat="review in reviewCtrl.reviews track by review.id" class="list card review">
+      <div ng-repeat="review in reviewList track by review.id" class="list card review">
 
         <div class="item item-borderless reviewHead">
           <h2>{{ review.student.firstName }} - {{ review.student.studentType }}</h2>
@@ -49,5 +49,5 @@
       </div>
     </ion-list>
 
-  </ion-content>
-</ion-view>
+  <!--</ion-content>-->
+<!--</ion-view>-->

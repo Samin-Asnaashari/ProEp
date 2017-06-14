@@ -1,51 +1,69 @@
 <ion-view view-title="Course Details">
 
-  <div class="bar bar-subheader" style="text-transform: uppercase;">
-    <h1 class="title"><strong> {{CourseDetailsCtrl.course.name}} </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.code}}</span></h1>
+  <div class="bar bar-subheader" style="text-transform: capitalize;border-bottom: none;">
+    <h1 class="title"><strong> {{CourseDetailsCtrl.course.name}} </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.code}}</span>
+    </h1>
   </div>
 
-  <ion-content>
-
-    <br/>
-    <br/>
-    <br/>
-
-    <div class="item item-icon-left">
-      <strong> EC: </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.ec}}</span>
-    </div>
-    <div class="item item-icon-left">
-      <strong> BLOCK: </strong><span class="badge badge-royal">{{CourseDetailsCtrl.course.block}}</span>
-    </div>
-
-    <div class="item item-icon-left bar bar-dark">
-      <i class="icon icon ion-calendar"></i>
-      {{CourseDetailsCtrl.course.regStartDate}}
-    </div>
-    <div class="item item-icon-left bar bar-dark">
-      <i class="icon ion-calendar"></i>
-      {{CourseDetailsCtrl.course.regEndDate}}
-    </div>
-
-    <div class="item item-icon-left">
-      <i class="icon ion-ios-people"></i>
-      {{CourseDetailsCtrl.course.maxSeats}}/{{course.filledSeat}}
-    </div>
-
-    <div class="item">
-      <h3>Teachers:</h3>
-      <div ng-repeat="teacher in CourseDetailsCtrl.course.teachers track by teacher.pcn">
-        <p>{{teacher.link}}</p>
+  <ion-content class="has-subheader">
+    <ion-list>
+      <br/>
+      <div class="row" style="border-top: 0.2px solid lightgray;">
+        <div class="col" style="text-align: center;">
+          <h4><strong> EC: </strong><span class="badge badge-royal"> {{CourseDetailsCtrl.course.ec || " - "}} </span></h4>
+        </div>
+        <div class="col" style="text-align: center;">
+          <h4><strong> BLOCK: </strong><span class="badge badge-royal"> {{CourseDetailsCtrl.course.block || " - "}} </span></h4>
+        </div>
       </div>
-    </div>
+      </div>
 
-    <div class="item">
-      <h3>Description:</h3>
-      {{CourseDetailsCtrl.course.description}}
-    </div>
+      <ion-item class="item item-icon-left bar bar-dark" style="color: #ffffff;">
+        <i class="icon icon ion-calendar"></i>
+        {{CourseDetailsCtrl.course.regStartDate || " TBD "}}
+      </ion-item>
+      <ion-item class="item item-icon-left bar bar-dark">
+        <i class="icon ion-calendar"></i>
+        {{CourseDetailsCtrl.course.regEndDate || " TBD "}}
+      </ion-item>
 
-    <!--Review-->
+      <ion-item class="item item-icon-left">
+        <i class="icon ion-ios-people"></i>
+        Max Seats/Filled Seat: {{CourseDetailsCtrl.course.maxSeats || " - "}}/{{course.filledSeat || " - "}}
+      </ion-item>
 
+      <ion-item class="item item-icon-left" style="border: 0px;padding-top:10px;padding-bottom: 10px;">
+        <i class="icon ion-ios-people-outline"></i> Teachers:
+      </ion-item>
+      <ion-item class="item item-icon-left"
+                ng-repeat="teacher in CourseDetailsCtrl.course.teachers track by teacher.pcn"
+                style="border: 0px;padding-top:10px;padding-bottom: 10px;">
+        <i class="icon ion-link"></i>
+        <p>{{teacher.firstName}} : <a href="teacher.link">{{teacher.link}}</a></p>
+      </ion-item>
+
+      <ion-item class="item item-text-wrap">
+        <h3>Description:</h3>
+        <div ng-bind-html="CourseDetailsCtrl.course.description || 'No Desciption Added Yet...'"></div>
+      </ion-item>
+
+      <div class="item item-divider text-center">
+        Reviews
+      </div>
+      <reviews review-list="CourseDetailsCtrl.reviews"></reviews>
+
+    </ion-list>
   </ion-content>
+
+  <div class="tabs-striped tabs-color-royal">
+    <div class="tabs">
+      <a class="title tab-item active" href="#">
+        <i class="icon ion-ios-star-half"></i>
+        Review
+      </a>
+    </div>
+  </div>
+
 </ion-view>
 
 

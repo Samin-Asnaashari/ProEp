@@ -1,4 +1,4 @@
-angular.module('GORCA.controllers', [])
+angular.module('GORCA.controllers', ['GORCA.Directives'])
 
   .controller('MenuController', function (notificationsResolve, notificationsBadgeCountResolve, notificationService,
                                           $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
@@ -153,12 +153,8 @@ angular.module('GORCA.controllers', [])
     $ionicLoading.hide();
   })
 
-  .controller('ReviewController', function (reviewsResolve, $ionicLoading, $stateParams) {
+  .controller('ReviewController', function ($ionicLoading, $scope) {
     var vm = this;
-
-    vm.courseCode = $stateParams.courseCode;
-
-    vm.reviews = reviewsResolve.reviews;
 
     vm.overallScore = null;
 
@@ -166,7 +162,7 @@ angular.module('GORCA.controllers', [])
 
     vm.processVariables = function () {
       var totalScore = 0;
-      angular.forEach(vm.reviews, function (obj) {
+      angular.forEach($scope.reviewList, function (obj) {
 
         //overallscore calculation
         totalScore = totalScore + obj.score;
@@ -184,7 +180,7 @@ angular.module('GORCA.controllers', [])
       });
 
       //overallscore calculation
-      vm.overallScore = (totalScore / vm.reviews.length);
+      vm.overallScore = (totalScore / $scope.reviewList.length);
     };
 
     vm.processVariables();
@@ -304,9 +300,10 @@ angular.module('GORCA.controllers', [])
     };
   })
 
-  .controller('CourseDetailsController', function ($stateParams) {
+  .controller('CourseDetailsController', function ($stateParams, reviewsResolve) {
     var vm = this;
-    vm.course = $stateParams.courseview;
+    vm.course = $stateParams.courseView;
+    vm.reviews = reviewsResolve.reviews;
   })
 
   .controller('MyCoursesController', function ($state, myMandatoryCoursesResolve, myAcceptedCoursesResolve) {

@@ -1,20 +1,18 @@
 <ion-view view-title="Registration">
   <ion-content>
     <div class="list list-inset">
-      <label class="item item-input">
+      <label class="item item-input" for="search">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" ng-model="searchFilter.code" name="search" id="search">
       </label>
     </div>
     <div class="list card">
-      <ion-item class="item item-icon-left item-icon-right" ng-repeat="course in registrationCtrl.electiveCourses track by course.code"
+      <ion-item class="item item-icon-left item-icon-right" ng-repeat="course in registrationCtrl.electiveCourses | filter:searchFilter track by course.code"
                 ng-class="{pending: (course.status=='PENDING')}">
-        <i ng-show=" course.status== 'PENDING'" class="icon ion-load-a"></i>
         <i ng-hide=" course.status== 'PENDING'" class="icon ion-compose"></i>
-        <h2><strong>{{ course.code }}</strong>
-          <small ng-show=" course.status== 'PENDING'"><sup>PENDING</sup></small>
-        </h2>
-        <i ng-click="registrationCtrl.register(course.code)" class="icon ion-plus-circled"></i>
+        <i ng-show=" course.status== 'PENDING'" class="icon ion-ios-clock-outline"></i>
+        <h2><strong>{{ course.code }}</strong></h2> <smal ng-show=" course.status== 'PENDING'">PENDING</smal>
+        <i ng-hide=" course.status== 'PENDING'" ng-click="registrationCtrl.register(course.code)" class="icon ion-plus-circled"></i>
       </ion-item>
     </div>
   </ion-content>
