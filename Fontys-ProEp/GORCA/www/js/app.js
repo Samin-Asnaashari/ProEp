@@ -90,6 +90,9 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('app', {
         url: '/app',
         abstract: true,
+        params: {
+          courseToView: null
+        },
         views: {
           'mainMenu': {
             templateUrl: 'templates/menu.html',
@@ -151,7 +154,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       })
 
       .state('app.myCourses', {
-        url: '/mycourses',
+        url: '/myCourses',
         views: {
           'menuContent': {
             templateUrl: 'templates/myCourses.html',
@@ -208,41 +211,22 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
         },
         resolve: {
           electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
-            //show loading icon
-            // $ionicLoading.show({
-            //   template: 'Loading...'
-            // });
-
             var courses = [];
-
             return courseService.getAllElectiveCourses()
-              .then(function (response) {
-                courses = response.data;
-              }, function (error) {
-                console.log('error');
-                //disable loading icon
-                // $ionicLoading.hide();
-                alert(angular.toJson(error))
-              });
-
-            return registrationService.GetAllRegistrationsExceptAcceptedOnes()
-              .then(function (response) {
-                var courses = [];
-                angular.forEach(response.data, function (c) {
-                  angular.forEach(response.data, function (r) {
-                    if(c == r.course){
-                      r.course.status = r.registrationStatus;
-                      courses.push(r.course)
-                    }
+              .then(function (courseResponse) {
+                courses = courseResponse.data;
+                registrationService.GetAllRegistrationsExceptAcceptedOnes()
+                  .then(function (registrationResponse) {
+                    angular.forEach(registrationResponse.data, function (r) {
+                      var duplicatedCIndex = courses.indexOf(r.course);
+                      if (duplicatedCIndex != undefined) {
+                        courses.splice(duplicatedCIndex, 1);
+                        r.course.status = r.registrationStatus;
+                        courses.push(r.course);
+                      }
+                    });
                   });
-                });
-                return {electiveCourses: courses};
-                /*+ elective ones*/
-              }, function (error) {
-                console.log('error');
-                //disable loading icon
-                // $ionicLoading.hide();
-                alert(angular.toJson(error));
+                return {courses: courses};
               })
           }
         }
@@ -291,20 +275,20 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
       .state('courseDetailView', {
         url: '/courseDetailView',
+        params: {
+          courseview: null
+        },
         views: {
           'mainMenu': {
             templateUrl: 'templates/courseDetailsView.html',
             controller: 'CourseDetailsController',
-            controllerAs: 'CourseDetailsCtrl',
-            params: {
-              course: null
-            }
+            controllerAs: 'CourseDetailsCtrl'
           }
         }
       })
     ;
 
-    $urlRouterProvider.otherwise(function($injector) {
+    $urlRouterProvider.otherwise(function ($injector) {
       var $state = $injector.get('$state');
       return $state.go('login');
     });

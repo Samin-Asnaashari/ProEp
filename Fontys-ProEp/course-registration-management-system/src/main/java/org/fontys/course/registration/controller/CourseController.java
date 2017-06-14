@@ -99,9 +99,4 @@ public class CourseController {
     public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal) {
         return this.courseService.GetAcceptedElectiveCourses(Integer.valueOf(principal.getName()));
     }
-
-    @RequestMapping(value = "/elective/notYetApplied", method = RequestMethod.GET)
-    public List<Course> GetAllElectiveCoursesByPcnWithFilteredStatus(Principal principal) {
-        return this.courseService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()), RegistrationStatus.ACCEPTED);
-    }
 }

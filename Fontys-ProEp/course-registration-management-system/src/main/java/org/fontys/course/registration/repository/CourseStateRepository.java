@@ -11,8 +11,5 @@ import java.util.List;
 
 @Repository
 public interface CourseStateRepository extends JpaRepository<CourseState, Integer> {
-
     List<CourseState> findByMajorAndCourseType(Major major, CourseType courseType);
-
-//    List<CourseState> findByMajorAndCourseTypeElectiveAndCourseNotIn(Major major, List<Course> courses);
 }
