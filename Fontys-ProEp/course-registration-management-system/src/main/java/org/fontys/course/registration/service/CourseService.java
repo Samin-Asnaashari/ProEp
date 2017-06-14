@@ -61,17 +61,6 @@ public class CourseService {
         return this.courseRepository.findAll();
     }
 
-    public List<Course> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer pcn, RegistrationStatus registrationStatus) {
-//        List<Course> coursesExceptRegisteredOnes = utilService.GetAllElectiveCoursesByPcnWithFilteredRegistrationStatus(pcn, registrationStatus);
-//        List<CourseState> electiveCourses = courseStateRepository.findByMajorAndCourseTypeElectiveAndCourseNotIn(this.utilService.GetStudentById(pcn).getMajor(), coursesExceptRegisteredOnes);
-//        List<Course> courses = new ArrayList<>();
-//        for (CourseState c : electiveCourses) {
-//            courses.add(c.getCourse());
-//        }
-//        return courses;
-        return null;
-    }
-
     @Transactional
     public void UpdateCourse(Course course) {
         for (CourseState state : course.getStates()) {

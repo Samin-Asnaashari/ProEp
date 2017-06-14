@@ -57,24 +57,11 @@ public class RegistrationService {
         return courses;
     }
 
-    public List<Registration> GetAllAcceptedRegistrationsByPcn(Integer pcn) {
-        return this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
+    public List<Registration> GetAllRegistrationsByPcnWithStatus(Integer pcn, RegistrationStatus status) {
+        return this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, status);
     }
 
     public List<Registration> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer pcn, RegistrationStatus registrationStatus) {
         return this.registrationRepository.findByStudent_PcnAndRegistrationStatusNot(pcn, registrationStatus);
     }
-
-//    public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
-//    {
-//        List<Registration> registrations =
-//                this.registrationRepository.findByStudent_PcnAndRegistrationStatus(pcn, RegistrationStatus.ACCEPTED);
-//        List<Course> courses = new ArrayList<>();
-//
-//        for(Registration reg: registrations)
-//            courses.add(reg.getCourse());
-//
-//        return courses;
-//    }
-
 }
