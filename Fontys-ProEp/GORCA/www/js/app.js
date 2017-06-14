@@ -151,7 +151,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       })
 
       .state('app.myCourses', {
-        url: '/mycourses',
+        url: '/myCourses',
         views: {
           'menuContent': {
             templateUrl: 'templates/myCourses.html',
