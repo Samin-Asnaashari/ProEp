@@ -218,7 +218,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 courses = courseResponse.data;
                 registrationService.GetAllRegistrationsExceptAcceptedOnes()
                   .then(function (registrationResponse) {
-                    angular.forEach(registrationResponse, function (r) {
+                    angular.forEach(registrationResponse.data, function (r) {
                       var duplicatedCIndex = courses.indexOf(r.course);
                       if (duplicatedCIndex != undefined) {
                         courses.splice(duplicatedCIndex, 1);
@@ -226,8 +226,8 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                         courses.push(r.course);
                       }
                     });
-                    return {courses: courses};
-                  })
+                  });
+                return {courses: courses};
               })
           }
         }

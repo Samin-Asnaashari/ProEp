@@ -1,13 +1,20 @@
 <ion-view view-title="Registration">
   <ion-content>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search">
+      </label>
+    </div>
     <div class="list card">
-      <ion-item class="item-icon-right" ng-repeat="course in registrationCtrl.electiveCourses track by course.code"
+      <ion-item class="item item-icon-left item-icon-right" ng-repeat="course in registrationCtrl.electiveCourses track by course.code"
                 ng-class="{pending: (course.status=='PENDING')}">
-        <h2>{{ course.code }}
-          <small ng-show=" course.status== 'PENDING'">
-            <sup>PENDING</sup></small>
+        <i ng-show=" course.status== 'PENDING'" class="icon ion-load-a"></i>
+        <i ng-hide=" course.status== 'PENDING'" class="icon ion-compose"></i>
+        <h2><strong>{{ course.code }}</strong>
+          <small ng-show=" course.status== 'PENDING'"><sup>PENDING</sup></small>
         </h2>
-        <i class="icon ion-plus-circled"></i>
+        <i ng-click="registrationCtrl.register(course.code)" class="icon ion-plus-circled"></i>
       </ion-item>
     </div>
   </ion-content>
