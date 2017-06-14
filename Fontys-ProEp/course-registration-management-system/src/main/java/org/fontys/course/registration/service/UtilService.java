@@ -11,6 +11,7 @@ import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.Teacher;
+import org.fontys.course.registration.model.enums.CourseType;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -168,7 +169,7 @@ public class UtilService {
     public List<Course> GetAllAcceptedElectiveCoursesByPcn(Integer pcn)
     {
         List<Registration> registrations =
-                this.registrationService.GetAllAcceptedRegistrationsByPcn(pcn);
+                this.registrationService.GetAllRegistrationsByPcnWithStatus(pcn, RegistrationStatus.ACCEPTED);
         List<Course> courses = new ArrayList<>();
 
         for(Registration reg: registrations)
