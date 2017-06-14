@@ -1,4 +1,4 @@
-<ion-view view-title="My Courses">
+<ion-view view-title="My Courses" cache-view="false">
   <ion-content id="mycourses">
     <ion-list>
 
@@ -30,7 +30,7 @@
           Drop
         </ion-option-button>
       </ion-item>
-      <ion-item ng-show="!MyCoursesCtrl.acceptedCourses.length">No courses</ion-item>
+      <ion-item ng-show="!MyCoursesCtrl.acceptedCourses.length">No accepted courses</ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

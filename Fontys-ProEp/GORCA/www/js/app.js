@@ -246,6 +246,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
       .state('reviews', {
         url: '/courseDetails/reviews/:courseCode',
+        cache: false,
         views: {
           'mainMenu': {
             templateUrl: 'templates/review.html',
