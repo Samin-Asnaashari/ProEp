@@ -5,7 +5,7 @@ import static org.junit.Assert.assertThat;
 
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.repository.StudentRepository;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
