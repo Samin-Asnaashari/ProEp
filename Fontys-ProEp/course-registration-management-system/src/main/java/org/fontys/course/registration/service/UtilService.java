@@ -11,7 +11,6 @@ import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.model.Teacher;
-import org.fontys.course.registration.model.enums.CourseType;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,7 +78,7 @@ public class UtilService {
 		
         List<Student> studentsApplied = new ArrayList<>();
         for (int i = 0; i < registrations.size(); i++) {
-            studentsApplied.add(registrations.get(i).getStudent());
+            studentsApplied.add(registrations.get(i).getId().getStudent());
         }
         
         return studentsApplied;
@@ -173,7 +172,7 @@ public class UtilService {
         List<Course> courses = new ArrayList<>();
 
         for(Registration reg: registrations)
-            courses.add(reg.getCourse());
+            courses.add(reg.getId().getCourse());
 
         return courses;
     }
@@ -185,7 +184,7 @@ public class UtilService {
         List<Course> courses = new ArrayList<>();
 
         for(Registration reg: registrations)
-            courses.add(reg.getCourse());
+            courses.add(reg.getId().getCourse());
 
         return courses;
     }

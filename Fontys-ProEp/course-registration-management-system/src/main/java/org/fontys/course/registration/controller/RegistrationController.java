@@ -41,7 +41,6 @@ public class RegistrationController {
         try {
 			return this.registrationService.GetAllRegistrationByStatusAndCourse(registrationStatus, courseCode);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         return null;
