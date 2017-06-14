@@ -25,6 +25,13 @@ public class RegistrationService {
         this.registrationRepository.save(registration);
     }
 
+    @Transactional
+    public void dropRegistration(String courseCode, Integer pcn) throws Exception {
+        Registration reg =
+                registrationRepository.findByCourseAndStudent(utilService.GetCourse(courseCode), utilService.GetStudentById(pcn));
+        this.registrationRepository.delete(reg);
+    }
+
     public List<Registration> GetAllRegistrations() {
         return this.registrationRepository.findAll();
     }

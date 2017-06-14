@@ -90,6 +90,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('app', {
         url: '/app',
         abstract: true,
+        cache: false,
         params: {
           courseToView: null
         },

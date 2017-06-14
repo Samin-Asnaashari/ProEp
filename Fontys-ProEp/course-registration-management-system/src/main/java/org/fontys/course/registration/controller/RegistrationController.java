@@ -61,4 +61,13 @@ public class RegistrationController {
     public List<Registration> GetAllRegistrationsExceptAcceptedOnes(Principal principal){
         return this.registrationService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()),RegistrationStatus.ACCEPTED);
     }
+
+    @RequestMapping(value = "/drop/{courseCode}", method = RequestMethod.GET)
+    public void DropRegistration(@PathVariable String courseCode, Principal principal){
+        try {
+            this.registrationService.dropRegistration(courseCode, Integer.valueOf(principal.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

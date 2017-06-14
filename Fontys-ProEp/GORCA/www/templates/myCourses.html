@@ -1,8 +1,8 @@
 <ion-view view-title="My Courses">
-  <ion-content>
+  <ion-content id="mycourses">
     <ion-list>
 
-      <ion-item class="item-divider item-icon-left">
+      <ion-item class="item-divider item-icon-left vertical-align-content">
         <i class="icon ion-heart-broken"></i>
         Mandatory Courses
         <div style="float: right;">EC: {{MyCoursesCtrl.mandatoryEC}}</div>
@@ -26,21 +26,11 @@
         <h2>{{ course.code }}</h2>
         <p>{{ course.name }}</p>
         <i class="icon ion-ios-arrow-right"></i>
-        <ion-option-button ng-click="" class="button-assertive icon-left ion-trash-b">
+        <ion-option-button ng-click="MyCoursesCtrl.dropRegistration(course)" class="button-assertive icon-left ion-trash-b">
           Drop
         </ion-option-button>
       </ion-item>
-
-
-      <!--<ion-item class="item-remove-animate item-icon-right" href="#" ng-repeat="">-->
-        <!--<h2>DPR</h2>-->
-        <!--<p>Design pattern</p>-->
-        <!--<i class="icon ion-ios-arrow-right"></i>-->
-        <!--<ion-option-button ng-click="" class="button-assertive icon-left ion-trash-b">-->
-          <!--Drop-->
-        <!--</ion-option-button>-->
-      <!--</ion-item>-->
-
+      <ion-item ng-show="!MyCoursesCtrl.acceptedCourses.length">No courses</ion-item>
     </ion-list>
   </ion-content>
 </ion-view>

@@ -19,4 +19,8 @@ angular.module('GORCA.serviceAPIS').service('registrationService', function ($ht
   self.GetAllRegistrationsByStudent = function () {
     return $http.get(baseUrl + "/forStudent/{pcn}");
   };
+
+  self.dropRegistration = function(course) {
+    return $http.get(baseUrl + '/drop/' + course);
+  }
 });
