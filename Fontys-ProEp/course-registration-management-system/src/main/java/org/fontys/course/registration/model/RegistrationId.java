@@ -31,6 +31,11 @@ public class RegistrationId implements Serializable {
     public RegistrationId() {
     }
 
+    public RegistrationId(Student student, Course course) {
+        this.student = student;
+        this.course = course;
+    }
+
     public Student getStudent() {
         return student;
     }

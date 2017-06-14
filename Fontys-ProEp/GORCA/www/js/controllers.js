@@ -289,9 +289,19 @@ angular.module('GORCA.controllers', [])
     vm.currentDate = new Date();
   })
 
-  .controller('RegistrationController', function (electiveCoursesResolve) {
+  .controller('RegistrationController', function (electiveCoursesResolve, registrationService, $state) {
     var vm = this;
-    vm.electiveCourses = electiveCoursesResolve.electiveCourses;
+    vm.electiveCourses = electiveCoursesResolve.courses;
+
+    vm.register = function (courseCode) {
+      return registrationService.createRegistration(courseCode)
+        .then(function (response) {
+          $state.go('app.registration');
+        }, function (error) {
+          console.log(error);
+        });
+
+    };
   })
 
   .controller('CourseDetailsController', function ($stateParams) {

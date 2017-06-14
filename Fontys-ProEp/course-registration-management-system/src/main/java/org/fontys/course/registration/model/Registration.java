@@ -28,6 +28,22 @@ public class Registration {
     public Registration() {
     }
 
+    public Registration(Student student, Course course, Date date, RegistrationStatus registrationStatus) {
+        this.student = student;
+        this.course = course;
+        this.date = date;
+        this.registrationStatus = registrationStatus;
+    }
+
+    public Registration(int pcn, String courseCode, Date date, RegistrationStatus registrationStatus) {
+        this.student = new Student();
+        this.student.setPcn(pcn);
+        this.course = new Course();
+        this.course.setCode(courseCode);
+        this.date = date;
+        this.registrationStatus = registrationStatus;
+    }
+
 //    public RegistrationId getId() {
 //        return id;
 //    }
