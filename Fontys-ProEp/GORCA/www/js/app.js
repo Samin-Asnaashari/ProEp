@@ -215,7 +215,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             return courseService.getAllElectiveCourses()
               .then(function (courseResponse) {
                 courses = courseResponse.data;
-                registrationService.GetAllOfMyRegistrationsExceptAcceptedOnes()
+                registrationService.GetAllRegistrationsExceptAcceptedOnes()
                   .then(function (registrationResponse) {
                     angular.forEach(registrationResponse, function (r) {
                       var duplicatedCIndex = courses.indexOf(r.course);
