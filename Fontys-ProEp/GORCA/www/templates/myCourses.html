@@ -22,7 +22,7 @@
       </ion-item>
 
       <ion-item class="item-remove-animate item-icon-right" ng-repeat="course in MyCoursesCtrl.acceptedCourses track by course.code"
-                ui-sref="courseDetailsView({courseView : course})" >
+                ui-sref="app.courseDetailsView({courseView : course})" >
         <h2>{{ course.code }}</h2>
         <p>{{ course.name }}</p>
         <i class="icon ion-ios-arrow-right"></i>

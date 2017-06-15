@@ -56,7 +56,7 @@
                 class="button glyphicon glyphicon-plus-sign"></li>
         </th>
     </tr>
-    <tr ng-repeat="student in studentList | filter:searchFilter" ts-repeat ts-hide-no-data>
+    <tr ng-repeat="student in studentList | filter:searchFilter track by student.pcn" ts-repeat ts-hide-no-data>
         <th colspan="1" style="vertical-align: middle;text-align: center;">
             <md-checkbox style="margin-bottom: 0;" class="md-primary" aria-label="Checkbox"
                          ng-checked="vmStudentCustomTable.exists(student)"

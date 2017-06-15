@@ -219,11 +219,11 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 registrationService.GetAllRegistrationsExceptAcceptedOnes()
                   .then(function (registrationResponse) {
                     angular.forEach(registrationResponse.data, function (r) {
-                      var duplicatedCIndex = courses.indexOf(r.course);
+                      var duplicatedCIndex = courses.indexOf(r.id.course);
                       if (duplicatedCIndex != undefined) {
                         courses.splice(duplicatedCIndex, 1);
-                        r.course.status = r.registrationStatus;
-                        courses.push(r.course);
+                        r.id.course.status = r.id.registrationStatus;
+                        courses.push(r.id.course);
                       }
                     });
                   });

@@ -10,6 +10,6 @@ angular.module('appComponent.studentTable').directive('studentCustomTable', func
             templateUrl: "./components/studentCustomTable/studentCustomTable.html",
             controller: 'studentCustomTableCtrl',
             controllerAs: 'vmStudentCustomTable'
-        }
+        };
     }
 );
