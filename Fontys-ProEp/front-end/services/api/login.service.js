@@ -9,18 +9,18 @@ angular.module('appServiceAPI').service('loginService', function ($http, $cookie
         return $http.post(http + localhost + ":8090/logout");
     };
     
-    self.login = function (newLogin) {
+    self.login = function (newLogin, loginApp) {
         return $http({
             method: 'GET',
-            url: baseUrl + '/do' + angular.fromJson(sessionStorage.loginApp) + 'Login',
+            url: baseUrl + '/do' + loginApp + 'Login',
             headers: {
                 'Authorization': 'Basic ' + btoa(newLogin.pcn + ':' + newLogin.password)
             }
         });
     };
 
-    self.SetHeaderAuthentication = function () {
-        var cookieDetails = self.getAuthentication();
+    self.SetHeaderAuthentication = function (loginApp) {
+        var cookieDetails = self.getAuthentication(loginApp);
         if(cookieDetails){
             $http.defaults.headers.common.Authorization = cookieDetails;
             return true;
@@ -30,17 +30,17 @@ angular.module('appServiceAPI').service('loginService', function ($http, $cookie
         }
     };
 
-    self.setAuthentication = function (token) {
+    self.setAuthentication = function (token, loginApp) {
         $http.defaults.headers.common.Authorization = token;
-        $cookies.putObject(angular.fromJson(sessionStorage.loginApp) + 'token', token);
+        $cookies.putObject(loginApp + 'Token', token);
     };
 
-    self.getAuthentication = function () {
-        return $cookies.getObject(angular.fromJson(sessionStorage.loginApp) + 'token');
+    self.getAuthentication = function (loginApp) {
+        return $cookies.getObject(loginApp + 'Token');
     };
 
-    self.DeleteAuthenticationCookie = function () {
+    self.DeleteAuthenticationCookie = function (loginApp) {
         $http.defaults.headers.common.Authorization = "";
-        $cookies.remove(angular.fromJson(sessionStorage.loginApp) + 'token');
+        $cookies.remove(loginApp + 'Token');
     };
 });

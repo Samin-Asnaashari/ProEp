@@ -19,17 +19,14 @@ angular.module('appServiceAPI').service('registrationService', function ($http) 
     };
 
     self.getAllAcceptedRegistrations = function (courseCode) {
-        $http.defaults.headers.common.Authorization = "Basic MzcyODM6MTIzNzM=";
         return $http.get(baseUrl + '/status/ACCEPTED/' + courseCode);
     };
 
     self.getAllPendingRegistrations = function (courseCode) {
-        $http.defaults.headers.common.Authorization = "Basic MzcyODM6MTIzNzM=";
         return $http.get(baseUrl + '/status/PENDING/' + courseCode);
     };
 
     self.getAllDeclinedRegistrations = function (courseCode) {
-        $http.defaults.headers.common.Authorization = "Basic MzcyODM6MTIzNzM=";
         return $http.get(baseUrl + '/status/DECLINE/' + courseCode);
     };
 

@@ -2,11 +2,9 @@
  * Created by Phoenix on 17-May-17.
  */
 
-angular.module('appComponent.login').controller('loginCtrl', function ($state, $scope, loginService, loginResolve) {
+angular.module('appComponent.login').controller('loginCtrl', function ($state, $scope, loginService) {
 
     var vm = this;
-
-    sessionStorage.loginApp = angular.toJson(loginResolve.loginApp);
 
     vm.errorMsg = "";
 
@@ -24,12 +22,11 @@ angular.module('appComponent.login').controller('loginCtrl', function ($state, $
     };
 
     vm.login = function () {
-        loginService.login(vm.newLogin)
+        loginService.login(vm.newLogin, $scope.loginApp)
             .then(function (response) {
-                loginService.setAuthentication(response.data.message);
+                loginService.setAuthentication(response.data.message, $scope.loginApp);
                 $state.go('home');
             }, function (error) {
-                console.log(error);
                 if(error.status === 401){
                     vm.errorMsg = "Bad credentials";
                 }

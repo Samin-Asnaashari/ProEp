@@ -10,7 +10,7 @@ angular.module("appTeacher").controller("navCtrl", function ($location, loginSer
     };
 
     $scope.isLoggedIn = function () {
-        if(loginService.getAuthentication()){
+        if(loginService.getAuthentication("Teacher")){
             return true;
         }
         else{

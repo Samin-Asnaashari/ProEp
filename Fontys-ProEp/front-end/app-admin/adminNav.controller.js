@@ -7,7 +7,7 @@ angular.module("appAdmin").controller("navCtrl", function ($scope, $rootScope, $
     };
 
     $scope.isLoggedIn = function () {
-        if(loginService.getAuthentication()){
+        if(loginService.getAuthentication("Admin")){
             return true;
         }
         else{

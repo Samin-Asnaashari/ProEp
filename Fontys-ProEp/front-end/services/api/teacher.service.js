@@ -26,9 +26,7 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
         return $http.get(baseUrl + '/fontysTeachers');
     };
 
-    self.getMyCourses = function()
-    {
-        $http.defaults.headers.common.Authorization = "Basic " + btoa('37283:12373');
+    self.getMyCourses = function() {
         return $http.get(baseUrl + '/courses');
     };
 
