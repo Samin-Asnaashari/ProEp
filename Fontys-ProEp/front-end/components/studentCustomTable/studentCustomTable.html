@@ -48,15 +48,15 @@
         <td colspan="2" ts-criteria="major">Major</td>
         <td colspan="2" ts-criteria="studentType">Type</td>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li ng-show="action == 0" ng-click="vmStudentCustomTable.removeStudents(vmStudentCustomTable.selected)"
+            <li style="margin-right: 5px;" ng-show="removeAction == 1" ng-click="vmStudentCustomTable.removeStudents(vmStudentCustomTable.selected)"
                 data-toggle="tooltip" title="Remove"
                 class="button glyphicon glyphicon-remove-sign"></li>
-            <li ng-show="action == 1" ng-click="vmStudentCustomTable.addStudents(vmStudentCustomTable.selected)"
+            <li ng-show="addAction == 1" ng-click="vmStudentCustomTable.addStudents(vmStudentCustomTable.selected)"
                 data-toggle="tooltip" title="Add"
                 class="button glyphicon glyphicon-plus-sign"></li>
         </th>
     </tr>
-    <tr ng-repeat="student in studentList | filter:searchFilter" ts-repeat ts-hide-no-data>
+    <tr ng-repeat="student in studentList | filter:searchFilter track by student.pcn" ts-repeat ts-hide-no-data>
         <th colspan="1" style="vertical-align: middle;text-align: center;">
             <md-checkbox style="margin-bottom: 0;" class="md-primary" aria-label="Checkbox"
                          ng-checked="vmStudentCustomTable.exists(student)"
@@ -72,10 +72,10 @@
         <td colspan="2">{{student.major}}</td>
         <td colspan="2">{{student.studentType}}</td>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li ng-show="action == 0" ng-click="vmStudentCustomTable.removeStudent(student.pcn)" data-toggle="tooltip"
+            <li style="margin-right: 5px;" ng-show="removeAction == 1" ng-click="vmStudentCustomTable.removeStudent(student.pcn)" data-toggle="tooltip"
                 title="Remove"
                 class="button glyphicon glyphicon-remove"></li>
-            <li ng-show="action == 1" ng-click="vmStudentCustomTable.addStudent(student)" data-toggle="tooltip" title="Add"
+            <li style="top: 0px;" ng-show="addAction == 1" ng-click="vmStudentCustomTable.addStudent(student)" data-toggle="tooltip" title="Add"
                 class="button glyphicon glyphicon-plus"></li>
         </th>
     </tr>
@@ -86,4 +86,3 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-

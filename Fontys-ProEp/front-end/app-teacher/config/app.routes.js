@@ -48,7 +48,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var acceptedStudents = [];
                             angular.forEach(response.data, function (r) {
-                                acceptedStudents.push(r.student);
+                                acceptedStudents.push(r.id.student);
                                 //acceptedStudents.push(r);
                             });
                             //If other info is needed other than student from registration object you can pass it here as commented example below
@@ -62,7 +62,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var pendingStudents = [];
                             angular.forEach(response.data, function (r) {
-                                pendingStudents.push(r.student);
+                                pendingStudents.push(r.id.student);
                             });
                             return {pendingStudents: pendingStudents};
                         }, function (error) {
@@ -74,7 +74,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var declinedStudents = [];
                             angular.forEach(response.data, function (r) {
-                                declinedStudents.push(r.student);
+                                declinedStudents.push(r.id.student);
                             });
                             return {declinedStudents: declinedStudents};
                         }, function (error) {
@@ -85,30 +85,20 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
         })
         .state('login', {
             url: '/login',
-            templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin',
-            resolve: {
-                loginResolve: function () {
-                    return {loginApp: "Teacher"};
-                }
-            }
+            template: '<login-page login-app="Teacher"></login-page>'
         })
         .state('logout', {
             url: '/logout',
-            templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin',
+            template: '<login-page login-app="Teacher"></login-page>',
             resolve: {
-                logOutResolve: function ($state, $stateParams, loginService) {
+                logOutResolve: function (loginService) {
                     return loginService.logout()
                         .then(function (response) {
-                            loginService.DeleteAuthenticationCookie();
+                            loginService.DeleteAuthenticationCookie("Teacher");
                         }, function (error) {
                             console.log("Error");
                             console.log(error);
                         });
-                },
-                loginResolve: function () {
-                    return {loginApp: "Admin"};
                 }
             }
         });

@@ -210,7 +210,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             controllerAs: 'registrationCtrl'
           }
         },
-        resolve: {
+        resolve: { //TODO i am working on it
           electiveCoursesResolve: function (registrationService, courseService) {
             var courses = [];
             return courseService.getAllElectiveCourses()
@@ -224,6 +224,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                       if (duplicatedCIndex != undefined) {
                         courses.splice(duplicatedCIndex, 1);
                         r.id.course.status = r.registrationStatus;
+                        // courses.push(r.id.course);
                       }
                       courses.push(r.id.course);
                     });
@@ -296,6 +297,13 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             //   template: 'Loading...'
             // });
 
+            var courseDetailStorage = window.localStorage['courseDetail'];
+            if(!courseDetailStorage || $stateParams.courseView !== null) {
+               window.localStorage['courseDetail'] = JSON.stringify($stateParams.courseView);
+            }
+            else {
+              $stateParams.courseView = JSON.parse(courseDetailStorage);
+            }
             return reviewService.getAllReviews($stateParams.courseView.code)
               .then(function (response) {
                 return {reviews: response.data};

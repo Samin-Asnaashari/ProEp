@@ -9,7 +9,7 @@ angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', f
     };
 
     vm.goToCourseEdit = function (courseCode) {
-        $state.go('courseEdit', {code: courseCode})
+        $state.go('courseEdit', {code: courseCode});
     };
 
     vm.addCourse = function (course) {

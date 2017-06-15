@@ -38,31 +38,20 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
         })
         .state('login', {
             url: '/login',
-            templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin',
-            resolve: {
-                loginResolve: function () {
-                    console.log("KEKEKEKEKE");
-                    return {loginApp: "Admin"};
-                }
-            }
+            template: '<login-page login-app="Admin"></login-page>'
         })
         .state('logout', {
             url: '/logout',
-            templateUrl: './components/login/login.html',
-            controller: 'loginCtrl as vmLogin',
+            template: '<login-page login-app="Admin"></login-page>',
             resolve: {
-                logOutResolve: function ($state, $stateParams, loginService) {
+                logOutResolve: function (loginService) {
                     return loginService.logout()
                         .then(function (response) {
-                            loginService.DeleteAuthenticationCookie();
+                            loginService.DeleteAuthenticationCookie("Admin");
                         }, function (error) {
                             console.log("Error");
                             console.log(error);
                         });
-                },
-                loginResolve: function () {
-                    return {loginApp: "Admin"};
                 }
             }
         })

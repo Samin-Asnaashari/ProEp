@@ -17,12 +17,11 @@ angular.module('appTeacher',
 .run(function ($transitions) {
 
         $transitions.onStart( {}, function(transition) {
-            if(!transition.injector().get('loginService').SetHeaderAuthentication() && transition.to().name !== 'login') {
+            if(!transition.injector().get('loginService').SetHeaderAuthentication("Teacher") && transition.to().name !== 'login') {
                 return transition.router.stateService.target("login", undefined, { location: false });
             }
-            else if(transition.injector().get('loginService').getAuthentication() && transition.to().name === 'login') {
+            else if(transition.injector().get('loginService').getAuthentication("Teacher") && transition.to().name === 'login') {
                 return false;
             }
         });
-
 });

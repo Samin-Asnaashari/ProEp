@@ -44,7 +44,7 @@ public class TeacherController {
     public List<Teacher> GetAllFontysTeachers() {
         List<Teacher> teachers = new ArrayList<>();
         teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
-        teachers.add(new Teacher(37283, "12373", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
+        teachers.add(new Teacher(37777, "123", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
         teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "George", "bla", ""));
         teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", ""));
         teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", ""));
