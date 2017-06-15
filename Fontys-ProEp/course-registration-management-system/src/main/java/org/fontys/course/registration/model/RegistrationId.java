@@ -11,12 +11,12 @@ import java.util.Objects;
 public class RegistrationId implements Serializable {
 
 	@JsonIgnoreProperties("notifications")
-	@OneToOne
+	@OneToOne(orphanRemoval = true)
     @JoinColumn(name = "student_pcn", referencedColumnName="pcn")
     private Student student;
 
 	@JsonIgnoreProperties({"teachers", "states", "reviews"})
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "course_code", referencedColumnName="code")
     private Course course;
 

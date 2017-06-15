@@ -58,10 +58,11 @@ public class RegistrationService {
 	@Transactional
 	public void UpdateRegistration(String courseCode, List<Integer> studentPcnList, String status) throws Exception {
 		Course course = this.utilService.GetCourse(courseCode);
-		Registration registration = null;
+		//Registration registration = null;
 		for(int i = 0; i < studentPcnList.size(); i++) {
-			registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
+			Registration registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
 			registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
+			this.registrationRepository.save(registration);
 		}
 	}
 
