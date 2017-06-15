@@ -71,7 +71,7 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
             }, function (error) {
 
             });
-        })
+        });
     });
 
     EventStudent.subscribeOnStudentsRemoved($scope, function (event, data){
@@ -83,6 +83,6 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
                 }, function (error) {
 
                 });
-        })
+        });
     });
 });
