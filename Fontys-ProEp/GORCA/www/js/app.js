@@ -294,10 +294,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             // $ionicLoading.show({
             //   template: 'Loading...'
             // });
-            // if(angular.fromJson(sessionStorage.course) === null || ($stateParams.course !== null &&
-            //   $stateParams.course.code !== angular.fromJson(sessionStorage.course))) {
-            //   sessionStorage.course = angular.toJson($stateParams.course);
-            // }
 
             var courseDetailStorage = window.localStorage['courseDetail'];
             if(!courseDetailStorage || $stateParams.courseView !== null) {

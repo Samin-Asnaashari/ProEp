@@ -9,6 +9,6 @@ angular.module('appComponent.teacherTable').directive('teacherCustomTable', func
             templateUrl: "./components/teacherCustomTable/teacherCustomTable.html",
             controller: 'teacherCustomTableCtrl',
             controllerAs: 'vmTeacherCustomTable'
-        }
+        };
     }
 );

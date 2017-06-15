@@ -12,6 +12,6 @@ angular.module('appComponent.courseTable').directive('courseCustomTable', functi
             templateUrl: "./components/courseCustomTable/courseCustomTable.html",
             controller: 'courseCustomTableCtrl',
             controllerAs: 'vmCourseCustomTable'
-        }
+        };
     }
 );

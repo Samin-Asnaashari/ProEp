@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody class="courseTBody">
-    <tr ng-repeat="course in courseList | filter:searchText">
+    <tr ng-repeat="course in courseList | filter:searchText track by course.code">
         <td colspan="1">{{vmCourseCustomTable.RowNumber(course)}}</td>
         <td colspan="3">{{course.code}}</td>
         <td colspan="4"> {{course.name}}</td>

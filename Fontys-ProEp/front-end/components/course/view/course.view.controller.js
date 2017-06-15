@@ -6,8 +6,7 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
 
 
     //storing data for when browser refreshes
-    if(angular.fromJson(sessionStorage.course) === null || ($stateParams.course !== null &&
-        $stateParams.course.code !== angular.fromJson(sessionStorage.course).code)) {
+    if(angular.fromJson(sessionStorage.course) === null || $stateParams.course !== null) {
         sessionStorage.course = angular.toJson($stateParams.course);
     }
 
