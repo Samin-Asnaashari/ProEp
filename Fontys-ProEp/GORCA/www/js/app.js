@@ -211,20 +211,21 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
+          electiveCoursesResolve: function (registrationService, courseService) {
             var courses = [];
             return courseService.getAllElectiveCourses()
               .then(function (courseResponse) {
                 courses = courseResponse.data;
                 registrationService.GetAllRegistrationsExceptAcceptedOnes()
                   .then(function (registrationResponse) {
+                    console.log(registrationResponse.data);
                     angular.forEach(registrationResponse.data, function (r) {
-                      var duplicatedCIndex = courses.indexOf(r.course);
+                      var duplicatedCIndex = courses.indexOf(r.id.course);
                       if (duplicatedCIndex != undefined) {
                         courses.splice(duplicatedCIndex, 1);
-                        r.course.status = r.registrationStatus;
-                        courses.push(r.course);
+                        r.id.course.status = r.registrationStatus;
                       }
+                      courses.push(r.id.course);
                     });
                   });
                 return {courses: courses};

@@ -300,10 +300,26 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     };
   })
 
-  .controller('CourseDetailsController', function ($stateParams, reviewsResolve) {
+  .controller('CourseDetailsController', function ($stateParams, reviewsResolve, $ionicPopup) {
     var vm = this;
     vm.course = $stateParams.courseView;
     vm.reviews = reviewsResolve.reviews;
+
+    vm.AddReview = function() {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Review for ' + vm.course.code,
+        templateUrl: 'templates/addReview.html',
+        controller: 'AddReviewController',
+        controllerAs: 'addReviewCtrl'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          //
+
+        }
+      });
+    };
   })
 
   .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService) {

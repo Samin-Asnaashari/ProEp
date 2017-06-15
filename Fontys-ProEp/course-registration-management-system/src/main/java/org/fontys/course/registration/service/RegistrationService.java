@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.fontys.course.registration.model.Course;
+import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Registration;
 import org.fontys.course.registration.model.RegistrationId;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
@@ -26,6 +27,7 @@ public class RegistrationService {
     public void createRegistration(String courseCode, int pcn) throws Exception {
         Registration newRegistration = new Registration(new RegistrationId(utilService.GetStudentById(pcn), utilService.GetCourse(courseCode)), new Date(), RegistrationStatus.PENDING);
         this.registrationRepository.save(newRegistration);
+//        this.utilService.AddNewNotification(new Notification("", new Date(), ));
     }
 
     @Transactional
