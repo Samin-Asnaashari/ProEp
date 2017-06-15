@@ -1,9 +1,8 @@
 'use strict';
 
-angular.module('appComponent.courseView').controller('courseViewCtrl', function ($stateParams, $scope,registrationService, acceptedRegistrationsResolve,
+angular.module('appComponent.courseView').controller('courseViewCtrl', function ($filter, $stateParams, $scope,registrationService, acceptedRegistrationsResolve,
                                                                                  pendingRegistrationsResolve, declinedRegistrationsResolve, EventStudent) {
     var vm = this;
-
 
     //storing data for when browser refreshes
     if(angular.fromJson(sessionStorage.course) === null || $stateParams.course !== null) {
@@ -19,70 +18,74 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
     vm.pendingStudents = pendingRegistrationsResolve.pendingStudents;
     vm.declinedStudents = declinedRegistrationsResolve.declinedStudents;
 
-    EventStudent.subscribeOnAStudentAdded($scope, function (event, data) {
-        console.log(event, "event");
-        console.log(data.student.pcn, "data");
-        console.log(vm.course.code, "code");
-        registrationService.updateRegistration(vm.course.code,data.student.pcn,"ACCEPTED")
-            .then(function () {
-                if(vm.pendingStudents.indexOf(data.student) !== -1) {
-                    vm.pendingStudents.splice(vm.pendingStudents.indexOf(data.student), 1);
-                }
-                if(vm.declinedStudents.indexOf(data.student) !== -1) {
-                    vm.declinedStudents.splice(vm.declinedStudents.indexOf(data.student), 1);
-                }
-                vm.acceptedStudents.push(data.student);
-            }, function (error) {
+    vm.getStudentPCNs = function (list) {
+        var studentPCNs = [];
+        angular.forEach(list, function (student) {
+            studentPCNs.push(student.pcn);
+        });
+        return studentPCNs;
+    };
 
+    vm.handleRemoveOrAdd = function (spliceList, pushList, pushSliceObject, status) {
+        vm.callAddOrRemoveBackend(pushSliceObject.pcn, status)
+            .then(function () {
+                vm.handleSpliceAndPush(spliceList, pushList, pushSliceObject);
+            }, function (error) {
+                console.log(angular.toJson(error));
             });
+    };
+
+    vm.handleRemoveOrAddList = function (spliceList, pushList, pushSliceListObjects, status) {
+        vm.callAddOrRemoveBackend(vm.getStudentPCNs(pushSliceListObjects), status)
+            .then(function (response) {
+                angular.forEach(pushSliceListObjects, function (student) {
+                    vm.handleSpliceAndPush(spliceList, pushList, student);
+                });
+            }, function (error) {
+                console.log(angular.toJson(error));
+            });
+    };
+
+    vm.callAddOrRemoveBackend = function (listOfPCNs, status) {
+        return registrationService.updateRegistration(vm.course.code, listOfPCNs, status);
+    };
+
+    vm.handleSpliceAndPush = function (spliceList, pushList, pushSliceObject) {
+        spliceList.splice(spliceList.indexOf(pushSliceObject), 1);
+        pushList.push(pushSliceObject);
+    };
+
+    EventStudent.subscribeOnAStudentAdded($scope, function (event, data) {
+        if(vm.pendingStudents.indexOf(data.student) !== -1) {
+            vm.handleRemoveOrAdd(vm.pendingStudents, vm.acceptedStudents, data.student, "ACCEPTED");
+            return;
+        }
+        vm.handleRemoveOrAdd(vm.declinedStudents, vm.acceptedStudents, data.student, "ACCEPTED");
     });
 
     EventStudent.subscribeOnAStudentRemoved($scope, function (event, data) {
-        console.log(data.pcn, "data");
-        for(var i =0;i<vm.acceptedStudents.length;i++)
-        {
-            if(vm.acceptedStudents[i].pcn==data.pcn)
-            {
-                var s;
-                s =vm.acceptedStudents[i];
-                registrationService.updateRegistration(vm.course.code,data.pcn,"DECLINE")
-                    .then(function () {
-                        vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(s), 1);
-                        vm.declinedStudents.push(s);
-                    }, function (error) {
 
-                    });
-            }
+        var studentFoundList = $filter("filter")(vm.acceptedStudents, {pcn:data.pcn});
+        if(studentFoundList.length !== 0) {
+            vm.handleRemoveOrAdd(vm.acceptedStudents, vm.declinedStudents, studentFoundList[0], "DECLINE");
+            return;
         }
-
+        vm.handleRemoveOrAdd(vm.pendingStudents, vm.declinedStudents, $filter("filter")(vm.pendingStudents, {pcn:data.pcn})[0], "DECLINE");
     });
 
     EventStudent.subscribeOnStudentsAdded($scope, function (event, data) {
-        angular.forEach(data.students, function (s) {
-        return registrationService.updateRegistration(vm.course.code,s.pcn,"ACCEPTED")
-            .then(function () {
-                    if(vm.pendingStudents.indexOf(s) !== -1) {
-                        vm.pendingStudents.splice(vm.pendingStudents.indexOf(s), 1);
-                    }
-                    if(vm.declinedStudents.indexOf(s) !== -1) {
-                        vm.declinedStudents.splice(vm.declinedStudents.indexOf(s), 1);
-                    }
-                    vm.acceptedStudents.push(s);
-            }, function (error) {
-
-            });
-        });
+        if(vm.pendingStudents.indexOf(data.students[0]) !== -1) {
+            vm.handleRemoveOrAddList(vm.pendingStudents, vm.acceptedStudents, data.students, "ACCEPTED");
+            return;
+        }
+        vm.handleRemoveOrAddList(vm.declinedStudents, vm.acceptedStudents, data.students, "ACCEPTED");
     });
 
     EventStudent.subscribeOnStudentsRemoved($scope, function (event, data){
-        angular.forEach(data.students, function (s) {
-            return registrationService.updateRegistration(vm.course.code,s.pcn,"DECLINE")
-                .then(function () {
-                    vm.acceptedStudents.splice(vm.acceptedStudents.indexOf(s), 1);
-                    vm.declinedStudents.push(s);
-                }, function (error) {
-
-                });
-        });
+        if(vm.pendingStudents.indexOf(data.students[0]) !== -1) {
+            vm.handleRemoveOrAddList(vm.pendingStudents, vm.declinedStudents, data.students, "DECLINE");
+            return;
+        }
+        vm.handleRemoveOrAddList(vm.acceptedStudents, vm.declinedStudents, data.students, "DECLINE");
     });
 });
