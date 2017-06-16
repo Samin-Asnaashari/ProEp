@@ -210,21 +210,23 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             controllerAs: 'registrationCtrl'
           }
         },
-        resolve: {
-          electiveCoursesResolve: function (registrationService, courseService, $ionicLoading) {
+        resolve: { //TODO i am working on it
+          electiveCoursesResolve: function (registrationService, courseService) {
             var courses = [];
             return courseService.getAllElectiveCourses()
               .then(function (courseResponse) {
                 courses = courseResponse.data;
                 registrationService.GetAllRegistrationsExceptAcceptedOnes()
                   .then(function (registrationResponse) {
+                    console.log(registrationResponse.data);
                     angular.forEach(registrationResponse.data, function (r) {
                       var duplicatedCIndex = courses.indexOf(r.id.course);
                       if (duplicatedCIndex != undefined) {
                         courses.splice(duplicatedCIndex, 1);
-                        r.id.course.status = r.id.registrationStatus;
-                        courses.push(r.id.course);
+                        r.id.course.status = r.registrationStatus;
+                        // courses.push(r.id.course);
                       }
+                      courses.push(r.id.course);
                     });
                   });
                 return {courses: courses};
