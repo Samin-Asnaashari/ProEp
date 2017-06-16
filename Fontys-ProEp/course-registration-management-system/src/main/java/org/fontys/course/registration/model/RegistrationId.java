@@ -2,6 +2,9 @@ package org.fontys.course.registration.model;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
@@ -11,12 +14,14 @@ import java.util.Objects;
 public class RegistrationId implements Serializable {
 
 	@JsonIgnoreProperties("notifications")
-	@OneToOne(orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@OneToOne
     @JoinColumn(name = "student_pcn", referencedColumnName="pcn")
     private Student student;
 
 	@JsonIgnoreProperties({"teachers", "states", "reviews"})
-    @OneToOne(orphanRemoval = true)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+    @OneToOne
     @JoinColumn(name = "course_code", referencedColumnName="code")
     private Course course;
 

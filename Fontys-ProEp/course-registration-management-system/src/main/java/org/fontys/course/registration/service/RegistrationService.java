@@ -58,11 +58,10 @@ public class RegistrationService {
 	@Transactional
 	public void UpdateRegistration(String courseCode, List<Integer> studentPcnList, String status) throws Exception {
 		Course course = this.utilService.GetCourse(courseCode);
-		//Registration registration = null;
+		Registration registration = null;
 		for(int i = 0; i < studentPcnList.size(); i++) {
-			Registration registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
+			registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
 			registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
-			this.registrationRepository.save(registration);
 		}
 	}
 
@@ -91,4 +90,14 @@ public class RegistrationService {
     public List<Registration> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer studentPcn, RegistrationStatus registrationStatus) {
         return this.registrationRepository.findByIdStudentAndRegistrationStatusNot(this.utilService.GetStudentById(studentPcn), registrationStatus);
     }
+	
+	@Transactional
+	public void DeleteAllRegistrationsByStudent(Integer pcn) {
+		this.registrationRepository.deleteByIdStudent(this.utilService.GetStudentById(pcn));
+	}
+
+	@Transactional
+	public void DeleteAllRegistrationsByCourse(String courseCode) throws Exception {
+		this.registrationRepository.deleteByIdCourse(this.utilService.GetCourse(courseCode));
+	}
 }

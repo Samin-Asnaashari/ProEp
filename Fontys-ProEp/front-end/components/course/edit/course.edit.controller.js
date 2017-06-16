@@ -71,7 +71,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
         vm.course.regEndDate = vm.selectedEndDate.toISOString();
         return courseService.updateCourse(vm.course)
             .then(function (response) {
-                vm.removeStatesFromCourse();
+                //vm.removeStatesFromCourse();
                 $state.go('home');
             }, function (error) {
             });
