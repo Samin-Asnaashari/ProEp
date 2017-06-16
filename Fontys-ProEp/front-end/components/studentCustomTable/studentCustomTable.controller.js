@@ -19,11 +19,13 @@ angular.module('appComponent.studentTable').controller('studentCustomTableCtrl',
     };
 
     vm.addStudents = function (students) {
-        EventStudent.notifyOnStudentsAdded(students);
+        if(students.length > 0)
+            EventStudent.notifyOnStudentsAdded(students);
     };
 
     vm.removeStudents = function (students) {
-        EventStudent.notifyOnStudentsRemoved(students);
+        if(students.length > 0)
+            EventStudent.notifyOnStudentsRemoved(students);
     };
 
     vm.toggle = function (item) {
