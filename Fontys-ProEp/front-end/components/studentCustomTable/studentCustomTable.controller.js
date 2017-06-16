@@ -6,6 +6,14 @@ angular.module('appComponent.studentTable').controller('studentCustomTableCtrl',
     vm.showFilter = false;
     vm.selected = [];
 
+    vm.getMaxColspan = function () {
+      if($scope.registration === 1) {
+          return 22;
+      }
+      else
+          return 20;
+    };
+
     vm.ShowOrHideFilter = function () {
         vm.showFilter = !vm.showFilter;
     };

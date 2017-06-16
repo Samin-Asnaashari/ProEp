@@ -5,7 +5,9 @@
             <span ng-click="" class="glyphicon glyphicon-chevron-down"></span>
             <!--data-toggle="collapse" href="#collapseTable"-->
         </th>
-        <th colspan="20" class="md-title" style="vertical-align: middle;">Students</th>
+        <th colspan="{{ vmStudentCustomTable.getMaxColspan()}}" class="md-title" style="vertical-align: middle;">
+            Students
+        </th>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
             <md-button class="pull-right" aria-label="Filter"
                        ng-click="vmStudentCustomTable.ShowOrHideFilter()">
@@ -18,17 +20,14 @@
     <tr ng-show="vmStudentCustomTable.showFilter">
         <th colspan="1"></th>
         <th colspan="2"><input type="text" ng-model="searchFilter.pcn" class="form-control" placeholder="PCN"></th>
-        <th colspan="4"><input type="text" ng-model="searchFilter.firstName" class="form-control"
-                               placeholder="1st Name"></th>
-        <th colspan="4"><input type="text" ng-model="searchFilter.lastName" class="form-control"
-                               placeholder="Last Name"></th>
+        <th colspan="4"><input type="text" ng-model="searchFilter.firstName" class="form-control" placeholder="1st Name"></th>
+        <th colspan="4"><input type="text" ng-model="searchFilter.lastName" class="form-control" placeholder="Last Name"></th>
         <th colspan="3"><input type="text" ng-model="searchFilter.email" class="form-control" placeholder="Email"></th>
-        <th colspan="2"><input type="text" ng-model="searchFilter.studentNumber" class="form-control" placeholder="#">
-        </th>
-        <th colspan="1"><input type="text" ng-model="searchFilter.avgScore" class="form-control"
-                               placeholder="Avg Score"></th>
+        <th colspan="2"><input type="text" ng-model="searchFilter.studentNumber" class="form-control" placeholder="#"></th>
+        <th colspan="1"><input type="text" ng-model="searchFilter.avgScore" class="form-control" placeholder="Avg Score"></th>
         <th colspan="2"><input type="text" ng-model="searchFilter.major" class="form-control" placeholder="Major"></th>
         <th colspan="2"><input type="text" ng-model="searchFilter.studentType" class="form-control" placeholder="Type">
+        <th ng-show="registration == 1" colspan="2"><input type="text" ng-model="searchFilter.registrationDate" class="form-control" placeholder="Registration Date">
         </th>
         <th colspan="2"></th>
     </tr>
@@ -47,8 +46,10 @@
         <td colspan="1" ts-criteria="avgScore">Avg Score</td>
         <td colspan="2" ts-criteria="major">Major</td>
         <td colspan="2" ts-criteria="studentType">Type</td>
+        <td ng-show="registration == 1" colspan="2" ts-criteria="registrationDate">Registration date</td>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li style="margin-right: 5px;" ng-show="removeAction == 1" ng-click="vmStudentCustomTable.removeStudents(vmStudentCustomTable.selected)"
+            <li style="margin-right: 5px;" ng-show="removeAction == 1"
+                ng-click="vmStudentCustomTable.removeStudents(vmStudentCustomTable.selected)"
                 data-toggle="tooltip" title="Remove"
                 class="button glyphicon glyphicon-remove-sign"></li>
             <li ng-show="addAction == 1" ng-click="vmStudentCustomTable.addStudents(vmStudentCustomTable.selected)"
@@ -71,11 +72,14 @@
         <td colspan="1">{{student.avgScore}}</td>
         <td colspan="2">{{student.major}}</td>
         <td colspan="2">{{student.studentType}}</td>
+        <td ng-if="registration == 1" colspan="2">{{student.registrationDate}}</td>
         <th colspan="2" style="vertical-align: middle;text-align: center;">
-            <li style="margin-right: 5px;" ng-show="removeAction == 1" ng-click="vmStudentCustomTable.removeStudent(student.pcn)" data-toggle="tooltip"
+            <li style="margin-right: 5px;" ng-show="removeAction == 1"
+                ng-click="vmStudentCustomTable.removeStudent(student.pcn)" data-toggle="tooltip"
                 title="Remove"
                 class="button glyphicon glyphicon-remove"></li>
-            <li style="top: 0px;" ng-show="addAction == 1" ng-click="vmStudentCustomTable.addStudent(student)" data-toggle="tooltip" title="Add"
+            <li style="top: 0px;" ng-show="addAction == 1" ng-click="vmStudentCustomTable.addStudent(student)"
+                data-toggle="tooltip" title="Add"
                 class="button glyphicon glyphicon-plus"></li>
         </th>
     </tr>
