@@ -48,6 +48,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var acceptedStudents = [];
                             angular.forEach(response.data, function (r) {
+                                r.id.student.registrationDate = moment(r.date).format("LL LT");
                                 acceptedStudents.push(r.id.student);
                                 //acceptedStudents.push(r);
                             });

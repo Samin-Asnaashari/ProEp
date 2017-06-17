@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.fontys.course.registration.model.*;
+import org.fontys.course.registration.model.enums.NotificationType;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class RegistrationService {
         Registration newRegistration = new Registration(new RegistrationId(student, course), new Date(), RegistrationStatus.PENDING);
         this.registrationRepository.save(newRegistration);
         String notificationContent = "Registration Request: Student with PCN " + pcn + " requested registration for course " + courseCode;
-        for (Teacher courseTeacher: course.getTeachers()){
-            this.utilService.AddNewNotification(new Notification(notificationContent, new Date(), student, courseTeacher));
+        for (Teacher courseTeacher : course.getTeachers()) {
+            this.utilService.AddNewNotification(new Notification(NotificationType.REGISTRATION, notificationContent, new Date(), student, courseTeacher, courseCode));
         }
     }
 
@@ -60,11 +61,10 @@ public class RegistrationService {
     @Transactional
     public void UpdateRegistration(String courseCode, List<Integer> studentPcnList, String status) throws Exception {
         Course course = this.utilService.GetCourse(courseCode);
-        //Registration registration = null;
+        Registration registration = null;
         for (int i = 0; i < studentPcnList.size(); i++) {
-            Registration registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
+            registration = this.registrationRepository.findById(new RegistrationId(this.utilService.GetStudentById(studentPcnList.get(i)), course));
             registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
-            this.registrationRepository.save(registration);
         }
     }
 
@@ -88,5 +88,15 @@ public class RegistrationService {
 
     public List<Registration> GetAllElectiveCoursesByPcnWithFilteredStatus(Integer studentPcn, RegistrationStatus registrationStatus) {
         return this.registrationRepository.findByIdStudentAndRegistrationStatusNot(this.utilService.GetStudentById(studentPcn), registrationStatus);
+    }
+
+    @Transactional
+    public void DeleteAllRegistrationsByStudent(Integer pcn) {
+        this.registrationRepository.deleteByIdStudent(this.utilService.GetStudentById(pcn));
+    }
+
+    @Transactional
+    public void DeleteAllRegistrationsByCourse(String courseCode) throws Exception {
+        this.registrationRepository.deleteByIdCourse(this.utilService.GetCourse(courseCode));
     }
 }

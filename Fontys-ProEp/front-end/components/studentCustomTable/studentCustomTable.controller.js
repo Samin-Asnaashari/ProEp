@@ -6,6 +6,14 @@ angular.module('appComponent.studentTable').controller('studentCustomTableCtrl',
     vm.showFilter = false;
     vm.selected = [];
 
+    vm.getMaxColspan = function () {
+      if($scope.registration === 1) {
+          return 22;
+      }
+      else
+          return 20;
+    };
+
     vm.ShowOrHideFilter = function () {
         vm.showFilter = !vm.showFilter;
     };
@@ -19,11 +27,13 @@ angular.module('appComponent.studentTable').controller('studentCustomTableCtrl',
     };
 
     vm.addStudents = function (students) {
-        EventStudent.notifyOnStudentsAdded(students);
+        if(students.length > 0)
+            EventStudent.notifyOnStudentsAdded(students);
     };
 
     vm.removeStudents = function (students) {
-        EventStudent.notifyOnStudentsRemoved(students);
+        if(students.length > 0)
+            EventStudent.notifyOnStudentsRemoved(students);
     };
 
     vm.toggle = function (item) {

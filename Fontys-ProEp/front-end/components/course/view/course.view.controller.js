@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.courseView').controller('courseViewCtrl', function ($filter, $stateParams, $scope,registrationService, acceptedRegistrationsResolve,
+angular.module('appComponent.courseView').controller('courseViewCtrl', function ($anchorScroll, $location, $filter, $stateParams, $scope,registrationService, acceptedRegistrationsResolve,
                                                                                  pendingRegistrationsResolve, declinedRegistrationsResolve, EventStudent) {
     var vm = this;
 
@@ -17,6 +17,12 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
     vm.acceptedStudents = acceptedRegistrationsResolve.acceptedStudents;
     vm.pendingStudents = pendingRegistrationsResolve.pendingStudents;
     vm.declinedStudents = declinedRegistrationsResolve.declinedStudents;
+
+    vm.goTop = function () {
+        $location.hash('top');
+        // call $anchorScroll()
+        $anchorScroll();
+    };
 
     vm.getStudentPCNs = function (list) {
         var studentPCNs = [];

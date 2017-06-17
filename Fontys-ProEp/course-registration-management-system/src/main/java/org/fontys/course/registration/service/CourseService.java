@@ -8,6 +8,7 @@ import java.util.List;
 import org.fontys.course.registration.exception.Message;
 import org.fontys.course.registration.model.*;
 import org.fontys.course.registration.model.enums.CourseType;
+import org.fontys.course.registration.model.enums.NotificationType;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.CourseRepository;
 import org.fontys.course.registration.repository.CourseStateRepository;
@@ -144,12 +145,12 @@ public class CourseService {
                     String notificationContent = " is not available anymore in this block, sorry for any inconveniences.";
                     if (persons.size() == 1) {
                         Notification notification = new Notification
-                                (courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(0));
+                                (NotificationType.DELETION, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(0), courseCode);
                         this.utilService.AddNewNotification(notification);
                     } else {
                         List<Notification> notifications = new ArrayList<>();
                         for (int i = 0; i < persons.size(); i++) {
-                            notifications.add(new Notification(courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(i)));
+                            notifications.add(new Notification(NotificationType.DELETION, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(i), courseCode));
                         }
                         this.utilService.AddNewNotifications(notifications);
                     }

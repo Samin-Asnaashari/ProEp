@@ -188,4 +188,12 @@ public class UtilService {
 
         return courses;
     }
+    
+    public void DeleteAllRegistrationsByStudent(Integer pcn) {
+    	this.registrationService.DeleteAllRegistrationsByStudent(pcn);
+    }
+    
+    public void DeleteAllRegistrationsByCourse(String courseCode) throws Exception {
+    	this.registrationService.DeleteAllRegistrationsByCourse(courseCode);
+    }
 }

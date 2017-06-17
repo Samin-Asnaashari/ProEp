@@ -32,6 +32,7 @@ public class Review {
     @Column
     private Integer score;
     
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
     @JoinColumn(referencedColumnName="pcn")
     private Student student;

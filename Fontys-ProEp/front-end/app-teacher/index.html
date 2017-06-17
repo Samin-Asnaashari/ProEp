@@ -54,19 +54,38 @@
             <ul class="nav navbar-nav navbar-right">
                 <li class="pull-right" ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
                 <li class="pull-right" ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
-                <li class="removeHighlight dropdown pull-right dropdown-notifications" >
-                    <a href="#" class="dropdown-toggle">
-                        <i data-count="2" class="glyphicon glyphicon-bell notification-icon" style="vertical-align: middle;"></i>
+                <li ng-click="getNotifications();$event.stopImmediatePropagation();" class="removeHighlight pull-right" ng-if="isLoggedIn()">
+                    <a href="">
+                        <i class="fa fa-bell fa-1x"><span ng-if="amountOfBadges > 0" class="badgeNotification">{{ amountOfBadges }}</span></i>
                     </a>
                 </li>
             </ul>
-            <!-- right align
-            <ul ng-controller="navCtrl" class="nav navbar-nav navbar-right">
-                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
-                <li ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
-                <li ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
-            </ul>
-            -->
+            <div ng-click="$event.stopImmediatePropagation();" ng-class='{"showWindow":show==true}' class="container-fluid dropdown-menu">
+                <div class="beeperNub"></div>
+                <div ng-if="!loadingDone" id="img-load">
+                    <img style="width: 160px;height: 115px;" src="pics/Loading_icon.gif" />
+                </div>
+                <section ng-if="loadingDone">
+                    <md-subheader class="md-primary">Notifications</md-subheader>
+                    <md-list id="notificationList" layout-padding>
+                        <div style="color: black" ng-if="notifications.length === 0">No notifications yet</div>
+                        <md-list-item class="hoverOnNotification md-3-line" ng-repeat="notification in notifications track by notification.id"
+                                      ng-style="{'UNREAD':{background: '#edf2fa'},'READ':{background: '#FFF'}}[notification.status]"
+                                      ng-click="setNotificationStatus(notification)">
+                            <img ng-src="pics/{{ notification.type }}.png" class="md-avatar" alt="{{ notification.type }}">
+                            <div class="md-list-item-text">
+                                <h3>{{ notification.type }}</h3>
+                                <h4 class="capitalize">{{ notification.sender.firstName }}</h4>
+                                <p>
+                                    {{ notification.content }}
+                                </p>
+                                <span style="color: black;" am-time-ago="notification.date"></span>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+                </section>
+                <a ui-sref="#"><div id="seeAllNotifications">See All</div></a>
+            </div>
         </div>
     </div>
 </nav>
@@ -110,6 +129,9 @@
 <script src="../bower_components/angular-ui-notification/dist/angular-ui-notification.js"></script>
 <script src="../bower_components/angular-tablesort/js/angular-tablesort.js"></script>
 <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="../bower_components/moment/min/moment-with-locales.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/angular-moment/angular-moment.js"></script>
 
 <!--app config-->
 <script src="config/app.module.js"></script>
@@ -139,7 +161,7 @@
 <script src="../services/api/registrationService.js"></script>
 <script src="../services/api/course.service.js"></script>
 <script src="../services/api/login.service.js"></script>
-
+<script src="../services/api/notification.service.js"></script>
 <!--event-->
 <script src="../services/event/event.student.js"></script>
 

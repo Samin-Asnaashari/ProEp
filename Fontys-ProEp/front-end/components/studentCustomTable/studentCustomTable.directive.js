@@ -6,7 +6,8 @@ angular.module('appComponent.studentTable').directive('studentCustomTable', func
             scope: {
                 studentList: '=',
                 removeAction: '=',
-                addAction: '='
+                addAction: '=',
+                registration: '='
             },
             templateUrl: "./components/studentCustomTable/studentCustomTable.html",
             controller: 'studentCustomTableCtrl',

@@ -48,11 +48,11 @@ public class Course {
     private List<Teacher> teachers;
 
     @JsonManagedReference(value = "course-courseState")
-    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CourseState> states;
 
     @JsonManagedReference(value = "course-review")
-    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
 
     public Course() {

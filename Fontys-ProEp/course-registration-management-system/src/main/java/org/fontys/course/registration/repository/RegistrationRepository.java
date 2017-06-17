@@ -19,4 +19,6 @@ public interface RegistrationRepository extends JpaRepository<Registration, Regi
     List<Registration> findByIdStudent(Student student);
     List<Registration> findByIdStudentAndRegistrationStatus(Student student, RegistrationStatus status);
     List<Registration> findByIdStudentAndRegistrationStatusNot(Student student, RegistrationStatus status);
+    Long deleteByIdStudent(Student student);
+    Long deleteByIdCourse(Course course);
 }

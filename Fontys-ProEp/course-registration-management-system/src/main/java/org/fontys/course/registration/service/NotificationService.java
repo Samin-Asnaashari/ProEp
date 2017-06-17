@@ -82,4 +82,8 @@ public class NotificationService {
 		}
 		return notifications;
 	}
+
+	public List<Notification> GetNotifications(Integer pcn) {
+		return this.notificationRepository.findByReceiver(this.utilService.GetPersonById(pcn));
+	}
 }
