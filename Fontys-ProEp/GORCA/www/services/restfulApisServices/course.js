@@ -4,7 +4,6 @@ angular.module('GORCA.serviceAPIS').service('courseService', function ($http) {
 
   var self = this;
   var http = 'http://';
-  //192.168.178.24 (your own ip) for testing on emulator or android device
   var ipAddress = "localhost";
   var baseUrl = http + ipAddress + ':8090/courses';
 
@@ -26,5 +25,9 @@ angular.module('GORCA.serviceAPIS').service('courseService', function ($http) {
 
   self.GetAllElectiveCoursesExceptAcceptedOnes = function () {
     return $http.get(baseUrl + "/elective/exceptAcceptedOnes");
+  };
+
+  self.GetAllNotAppliedElectiveCoursesForStudent = function () {
+    return $http.get(baseUrl + "/elective/forApply");
   };
 });

@@ -210,33 +210,36 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
             controllerAs: 'registrationCtrl'
           }
         },
-        resolve: { //TODO i am working on it
-          electiveCoursesResolve: function (registrationService, courseService) {
-            var courses = [];
-            return courseService.getAllElectiveCourses()
-              .then(function (courseResponse) {
-                courses = courseResponse.data;
-                registrationService.GetAllRegistrationsExceptAcceptedOnes()
-                  .then(function (registrationResponse) {
-                    console.log(registrationResponse.data);
-                    angular.forEach(registrationResponse.data, function (r) {
-                      var duplicatedCIndex = courses.indexOf(r.id.course);
-                      if (duplicatedCIndex != undefined) {
-                        courses.splice(duplicatedCIndex, 1);
-                        r.id.course.status = r.registrationStatus;
-                        // courses.push(r.id.course);
-                      }
-                      courses.push(r.id.course);
-                    });
-                  });
-                return {courses: courses};
-              })
+        resolve: {
+          registeredCoursesResolve: function (registrationService) {
+            return registrationService.GetAllRegistrationsExceptAcceptedOnes()
+              .then(function (response) {
+                var myRegisteredCourses= [];
+                angular.forEach(response.data, function (r) {
+                  r.id.course.status = r.registrationStatus;
+                  myRegisteredCourses.push(r.id.course);
+                });
+                return {registeredCoursesExceptAcceptedOnes: myRegisteredCourses};
+              }, function (error) {
+                alert(angular.toJson(error));
+              });
+          },
+          electiveCoursesToApplyResolve: function (courseService) {
+            return courseService.GetAllNotAppliedElectiveCoursesForStudent()
+              .then(function (response) {
+                return {coursesToApply: response.data};
+              }, function (error) {
+                alert(angular.toJson(error));
+              });
           }
         }
       })
 
-      .state('addReview', {
-        url: '/courseDetails/newReview/:courseCode',
+      .state('app.addReview', {
+        url: '/courseDetails/newReview',
+        params: {
+          course: null
+        },
         views: {
           'menuContent': {
             templateUrl: 'templates/addReview.html',
@@ -293,13 +296,13 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           reviewsResolve: function (reviewService, $ionicLoading, $stateParams) {
 
             // show loading icon
-            // $ionicLoading.show({
-            //   template: 'Loading...'
-            // });
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
 
             var courseDetailStorage = window.localStorage['courseDetail'];
-            if(!courseDetailStorage || $stateParams.courseView !== null) {
-               window.localStorage['courseDetail'] = JSON.stringify($stateParams.courseView);
+            if (!courseDetailStorage || $stateParams.courseView !== null) {
+              window.localStorage['courseDetail'] = JSON.stringify($stateParams.courseView);
             }
             else {
               $stateParams.courseView = JSON.parse(courseDetailStorage);
@@ -309,8 +312,8 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 return {reviews: response.data};
               }, function (error) {
                 console.log('error');
-                //disable loading icon
-                // $ionicLoading.hide();
+                // disable loading icon
+                $ionicLoading.hide();
                 alert(angular.toJson(error));
               })
           }

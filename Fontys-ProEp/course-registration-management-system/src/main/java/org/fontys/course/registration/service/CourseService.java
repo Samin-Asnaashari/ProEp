@@ -61,6 +61,11 @@ public class CourseService {
         return this.courseRepository.findAll();
     }
 
+    public List<Course> findAllNotAppliedElectiveCoursesForStudent(int studentPcn){
+        Student s = this.utilService.GetStudentById(studentPcn);
+        return this.courseRepository.findAllNotAppliedElectiveCoursesForStudent(s.getMajor().name(),studentPcn);
+    }
+
     @Transactional
     public void UpdateCourse(Course course) {
         for (CourseState state : course.getStates()) {
