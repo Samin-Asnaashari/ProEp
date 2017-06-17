@@ -10,6 +10,16 @@ angular.module('appServiceAPI').service('courseService', function ($http) {
     var localhost = "localhost";
     var baseUrl = http + localhost + ':8090/courses';
 
+    self.courses = null;
+
+    self.getCourses = function () {
+        return self.courses;
+    };
+
+    self.setCourses = function (courses) {
+        self.courses = courses;
+    };
+
     self.addCourse = function (newCourse) {
         return $http.post(baseUrl, newCourse);
     };

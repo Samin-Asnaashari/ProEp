@@ -30,7 +30,7 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/courses").access("hasRole('ROLE_" + utilservice.admin + "')")
+//		.antMatchers("/courses").access("hasRole('ROLE_" + utilservice.admin + "')")
 		.antMatchers("/login/doAdminLogin").access("hasRole('ROLE_" + utilservice.admin + "')")
 		.antMatchers("/login/doStudentLogin").access("hasRole('ROLE_" + utilservice.student + "')")
 		.antMatchers("/login/doTeacherLogin").access("hasRole('ROLE_" + utilservice.teacher + "')")

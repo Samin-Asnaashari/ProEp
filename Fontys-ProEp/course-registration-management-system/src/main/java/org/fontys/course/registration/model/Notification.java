@@ -21,6 +21,9 @@ public class Notification {
     
     @Column
     private String content;
+    
+    @Column
+    private String courseCode;
 
     @Column
 //    @JsonFormat
@@ -46,15 +49,24 @@ public class Notification {
     @JoinColumn
     private Person receiver;
 	
-	public Notification(NotificationType type, String content, Date date, Person sender, Person receiver) {
+	public Notification(NotificationType type, String content, Date date, Person sender, Person receiver, String courseCode) {
 		super();
 		this.type = type;
 		this.content = content;
 		this.date = date;
 		this.sender = sender;
 		this.receiver = receiver;
+		this.courseCode = courseCode;
 		this.sendStatus = SendStatus.UNSEND;
 		this.status = NotificationStatus.UNREAD;
+	}
+
+	public String getCourseCode() {
+		return courseCode;
+	}
+
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
 	}
 
 	public Notification() {

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-angular.module("appTeacher").controller("navCtrl", function ($location, loginService, $scope, $window, notificationService, teacherService) {
+angular.module("appTeacher").controller("navCtrl", function ($filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
 
     //var vm = this;
 
@@ -55,6 +55,37 @@ angular.module("appTeacher").controller("navCtrl", function ($location, loginSer
             $scope.removeBadge();
         }
         $scope.show = false;
+        if(notification.type === "DELETION") {
+            $state.go('home');
+        }
+        else {
+            var courses = courseService.getCourses();
+            if(courses === null) {
+                courseService.getAllCourses()
+                    .then(function (response) {
+                        var course = $filter("filter")(response.data, {code:notification.courseCode});
+                        if(course.length === 1) {
+                            $state.go('courseView', {course: course[0], code: course[0].code});
+                        }
+                        else {
+                            console.log("course not found");
+                            //notification
+                        }
+                    }, function (error) {
+                        console.log(angular.toJson(error));
+                    });
+                return;
+            }
+            var course = $filter("filter")(courseService.getCourses(), {code:notification.courseCode});
+            if(course.length === 1) {
+                console.log(course[0]);
+                $state.go('courseView', {course: course[0], code: course[0].code});
+            }
+            else {
+                console.log("course not found");
+                //notification
+            }
+        }
     };
 
     $scope.getNotifications = function () {
