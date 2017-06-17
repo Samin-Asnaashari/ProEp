@@ -29,8 +29,13 @@ public class NotificationController {
     private NotificationService notificationService;
 	
 	@RequestMapping(method = RequestMethod.GET)
-    public List<Notification> GetNotifications(Principal principal) throws Exception {
+    public List<Notification> GetNotificationsForMobileView(Principal principal) throws Exception {
         return this.notificationService.GetNotificationsForMobileView(Integer.valueOf(principal.getName()));
+    }
+	
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+    public List<Notification> GetNotifications(Principal principal) throws Exception {
+        return this.notificationService.GetNotifications(Integer.valueOf(principal.getName()));
     }
 	
 	@RequestMapping(value = "/before/{notificationID}", method = RequestMethod.GET)

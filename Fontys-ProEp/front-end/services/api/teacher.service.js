@@ -37,4 +37,12 @@ angular.module('appServiceAPI').service('teacherService', function ($http) {
     self.deleteTeacher = function (pcn) {
         return $http.delete(baseUrl + '/' + pcn);
     };
+
+    self.getBadgeCount = function () {
+        return $http.get(baseUrl + "/getBadgeCount");
+    };
+
+    self.clearBadgeCount = function () {
+        return $http.put(baseUrl + "/clearBadgeCount");
+    };
 });

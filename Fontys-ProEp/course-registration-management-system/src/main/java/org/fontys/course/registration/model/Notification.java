@@ -3,6 +3,7 @@ package org.fontys.course.registration.model;
 import javax.persistence.*;
 
 import org.fontys.course.registration.model.enums.NotificationStatus;
+import org.fontys.course.registration.model.enums.NotificationType;
 import org.fontys.course.registration.model.enums.SendStatus;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -17,7 +18,7 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long id;
-
+    
     @Column
     private String content;
 
@@ -31,6 +32,9 @@ public class Notification {
     
     @Enumerated(EnumType.STRING)
     private SendStatus sendStatus;
+    
+    @Enumerated(EnumType.STRING)
+    private NotificationType type;
 
     @JsonIgnoreProperties("myCourses")
     @OneToOne
@@ -41,9 +45,10 @@ public class Notification {
     @ManyToOne
     @JoinColumn
     private Person receiver;
-
-	public Notification(String content, Date date, Person sender, Person receiver) {
+	
+	public Notification(NotificationType type, String content, Date date, Person sender, Person receiver) {
 		super();
+		this.type = type;
 		this.content = content;
 		this.date = date;
 		this.sender = sender;
@@ -51,11 +56,19 @@ public class Notification {
 		this.sendStatus = SendStatus.UNSEND;
 		this.status = NotificationStatus.UNREAD;
 	}
-	
+
 	public Notification() {
     }
 
-    public SendStatus getSendStatus() {
+    public NotificationType getType() {
+		return type;
+	}
+
+	public void setType(NotificationType type) {
+		this.type = type;
+	}
+
+	public SendStatus getSendStatus() {
 		return sendStatus;
 	}
 

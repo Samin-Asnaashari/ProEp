@@ -69,6 +69,96 @@ body {
     font-size: x-large;
 }
 
-.rightIcon >a .glyphiconRight:hover, .rightIcon >a .glyphiconRight:focus{
+/*.rightIcon >a .glyphiconRight:hover, .rightIcon >a .glyphiconRight:focus{*/
+    /*color: #DCDCDC;*/
+/*}*/
+
+#mainNavBar .dropdown-menu .hoverOnNotification:hover {
+    background-image: linear-gradient(rgba(29, 33, 41, .04), rgba(29, 33, 41, .04)) !important;
+    cursor: pointer;
+}
+
+#mainNavBar .navbar-right .removeHighlight i {
+    text-align:center;
+    vertical-align:middle;
+}
+
+#mainNavBar .navbar-right .removeHighlight .fa {
+    position: relative;
+}
+
+#mainNavBar .navbar-right .removeHighlight .badgeNotification {
+    font-size: .65em;
+    display: block;
+    position: absolute;
+    top: -11px;
+    right: -8px;
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff;
+    background: rgba(255,0,0,0.8);
+}
+
+#mainNavBar .dropdown-menu .hoverOnNotification {
+    /*padding-bottom: 5px;*/
+    /*border-bottom: grey;*/
+    /*border-bottom-width: 1px;*/
+    /*border-bottom-style: solid;*/
+    /*border-bottom-color: rgba(0,0,255,0.25);*/
+}
+
+#mainNavBar .dropdown-menu {
+    right: 89px;
+    top: 97%;
+    cursor: default;
+    left: auto;
+}
+
+#mainNavBar .dropdown-menu #notificationList {
+    max-height: 500px;
+    overflow-y: auto;
+    max-width: 400px;
+    word-wrap: break-word;
+}
+
+#mainNavBar .dropdown-menu #seeAllNotifications {
+    padding: 5px;
+    text-align:center;
+    cursor:pointer;
+}
+
+#mainNavBar .dropdown-menu #notificationList .hoverOnNotification .capitalize {
+    text-transform: capitalize;
+}
+
+#mainNavBar .showWindow {
+    display: block;
+}
+
+#mainNavBar .dropdown-menu .beeperNub {
+    background-image: url(../pics/dTQOHZm7Z-3.png);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: 0 -67px;
+    height: 11px;
+    position: absolute;
+    top: -11px;
+    width: 20px;
+    right: 11px;
+}
+
+#mainNavBar .dropdown-menu #notificationList .hoverOnNotification .md-button.md-default-theme:not([disabled]).md-focused, .md-button:not([disabled]).md-focused, .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover {
+    background-color: transparent;
+}
+
+#mainNavBar .dropdown-menu #notificationList .hoverOnNotification md-list-item .md-avatar, md-list-item .md-list-item-inner .md-avatar {
+    width: 50px;
+    height: 50px;
+}
+
+.courseCard:hover .glyphiconRight {
     color: #DCDCDC;
 }

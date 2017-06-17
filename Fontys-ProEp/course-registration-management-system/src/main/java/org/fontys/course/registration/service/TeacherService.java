@@ -55,4 +55,14 @@ public class TeacherService {
 		Teacher teacher = this.teacherRepository.findOne(person.getPcn());
 		teacher.setNotificationBadgeCount(teacher.getNotificationBadgeCount() + 1);
 	}
+    
+    @Transactional
+	public void ClearAmountOfBadges(Integer pcn) {
+		this.teacherRepository.findOne(pcn).setNotificationBadgeCount(0);
+	}
+    
+    @Transactional
+	public Integer GetAmountOfBadges(Integer pcn) {
+		return this.teacherRepository.findOne(pcn).getNotificationBadgeCount();
+	}
 }

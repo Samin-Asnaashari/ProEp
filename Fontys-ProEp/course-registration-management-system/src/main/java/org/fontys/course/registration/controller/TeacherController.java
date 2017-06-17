@@ -67,5 +67,15 @@ public class TeacherController {
     {
         return this.teacherService.GetTeacher(Integer.valueOf(principal.getName())).getMyCourses();
     }
+    
+    @RequestMapping(value = "/clearBadgeCount", method = RequestMethod.PUT)
+    public void ClearAmounOfBadges(Principal principal) throws Exception {
+        this.teacherService.ClearAmountOfBadges(Integer.valueOf(principal.getName()));
+    }
+    
+    @RequestMapping(value = "/getBadgeCount", method = RequestMethod.GET)
+    public Integer GetAmounOfBadges(Principal principal) throws Exception {
+        return this.teacherService.GetAmountOfBadges(Integer.valueOf(principal.getName()));
+    }
 
 }
