@@ -49,12 +49,9 @@ public class RegistrationController {
 	@RequestMapping(value = "/updateRegistrationStatus/{courseCode}/{studentPcnList}/{registrationStatus}", method = RequestMethod.PUT)
 	public void UpdateRegistration(@PathVariable("courseCode") String courseCode,
 			@PathVariable("studentPcnList") List<Integer> studentPcnList,
-			@PathVariable("registrationStatus") String registrationStatus) {
-		try {
-			this.registrationService.UpdateRegistration(courseCode, studentPcnList, registrationStatus);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			@PathVariable("registrationStatus") String registrationStatus, Principal principal) throws NumberFormatException, Exception {
+		this.registrationService.UpdateRegistration(courseCode, studentPcnList, registrationStatus,
+				Integer.valueOf(principal.getName()));
 	}
 
     @RequestMapping(value = "/exceptAcceptedOnes", method = RequestMethod.GET)

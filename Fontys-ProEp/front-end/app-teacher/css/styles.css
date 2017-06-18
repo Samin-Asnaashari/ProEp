@@ -167,3 +167,7 @@ body {
 .courseCard:hover .glyphiconRight {
     color: #DCDCDC;
 }
+
+/*[ng\:if], [ng-if], .ng-if {*/
+    /*display: none !important;*/
+/*}*/

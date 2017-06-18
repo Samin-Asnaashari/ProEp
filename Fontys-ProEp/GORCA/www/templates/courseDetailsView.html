@@ -22,12 +22,12 @@
       <ion-item class="item item-icon-left bar bar-dark" style="color: #ffffff;">
         <i class="icon icon ion-calendar"></i>
         <strong ng-if="CourseDetailsCtrl.course.regStartDate == null">TBD</strong>
-        {{CourseDetailsCtrl.course.regStartDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY'}}
+        {{CourseDetailsCtrl.course.regStartDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY HH:mm:00'}}
       </ion-item>
       <ion-item class="item item-icon-left bar bar-dark">
         <i class="icon ion-calendar"></i>
         <strong ng-if="CourseDetailsCtrl.course.regEndDate == null">TBD</strong>
-        {{CourseDetailsCtrl.course.regEndDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY'}}
+        {{CourseDetailsCtrl.course.regEndDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY HH:mm:00'}}
       </ion-item>
 
       <ion-item class="item item-icon-left">
@@ -56,19 +56,25 @@
       <div class="item item-divider text-center">
         Reviews
       </div>
-      <reviews review-list="CourseDetailsCtrl.reviews"></reviews>
+      <ion-item style="text-align: center;" ng-if="CourseDetailsCtrl.reviews.length === 0">No reviews yet, be the first one!</ion-item>
+      <reviews ng-if="CourseDetailsCtrl.reviews > 0" review-list="CourseDetailsCtrl.reviews"></reviews>
 
     </ion-list>
   </ion-content>
 
-  <div class="tabs-striped tabs-color-royal">
-    <div class="tabs">
-      <a class="title tab-item active" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">
-        <i class="icon ion-ios-star-half"></i>
-        Review
-      </a>
-    </div>
-  </div>
+  <ion-footer-bar class="bar-royal" id="courseDetailsButton-footer-bar">
+    <a style="font-size: 20px;" class="button button-royal icon-left ion-android-star tab-item" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">New review</a>
+  </ion-footer-bar>
+
+  <!--<div class="tabs-striped tabs-color-royal">-->
+    <!--<div class="tabs">-->
+      <!--<a class="title tab-item active" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">-->
+        <!--<i class="icon ion-ios-star-half"></i>-->
+        <!--Review-->
+      <!--</a>-->
+      <!--&lt;!&ndash;Add New Review&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
 
 </ion-view>
 

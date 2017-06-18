@@ -13,7 +13,8 @@ angular.module('appTeacher',
         'appComponent.studentTable',
         'ngCookies',
         'appComponent.login',
-        'angularMoment'
+        'angularMoment',
+        'ui-notification'
     ]
 )
 
