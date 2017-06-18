@@ -33,7 +33,7 @@ public class RegistrationService {
                 this.registrationRepository.save(newRegistration);
                 String notificationContent = "Student with PCN " + pcn + " requested registration for course " + courseCode;
                 for (Teacher courseTeacher : course.getTeachers()) {
-                    this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERD, notificationContent, new Date(), student, courseTeacher, courseCode));
+                    this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, notificationContent, new Date(), student, courseTeacher, courseCode));
                 }
                 return true;
             }
@@ -50,7 +50,7 @@ public class RegistrationService {
                         (student, course));
         String notificationContent = "Student with PCN " + pcn + " Dropped Course " + courseCode;
         for (Teacher courseTeacher : utilService.GetCourse(courseCode).getTeachers()) {
-            this.utilService.AddNewNotification(new Notification(NotificationType.DROPED, notificationContent, new Date(), student, courseTeacher, courseCode));
+            this.utilService.AddNewNotification(new Notification(NotificationType.DROPPED, notificationContent, new Date(), student, courseTeacher, courseCode));
         }
         this.registrationRepository.delete(reg);
     }
@@ -93,7 +93,7 @@ public class RegistrationService {
         Registration registration = null;
         for (int i = 0; i < studentPcnList.size(); i++) {
             Student student = this.utilService.GetStudentById(studentPcnList.get(i));
-            this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERD, "You have been " + status.toString() + " in " + courseCode + " by " + sender.getFirstName(), new Date(),
+            this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, "You have been " + status.toString() + " in " + courseCode + " by " + sender.getFirstName(), new Date(),
                     sender, student, courseCode));
             registration = this.registrationRepository.findById(new RegistrationId(student, course));
             registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
