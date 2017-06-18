@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.homeTeacher').controller('teacherHomeCtrl', function (coursesResolve, $state, courseService) {
+angular.module('appComponent.homeTeacher').controller('teacherHomeCtrl', function (Notification, coursesResolve, $state, courseService) {
 
     var vm = this;
     vm.courses = coursesResolve.courses;

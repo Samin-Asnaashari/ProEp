@@ -11,6 +11,7 @@ angular.module('appComponent',
         'appComponent.textEditor',
         'appComponent.teacherTable',
         'appComponent.courseTable',
-        'appComponent.studentTable'
+        'appComponent.studentTable',
+        'appComponent.notification'
     ]
 );

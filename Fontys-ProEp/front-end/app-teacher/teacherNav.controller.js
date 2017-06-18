@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
-
+console.log("sssss");
     //var vm = this;
     $scope.amountOfBadges = 0;
     $scope.notificationService = notificationService;
@@ -23,6 +23,7 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
             .then(function (response) {
                 $scope.amountOfBadges = response.data;
             }, function (error) {
+                Notification.error("Error getting notification count");
                 console.log(angular.toJson(error));
             });
     }
@@ -71,6 +72,7 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
                             //notification
                         }
                     }, function (error) {
+                        Notification.error("Error going to course details");
                         console.log(angular.toJson(error));
                     });
                 return;
@@ -102,8 +104,8 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
                     $scope.notifications = response.data;
                     $scope.loadingDone = true;
                 }, function (error) {
-                    Notification.error({message: 'Error notification 1s', delay: 1000});
-                   console.log(angular.toJson(error));
+                    Notification.error("Error getting notifications");
+                    console.log(angular.toJson(error));
                     $scope.loadingDone = true;
                 });
         }

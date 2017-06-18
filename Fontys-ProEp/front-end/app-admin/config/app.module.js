@@ -6,8 +6,9 @@ angular.module('appAdmin',
         'ui.router',
         'appServiceAPI',
         'appServiceEvent',
+        'ui-notification',
         'appComponent',
-        'ngCookies'
+        'ngCookies',
     ]
 )
 

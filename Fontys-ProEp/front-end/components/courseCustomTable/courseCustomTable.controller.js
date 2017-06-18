@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', function ($state, $scope, courseService, $mdDialog, EventCourse) {
+angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', function (Notification, $state, $scope, courseService, $mdDialog, EventCourse) {
 
     var vm = this;
 
@@ -21,6 +21,7 @@ angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', f
             .then(function (response) {
                 vm.showDialog(response.data.message, course);
             }, function (error) {
+                Notification.error("Error trying to delete " + course.code);
                 console.log("error request");
                 console.log(error.data.message);
             });
@@ -44,6 +45,7 @@ angular.module('appComponent.courseTable').controller('courseCustomTableCtrl', f
                             console.log("success deletion2s");
                             EventCourse.notifyOnCourseDeleted(course);
                         }, function (error) {
+                            Notification.error("Error trying to delete " + course.code);
                             console.log("error deletion");
                         });
                     $mdDialog.cancel();
