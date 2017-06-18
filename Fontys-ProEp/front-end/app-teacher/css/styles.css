@@ -59,11 +59,16 @@ body {
     color: #fff
 }
 .teacherNav .navbar-brand:hover, .teacherNav .navbar-brand:focus {
-    color: #ccc
+    color: #ccc;
 }
 .teacherNav .navbar-right .removeHighlight > a:hover, .teacherNav .navbar-right .removeHighlight > a:focus{
     background-color: transparent !important;
 }
+
+#mainNavBar .nav > li > a:hover, .nav > li > a:focus {
+    color: #5e5e5e !important;
+}
+
 .glyphiconRight{
     color: #573d7e;
     font-size: x-large;
@@ -99,7 +104,7 @@ body {
     border-radius: 50%;
     text-align: center;
     color: #fff;
-    background: rgba(255,0,0,0.8);
+    background: rgba(255,0,0,0.9);
 }
 
 #mainNavBar .dropdown-menu .hoverOnNotification {

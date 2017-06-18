@@ -63,6 +63,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var pendingStudents = [];
                             angular.forEach(response.data, function (r) {
+                                r.id.student.registrationDate = moment(r.date).format("LL LT");
                                 pendingStudents.push(r.id.student);
                             });
                             return {pendingStudents: pendingStudents};
@@ -75,6 +76,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             var declinedStudents = [];
                             angular.forEach(response.data, function (r) {
+                                r.id.student.registrationDate = moment(r.date).format("LL LT");
                                 declinedStudents.push(r.id.student);
                             });
                             return {declinedStudents: declinedStudents};
