@@ -33,3 +33,7 @@
   -ms-flex-align: center;
   align-items: center;
 }
+
+.bar .button.button-icon:before, .bar .button .icon:before, .bar .button.icon:before, .bar .button.icon-left:before, .bar .button.icon-right:before, .bar button.button-icon:before, .bar button .icon:before, .bar button.icon:before, .bar button.icon-left:before, .bar button.icon-right:before {
+  font-size: 30px;
+}

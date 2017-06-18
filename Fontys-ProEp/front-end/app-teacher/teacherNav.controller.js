@@ -3,10 +3,9 @@
  */
 'use strict';
 
-angular.module("appTeacher").controller("navCtrl", function ($filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
+angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
 
     //var vm = this;
-
     $scope.amountOfBadges = 0;
     $scope.notificationService = notificationService;
     $scope.$watch('notificationService.getAmountOfBadges()', function(newValue) {
@@ -103,6 +102,7 @@ angular.module("appTeacher").controller("navCtrl", function ($filter, $location,
                     $scope.notifications = response.data;
                     $scope.loadingDone = true;
                 }, function (error) {
+                    Notification.error({message: 'Error notification 1s', delay: 1000});
                    console.log(angular.toJson(error));
                     $scope.loadingDone = true;
                 });

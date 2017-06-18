@@ -56,21 +56,25 @@
       <div class="item item-divider text-center">
         Reviews
       </div>
-      <ion-item style="text-align: center" ng-if="CourseDetailsCtrl.reviews.length === 0">No reviews yet, be the first one!</ion-item>
+      <ion-item style="text-align: center;" ng-if="CourseDetailsCtrl.reviews.length === 0">No reviews yet, be the first one!</ion-item>
       <reviews ng-if="CourseDetailsCtrl.reviews > 0" review-list="CourseDetailsCtrl.reviews"></reviews>
 
     </ion-list>
   </ion-content>
 
-  <div class="tabs-striped tabs-color-royal">
-    <div class="tabs">
-      <a class="title tab-item active" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">
-        <i class="icon ion-ios-star-half"></i>
-        Review
-      </a>
-      <!--Add New Review-->
-    </div>
-  </div>
+  <ion-footer-bar class="bar-royal" id="courseDetailsButton-footer-bar">
+    <a style="font-size: 20px;" class="button button-royal icon-left ion-android-star tab-item" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">New review</a>
+  </ion-footer-bar>
+
+  <!--<div class="tabs-striped tabs-color-royal">-->
+    <!--<div class="tabs">-->
+      <!--<a class="title tab-item active" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">-->
+        <!--<i class="icon ion-ios-star-half"></i>-->
+        <!--Review-->
+      <!--</a>-->
+      <!--&lt;!&ndash;Add New Review&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
 
 </ion-view>
 

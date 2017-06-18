@@ -55,7 +55,7 @@
       <!--<ion-refresher pulling-text="Pull"-->
       <!--on-refresh="menuCtrl.loadNewerNotifications()">-->
       <!--</ion-refresher>-->
-      <ion-item style="text-align: center;margin-bottom: 15px;" ng-if="menuCtrl.notifications.length === 0">No notifications yet</ion-item>
+      <ion-item style="text-align: center;" ng-if="menuCtrl.notifications.length === 0">No notifications yet</ion-item>
       <ion-list id="menu-notifications">
         <ion-item ng-repeat="notification in menuCtrl.notifications track by notification.id"
                   ng-style="{'UNREAD':{background: '#edf2fa'},
