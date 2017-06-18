@@ -106,7 +106,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.loadMoreNotifications = function () {
       notificationService.getAllNotificationsAfter(vm.notifications[vm.notifications.length - 1].id)
         .then(function (response) {
-          if (response.data !== "") {
+          if (response.data.length !== 0) {
             vm.notifications = vm.notifications.concat(response.data);
             $scope.$broadcast('scroll.infiniteScrollComplete');
           }

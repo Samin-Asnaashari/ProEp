@@ -82,6 +82,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
   .config(function ($ionicConfigProvider) {
     $ionicConfigProvider.navBar.alignTitle('center');
+    $ionicConfigProvider.views.maxCache(0);
   })
 
   .config(function ($stateProvider, $urlRouterProvider) {
@@ -90,7 +91,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
       .state('app', {
         url: '/app',
         abstract: true,
-        cache: false,
         params: {
           courseToView: null
         },
@@ -281,7 +281,6 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
       .state('app.courseDetailsView', {
         url: '/myCourses/courseDetailsView',
-        cache: false,
         params: {
           courseView: null
         },
