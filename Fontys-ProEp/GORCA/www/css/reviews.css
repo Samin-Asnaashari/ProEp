@@ -40,3 +40,7 @@
 #reviews .list {
   padding-top: 0;
 }
+
+#reviews #reviewsList .list:last-child.card {
+  margin-bottom: 60px;
+}
