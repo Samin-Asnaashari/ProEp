@@ -311,7 +311,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     };
   })
 
-  .controller('CourseDetailsController', function ($stateParams, reviewsResolve, $ionicPopup) {
+  .controller('CourseDetailsController', function ($stateParams, reviewsResolve, $ionicPopup, $ionicLoading) {
     var vm = this;
     vm.course = $stateParams.courseView;
     vm.reviews = reviewsResolve.reviews;
@@ -331,6 +331,9 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     //     }
     //   });
     // };
+
+    // disable loading icon
+    $ionicLoading.hide();
   })
 
   .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService) {
