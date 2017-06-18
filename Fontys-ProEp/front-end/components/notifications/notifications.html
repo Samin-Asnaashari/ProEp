@@ -1,0 +1,37 @@
+<div class="notificationContainer container">
+
+    <div class="row">
+        <md-toolbar>
+            <div class="md-toolbar-tools notificationHeader">My notifications</div>
+        </md-toolbar>
+    </div>
+
+    <div class="row">
+        <md-content  style="height: 600px;">
+            <!--<section>-->
+                <md-list id="notificationFullList">
+                    <div class="col-xs-12" style="color: black" ng-if="notifications.length === 0">No notifications
+                        yet
+                    </div>
+                    <md-list-item class="hoverOnNotification md-3-line"
+                                  ng-repeat="notification in vmNotifications.notifications track by notification.id"
+                                  ng-style="{'UNREAD':{background: '#edf2fa'},'READ':{background: '#FFF'}}[notification.status]"
+                                  ng-click="vmNotifications.setNotificationStatus(notification)">
+                        <img ng-src="pics/{{ notification.type }}.png" class="md-avatar"
+                             alt="{{ notification.type }}">
+                        <div class="md-list-item-text">
+                            <h3>{{ notification.type }}</h3>
+                            <h4 class="capitalize">{{ notification.sender.firstName }}</h4>
+                            <p>
+                                {{$index}}
+                                {{ notification.content }}
+                            </p>
+                            <span style="color: black;" am-time-ago="notification.date"></span>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            <!--</section>-->
+        </md-content>
+    </div>
+</div>
+

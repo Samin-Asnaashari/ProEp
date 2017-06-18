@@ -32,7 +32,7 @@
 <body>
 
 <!--Navigation-->
-<nav class="navbar teacherNav">
+<nav class="navbar teacherNav" style="border-radius:0px;">
     <div class="container-fluid">
 
         <!-- Logo -->
@@ -42,7 +42,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="#" class="navbar-brand">GORCA</a>
+            <a href="#" class="navbar-brand"><img style="max-width:92px; margin-top: -18px;"
+                                                  src="./pics/GORCALogoNoText.PNG"></a>
+            <a class="navbar-brand" href="#" style="margin-left:-32px;">GORCA</a>
         </div>
 
         <!-- Nagivation items -->
@@ -84,7 +86,7 @@
                         </md-list-item>
                     </md-list>
                 </section>
-                <a ui-sref="#"><div id="seeAllNotifications">See All</div></a>
+                <a ui-sref="notifications"><div id="seeAllNotifications">See All</div></a>
             </div>
         </div>
     </div>
@@ -142,6 +144,8 @@
 <script src="../components/course/view/module.js"></script>
 <script src="../components/studentCustomTable/module.js"></script>
 <script src="../components/login/module.js"></script>
+<script src="../components/course/view/module.js"></script>
+<script src="../components/notifications/module.js"></script>
 
 <!--service config-->
 <script src="../services/api/config/module.js"></script>
@@ -153,6 +157,7 @@
 <script src="../components/login/login.directive.js"></script>
 <script src="../components/login/login.controller.js"></script>
 <script src="teacherNav.controller.js"></script>
+<script src="../components/notifications/notifications.controller.js"></script>
 <script src="../components/studentCustomTable/studentCustomTable.controller.js"></script>
 <script src="../components/studentCustomTable/studentCustomTable.directive.js"></script>
 

@@ -12,6 +12,7 @@ angular.module('appServiceAPI').service('notificationService', function ($http) 
     var http = 'http://';
     var localhost = "localhost";
     var baseUrl = http + localhost + ':8090/notifications';
+    self.notifications = null;
 
     self.amountOfBadges = 0;
 
@@ -27,7 +28,14 @@ angular.module('appServiceAPI').service('notificationService', function ($http) 
         return $http.get(baseUrl + "/");
     };
 
+    self.getAllNotificationsCached = function () {
+        return self.notifications;
+    }
     self.setNotificationStatus = function (notificationID) {
         return $http.put(baseUrl + "/changeStatus/" + notificationID);
     };
+
+    self.setNotifications = function (data) {
+        self.notifications = data;
+    }
 });

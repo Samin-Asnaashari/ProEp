@@ -167,3 +167,17 @@ body {
 .courseCard:hover .glyphiconRight {
     color: #DCDCDC;
 }
+
+#notificationFullList .hoverOnNotification:hover {
+    background-image: linear-gradient(rgba(29, 33, 41, .04), rgba(29, 33, 41, .04)) !important;
+    cursor: pointer;
+}
+
+.notificationContainer {
+    align-content: center;
+}
+
+.notificationHeader {
+    background-color: #563d7c;
+    color: #ffffff;
+}
