@@ -21,15 +21,16 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
                 .then(function (response) {
                     vm.students.push(data.student);
                 }, function (error) {
-                    Notification.error(data.student.firstName + " is already in the list");
+                    Notification.error("Error adding student!");
                 });
+        }else{
+            Notification.error(data.student.pcn + " is already in the list!");
         }
-        /*TODO show student already existed notification*/
     });
 
     EventStudent.subscribeOnAStudentRemoved($scope, function (event, data) {
         return studentService.deleteStudent(data.pcn)
-            .then(function (response) { //TODO fix it
+            .then(function (response) {
                 angular.forEach(vm.students, function (s) {
                     if (s.pcn === data.pcn) {
                         var index = vm.students.indexOf(s);
@@ -37,7 +38,7 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
                     }
                 });
             }, function (error) {
-                Notification.error("Error deleting " + data.firstName);
+                Notification.error("Error deleting " + data.firstName + "!");
             });
     });
 
@@ -53,13 +54,14 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
             if (add == true) {
                 vm.students.push(s1);
                 addedStudents.push(s1);
+            }else{
+                Notification.error(s1.pcn + " is already in the list!");
             }
-            /*TODO else show that student already exist*/
         });
         return studentService.addStudents(addedStudents)
             .then(function (response) {
             }, function (error) {
-                Notification.error("Error adding students");
+                Notification.error("Error adding students!");
             });
     });
 
@@ -71,7 +73,7 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
                     vm.students.splice(index, 1);
                 });
             }, function (error) {
-                Notification.error("Error deleting students");
+                Notification.error("Error deleting students!");
             });
     });
 
@@ -82,7 +84,7 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
                 allStudents = response.data;
                 vm.showDialog(allStudents);
             }, function (error) {
-                Notification.error("Error showing students");
+                Notification.error("Error showing students!");
             });
     };
 
@@ -94,7 +96,7 @@ angular.module('appComponent.student').controller('studentCtrl', function (Notif
             locals: {fontysStudentList: fontysStudentList},
             controller: function () {
                 var vm = this;
-                vm.allFontysStudents = fontysStudentList; //TODO Check
+                vm.allFontysStudents = fontysStudentList;
 
                 vm.close = function () {
                     $mdDialog.cancel();
