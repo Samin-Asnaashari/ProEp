@@ -6,7 +6,7 @@
 <div id="reviews">
     <div id="reviewsHeader" class="card ">
       <div class="item">
-        <div class="reviewsScore">{{ reviewCtrl.overallScore | number:1 }}</div>
+        <div class="reviewsScore">{{ reviewCtrl.overallScore | number:1}} <span ng-if="!reviewCtrl.overallScore">0</span></div>
         <div>
           <h2>{{ reviewCtrl.scoreDefinition }}</h2>
           <p>Based on {{ reviewList.length }} reviews</p>

@@ -1,10 +1,10 @@
 <table class="table table-sm table-hover table-striped studentCustomTable" ts-wrapper>
     <thead>
     <tr class="tableHeader">
-        <th colspan="1" style="vertical-align: middle;text-align: center;">
-            <span ng-click="" class="glyphicon glyphicon-chevron-down"></span>
-            <!--data-toggle="collapse" href="#collapseTable"-->
-        </th>
+        <!--<th colspan="1" style="vertical-align: middle;text-align: center;">-->
+            <!--<span ng-click="" class="glyphicon glyphicon-chevron-down"></span>-->
+            <!--&lt;!&ndash;data-toggle="collapse" href="#collapseTable"&ndash;&gt;-->
+        <!--</th>-->
         <th colspan="{{ vmStudentCustomTable.getMaxColspan()}}" class="md-title" style="vertical-align: middle;">
             Students
         </th>
@@ -56,6 +56,19 @@
                 data-toggle="tooltip" title="Add"
                 class="button glyphicon glyphicon-plus-sign"></li>
         </th>
+    </tr>
+    <tr ng-if="studentList.length == 0">
+        <th colspan="1"></th>
+        <td colspan="2">--</td>
+        <td colspan="4">--</td>
+        <td colspan="4">--</td>
+        <td colspan="3">--</td>
+        <td colspan="2">--</td>
+        <td colspan="1">--</td>
+        <td colspan="2">--</td>
+        <td colspan="2">--</td>
+        <td ng-if="registration == 1" colspan="2">--</td>
+        <th colspan="2"></th>
     </tr>
     <tr ng-repeat="student in studentList | filter:searchFilter track by student.pcn" ts-repeat ts-hide-no-data>
         <th colspan="1" style="vertical-align: middle;text-align: center;">

@@ -27,7 +27,7 @@ angular.module('appServiceAPI').service('registrationService', function ($http) 
     };
 
     self.getAllDeclinedRegistrations = function (courseCode) {
-        return $http.get(baseUrl + '/status/DECLINE/' + courseCode);
+        return $http.get(baseUrl + '/status/DECLINED/' + courseCode);
     };
 
     self.updateRegistration = function (courseCode, studentPcnList, status) {
