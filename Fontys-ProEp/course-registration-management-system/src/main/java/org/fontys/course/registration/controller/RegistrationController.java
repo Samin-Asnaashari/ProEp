@@ -26,8 +26,8 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.POST)
-    public void createRegistration(@PathVariable String courseCode, Principal principal) throws Exception {
-        this.registrationService.createRegistration(courseCode, Integer.valueOf(principal.getName()));
+    public boolean createRegistration(@PathVariable String courseCode, Principal principal) throws Exception {
+        return this.registrationService.createRegistration(courseCode, Integer.valueOf(principal.getName()));
     }
 
     @RequestMapping(value = "/{courseCode}", method = RequestMethod.GET)
@@ -37,32 +37,41 @@ public class RegistrationController {
 
     @RequestMapping(value = "/status/{registrationStatus}/{courseCode}", method = RequestMethod.GET)
     public List<Registration> GetAllRegistrationsByStatus(@PathVariable("registrationStatus") RegistrationStatus registrationStatus,
-    		@PathVariable("courseCode") String courseCode){
+                                                          @PathVariable("courseCode") String courseCode) {
         try {
-			return this.registrationService.GetAllRegistrationByStatusAndCourse(registrationStatus, courseCode);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+            return this.registrationService.GetAllRegistrationByStatusAndCourse(registrationStatus, courseCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
-	@RequestMapping(value = "/updateRegistrationStatus/{courseCode}/{studentPcnList}/{registrationStatus}", method = RequestMethod.PUT)
-	public void UpdateRegistration(@PathVariable("courseCode") String courseCode,
-			@PathVariable("studentPcnList") List<Integer> studentPcnList,
-			@PathVariable("registrationStatus") String registrationStatus, Principal principal) throws NumberFormatException, Exception {
-		this.registrationService.UpdateRegistration(courseCode, studentPcnList, registrationStatus,
-				Integer.valueOf(principal.getName()));
-	}
+    @RequestMapping(value = "/updateRegistrationStatus/{courseCode}/{studentPcnList}/{registrationStatus}", method = RequestMethod.PUT)
+    public void UpdateRegistration(@PathVariable("courseCode") String courseCode,
+                                   @PathVariable("studentPcnList") List<Integer> studentPcnList,
+                                   @PathVariable("registrationStatus") String registrationStatus, Principal principal) throws NumberFormatException, Exception {
+        this.registrationService.UpdateRegistration(courseCode, studentPcnList, registrationStatus,
+                Integer.valueOf(principal.getName()));
+    }
 
     @RequestMapping(value = "/exceptAcceptedOnes", method = RequestMethod.GET)
-    public List<Registration> GetAllRegistrationsExceptAcceptedOnes(Principal principal){
-        return this.registrationService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()),RegistrationStatus.ACCEPTED);
+    public List<Registration> GetAllRegistrationsExceptAcceptedOnes(Principal principal) {
+        return this.registrationService.GetAllElectiveCoursesByPcnWithFilteredStatus(Integer.valueOf(principal.getName()), RegistrationStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/drop/{courseCode}", method = RequestMethod.GET)
-    public void DropRegistration(@PathVariable String courseCode, Principal principal){
+    public void DropRegistration(@PathVariable String courseCode, Principal principal) {
         try {
             this.registrationService.dropRegistration(courseCode, Integer.valueOf(principal.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping(value = "/cancelRegistration/{courseCode}", method = RequestMethod.DELETE)
+    public void CancelRegistration(@PathVariable String courseCode, Principal principal) {
+        try {
+            this.registrationService.CancelRegistration(courseCode, Integer.valueOf(principal.getName()));
         } catch (Exception e) {
             e.printStackTrace();
         }
