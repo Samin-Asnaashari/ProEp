@@ -73,7 +73,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
       if (data.message.raw.additionalData.foreground) {
         notificationService.getAllNotificationsBefore(notificationDataService.lastNotificationID)
           .then(function (response) {
-            if (response.data != "") {
+            if (response.data !== "") {
               notificationDataService.lastNotificationID = response.data[0].id;
               vm.notifications = response.data.concat(vm.notifications);
               vm.updateNotificationGui();
@@ -87,8 +87,8 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.updateNotificationGui = function () {
       studentService.getBadgeCount()
         .then(function (response) {
-          if (response.data != "") {
-            if (response.data != 0) {
+          if (response.data !== "") {
+            if (response.data !== 0) {
               vm.amountOfBadges = response.data;
               vm.badgeAvailable = true;
             }
@@ -106,7 +106,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.loadMoreNotifications = function () {
       notificationService.getAllNotificationsAfter(vm.notifications[vm.notifications.length - 1].id)
         .then(function (response) {
-          if (response.data != "") {
+          if (response.data !== "") {
             vm.notifications = vm.notifications.concat(response.data);
             $scope.$broadcast('scroll.infiniteScrollComplete');
           }

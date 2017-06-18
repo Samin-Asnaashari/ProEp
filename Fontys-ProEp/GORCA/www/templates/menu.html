@@ -39,7 +39,7 @@
           <i class="icon ion-compose"></i>
           Registration
         </ion-item>
-        <ion-item class="item-icon-left" menu-close ng-click="menuCtrl.logout()">
+        <ion-item class="item-icon-left" ng-click="menuCtrl.logout()">
           <i class="icon ion-log-out"></i>
           Log out
         </ion-item>
@@ -55,6 +55,7 @@
       <!--<ion-refresher pulling-text="Pull"-->
       <!--on-refresh="menuCtrl.loadNewerNotifications()">-->
       <!--</ion-refresher>-->
+      <ion-item style="text-align: center" ng-if="menuCtrl.notifications.length === 0">No notifications yet</ion-item>
       <ion-list id="menu-notifications">
         <ion-item ng-repeat="notification in menuCtrl.notifications track by notification.id"
                   ng-style="{'UNREAD':{background: '#edf2fa'},

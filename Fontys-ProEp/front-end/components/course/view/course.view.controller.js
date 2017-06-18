@@ -73,10 +73,10 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
 
         var studentFoundList = $filter("filter")(vm.acceptedStudents, {pcn:data.pcn});
         if(studentFoundList.length !== 0) {
-            vm.handleRemoveOrAdd(vm.acceptedStudents, vm.declinedStudents, studentFoundList[0], "DECLINE");
+            vm.handleRemoveOrAdd(vm.acceptedStudents, vm.declinedStudents, studentFoundList[0], "DECLINED");
             return;
         }
-        vm.handleRemoveOrAdd(vm.pendingStudents, vm.declinedStudents, $filter("filter")(vm.pendingStudents, {pcn:data.pcn})[0], "DECLINE");
+        vm.handleRemoveOrAdd(vm.pendingStudents, vm.declinedStudents, $filter("filter")(vm.pendingStudents, {pcn:data.pcn})[0], "DECLINED");
     });
 
     EventStudent.subscribeOnStudentsAdded($scope, function (event, data) {
@@ -89,9 +89,9 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
 
     EventStudent.subscribeOnStudentsRemoved($scope, function (event, data){
         if(vm.pendingStudents.indexOf(data.students[0]) !== -1) {
-            vm.handleRemoveOrAddList(vm.pendingStudents, vm.declinedStudents, data.students, "DECLINE");
+            vm.handleRemoveOrAddList(vm.pendingStudents, vm.declinedStudents, data.students, "DECLINED");
             return;
         }
-        vm.handleRemoveOrAddList(vm.acceptedStudents, vm.declinedStudents, data.students, "DECLINE");
+        vm.handleRemoveOrAddList(vm.acceptedStudents, vm.declinedStudents, data.students, "DECLINED");
     });
 });
