@@ -29,7 +29,6 @@ public class Student extends Person {
     private String pushNotificationToken;
     
     @Column
-    @org.hibernate.annotations.ColumnDefault("0")
     private Integer notificationBadgeCount;
 
 	@JsonManagedReference

@@ -3,7 +3,7 @@
 angular.module('appComponent.courseEdit').controller('courseEditCtrl', function ($stateParams, $state, $scope,
                                                                                  courseResolve, courseService, EventCourseEdit,
                                                                                  $location, $anchorScroll, enumsService,
-                                                                                 teacherService, $mdDialog, EventTeacher) {
+                                                                                 teacherService, $mdDialog, EventTeacher, Notification) {
     var vm = this;
     vm.course = courseResolve.course;
     vm.majors = [];
@@ -27,6 +27,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             .then(function (response) {
                 vm.majors = response.data;
             }, function (error) {
+                Notification.error("Error getting course state");
             });
     };
 
@@ -35,6 +36,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             .then(function (response) {
                 vm.courseTypes = response.data;
             }, function (error) {
+                Notification.error("Error getting course state");
             });
     };
 
@@ -49,7 +51,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 //TODO break;
             }
         });
-        if (add == true) {
+        if (add === true) {
             vm.course.states.push(vm.courseState);
             vm.courseState = {};
         }//TODO else show error you can't add two different state for one major
@@ -74,25 +76,28 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 //vm.removeStatesFromCourse();
                 $state.go('home');
             }, function (error) {
+                Notification.error("Error saving");
             });
     };
 
     vm.saveNewCourseStates = function () {
-        if (vm.addedcourseStates.length != 0) {
+        if (vm.addedcourseStates.length !== 0) {
             return courseService.addNewCourseStateToCourse(vm.course.code, vm.addedcourseStates)
                 .then(function (response) {
                     vm.addedcourseStates = [];
                 }, function (error) {
+                    Notification.error("Error adding course state");
                 });
         }
     };
 
     vm.removeStatesFromCourse = function () {
-        if (vm.removedcourseStates.length != 0) {
+        if (vm.removedcourseStates.length !== 0) {
             return courseService.removeCourseStateFromCourse(vm.removedcourseStates)
                 .then(function (response) {
                     vm.removedcourseStates = [];
                 }, function (error) {
+                    Notification.error("Error removing course state");
                 });
         }
     };
@@ -104,7 +109,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 allTeachers = response.data;
                 vm.showDialog(allTeachers);
             }, function (error) {
-
+                Notification.error("Error opening fontys teachers");
             });
     };
 
@@ -136,11 +141,11 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
     EventTeacher.subscribeOnAddATeacherToCourse($scope, function (event, data) {
         var add = true;
         angular.forEach(vm.course.teachers, function (t1) {
-            if (data.teacher.pcn == t1.pcn) {
+            if (data.teacher.pcn === t1.pcn) {
                 add = false;
             }
         });
-        if (add == true) {
+        if (add === true) {
             vm.course.teachers.push(data.teacher);
         }
         /*TODO else show that teacher already exist*/
@@ -150,11 +155,11 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
         angular.forEach(data.teachers, function (t1) {
             var add = true;
             angular.forEach(vm.course.teachers, function (t2) {
-                if (t1.pcn == t2.pcn) {
+                if (t1.pcn === t2.pcn) {
                     add = false;
                 }
             });
-            if (add == true) {
+            if (add === true) {
                 vm.course.teachers.push(t1);
             }
             /*TODO else show that teacher already exist*/

@@ -11,5 +11,5 @@ angular.module('appComponent.resize').directive('resizeWindow', function ($windo
             // TODO: Maybe don't have a event service, but directly use the on 'resize' event
             angular.element($window).on('resize', onResize);
         }
-    }
+    };
 });

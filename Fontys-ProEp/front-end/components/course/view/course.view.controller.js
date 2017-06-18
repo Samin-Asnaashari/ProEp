@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.courseView').controller('courseViewCtrl', function ($anchorScroll, $location, $filter, $stateParams, $scope,registrationService, acceptedRegistrationsResolve,
+angular.module('appComponent.courseView').controller('courseViewCtrl', function (Notification, $anchorScroll, $location, $filter, $stateParams, $scope,registrationService, acceptedRegistrationsResolve,
                                                                                  pendingRegistrationsResolve, declinedRegistrationsResolve, EventStudent) {
     var vm = this;
 
@@ -37,6 +37,7 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
             .then(function () {
                 vm.handleSpliceAndPush(spliceList, pushList, pushSliceObject);
             }, function (error) {
+                Notification.error("Error " + status + " student");
                 console.log(angular.toJson(error));
             });
     };
@@ -48,6 +49,7 @@ angular.module('appComponent.courseView').controller('courseViewCtrl', function 
                     vm.handleSpliceAndPush(spliceList, pushList, student);
                 });
             }, function (error) {
+                Notification.error("Error " + status + " students");
                 console.log(angular.toJson(error));
             });
     };

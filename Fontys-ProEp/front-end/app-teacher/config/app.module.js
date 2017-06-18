@@ -11,10 +11,12 @@ angular.module('appTeacher',
         'appComponent.homeTeacher',
         'appComponent.courseView',
         'appComponent.studentTable',
+        'appComponent.notifications',
         'ngCookies',
         'appComponent.login',
         'angularMoment',
-        'ui-notification'
+        'ui-notification',
+        'appComponent.popupNotification'
     ]
 )
 

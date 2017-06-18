@@ -37,3 +37,7 @@ body {
     margin: 0;
     text-transform: none;
 }
+
+.navbar-brand img:hover {
+    filter: brightness(150%);
+}

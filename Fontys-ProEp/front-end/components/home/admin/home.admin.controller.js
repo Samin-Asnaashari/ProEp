@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($scope, coursesResolve, courseService, $mdDialog, EventCourse) {
+angular.module('appComponent.homeAdmin').controller('homeCtrl', function (Notification, $scope, coursesResolve, courseService, $mdDialog, EventCourse) {
 
     var vm = this;
     vm.courses = coursesResolve.courses;
@@ -12,16 +12,16 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($scope
     EventCourse.subscribeOnCourseAdded($scope, function (event, data) {
         var add = true;
         angular.forEach(vm.courses, function (c) {
-            if (c.code == data.course.code) {
+            if (c.code === data.course.code) {
                 add = false;
             }
         });
-        if (add == true) {
+        if (add === true) {
             return courseService.addCourse(data.course)
                 .then(function (response) {
                     vm.courses.push(data.course);
                 }, function (error) {
-
+                    Notification.error(data.course.code + " is already in the list");
                 });
         }
         /*TODO show course already existed notification*/
@@ -32,7 +32,7 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($scope
             .then(function (response) {
                 vm.showCourseDialog(response.data);
             }, function (error) {
-
+                Notification.error("Error showing fontys courses");
             });
     };
 
@@ -49,8 +49,7 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function ($scope
                 vm.close = function () {
                     $mdDialog.cancel();
                 };
-            }
-            ,
+            },
             controllerAs: 'vmFontysCourseDialog'
         });
     };

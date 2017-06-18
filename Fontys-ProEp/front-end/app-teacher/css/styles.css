@@ -69,6 +69,15 @@ body {
     color: #5e5e5e !important;
 }
 
+#mainNavBar .active {
+    background-color: #eee;
+    color: #5e5e5e !important;
+}
+
+#mainNavBar .active > a {
+    color: #5e5e5e !important;
+}
+
 .glyphiconRight{
     color: #573d7e;
     font-size: x-large;
@@ -168,6 +177,24 @@ body {
     color: #DCDCDC;
 }
 
-/*[ng\:if], [ng-if], .ng-if {*/
-    /*display: none !important;*/
-/*}*/
+#notificationFullList .hoverOnNotification:hover {
+    background-image: linear-gradient(rgba(29, 33, 41, .04), rgba(29, 33, 41, .04)) !important;
+    cursor: pointer;
+}
+
+.notificationContainer {
+    align-content: center;
+}
+
+.notificationHeader {
+    background-color: #563d7c;
+    color: #ffffff;
+}
+
+.navbar-brand img:hover {
+    filter: brightness(150%);
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}

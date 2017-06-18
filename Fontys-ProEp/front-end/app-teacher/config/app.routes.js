@@ -104,14 +104,32 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         });
                 }
             }
+        })
+
+        .state('notifications', {
+            url: '/notifications',
+            templateUrl: './components/notifications/notifications.html',
+            controller: 'notificationCtrl as vmNotifications',
+            resolve: {
+                notificationsResolve: function(notificationService){
+                    var notifications = notificationService.getAllNotificationsCached();
+                    if(notifications === null ) {
+                        return notificationService.getAllNotifications()
+                            .then(function (response) {
+                                notificationService.setNotifications(response.data);
+                                return {notifications: response.data}
+                            }, function (error) {
+                                console.log("Error");
+                                console.log(error);
+                            });
+                    }
+                    else {
+                        return {notifications: notifications};
+                    }
+
+                }
+            }
         });
-        // .state('notifications', {
-        //     url: '',
-        //     templateUrl: '',
-        //     controller: '',
-        //     resolve: {
-        //     }
-        // });
 });
 
 
