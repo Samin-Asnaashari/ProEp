@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('appComponent.student').controller('studentCtrl', function ($state, $scope, studentsResolve, studentService, $mdDialog, EventStudent) {
+angular.module('appComponent.student').controller('studentCtrl', function (Notification, $state, $scope, studentsResolve, studentService, $mdDialog, EventStudent) {
 
     var vm = this;
     vm.students = studentsResolve.students;
@@ -12,15 +12,16 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
     EventStudent.subscribeOnAStudentAdded($scope, function (event, data) {
         var add = true;
         angular.forEach(vm.students, function (s) {
-            if (s.pcn == data.student.pcn) {
+            if (s.pcn === data.student.pcn) {
                 add = false;
             }
         });
-        if (add == true) {
+        if (add === true) {
             return studentService.addStudent(data.student)
                 .then(function (response) {
                     vm.students.push(data.student);
                 }, function (error) {
+                    Notification.error(data.student.firstName + " is already in the list");
                 });
         }
         /*TODO show student already existed notification*/
@@ -30,13 +31,13 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
         return studentService.deleteStudent(data.pcn)
             .then(function (response) { //TODO fix it
                 angular.forEach(vm.students, function (s) {
-                    if (s.pcn == data.pcn) {
+                    if (s.pcn === data.pcn) {
                         var index = vm.students.indexOf(s);
                         vm.students.splice(index, 1);
                     }
                 });
             }, function (error) {
-
+                Notification.error("Error deleting " + data.firstName);
             });
     });
 
@@ -45,7 +46,7 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
         angular.forEach(data.students, function (s1) {
             var add = true;
             angular.forEach(vm.students, function (s2) {
-                if (s1.pcn == s2.pcn) {
+                if (s1.pcn === s2.pcn) {
                     add = false;
                 }
             });
@@ -58,7 +59,7 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
         return studentService.addStudents(addedStudents)
             .then(function (response) {
             }, function (error) {
-
+                Notification.error("Error adding students");
             });
     });
 
@@ -70,7 +71,7 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
                     vm.students.splice(index, 1);
                 });
             }, function (error) {
-
+                Notification.error("Error deleting students");
             });
     });
 
@@ -81,7 +82,7 @@ angular.module('appComponent.student').controller('studentCtrl', function ($stat
                 allStudents = response.data;
                 vm.showDialog(allStudents);
             }, function (error) {
-
+                Notification.error("Error showing students");
             });
     };
 

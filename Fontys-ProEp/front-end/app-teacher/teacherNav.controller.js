@@ -3,10 +3,9 @@
  */
 'use strict';
 
-angular.module("appTeacher").controller("navCtrl", function ($filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
-
+angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
+console.log("sssss");
     //var vm = this;
-
     $scope.amountOfBadges = 0;
     $scope.notificationService = notificationService;
     $scope.$watch('notificationService.getAmountOfBadges()', function(newValue) {
@@ -24,6 +23,7 @@ angular.module("appTeacher").controller("navCtrl", function ($filter, $location,
             .then(function (response) {
                 $scope.amountOfBadges = response.data;
             }, function (error) {
+                Notification.error("Error getting notification count");
                 console.log(angular.toJson(error));
             });
     }
@@ -72,6 +72,7 @@ angular.module("appTeacher").controller("navCtrl", function ($filter, $location,
                             //notification
                         }
                     }, function (error) {
+                        Notification.error("Error going to course details");
                         console.log(angular.toJson(error));
                     });
                 return;
@@ -103,7 +104,8 @@ angular.module("appTeacher").controller("navCtrl", function ($filter, $location,
                     $scope.notifications = response.data;
                     $scope.loadingDone = true;
                 }, function (error) {
-                   console.log(angular.toJson(error));
+                    Notification.error("Error getting notifications");
+                    console.log(angular.toJson(error));
                     $scope.loadingDone = true;
                 });
         }

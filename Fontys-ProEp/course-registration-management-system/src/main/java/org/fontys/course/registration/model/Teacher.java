@@ -13,7 +13,6 @@ public class Teacher extends Person {
     private String link;
     
     @Column
-    @org.hibernate.annotations.ColumnDefault("0")
     private Integer notificationBadgeCount;
     
     @JsonIgnoreProperties("teachers")

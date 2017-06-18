@@ -69,6 +69,15 @@ body {
     color: #5e5e5e !important;
 }
 
+#mainNavBar .active {
+    background-color: #eee;
+    color: #5e5e5e !important;
+}
+
+#mainNavBar .active > a {
+    color: #5e5e5e !important;
+}
+
 .glyphiconRight{
     color: #573d7e;
     font-size: x-large;
@@ -180,4 +189,12 @@ body {
 .notificationHeader {
     background-color: #563d7c;
     color: #ffffff;
+}
+
+.navbar-brand img:hover {
+    filter: brightness(150%);
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
 }

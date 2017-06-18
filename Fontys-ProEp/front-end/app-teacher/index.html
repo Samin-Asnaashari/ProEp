@@ -31,66 +31,7 @@
 
 <body>
 
-<!--Navigation-->
-<nav class="navbar teacherNav" style="border-radius:0px;">
-    <div class="container-fluid">
-
-        <!-- Logo -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavBar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="#" class="navbar-brand"><img style="max-width:92px; margin-top: -18px;"
-                                                  src="./pics/GORCALogoNoText.PNG"></a>
-            <a class="navbar-brand" href="#" style="margin-left:-32px;">GORCA</a>
-        </div>
-
-        <!-- Nagivation items -->
-        <div ng-controller="navCtrl" class="collapse navbar-collapse" id="mainNavBar">
-            <ul class="nav navbar-nav">
-                <li ng-class="{ active: isActive('/home')}"><a ng-href="#!/home">Home</a></li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="pull-right" ng-if="!isLoggedIn()" ng-class="{ active: isActive('/login')}"><a ng-href="#!/login">Login</a></li>
-                <li class="pull-right" ng-if="isLoggedIn()" ng-class="{ active: isActive('/logout')}"><a ng-href="#!/logout">Logout</a></li>
-                <li ng-click="getNotifications();$event.stopImmediatePropagation();" class="removeHighlight pull-right" ng-if="isLoggedIn()">
-                    <a href="">
-                        <i class="fa fa-bell fa-1x"><span ng-if="amountOfBadges > 0" class="badgeNotification">{{ amountOfBadges }}</span></i>
-                    </a>
-                </li>
-            </ul>
-            <div ng-click="$event.stopImmediatePropagation();" ng-class='{"showWindow":show==true}' class="container-fluid dropdown-menu">
-                <div class="beeperNub"></div>
-                <div ng-if="!loadingDone" id="img-load">
-                    <img style="width: 160px;height: 115px;" src="pics/Loading_icon.gif" />
-                </div>
-                <section ng-if="loadingDone">
-                    <md-subheader class="md-primary">Notifications</md-subheader>
-                    <md-list id="notificationList" layout-padding>
-                        <div style="color: black" ng-if="notifications.length === 0">No notifications yet</div>
-                        <md-list-item class="hoverOnNotification md-3-line" ng-repeat="notification in notifications track by notification.id"
-                                      ng-style="{'UNREAD':{background: '#edf2fa'},'READ':{background: '#FFF'}}[notification.status]"
-                                      ng-click="setNotificationStatus(notification)">
-                            <img ng-src="pics/{{ notification.type }}.png" class="md-avatar" alt="{{ notification.type }}">
-                            <div class="md-list-item-text">
-                                <h3>{{ notification.type }}</h3>
-                                <h4 class="capitalize">{{ notification.sender.firstName }}</h4>
-                                <p>
-                                    {{ notification.content }}
-                                </p>
-                                <span style="color: black;" am-time-ago="notification.date"></span>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-                </section>
-                <a ui-sref="notifications"><div id="seeAllNotifications">See All</div></a>
-            </div>
-        </div>
-    </div>
-</nav>
+<ng-include src="'navigation.html'"></ng-include>
 
 <div ui-view></div>
 
@@ -144,8 +85,8 @@
 <script src="../components/course/view/module.js"></script>
 <script src="../components/studentCustomTable/module.js"></script>
 <script src="../components/login/module.js"></script>
-<script src="../components/course/view/module.js"></script>
 <script src="../components/notifications/module.js"></script>
+<script src="../components/config/app.ui-notification.js"></script>
 
 <!--service config-->
 <script src="../services/api/config/module.js"></script>

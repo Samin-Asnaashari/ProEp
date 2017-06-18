@@ -13,5 +13,6 @@ angular.module('appComponent',
         'appComponent.courseTable',
         'appComponent.studentTable',
         'appComponent.notifications',
+        'appComponent.popupNotification'
     ]
 );

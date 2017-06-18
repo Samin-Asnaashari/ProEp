@@ -236,7 +236,6 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.save = function () {
       reviewService.addReview(vm.course.code, vm.newReview)
         .then(function (response) {
-          $ionicHistory.currentView($ionicHistory.backView());
           vm.newReview = {};
           $state.go('app.courseDetailsView', {courseView: vm.course});
         }, function (error) {

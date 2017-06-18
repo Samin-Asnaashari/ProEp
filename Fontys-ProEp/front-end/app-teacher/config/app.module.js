@@ -14,7 +14,9 @@ angular.module('appTeacher',
         'appComponent.notifications',
         'ngCookies',
         'appComponent.login',
-        'angularMoment'
+        'angularMoment',
+        'ui-notification',
+        'appComponent.popupNotification'
     ]
 )
 
