@@ -1,3 +1,7 @@
 .pending {
-  background-color: yellow;
+  background-color: #f4dc42;
+}
+
+.declined{
+  background-color: #ff2819;
 }

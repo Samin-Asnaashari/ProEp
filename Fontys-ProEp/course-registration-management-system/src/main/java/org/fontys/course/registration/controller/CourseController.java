@@ -99,4 +99,9 @@ public class CourseController {
     public List<Course> GetAllAcceptedRegistrationsByStudentAsCourses(Principal principal) {
         return this.courseService.GetAcceptedElectiveCourses(Integer.valueOf(principal.getName()));
     }
+
+    @RequestMapping(value = "/elective/forApply", method = RequestMethod.GET)
+    public List<Course> GetAllNotAppliedElectiveCoursesForStudent(Principal principal) {
+        return this.courseService.findAllNotAppliedElectiveCoursesForStudent(Integer.valueOf(principal.getName()));
+    }
 }

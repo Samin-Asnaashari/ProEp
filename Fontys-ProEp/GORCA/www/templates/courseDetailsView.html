@@ -7,25 +7,27 @@
 
   <ion-content class="has-subheader">
     <ion-list>
-      <br/>
+
       <div class="row" style="border-top: 0.2px solid lightgray;">
         <div class="col" style="text-align: center;">
-          <h4><strong> EC: </strong><span class="badge badge-royal"> {{CourseDetailsCtrl.course.ec || " - "}} </span></h4>
+          <h4><strong> EC: </strong><span class="badge badge-royal"> {{CourseDetailsCtrl.course.ec || " - "}} </span>
+          </h4>
         </div>
         <div class="col" style="text-align: center;">
-          <h4><strong> BLOCK: </strong><span class="badge badge-royal"> {{CourseDetailsCtrl.course.block || " - "}} </span></h4>
+          <h4><strong> BLOCK: </strong><span
+            class="badge badge-royal"> {{CourseDetailsCtrl.course.block || " - "}} </span></h4>
         </div>
       </div>
 
-
-
       <ion-item class="item item-icon-left bar bar-dark" style="color: #ffffff;">
         <i class="icon icon ion-calendar"></i>
-        {{CourseDetailsCtrl.course.regStartDate || " TBD "}}
+        <strong ng-if="CourseDetailsCtrl.course.regStartDate == null">TBD</strong>
+        {{CourseDetailsCtrl.course.regStartDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY'}}
       </ion-item>
       <ion-item class="item item-icon-left bar bar-dark">
         <i class="icon ion-calendar"></i>
-        {{CourseDetailsCtrl.course.regEndDate || " TBD "}}
+        <strong ng-if="CourseDetailsCtrl.course.regEndDate == null">TBD</strong>
+        {{CourseDetailsCtrl.course.regEndDate | amUtc | amLocal | amDateFormat:'MMMM DD, YYYY'}}
       </ion-item>
 
       <ion-item class="item item-icon-left">
@@ -35,6 +37,9 @@
 
       <ion-item class="item item-icon-left" style="border: 0px;padding-top:10px;padding-bottom: 10px;">
         <i class="icon ion-ios-people-outline"></i> Teachers:
+      </ion-item>
+      <ion-item class="item" ng-if="CourseDetailsCtrl.course.teachers.length == 0">
+        - No Teacher Assigned Yet
       </ion-item>
       <ion-item class="item item-icon-left"
                 ng-repeat="teacher in CourseDetailsCtrl.course.teachers track by teacher.pcn"
@@ -58,10 +63,11 @@
 
   <div class="tabs-striped tabs-color-royal">
     <div class="tabs">
-      <a class="title tab-item active" ng-click="CourseDetailsCtrl.AddReview()">
+      <a class="title tab-item active" ui-sref="app.addReview({course : CourseDetailsCtrl.course})">
         <i class="icon ion-ios-star-half"></i>
         Review
       </a>
+      <!--Add New Review-->
     </div>
   </div>
 

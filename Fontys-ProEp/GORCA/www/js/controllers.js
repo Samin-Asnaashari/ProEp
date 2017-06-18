@@ -210,7 +210,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
   .controller('AddReviewController', function ($stateParams, reviewService, $state, $ionicHistory, $ionicPopup) {
     var vm = this;
 
-    vm.courseCode = $stateParams.courseCode;
+    vm.course = $stateParams.course;
 
     vm.newReview = {};
 
@@ -234,11 +234,11 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     };
 
     vm.save = function () {
-      reviewService.addReview(vm.courseCode, vm.newReview)
+      reviewService.addReview(vm.course.code, vm.newReview)
         .then(function (response) {
           $ionicHistory.currentView($ionicHistory.backView());
           vm.newReview = {};
-          $state.go('reviews', {courseCode: 'SAI'});
+          $state.go('app.courseDetailsView', {courseView: vm.course});
         }, function (error) {
           $ionicPopup.alert({
             title: 'Error',
@@ -285,18 +285,29 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.currentDate = new Date();
   })
 
-  .controller('RegistrationController', function (electiveCoursesResolve, registrationService, $state) {
+  .controller('RegistrationController', function (electiveCoursesToApplyResolve, registeredCoursesResolve, registrationService, $state) {
     var vm = this;
-    vm.electiveCourses = electiveCoursesResolve.courses;
+    vm.coursesToApply = electiveCoursesToApplyResolve.coursesToApply;
+    vm.registeredCoursesExceptAcceptedOnes = registeredCoursesResolve.registeredCoursesExceptAcceptedOnes;
 
-    vm.register = function (courseCode) {
-      return registrationService.createRegistration(courseCode)
-        .then(function (response) {
-          $state.go('app.registration');
-        }, function (error) {
-          console.log(error);
-        });
+    vm.register = function (course) {
+      if(course.teachers.length != 0){
+        return registrationService.createRegistration(course.code)
+          .then(function (response) {
+            var index = vm.coursesToApply.indexOf(course);
+            vm.coursesToApply.splice(index, 1);
+            course.status= "PENDING";
+            vm.registeredCoursesExceptAcceptedOnes.push(course);
+          }, function (error) {
+            console.log(error);
+          });
+      }else{
+        //show notification TODO
+      }
+    };
 
+    vm.goToCourseView = function (course) {
+      $state.go('app.courseDetailsView', {courseView: course})
     };
   })
 
@@ -305,21 +316,21 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.course = $stateParams.courseView;
     vm.reviews = reviewsResolve.reviews;
 
-    vm.AddReview = function() {
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'Review for ' + vm.course.code,
-        templateUrl: 'templates/addReview.html',
-        controller: 'AddReviewController',
-        controllerAs: 'addReviewCtrl'
-      });
-
-      confirmPopup.then(function(res) {
-        if(res) {
-          //
-
-        }
-      });
-    };
+    // vm.AddReview = function () {
+    //   var confirmPopup = $ionicPopup.confirm({
+    //     title: 'Review for ' + vm.course.code,
+    //     templateUrl: 'templates/addReview.html',
+    //     controller: 'AddReviewController',
+    //     controllerAs: 'addReviewCtrl'
+    //   });
+    //
+    //   confirmPopup.then(function (res) {
+    //     if (res) {
+    //       //
+    //
+    //     }
+    //   });
+    // };
   })
 
   .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService) {
@@ -330,14 +341,14 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     vm.mandatoryEC = myMandatoryCoursesResolve.mandatoryEC;
     vm.acceptedEC = myAcceptedCoursesResolve.acceptedEC;
 
-    vm.dropRegistration = function(course) {
+    vm.dropRegistration = function (course) {
       var confirmPopup = $ionicPopup.confirm({
         title: 'Drop course ' + course.code,
         template: 'Are you sure you want to drop this course?'
       });
 
-      confirmPopup.then(function(res) {
-        if(res) {
+      confirmPopup.then(function (res) {
+        if (res) {
           registrationService.dropRegistration(course.code).then(function (response) {
             var index = vm.acceptedCourses.indexOf(course);
             vm.acceptedEC = vm.acceptedEC - course.ec;
