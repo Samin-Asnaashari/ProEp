@@ -43,12 +43,12 @@ public class TeacherController {
     @RequestMapping(value = "/fontysTeachers", method = RequestMethod.GET)
     public List<Teacher> GetAllFontysTeachers() {
         List<Teacher> teachers = new ArrayList<>();
-        teachers.add(new Teacher(26646, "12383", "t.example@fontys.nl", "Bert", "Gestle", ""));
-        teachers.add(new Teacher(37777, "123", "lol@fontys.nl", "Marrielle", "Vrolijk", ""));
-        teachers.add(new Teacher(82282, "sdf", "hohoo@fontys.nl", "George", "bla", ""));
-        teachers.add(new Teacher(84629, "hoho", "blablabla@fontys.nl", "Joris", "Guest", ""));
-        teachers.add(new Teacher(86366, "test", "lalaLand@fontys.nl", "Li", "Li", ""));
-        teachers.add(new Teacher(80903, "pass", "awesome@fontys.nl", "Anna", "bel", ""));
+        teachers.add(new Teacher(222, "123", "p.boots@fontys.nl", "Peter", "Boot", "https://apps.fhict.nl/hellotalent/Profile/I871412"));
+        teachers.add(new Teacher(333, "password", "m.fransen@fontys.nl", "Marielle", "Fransen", "https://apps.fhict.nl/hellotalent/Profile/I872270"));
+        teachers.add(new Teacher(666, "666", "j.geurts@fontys.nl", "Joris", "Geurts", "https://apps.fhict.nl/hellotalent/Profile/I878848"));
+        teachers.add(new Teacher(777, "777", "li.li@fontys.nl", "Li", "Li", "https://apps.fhict.nl/hellotalent/Profile/I879556"));
+        teachers.add(new Teacher(888, "888", "m.pesic@fontys.nl", "Maja", "Pesic", "https://apps.fhict.nl/hellotalent/profile/I884294"));
+        teachers.add(new Teacher(999, "999", "o.figaroa@fontys.nl", "Figaroa", "Oswald", "https://apps.fhict.nl/hellotalent/Profile/I883146"));
         return teachers;
     }
 

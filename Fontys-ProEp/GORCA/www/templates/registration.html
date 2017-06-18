@@ -13,6 +13,9 @@
       <div class="item item-divider text-center">
         Courses with registration in progress
       </div>
+      <ion-item class="item" ng-if="registrationCtrl.registeredCoursesExceptAcceptedOnes.length == 0">
+          No Registration History
+      </ion-item>
       <ion-item class="item item-icon-left item-icon-right"
                 ng-repeat="course in registrationCtrl.registeredCoursesExceptAcceptedOnes | filter:searchFilter track by course.code"
                 ng-class="{pending: course.status=='PENDING', declined: course.status=='DECLINED'}"
@@ -30,6 +33,10 @@
       <div class="item item-divider text-center">
         Elective Courses
       </div>
+      <ion-item class="item item-text-wrap" ng-if="registrationCtrl.coursesToApply.length == 0">
+        No Elective Courses Are Available For Registration.
+        Please Check Later.
+      </ion-item>
       <ion-item class="item item-icon-right"
                 ng-repeat="course in registrationCtrl.coursesToApply | filter:searchFilter track by course.code">
         <div ui-sref="app.courseDetailsView({courseView : course})">

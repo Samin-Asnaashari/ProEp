@@ -1,6 +1,4 @@
-/**
- * Created by Merv on 6/11/2017.
- */
+
 'use strict';
 
 angular.module('GORCA.serviceAPIS').service('loginService', function ($http, $window) {
