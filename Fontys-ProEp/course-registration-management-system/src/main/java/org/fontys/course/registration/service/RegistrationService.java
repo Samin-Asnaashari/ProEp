@@ -91,12 +91,25 @@ public class RegistrationService {
         Course course = this.utilService.GetCourse(courseCode);
         Person sender = this.utilService.GetPersonById(teacherPCN);
         Registration registration = null;
+        RegistrationStatus oldStatus = null;
+        		
         for (int i = 0; i < studentPcnList.size(); i++) {
         	Student student = this.utilService.GetStudentById(studentPcnList.get(i));
         	this.utilService.AddNewNotification(new Notification(NotificationType.valueOf(status), "You have been " + status.toLowerCase() + " in " + courseCode + " by " + sender.getFirstName(), new Date(), 
             		sender, student, courseCode));
             registration = this.registrationRepository.findById(new RegistrationId(student, course));
+            oldStatus = registration.getRegistrationStatus();
             registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
+        }
+        if(NotificationType.valueOf(status).equals(NotificationType.ACCEPTED)) {
+        	course.setFilledSeat(course.getFilledSeat() + 1);
+        }
+        else {
+        	if(oldStatus != null) {
+        		if(oldStatus.equals(RegistrationStatus.ACCEPTED)) {
+        			course.setFilledSeat(course.getFilledSeat() - 1);
+        		}
+        	}
         }
     }
 
