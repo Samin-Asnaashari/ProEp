@@ -9,7 +9,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             templateUrl: './components/home/teacher/home.teacher.html',
             controller: 'teacherHomeCtrl as vmTeacherHome',
             resolve: {
-                coursesResolve: function (teacherService) {
+                coursesResolve: function (teacherService, Notification) {
                     return teacherService.getMyCourses()
                         .then(function (response) {
                             return {courses: response.data};
@@ -43,7 +43,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             //        //     return $state.go('login');
             //        // }
             //     },
-                acceptedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                acceptedRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllAcceptedRegistrations($stateParams.code)
                         .then(function (response) {
                             var acceptedStudents = [];
@@ -58,7 +58,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             Notification.error("Error loading accepted students");
                         });
                 },
-                pendingRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                pendingRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllPendingRegistrations($stateParams.code)
                         .then(function (response) {
                             var pendingStudents = [];
@@ -71,7 +71,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             Notification.error("Error loading pending students");
                         });
                 },
-                declinedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                declinedRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllDeclinedRegistrations($stateParams.code)
                         .then(function (response) {
                             var declinedStudents = [];
@@ -94,7 +94,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             url: '/logout',
             template: '<login-page login-app="Teacher"></login-page>',
             resolve: {
-                logOutResolve: function (loginService) {
+                logOutResolve: function (loginService, Notification) {
                     return loginService.logout()
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Teacher");
@@ -111,7 +111,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             templateUrl: './components/notifications/notifications.html',
             controller: 'notificationCtrl as vmNotifications',
             resolve: {
-                notificationsResolve: function(notificationService) {
+                notificationsResolve: function(notificationService, Notification) {
                     return notificationService.getAllNotifications()
                         .then(function (response) {
                             return {notifications: response.data};
