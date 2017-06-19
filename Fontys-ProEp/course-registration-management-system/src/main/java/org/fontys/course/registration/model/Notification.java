@@ -5,6 +5,8 @@ import javax.persistence.*;
 import org.fontys.course.registration.model.enums.NotificationStatus;
 import org.fontys.course.registration.model.enums.NotificationType;
 import org.fontys.course.registration.model.enums.SendStatus;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -40,8 +42,9 @@ public class Notification {
     private NotificationType type;
 
     @JsonIgnoreProperties("myCourses")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne
-    @JoinColumn
+    @JoinColumn(referencedColumnName="pcn")
     private Person sender;
 
     @JsonBackReference

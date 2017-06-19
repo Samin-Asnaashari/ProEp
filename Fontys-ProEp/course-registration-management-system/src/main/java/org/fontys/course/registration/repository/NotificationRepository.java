@@ -2,6 +2,7 @@ package org.fontys.course.registration.repository;
 
 import java.util.List;
 
+import org.fontys.course.registration.model.Course;
 import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.enums.SendStatus;
@@ -21,4 +22,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Long
 	List<Notification> findTop5ByIdLessThanAndReceiverOrderByIdDesc(Long id, Person person);
 	
 	List<Notification> findByReceiverAndSendStatusOrderByIdDesc(Person person, SendStatus status);
+	
+	Long deleteBySender(Person person);
 }

@@ -196,4 +196,8 @@ public class UtilService {
     public void DeleteAllRegistrationsByCourse(String courseCode) throws Exception {
     	this.registrationService.DeleteAllRegistrationsByCourse(courseCode);
     }
+    
+    public void DeleteAllNotificationsBySender(Integer pcn){
+    	this.notificationService.DeleteAllNotificationsBySender(this.GetPersonById(pcn));
+    }
 }

@@ -84,6 +84,12 @@ public class NotificationService {
 	}
 
 	public List<Notification> GetNotifications(Integer pcn) {
+		System.out.println(pcn);
 		return this.notificationRepository.findByReceiverOrderByDateDesc(this.utilService.GetPersonById(pcn));
+	}
+	
+	@Transactional
+	public void DeleteAllNotificationsBySender(Person person) {
+		System.out.println(this.notificationRepository.deleteBySender(person));
 	}
 }

@@ -41,6 +41,11 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
         }
     };
 
+    $scope.goToAllNotifications = function () {
+      $scope.show = false;
+      $state.go('notifications');
+    };
+
     $scope.removeBadge = function () {
         //if ($scope.amountOfBadges > 0) {
             $scope.amountOfBadges = 0;

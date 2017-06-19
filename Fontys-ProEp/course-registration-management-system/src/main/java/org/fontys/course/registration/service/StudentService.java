@@ -1,5 +1,6 @@
 package org.fontys.course.registration.service;
 
+import org.fontys.course.registration.model.Notification;
 import org.fontys.course.registration.model.Person;
 import org.fontys.course.registration.model.Student;
 import org.fontys.course.registration.repository.StudentRepository;
@@ -58,6 +59,7 @@ public class StudentService {
 
     @Transactional
     public void DeleteStudent(Integer pcn) {
+    	this.utilService.DeleteAllNotificationsBySender(pcn);
         this.studentRepository.delete(pcn);
     }
 
