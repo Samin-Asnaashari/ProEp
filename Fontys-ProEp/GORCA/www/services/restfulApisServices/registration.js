@@ -15,7 +15,11 @@ angular.module('GORCA.serviceAPIS').service('registrationService', function ($ht
     return $http.get(baseUrl + "/exceptAcceptedOnes");
   };
 
-  self.dropRegistration = function(course) {
-    return $http.get(baseUrl + '/drop/' + course);
+  self.dropRegistration = function(courseCode) {
+    return $http.get(baseUrl + '/drop/' + courseCode);
+  };
+
+  self.cancelRegistration = function(courseCode) {
+    return $http.delete(baseUrl + '/cancelRegistration/' + courseCode);
   }
 });

@@ -11,25 +11,33 @@
     <!--<div class="list card">-->
     <ion-list>
       <div class="item item-divider text-center">
-        Courses with registration in progress
+        Courses With Registration In Progress
       </div>
       <ion-item class="item" ng-if="registrationCtrl.registeredCoursesExceptAcceptedOnes.length == 0">
-          No Registration History
+        No Registration History
       </ion-item>
-      <ion-item class="item item-icon-left item-icon-right"
+      <ion-item class="item item-remove-animate item-icon-left item-icon-right"
                 ng-repeat="course in registrationCtrl.registeredCoursesExceptAcceptedOnes | filter:searchFilter track by course.code"
-                ng-class="{pending: course.status=='PENDING', declined: course.status=='DECLINED'}"
-                ng-click="registrationCtrl.goToCourseView(course)">
+                ng-class="{pending: course.status=='PENDING', declined: course.status=='DECLINED'}">
         <i ng-if=" course.status == 'DECLINED'" class="icon ion-sad-outline"></i> <!--ion-thumbsdown-->
         <i ng-if=" course.status == 'PENDING'" class="icon ion-ios-clock-outline"></i>
-        <strong style="text-decoration:underline">{{ course.code }}</strong>
-        <span class="item-note">{{course.status}}</span>
-        <!--<p>{{ course.name }}</p>-->
+        <div ui-sref="app.courseDetailsView({courseView : course})">
+          <strong style="text-decoration:underline">{{ course.code }}</strong>
+          <span class="item-note">{{course.status}}</span>
+          <!--<p>{{ course.name }}</p>-->
+        </div>
+        <ion-option-button ng-if="course.status === 'PENDING'" ng-click="registrationCtrl.cancelRegistration(course)"
+                           class="button-assertive icon-left ion-ios-close-outline">
+          Cancel
+        </ion-option-button>
       </ion-item>
     </ion-list>
     <!--</div>-->
 
-    <div class="list card">
+    <br/>
+
+    <!--<div class="list card">-->
+    <ion-list>
       <div class="item item-divider text-center">
         Elective Courses
       </div>
@@ -45,7 +53,8 @@
         </div>
         <i ng-click="registrationCtrl.register(course)" class="icon ion-compose"></i>
       </ion-item>
-    </div>
+    </ion-list>
+    <!--</div>-->
 
   </ion-content>
 </ion-view>

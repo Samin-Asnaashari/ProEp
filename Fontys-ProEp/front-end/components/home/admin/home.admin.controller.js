@@ -21,10 +21,11 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function (Notifi
                 .then(function (response) {
                     vm.courses.push(data.course);
                 }, function (error) {
-                    Notification.error(data.course.code + " is already in the list");
+                    Notification.error('Error adding course!');
                 });
+        }else{
+            Notification.error(data.course.code + " is already in the list!");
         }
-        /*TODO show course already existed notification*/
     });
 
     vm.goToFontysCourseDialog = function () {
@@ -32,7 +33,7 @@ angular.module('appComponent.homeAdmin').controller('homeCtrl', function (Notifi
             .then(function (response) {
                 vm.showCourseDialog(response.data);
             }, function (error) {
-                Notification.error("Error showing fontys courses");
+                Notification.error("Error showing fontys courses!");
             });
     };
 
