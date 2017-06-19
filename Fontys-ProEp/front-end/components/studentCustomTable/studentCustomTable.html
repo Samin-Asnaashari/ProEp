@@ -1,10 +1,6 @@
 <table class="table table-sm table-hover table-striped studentCustomTable" ts-wrapper>
     <thead>
     <tr class="tableHeader">
-        <!--<th colspan="1" style="vertical-align: middle;text-align: center;">-->
-            <!--<span ng-click="" class="glyphicon glyphicon-chevron-down"></span>-->
-            <!--&lt;!&ndash;data-toggle="collapse" href="#collapseTable"&ndash;&gt;-->
-        <!--</th>-->
         <th colspan="{{ vmStudentCustomTable.getMaxColspan()}}" class="md-title" style="vertical-align: middle;">
             Students
         </th>
@@ -16,7 +12,7 @@
         </th>
     </tr>
     </thead>
-    <tbody class="collapse in"> <!--id="collapseTable"-->
+    <tbody>
     <tr ng-show="vmStudentCustomTable.showFilter">
         <th colspan="1"></th>
         <th colspan="2"><input type="text" ng-model="searchFilter.pcn" class="form-control" placeholder="PCN"></th>

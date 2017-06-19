@@ -4,7 +4,6 @@
 'use strict';
 
 angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
-console.log("sssss");
     //var vm = this;
     $scope.amountOfBadges = 0;
     $scope.notificationService = notificationService;
