@@ -100,16 +100,17 @@ public class RegistrationService {
             registration = this.registrationRepository.findById(new RegistrationId(student, course));
             oldStatus = registration.getRegistrationStatus();
             registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
-        }
-        if(NotificationType.valueOf(status).equals(NotificationType.ACCEPTED)) {
-        	course.setFilledSeat(course.getFilledSeat() + 1);
-        }
-        else {
-        	if(oldStatus != null) {
-        		if(oldStatus.equals(RegistrationStatus.ACCEPTED)) {
-        			course.setFilledSeat(course.getFilledSeat() - 1);
-        		}
-        	}
+            
+            if(NotificationType.valueOf(status).equals(NotificationType.ACCEPTED)) {
+            	course.setFilledSeat(course.getFilledSeat() + 1);
+            }
+            else {
+            	if(oldStatus != null) {
+            		if(oldStatus.equals(RegistrationStatus.ACCEPTED)) {
+            			course.setFilledSeat(course.getFilledSeat() - 1);
+            		}
+            	}
+            }
         }
     }
 
