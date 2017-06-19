@@ -1,7 +1,8 @@
-.pending {
+.pending  .item-content{
   background-color: #f4dc42;
 }
 
-.declined{
-  background-color: #ff2819;
+.declined .item-content{
+  background-color: #cc2b16;
+  color: #ffffff;
 }

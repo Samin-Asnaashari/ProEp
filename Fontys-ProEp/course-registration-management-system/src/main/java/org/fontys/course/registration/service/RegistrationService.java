@@ -9,6 +9,7 @@ import org.fontys.course.registration.model.enums.NotificationType;
 import org.fontys.course.registration.model.enums.RegistrationStatus;
 import org.fontys.course.registration.repository.RegistrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.SystemEnvironmentPropertySource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,22 +23,58 @@ public class RegistrationService {
     private UtilService utilService;
 
     @Transactional
-    public void createRegistration(String courseCode, int pcn) throws Exception {
+    public boolean createRegistration(String courseCode, int pcn) throws Exception {
         Course course = utilService.GetCourse(courseCode);
+<<<<<<< HEAD
         Student student = utilService.GetStudentById(pcn);
         Registration newRegistration = new Registration(new RegistrationId(student, course), new Date(), RegistrationStatus.PENDING);
         this.registrationRepository.save(newRegistration);
         String notificationContent = "Registration Request: Student with PCN " + pcn + " requested registration for course " + courseCode;
         for (Teacher courseTeacher : course.getTeachers()) {
             this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, notificationContent, new Date(), student, courseTeacher, courseCode));
+=======
+        Date now = new Date();
+        if (course.getRegStartDate() != null && course.getRegEndDate() != null) {
+            if (now.after(course.getRegStartDate()) && now.before(course.getRegEndDate())) {
+                Student student = utilService.GetStudentById(pcn);
+                Registration newRegistration = new Registration(new RegistrationId(student, course), new Date(), RegistrationStatus.PENDING);
+                this.registrationRepository.save(newRegistration);
+                String notificationContent = "Student with PCN " + pcn + " requested registration for course " + courseCode;
+                for (Teacher courseTeacher : course.getTeachers()) {
+                    this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, notificationContent, new Date(), student, courseTeacher, courseCode));
+                }
+                return true;
+            }
+>>>>>>> ce36a108346615f1cb179da5f2f88b61ea4b12d2
         }
+        return false;
     }
 
     @Transactional
     public void dropRegistration(String courseCode, Integer pcn) throws Exception {
+        Course course = utilService.GetCourse(courseCode);
+        Student student = utilService.GetStudentById(pcn);
         Registration reg =
                 registrationRepository.findById(new RegistrationId
-                        (utilService.GetStudentById(pcn), utilService.GetCourse(courseCode)));
+                        (student, course));
+        String notificationContent = "Student with PCN " + pcn + " Dropped Course " + courseCode;
+        for (Teacher courseTeacher : utilService.GetCourse(courseCode).getTeachers()) {
+            this.utilService.AddNewNotification(new Notification(NotificationType.DROPPED, notificationContent, new Date(), student, courseTeacher, courseCode));
+        }
+        this.registrationRepository.delete(reg);
+    }
+
+    @Transactional
+    public void CancelRegistration(String courseCode, Integer pcn) throws Exception {
+        Course course = utilService.GetCourse(courseCode);
+        Student student = utilService.GetStudentById(pcn);
+        Registration reg =
+                registrationRepository.findById(new RegistrationId
+                        (student, course));
+        String notificationContent = "Student with PCN " + pcn + " cancelled his/her request for Course " + courseCode;
+        for (Teacher courseTeacher : utilService.GetCourse(courseCode).getTeachers()) {
+            this.utilService.AddNewNotification(new Notification(NotificationType.CANCELED, notificationContent, new Date(), student, courseTeacher, courseCode));
+        }
         this.registrationRepository.delete(reg);
     }
 

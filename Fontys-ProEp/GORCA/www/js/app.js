@@ -7,7 +7,7 @@
 angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.controllers', 'GORCA.serviceAPIS', 'GORCA.dataServices',
   'angularMoment', 'GORCA.events', 'ngCookies'])
 
-  .run(function ($ionicPlatform, notificationDataService, notificationService, EventNotification, $rootScope, loginService, $state) {
+  .run(function ($ionicPlatform, notificationDataService, notificationService, EventNotification, $rootScope, loginService, $state, $ionicPopup) {
     $ionicPlatform.ready(function () {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -34,7 +34,10 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 EventNotification.notifyOnNewNotifications(response.data);
               }
             }, function (error) {
-              alert(angular.toJson(error));
+              $ionicPopup.alert({
+                title: 'Error',
+                template: 'Error getting the latest Notifications!'
+              });
             });
         }
       });
@@ -102,7 +105,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          notificationsResolve: function (notificationService, $ionicLoading) {
+          notificationsResolve: function (notificationService, $ionicLoading, $ionicPopup) {
 
             //show loading icon
             $ionicLoading.show({
@@ -116,17 +119,23 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 console.log('error');
                 //disable loading icon
                 $ionicLoading.hide();
-                alert(angular.toJson(error));
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error getting Notifications!'
+                });
               })
           },
-          notificationsBadgeCountResolve: function (studentService, $ionicLoading) {
+          notificationsBadgeCountResolve: function (studentService, $ionicLoading, $ionicPopup) {
             return studentService.getBadgeCount()
               .then(function (response) {
                 return {badgeCount: response.data};
               }, function (error) {
                 //disable loading icon
                 $ionicLoading.hide();
-                alert(angular.toJson(error));
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error getting Notifications count!'
+                });
               })
           }
         }
@@ -164,7 +173,12 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          myAcceptedCoursesResolve: function (courseService, $ionicPopup) {
+          myAcceptedCoursesResolve: function (courseService, $ionicPopup, $ionicLoading) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
 
             return courseService.getAllAcceptedElectiveCourses()
               .then(function (response) {
@@ -175,13 +189,20 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
                 return {acceptedCourses: response.data, acceptedEC: totalEC};
               }, function (error) {
+                //disable loading icon
+                $ionicLoading.hide();
                 $ionicPopup.alert({
                   title: 'Error',
-                  template: 'Error retreiving accepted courses'
+                  template: 'Error retreiving accepted courses!'
                 })
               });
           },
-          myMandatoryCoursesResolve: function (courseService, $ionicPopup) {
+          myMandatoryCoursesResolve: function (courseService, $ionicPopup, $ionicLoading) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
 
             return courseService.getAllMandatoryCourses()
               .then(function (response) {
@@ -192,9 +213,11 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
 
                 return {mandatoryCourses: response.data, mandatoryEC: totalEC};
               }, function (error) {
+                //disable loading icon
+                $ionicLoading.hide();
                 $ionicPopup.alert({
                   title: 'Error',
-                  template: 'Error retreiving mandatory courses'
+                  template: 'Error retreiving mandatory courses!'
                 })
               });
           }
@@ -211,25 +234,47 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          registeredCoursesResolve: function (registrationService) {
+          registeredCoursesResolve: function (registrationService, $ionicLoading, $ionicPopup) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
+
             return registrationService.GetAllRegistrationsExceptAcceptedOnes()
               .then(function (response) {
-                var myRegisteredCourses= [];
+                var myRegisteredCourses = [];
                 angular.forEach(response.data, function (r) {
                   r.id.course.status = r.registrationStatus;
                   myRegisteredCourses.push(r.id.course);
                 });
                 return {registeredCoursesExceptAcceptedOnes: myRegisteredCourses};
               }, function (error) {
-                alert(angular.toJson(error));
+                //disable loading icon
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error getting Registration record!'
+                });
               });
           },
-          electiveCoursesToApplyResolve: function (courseService) {
+          electiveCoursesToApplyResolve: function (courseService, $ionicLoading, $ionicPopup) {
+
+            //show loading icon
+            $ionicLoading.show({
+              template: 'Loading...'
+            });
+
             return courseService.GetAllNotAppliedElectiveCoursesForStudent()
               .then(function (response) {
                 return {coursesToApply: response.data};
               }, function (error) {
-                alert(angular.toJson(error));
+                //disable loading icon
+                $ionicLoading.hide();
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error getting elective courses to apply!'
+                });
               });
           }
         }
@@ -292,7 +337,7 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
           }
         },
         resolve: {
-          reviewsResolve: function (reviewService, $ionicLoading, $stateParams) {
+          reviewsResolve: function (reviewService, $ionicLoading, $stateParams, $ionicPopup) {
 
             // show loading icon
             $ionicLoading.show({
@@ -313,7 +358,10 @@ angular.module('GORCA', ['ionic', 'ionic.cloud', 'ionic-ratings', 'GORCA.control
                 console.log('error');
                 // disable loading icon
                 $ionicLoading.hide();
-                alert(angular.toJson(error));
+                $ionicPopup.alert({
+                  title: 'Error',
+                  template: 'Error getting Reviews!'
+                });
               })
           }
         }

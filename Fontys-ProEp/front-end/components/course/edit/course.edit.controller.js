@@ -27,7 +27,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             .then(function (response) {
                 vm.majors = response.data;
             }, function (error) {
-                Notification.error("Error getting course state");
+                Notification.error("Error getting course state!");
             });
     };
 
@@ -36,7 +36,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             .then(function (response) {
                 vm.courseTypes = response.data;
             }, function (error) {
-                Notification.error("Error getting course state");
+                Notification.error("Error getting course state!");
             });
     };
 
@@ -54,7 +54,9 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
         if (add === true) {
             vm.course.states.push(vm.courseState);
             vm.courseState = {};
-        }//TODO else show error you can't add two different state for one major
+        }else{
+            Notification.error("You cant add two states for a Major!");
+        }
     };
 
     /**
@@ -76,7 +78,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 //vm.removeStatesFromCourse();
                 $state.go('home');
             }, function (error) {
-                Notification.error("Error saving");
+                Notification.error("Error saving!");
             });
     };
 
@@ -86,7 +88,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 .then(function (response) {
                     vm.addedcourseStates = [];
                 }, function (error) {
-                    Notification.error("Error adding course state");
+                    Notification.error("Error adding course state!");
                 });
         }
     };
@@ -97,7 +99,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 .then(function (response) {
                     vm.removedcourseStates = [];
                 }, function (error) {
-                    Notification.error("Error removing course state");
+                    Notification.error("Error removing course state!");
                 });
         }
     };
@@ -109,7 +111,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
                 allTeachers = response.data;
                 vm.showDialog(allTeachers);
             }, function (error) {
-                Notification.error("Error opening fontys teachers");
+                Notification.error("Error opening Fontys teachers!");
             });
     };
 
@@ -121,7 +123,7 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             locals: {fontysTeacherList: fontysTeacherList},
             controller: function () {
                 var vm = this;
-                vm.allFontysTeachers = fontysTeacherList; //TODO Check
+                vm.allFontysTeachers = fontysTeacherList;
 
                 vm.close = function () {
                     $mdDialog.cancel();
@@ -147,8 +149,9 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
         });
         if (add === true) {
             vm.course.teachers.push(data.teacher);
+        }else{
+            Notification.error(data.teacher.pcn + " is already in the list!");
         }
-        /*TODO else show that teacher already exist*/
     });
 
     EventTeacher.subscribeOnAddTeachersToCourse($scope, function (event, data) {
@@ -161,8 +164,9 @@ angular.module('appComponent.courseEdit').controller('courseEditCtrl', function 
             });
             if (add === true) {
                 vm.course.teachers.push(t1);
+            }else{
+                Notification.error(t1.pcn + " is already in the list!");
             }
-            /*TODO else show that teacher already exist*/
         });
     });
 })

@@ -145,12 +145,12 @@ public class CourseService {
                     String notificationContent = " is not available anymore in this block, sorry for any inconveniences.";
                     if (persons.size() == 1) {
                         Notification notification = new Notification
-                                (NotificationType.DELETION, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(0), courseCode);
+                                (NotificationType.DELETED, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(0), courseCode);
                         this.utilService.AddNewNotification(notification);
                     } else {
                         List<Notification> notifications = new ArrayList<>();
                         for (int i = 0; i < persons.size(); i++) {
-                            notifications.add(new Notification(NotificationType.DELETION, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(i), courseCode));
+                            notifications.add(new Notification(NotificationType.DELETED, courseCode + notificationContent, new Date(), this.utilService.GetAdminById(sender.toString()), persons.get(i), courseCode));
                         }
                         this.utilService.AddNewNotifications(notifications);
                     }

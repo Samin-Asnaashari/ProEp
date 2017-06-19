@@ -1,6 +1,6 @@
 angular.module('GORCA.controllers', ['GORCA.Directives'])
 
-  .controller('MenuController', function ($ionicPopup, notificationsResolve, notificationsBadgeCountResolve, notificationService,
+  .controller('MenuController', function (notificationsResolve, notificationsBadgeCountResolve, notificationService, $ionicPopup,
                                           $ionicLoading, $scope, EventNotification, notificationDataService, studentService, loginService, $ionicHistory, $state) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -26,7 +26,10 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
           });
           $state.go('login');
         }, function (error) {
-          alert(angular.toJson(error));
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Error Logging out!'
+          });
         })
     };
 
@@ -101,7 +104,10 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
               vm.updateNotificationGui();
             }
           }, function (error) {
-            alert(angular.toJson(error));
+            $ionicPopup.alert({
+              title: 'Error',
+              template: 'Error receiving push Notifications!'
+            });
           });
       }
     });
@@ -116,7 +122,10 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
             }
           }
         }, function (error) {
-          alert(angular.toJson(error));
+          $ionicPopup.alert({
+            title: 'Error',
+            template: 'Error getting Notifications count!'
+          });
         });
     };
 
@@ -138,7 +147,10 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
           }
         }, function (error) {
           $scope.$broadcast('scroll.infiniteScrollComplete');
-          alert(angular.toJson(error));
+          $ionicPopup.alert({
+            title: 'Error',
+            template: alert(angular.toJson(error))
+          });
         });
     };
 
@@ -263,8 +275,8 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
         }, function (error) {
           $ionicPopup.alert({
             title: 'Error',
-            template: 'Saving new review failed'
-          })
+            template: 'Error adding Review!'
+          });
         });
     };
   })
@@ -313,60 +325,80 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
       $state.go('app.registration');
     };
   })
-
-  .controller('RegistrationController', function (electiveCoursesToApplyResolve, registeredCoursesResolve, registrationService, $state, courseService) {
+  
+  .controller('RegistrationController', function (electiveCoursesToApplyResolve, registeredCoursesResolve, registrationService, $state, $ionicLoading, $ionicPopup,
+                                                  courseService) {
     var vm = this;
     vm.coursesToApply = electiveCoursesToApplyResolve.coursesToApply;
     vm.registeredCoursesExceptAcceptedOnes = registeredCoursesResolve.registeredCoursesExceptAcceptedOnes;
     // courseService.setExceptAcceptedCourses(vm.registeredCoursesExceptAcceptedOnes);
 
     vm.register = function (course) {
-      if(course.teachers.length != 0){
+      if (course.teachers.length != 0) {
         return registrationService.createRegistration(course.code)
           .then(function (response) {
-            var index = vm.coursesToApply.indexOf(course);
-            vm.coursesToApply.splice(index, 1);
-            course.status= "PENDING";
-            vm.registeredCoursesExceptAcceptedOnes.push(course);
+            if(response.data == true){
+              var index = vm.coursesToApply.indexOf(course);
+              vm.coursesToApply.splice(index, 1);
+              course.status = "PENDING";
+              vm.registeredCoursesExceptAcceptedOnes.push(course);
+            }else{
+              $ionicPopup.alert({
+                title: 'Error',
+                template: 'Registration date is not set or is expired. For more info see the course details page.'
+              });
+            }
           }, function (error) {
-            console.log(error);
+            alert(angular.toJson(error));
           });
-      }else{
-        //show notification TODO
+      } else {
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'No Teacher has been assigned yet! Please Come Back Later.'
+        });
       }
     };
 
     vm.goToCourseView = function (course) {
       $state.go('app.courseDetailsView', {courseView: course})
     };
+
+    vm.cancelRegistration = function (course) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Cancel Registration for Course ' + course.code,
+        template: 'Are you sure you want to Cancel your request?'
+      });
+
+      confirmPopup.then(function (res) {
+        if (res) {
+          registrationService.cancelRegistration(course.code).then(function (response) {
+            var index = vm.registeredCoursesExceptAcceptedOnes.indexOf(course);
+            vm.registeredCoursesExceptAcceptedOnes.splice(index, 1);
+          }, function (error) {
+            $ionicPopup.alert({
+              title: 'Error',
+              template: 'Error cancelling registration request!'
+            });
+          });
+        }
+      });
+    };
+
+    //disable loading icon
+    $ionicLoading.hide();
   })
 
-  .controller('CourseDetailsController', function ($stateParams, reviewsResolve, $ionicPopup, $ionicLoading) {
+  .controller('CourseDetailsController', function ($stateParams, reviewsResolve, $ionicLoading) {
     var vm = this;
     vm.course = $stateParams.courseView;
     vm.reviews = reviewsResolve.reviews;
-
-    // vm.AddReview = function () {
-    //   var confirmPopup = $ionicPopup.confirm({
-    //     title: 'Review for ' + vm.course.code,
-    //     templateUrl: 'templates/addReview.html',
-    //     controller: 'AddReviewController',
-    //     controllerAs: 'addReviewCtrl'
-    //   });
-    //
-    //   confirmPopup.then(function (res) {
-    //     if (res) {
-    //       //
-    //
-    //     }
-    //   });
-    // };
 
     // disable loading icon
     $ionicLoading.hide();
   })
 
-  .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService) {
+  .controller('MyCoursesController', function ($state, $ionicPopup, myMandatoryCoursesResolve, myAcceptedCoursesResolve, registrationService, $ionicLoading) {
+
     var vm = this;
     vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
     // courseService.setAcceptedElectedCourses(vm.acceptedCourses);
@@ -388,7 +420,10 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
             vm.acceptedEC = vm.acceptedEC - course.ec;
             vm.acceptedCourses.splice(index, 1);
           }, function (error) {
-
+            $ionicPopup.alert({
+              title: 'Error',
+              template: 'Error dropping course!'
+            });
           });
         }
       });
@@ -398,4 +433,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
       vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
       vm.acceptedEC = myAcceptedCoursesResolve.acceptedEC;
     };
+
+    //disable loading icon
+    $ionicLoading.hide();
   });
