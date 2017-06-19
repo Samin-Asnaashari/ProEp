@@ -60,7 +60,7 @@
         <ion-item ng-repeat="notification in menuCtrl.notifications track by notification.id"
                   ng-style="{'UNREAD':{background: '#edf2fa'}, 'READ':{background: '#FFF'}}[notification.status]"
                   ng-click="menuCtrl.setNotificationStatus(notification)" menu-close class="item-avatar item-text-wrap">
-            <img src="../pics/{{ notification.type }}.png">
+            <img src="pics/{{ notification.type }}.png">
             <h2>{{ notification.type }}</h2>
             <p>{{ notification.content }}</p>
             <span am-time-ago="notification.date"></span>
