@@ -25,14 +25,6 @@ public class RegistrationService {
     @Transactional
     public boolean createRegistration(String courseCode, int pcn) throws Exception {
         Course course = utilService.GetCourse(courseCode);
-<<<<<<< HEAD
-        Student student = utilService.GetStudentById(pcn);
-        Registration newRegistration = new Registration(new RegistrationId(student, course), new Date(), RegistrationStatus.PENDING);
-        this.registrationRepository.save(newRegistration);
-        String notificationContent = "Registration Request: Student with PCN " + pcn + " requested registration for course " + courseCode;
-        for (Teacher courseTeacher : course.getTeachers()) {
-            this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, notificationContent, new Date(), student, courseTeacher, courseCode));
-=======
         Date now = new Date();
         if (course.getRegStartDate() != null && course.getRegEndDate() != null) {
             if (now.after(course.getRegStartDate()) && now.before(course.getRegEndDate())) {
@@ -45,7 +37,6 @@ public class RegistrationService {
                 }
                 return true;
             }
->>>>>>> ce36a108346615f1cb179da5f2f88b61ea4b12d2
         }
         return false;
     }
