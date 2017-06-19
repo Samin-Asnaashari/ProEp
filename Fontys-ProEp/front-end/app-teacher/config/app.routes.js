@@ -94,10 +94,11 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             url: '/logout',
             template: '<login-page login-app="Teacher"></login-page>',
             resolve: {
-                logOutResolve: function (loginService, Notification) {
+                logOutResolve: function (loginService, Notification, $rootScope, $interval) {
                     return loginService.logout()
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Teacher");
+                            $interval.cancel($rootScope.notificationLoop);
                         }, function (error) {
                             Notification.error("Error logging out");
                             console.log("Error");

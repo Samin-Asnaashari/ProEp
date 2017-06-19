@@ -42,10 +42,10 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
     };
 
     $scope.removeBadge = function () {
-        if ($scope.amountOfBadges > 0) {
+        //if ($scope.amountOfBadges > 0) {
             $scope.amountOfBadges = 0;
             teacherService.clearBadgeCount();
-        }
+        //}
     };
 
     $scope.setNotificationStatus = function (notification) {
@@ -55,8 +55,13 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
             $scope.removeBadge();
         }
         $scope.show = false;
-        if(notification.type === "DELETION") {
-            $state.go('home');
+        if(notification.type === "DELETED") {
+            if($state.current.name === 'home'){
+                $state.go($state.current, {}, {reload: true}); //second parameter is for $stateParams
+            }
+            else {
+                $state.go('home');
+            }
         }
         else {
             var courses = courseService.getCourses();
@@ -65,7 +70,12 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
                     .then(function (response) {
                         var course = $filter("filter")(response.data, {code:notification.courseCode});
                         if(course.length === 1) {
-                            $state.go('courseView', {course: course[0], code: course[0].code});
+                            if($state.current.name === 'courseView'){
+                                $state.go($state.current, {course: course[0], code: course[0].code}, {reload: true}); //second parameter is for $stateParams
+                            }
+                            else {
+                                $state.go('courseView', {course: course[0], code: course[0].code});
+                            }
                         }
                         else {
                             console.log("course not found");
@@ -80,7 +90,12 @@ angular.module("appTeacher").controller("navCtrl", function (Notification, $filt
             var course = $filter("filter")(courseService.getCourses(), {code:notification.courseCode});
             if(course.length === 1) {
                 console.log(course[0]);
-                $state.go('courseView', {course: course[0], code: course[0].code});
+                if($state.current.name === 'courseView'){
+                    $state.go($state.current, {course: course[0], code: course[0].code}, {reload: true}); //second parameter is for $stateParams
+                }
+                else {
+                    $state.go('courseView', {course: course[0], code: course[0].code});
+                }
             }
             else {
                 console.log("course not found");
