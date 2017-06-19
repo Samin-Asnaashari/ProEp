@@ -4,7 +4,7 @@
 'use strict';
 
 angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {
-console.log("sssss");
+
     //var vm = this;
     $scope.amountOfBadges = 0;
     $scope.notificationService = notificationService;
@@ -69,7 +69,7 @@ console.log("sssss");
                         }
                         else {
                             console.log("course not found");
-                            //notification
+                            Notification.error("Error going to course details");
                         }
                     }, function (error) {
                         Notification.error("Error going to course details");
@@ -84,7 +84,7 @@ console.log("sssss");
             }
             else {
                 console.log("course not found");
-                //notification
+                Notification.error("Error going to course details");
             }
         }
     };

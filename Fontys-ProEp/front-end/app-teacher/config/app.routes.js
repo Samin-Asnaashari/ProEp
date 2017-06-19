@@ -15,7 +15,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             return {courses: response.data};
                         }, function (error) {
                             console.log(error.data);
-                            // $state.go('Error');
+                            Notification.error("Error getting your courses");
                         });
                 }
             }
@@ -55,7 +55,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             //If other info is needed other than student from registration object you can pass it here as commented example below
                             return {acceptedStudents:  acceptedStudents/*, otherinfo: "whatever"*/};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading accepted students");
                         });
                 },
                 pendingRegistrationsResolve: function ($state, registrationService, $stateParams) {
@@ -68,7 +68,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             });
                             return {pendingStudents: pendingStudents};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading pending students");
                         });
                 },
                 declinedRegistrationsResolve: function ($state, registrationService, $stateParams) {
@@ -81,7 +81,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             });
                             return {declinedStudents: declinedStudents};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading declined students");
                         });
                 }
             }
@@ -99,13 +99,13 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Teacher");
                         }, function (error) {
+                            Notification.error("Error logging out");
                             console.log("Error");
                             console.log(error);
                         });
                 }
             }
         })
-
         .state('notifications', {
             url: '/notifications',
             templateUrl: './components/notifications/notifications.html',
@@ -117,8 +117,9 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                         return notificationService.getAllNotifications()
                             .then(function (response) {
                                 notificationService.setNotifications(response.data);
-                                return {notifications: response.data}
+                                return {notifications: response.data};
                             }, function (error) {
+                                Notification.error("Error loading notifications");
                                 console.log("Error");
                                 console.log(error);
                             });

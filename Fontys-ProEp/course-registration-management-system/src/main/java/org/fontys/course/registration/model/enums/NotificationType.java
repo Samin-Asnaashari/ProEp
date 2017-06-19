@@ -1,5 +1,5 @@
 package org.fontys.course.registration.model.enums;
 
 public enum NotificationType {
-	REGISTRATION, DROP, DELETION
+	REGISTERED, ACCEPTED, DECLINED, DROP, DELETION
 }

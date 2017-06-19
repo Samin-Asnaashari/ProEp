@@ -14,7 +14,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                         .then(function (response) {
                             return {courses: response.data};
                         }, function (error) {
-                            // $state.go('Error');
+                            Notification.error("Error getting courses");
                         });
                 }
             }
@@ -31,7 +31,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                             response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
                             return {course: response.data};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error getting course details");
                         });
                 }
             }
@@ -49,6 +49,7 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Admin");
                         }, function (error) {
+                            Notification.error("Error logging out");
                             console.log("Error");
                             console.log(error);
                         });
@@ -65,8 +66,8 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
                             .then(function (response) {
                                 return {students: response.data};
                             }, function (error) {
+                                Notification.error("Error getting students");
                                 console.log(error);
-                                //$state.go('home');
                             });
                 }
             }

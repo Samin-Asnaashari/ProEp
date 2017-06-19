@@ -2,7 +2,7 @@
  * Created by Phoenix on 18-Jun-17.
  */
 angular.module('appComponent.notifications')
-    .controller('notificationCtrl', function ($filter, $state, $scope, notificationsResolve, notificationService, courseService) {
+    .controller('notificationCtrl', function (teacherService, $filter, $state, $scope, notificationsResolve, notificationService, courseService) {
 
     var vm = this;
     vm.notifications = notificationsResolve.notifications;
@@ -18,7 +18,7 @@ angular.module('appComponent.notifications')
         if (notification.status === "UNREAD") {
             notification.status = "READ";
             notificationService.setNotificationStatus(notification.id);
-            vm.removeBadge();
+            $scope.removeBadge();
         }
         $scope.show = false;
         if(notification.type === "DELETION") {
@@ -35,9 +35,10 @@ angular.module('appComponent.notifications')
                         }
                         else {
                             console.log("course not found");
-                            //notification
+                            Notification.error("Error going to course details");
                         }
                     }, function (error) {
+                        Notification.error("Error going to course details");
                         console.log(angular.toJson(error));
                     });
                 return;
@@ -49,6 +50,7 @@ angular.module('appComponent.notifications')
             }
             else {
                 console.log("course not found");
+                Notification.error("Error going to course details");
             }
         }
     };

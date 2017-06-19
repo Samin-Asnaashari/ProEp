@@ -7,6 +7,25 @@ angular.module('GORCA.serviceAPIS').service('courseService', function ($http) {
   var ipAddress = "localhost";
   var baseUrl = http + ipAddress + ':8090/courses';
 
+  // self.acceptedElectedCourses = null;
+  // self.exceptAcceptedCourses = null;
+
+  // self.getAcceptedElectedCourses = function () {
+  //   return self.acceptedElectedCourses;
+  // };
+  //
+  // self.setAcceptedElectedCourses = function (courses) {
+  //   self.acceptedElectedCourses = courses;
+  // };
+  //
+  // self.setExceptAcceptedCourses = function (courses) {
+  //   self.exceptAcceptedCourses = courses;
+  // };
+  //
+  // self.getExceptAcceptedCourses = function () {
+  //   return self.exceptAcceptedCourses;
+  // };
+
   self.getCourse = function (code) {
     return $http.get(baseUrl + "/" + code);
   };

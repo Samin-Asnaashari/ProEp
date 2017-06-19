@@ -58,13 +58,21 @@
       <ion-item style="text-align: center;" ng-if="menuCtrl.notifications.length === 0">No notifications yet</ion-item>
       <ion-list id="menu-notifications">
         <ion-item ng-repeat="notification in menuCtrl.notifications track by notification.id"
-                  ng-style="{'UNREAD':{background: '#edf2fa'},
-        'READ':{background: '#FFF'}}[notification.status]"
-                  ng-click="menuCtrl.setNotificationStatus(notification)"
-                  menu-close ui-sref="app.home">
-          <h2 class="notification-title">{{ notification.content }}</h2>
-          <span am-time-ago="notification.date"></span>
+                  ng-style="{'UNREAD':{background: '#edf2fa'}, 'READ':{background: '#FFF'}}[notification.status]"
+                  ng-click="menuCtrl.setNotificationStatus(notification)" menu-close class="item-avatar item-text-wrap">
+            <img src="../pics/{{ notification.type }}.png">
+            <h2>{{ notification.type }}</h2>
+            <p>{{ notification.content }}</p>
+            <span am-time-ago="notification.date"></span>
         </ion-item>
+        <!--<ion-item ng-repeat="notification in menuCtrl.notifications track by notification.id"-->
+                  <!--ng-style="{'UNREAD':{background: '#edf2fa'},-->
+        <!--'READ':{background: '#FFF'}}[notification.status]"-->
+                  <!--ng-click="menuCtrl.setNotificationStatus(notification)"-->
+                  <!--menu-close ui-sref="app.home">-->
+          <!--<h2 class="notification-title">{{ notification.content }}</h2>-->
+          <!--<span am-time-ago="notification.date"></span>-->
+        <!--</ion-item>-->
       </ion-list>
       <ion-infinite-scroll on-infinite="menuCtrl.loadMoreNotifications()"
                            distance="1%" ng-if="menuCtrl.moreDataCanBeLoaded"></ion-infinite-scroll>
