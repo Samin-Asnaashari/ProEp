@@ -57,7 +57,7 @@
         Reviews
       </div>
       <ion-item style="text-align: center;" ng-if="CourseDetailsCtrl.reviews.length === 0">No reviews yet, be the first one!</ion-item>
-      <reviews ng-if="CourseDetailsCtrl.reviews > 0" review-list="CourseDetailsCtrl.reviews"></reviews>
+      <reviews ng-if="CourseDetailsCtrl.reviews.length > 0" review-list="CourseDetailsCtrl.reviews"></reviews>
 
     </ion-list>
   </ion-content>

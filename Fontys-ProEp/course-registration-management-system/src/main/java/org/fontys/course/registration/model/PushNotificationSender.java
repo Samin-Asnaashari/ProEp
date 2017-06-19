@@ -93,7 +93,7 @@ public class PushNotificationSender {
 		}
 	}
 
-	@Scheduled(initialDelay = 0, fixedDelay = 300000)
+	@Scheduled(initialDelay = 0, fixedDelay = 60000)
 	private void SendPushNotifications() {
 		try {
 			List<Student> students = this.utilService.GetAllStudents();
