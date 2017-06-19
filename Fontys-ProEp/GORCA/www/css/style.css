@@ -8,6 +8,10 @@ h2.notification-title {
   background-color: transparent !important;
 }
 
+#menu-notifications .item-avatar .capitalize {
+  text-transform: capitalize;
+}
+
 .popup-body {
   text-align: center;
 }

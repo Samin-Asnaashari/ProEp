@@ -9,13 +9,13 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             templateUrl: './components/home/teacher/home.teacher.html',
             controller: 'teacherHomeCtrl as vmTeacherHome',
             resolve: {
-                coursesResolve: function (teacherService) {
+                coursesResolve: function (teacherService, Notification) {
                     return teacherService.getMyCourses()
                         .then(function (response) {
                             return {courses: response.data};
                         }, function (error) {
                             console.log(error.data);
-                            // $state.go('Error');
+                            Notification.error("Error getting your courses");
                         });
                 }
             }
@@ -43,7 +43,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             //        //     return $state.go('login');
             //        // }
             //     },
-                acceptedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                acceptedRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllAcceptedRegistrations($stateParams.code)
                         .then(function (response) {
                             var acceptedStudents = [];
@@ -55,10 +55,10 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             //If other info is needed other than student from registration object you can pass it here as commented example below
                             return {acceptedStudents:  acceptedStudents/*, otherinfo: "whatever"*/};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading accepted students");
                         });
                 },
-                pendingRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                pendingRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllPendingRegistrations($stateParams.code)
                         .then(function (response) {
                             var pendingStudents = [];
@@ -68,10 +68,10 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             });
                             return {pendingStudents: pendingStudents};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading pending students");
                         });
                 },
-                declinedRegistrationsResolve: function ($state, registrationService, $stateParams) {
+                declinedRegistrationsResolve: function ($state, registrationService, $stateParams, Notification) {
                     return registrationService.getAllDeclinedRegistrations($stateParams.code)
                         .then(function (response) {
                             var declinedStudents = [];
@@ -81,7 +81,7 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
                             });
                             return {declinedStudents: declinedStudents};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error loading declined students");
                         });
                 }
             }
@@ -94,39 +94,33 @@ angular.module('appTeacher').config(function ($stateProvider, $urlRouterProvider
             url: '/logout',
             template: '<login-page login-app="Teacher"></login-page>',
             resolve: {
-                logOutResolve: function (loginService) {
+                logOutResolve: function (loginService, Notification, $rootScope, $interval) {
                     return loginService.logout()
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Teacher");
+                            $interval.cancel($rootScope.notificationLoop);
                         }, function (error) {
+                            Notification.error("Error logging out");
                             console.log("Error");
                             console.log(error);
                         });
                 }
             }
         })
-
         .state('notifications', {
             url: '/notifications',
             templateUrl: './components/notifications/notifications.html',
             controller: 'notificationCtrl as vmNotifications',
             resolve: {
-                notificationsResolve: function(notificationService){
-                    var notifications = notificationService.getAllNotificationsCached();
-                    if(notifications === null ) {
-                        return notificationService.getAllNotifications()
-                            .then(function (response) {
-                                notificationService.setNotifications(response.data);
-                                return {notifications: response.data}
-                            }, function (error) {
-                                console.log("Error");
-                                console.log(error);
-                            });
-                    }
-                    else {
-                        return {notifications: notifications};
-                    }
-
+                notificationsResolve: function(notificationService, Notification) {
+                    return notificationService.getAllNotifications()
+                        .then(function (response) {
+                            return {notifications: response.data};
+                        }, function (error) {
+                            Notification.error("Error loading notifications");
+                            console.log("Error");
+                            console.log(error);
+                        });
                 }
             }
         });

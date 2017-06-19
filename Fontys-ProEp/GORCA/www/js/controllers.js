@@ -69,6 +69,28 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
         notificationService.setNotificationStatus(notification.id);
         vm.removeBadge();
       }
+      if(notification.type === "ACCEPTED") {
+        $state.go('app.myCourses');
+      }
+      else if(notification.type === "DECLINED"){
+        $state.go('app.registration');
+      }
+      else {
+        // var acceptedCourses = courseService.getAcceptedElectedCourses();
+        // var exceptAcceptedCourses = courseService.getExceptAcceptedCourses();
+        // if(acceptedCourses !== null) {
+        //   if($filter("filter")(acceptedCourses, {code:notification.courseCode}).length !== 0) {
+        //     $state.go('app.myCourses');
+        //     return;
+        //   }
+        // }
+        // if()
+        //
+        // $ionicPopup.alert({
+        //   title: 'Error',
+        //   template: 'Could not find acceptedCourses'
+        // })
+      }
     };
 
     //event for receiving push notifications
@@ -291,15 +313,25 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
     };
   })
 
-  .controller('HomeController', function () {
+  .controller('HomeController', function ($state, $ionicHistory) {
     var vm = this;
     vm.currentDate = new Date();
-  })
 
-  .controller('RegistrationController', function (electiveCoursesToApplyResolve, registeredCoursesResolve, registrationService, $state, $ionicLoading, $ionicPopup) {
+    vm.goToRegistration = function () {
+      $ionicHistory.nextViewOptions({
+        disableBack: true
+      });
+
+      $state.go('app.registration');
+    };
+  })
+  
+  .controller('RegistrationController', function (electiveCoursesToApplyResolve, registeredCoursesResolve, registrationService, $state, $ionicLoading, $ionicPopup,
+                                                  courseService) {
     var vm = this;
     vm.coursesToApply = electiveCoursesToApplyResolve.coursesToApply;
     vm.registeredCoursesExceptAcceptedOnes = registeredCoursesResolve.registeredCoursesExceptAcceptedOnes;
+    // courseService.setExceptAcceptedCourses(vm.registeredCoursesExceptAcceptedOnes);
 
     vm.register = function (course) {
       if (course.teachers.length != 0) {
@@ -369,6 +401,7 @@ angular.module('GORCA.controllers', ['GORCA.Directives'])
 
     var vm = this;
     vm.acceptedCourses = myAcceptedCoursesResolve.acceptedCourses;
+    // courseService.setAcceptedElectedCourses(vm.acceptedCourses);
     vm.mandatoryCourses = myMandatoryCoursesResolve.mandatoryCourses;
 
     vm.mandatoryEC = myMandatoryCoursesResolve.mandatoryEC;

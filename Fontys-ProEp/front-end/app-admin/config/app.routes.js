@@ -9,12 +9,12 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/home/admin/home.admin.html',
             controller: 'homeCtrl as vmHome',
             resolve: {
-                coursesResolve: function ($state, courseService) {
+                coursesResolve: function ($state, courseService, Notification) {
                     return courseService.getAllCourses()
                         .then(function (response) {
                             return {courses: response.data};
                         }, function (error) {
-                            // $state.go('Error');
+                            Notification.error("Error getting courses");
                         });
                 }
             }
@@ -24,14 +24,14 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/course/edit/course.edit.html',
             controller: 'courseEditCtrl as vmCourseEdit',
             resolve: {
-                courseResolve: function ($state, $stateParams, courseService) {
+                courseResolve: function ($state, $stateParams, courseService, Notification) {
                     return courseService.getCourse($stateParams.code)
                         .then(function (response) {
                             response.data.regStartDate = moment(response.data.regStartDate).format("LL LT");
                             response.data.regEndDate = moment(response.data.regEndDate).format("LL LT");
                             return {course: response.data};
                         }, function (error) {
-                            $state.go('home');
+                            Notification.error("Error getting course details");
                         });
                 }
             }
@@ -44,11 +44,12 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             url: '/logout',
             template: '<login-page login-app="Admin"></login-page>',
             resolve: {
-                logOutResolve: function (loginService) {
+                logOutResolve: function (loginService, Notification) {
                     return loginService.logout()
                         .then(function (response) {
                             loginService.DeleteAuthenticationCookie("Admin");
                         }, function (error) {
+                            Notification.error("Error logging out");
                             console.log("Error");
                             console.log(error);
                         });
@@ -60,13 +61,13 @@ angular.module('appAdmin').config(function ($stateProvider, $urlRouterProvider) 
             templateUrl: './components/student/student.html',
             controller: 'studentCtrl as vmStudent',
             resolve: {
-                studentsResolve: function (studentService) {
+                studentsResolve: function (studentService, Notification) {
                         return studentService.getAllStudents()
                             .then(function (response) {
                                 return {students: response.data};
                             }, function (error) {
+                                Notification.error("Error getting students");
                                 console.log(error);
-                                //$state.go('home');
                             });
                 }
             }

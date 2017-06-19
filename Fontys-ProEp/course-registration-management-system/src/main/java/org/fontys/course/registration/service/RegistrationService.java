@@ -92,9 +92,9 @@ public class RegistrationService {
         Person sender = this.utilService.GetPersonById(teacherPCN);
         Registration registration = null;
         for (int i = 0; i < studentPcnList.size(); i++) {
-            Student student = this.utilService.GetStudentById(studentPcnList.get(i));
-            this.utilService.AddNewNotification(new Notification(NotificationType.REGISTERED, "You have been " + status.toString() + " in " + courseCode + " by " + sender.getFirstName(), new Date(),
-                    sender, student, courseCode));
+        	Student student = this.utilService.GetStudentById(studentPcnList.get(i));
+        	this.utilService.AddNewNotification(new Notification(NotificationType.valueOf(status), "You have been " + status.toLowerCase() + " in " + courseCode + " by " + sender.getFirstName(), new Date(), 
+            		sender, student, courseCode));
             registration = this.registrationRepository.findById(new RegistrationId(student, course));
             registration.setRegistrationStatus(RegistrationStatus.valueOf(status));
         }
