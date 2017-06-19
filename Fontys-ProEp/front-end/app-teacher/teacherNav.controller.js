@@ -1,6 +1,3 @@
-/**
- * Created by Phoenix on 24-May-17.
- */
 'use strict';
 
 angular.module("appTeacher").controller("navCtrl", function (Notification, $filter, $location, loginService, $scope, $window, notificationService, teacherService, $state, courseService) {

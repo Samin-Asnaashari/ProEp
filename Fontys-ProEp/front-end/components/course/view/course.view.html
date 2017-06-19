@@ -10,31 +10,35 @@
 
     <br/>
 
-    <div class="row">
-        <div class="col-xs-12" style="padding-left: 0;">
-            <h3><strong>Accepted Students</strong></h3>
+    <md-card class="row">
+        <div class="col-xs-12" style="vertical-align: middle;">
+            <h3 data-toggle="collapse" href="#collapseAcceptedStudentsTable" class="glyphicon glyphicon-chevron-down col-xs-1"></h3>
+            <div class="col-xs-11"><h3><strong>Accepted Students</strong></h3></div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 collapse in" id="collapseAcceptedStudentsTable">
             <student-custom-table student-list="vmCourseView.acceptedStudents" registration="1" remove-action="1" add-action="0"></student-custom-table>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12" style="padding-left: 0;">
-            <h3><strong>Pending Students</strong></h3>
+    </md-card>
+
+    <md-card class="row">
+        <div class="col-xs-12" style="vertical-align: middle;">
+            <h3 data-toggle="collapse" href="#collapsePendingStudentsTable" class="glyphicon glyphicon-chevron-down col-xs-1"></h3>
+            <div class="col-xs-11"><h3><strong>Pending Students</strong></h3></div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 collapse in" id="collapsePendingStudentsTable">
             <student-custom-table student-list="vmCourseView.pendingStudents" registration="1" remove-action="1" add-action="1"></student-custom-table>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12" style="padding-left: 0;">
-            <h3><strong>Declined Students</strong></h3>
+    </md-card>
+
+    <md-card class="row">
+        <div class="col-xs-12" style="vertical-align: middle;">
+            <h3 data-toggle="collapse" href="#collapseDeclinedStudentsTable" class="glyphicon glyphicon-chevron-down col-xs-1"></h3>
+            <div class="col-xs-11"><h3><strong>Declined Students</strong></h3></div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12 collapse in" id="collapseDeclinedStudentsTable">
             <student-custom-table student-list="vmCourseView.declinedStudents" registration="1" remove-action="0" add-action="1"></student-custom-table>
         </div>
-    </div>
-
+    </md-card>
 
     <div class="row">
         <md-button class="md-fab pull-right" aria-label="go top" ng-click="vmCourseView.goTop()" data-toggle="tooltip"
