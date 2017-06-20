@@ -14,7 +14,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 	    property = "class")  
 	@JsonSubTypes({  
 	    @Type(value = Student.class, name = "com.example.Student"),  
-	    @Type(value = Teacher.class, name = "com.example.Teacher") })  
+	    @Type(value = Teacher.class, name = "com.example.Teacher"),
+	    @Type(value = Admin.class, name = "com.example.Admin")})  
 public abstract class Person {
 
     @Id
